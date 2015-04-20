@@ -80,7 +80,7 @@
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <PrecompiledHeader>
       </PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <DisableSpecificWarnings>4267;4251;4244;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -152,6 +152,12 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y</Command>
     <ProjectReference Include="..\..\cocos2d\cocos\2d\libcocos2d.vcxproj">
       <Project>{98a51ba8-fc3a-415b-ac8f-8c7bd464e93e}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\ThirdParty\MonkSVG\projects\MonkSVG-Win\MonkSVG-Win.vcxproj">
+      <Project>{ba92fd7d-2187-4760-9c4a-8b809b23c9ab}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\ThirdParty\MonkVG\projects\MonkVG-Windows\MonkVG.vcxproj">
+      <Project>{deb0d7e2-d03d-41c2-8852-ccc3a32db39d}</Project>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

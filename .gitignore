@@ -26,3 +26,15 @@
 *.exe
 *.out
 *.app
+
+# self
+*.tlog
+*.sdf
+*.opensdf
+**/Debug
+**/Debug*
+/ThirdParty/MonkVG/Frameworks/boost.framework
+/ThirdParty/MonkVG/projects/MonkVG-Test-Android/jni/boost/include
+/proj.win32/*.sdf
+/proj.win32/ipch/monksvg-win.windows-77bc1306/*.ipch
+/proj.win32/ipch/monksvg-win.windowsphone-4ec6635a/*.ipch
