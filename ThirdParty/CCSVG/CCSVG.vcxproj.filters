@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{9afdcdf2-63ef-404d-bf20-f30d4aab4205}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\ccsvg">
+      <UniqueIdentifier>{dedb8a33-7f01-49f7-a818-415a476d1a30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\svg">
+      <UniqueIdentifier>{713dcbe6-3b87-4ee8-880b-a09f4551ebe0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\include">
+      <UniqueIdentifier>{fe15480e-9cd6-4bbb-8c28-3188c4605632}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="src\include\MonkSVG">
+      <UniqueIdentifier>{c5c9a0bc-8166-4b7b-a597-2bf377416d2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\include\MonkVG">
+      <UniqueIdentifier>{4a50e0fb-36ac-4d4d-baf9-8d28d5cbb802}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\include\tinyxml">
+      <UniqueIdentifier>{be060fbe-f7a0-49cd-82f8-2cb59d54f21c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\tinyxml">
+      <UniqueIdentifier>{2ad28f14-6299-4fd2-9513-b3df9af5d98d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\CCSVG.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CCSVGAnimate.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CCSVGAnimation.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CCSVGAnimationCache.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CCSVGCache.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CCSVGSource.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CCSVGSprite.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\MonkSVG\mkOpenVG_SVG.h">
+      <Filter>src\include\MonkSVG</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\MonkSVG\mkSVG.h">
+      <Filter>src\include\MonkSVG</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\MonkSVG\mkTransform2d.h">
+      <Filter>src\include\MonkSVG</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\MonkVG\openvg.h">
+      <Filter>src\include\MonkVG</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\MonkVG\vgext.h">
+      <Filter>src\include\MonkVG</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\MonkVG\vgplatform.h">
+      <Filter>src\include\MonkVG</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\MonkVG\vgu.h">
+      <Filter>src\include\MonkVG</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\tinyxml\tinystr.h">
+      <Filter>src\include\tinyxml</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\tinyxml\tinyxml.h">
+      <Filter>src\include\tinyxml</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\ccsvg\CCSVGAnimate.mm">
+      <Filter>src\ccsvg</Filter>
+    </None>
+    <None Include="src\ccsvg\CCSVGAnimation.mm">
+      <Filter>src\ccsvg</Filter>
+    </None>
+    <None Include="src\ccsvg\CCSVGAnimationCache.mm">
+      <Filter>src\ccsvg</Filter>
+    </None>
+    <None Include="src\ccsvg\CCSVGCache.mm">
+      <Filter>src\ccsvg</Filter>
+    </None>
+    <None Include="src\ccsvg\CCSVGSprite.mm">
+      <Filter>src\ccsvg</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\ccsvg\CCSVGSource.cpp">
+      <Filter>src\ccsvg</Filter>
+    </ClCompile>
+    <ClCompile Include="src\svg\mkOpenVG_SVG.cpp">
+      <Filter>src\svg</Filter>
+    </ClCompile>
+    <ClCompile Include="src\svg\mkSVG.cpp">
+      <Filter>src\svg</Filter>
+    </ClCompile>
+    <ClCompile Include="src\tinyxml\tinystr.cpp">
+      <Filter>src\tinyxml</Filter>
+    </ClCompile>
+    <ClCompile Include="src\tinyxml\tinyxml.cpp">
+      <Filter>src\tinyxml</Filter>
+    </ClCompile>
+    <ClCompile Include="src\tinyxml\tinyxmlerror.cpp">
+      <Filter>src\tinyxml</Filter>
+    </ClCompile>
+    <ClCompile Include="src\tinyxml\tinyxmlparser.cpp">
+      <Filter>src\tinyxml</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

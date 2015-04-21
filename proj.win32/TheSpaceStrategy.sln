@@ -13,7 +13,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libcocos2d", "..\..\cocos2d
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MonkVG", "..\ThirdParty\MonkVG\projects\MonkVG-Windows\MonkVG.vcxproj", "{DEB0D7E2-D03D-41C2-8852-CCC3A32DB39D}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MonkSVG-Win", "..\ThirdParty\MonkSVG\projects\MonkSVG-Win\MonkSVG-Win.vcxproj", "{BA92FD7D-2187-4760-9C4A-8B809B23C9AB}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CCSVG", "..\ThirdParty\CCSVG\CCSVG.vcxproj", "{B3F4DF88-016D-4479-A063-9E66D9E2B7ED}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,14 +49,14 @@ Global
 		{DEB0D7E2-D03D-41C2-8852-CCC3A32DB39D}.Release|Win32.ActiveCfg = Release|Win32
 		{DEB0D7E2-D03D-41C2-8852-CCC3A32DB39D}.Release|Win32.Build.0 = Release|Win32
 		{DEB0D7E2-D03D-41C2-8852-CCC3A32DB39D}.Release|x64.ActiveCfg = Release|Win32
-		{BA92FD7D-2187-4760-9C4A-8B809B23C9AB}.Debug|ARM.ActiveCfg = Debug|Win32
-		{BA92FD7D-2187-4760-9C4A-8B809B23C9AB}.Debug|Win32.ActiveCfg = Debug|Win32
-		{BA92FD7D-2187-4760-9C4A-8B809B23C9AB}.Debug|Win32.Build.0 = Debug|Win32
-		{BA92FD7D-2187-4760-9C4A-8B809B23C9AB}.Debug|x64.ActiveCfg = Debug|Win32
-		{BA92FD7D-2187-4760-9C4A-8B809B23C9AB}.Release|ARM.ActiveCfg = Release|Win32
-		{BA92FD7D-2187-4760-9C4A-8B809B23C9AB}.Release|Win32.ActiveCfg = Release|Win32
-		{BA92FD7D-2187-4760-9C4A-8B809B23C9AB}.Release|Win32.Build.0 = Release|Win32
-		{BA92FD7D-2187-4760-9C4A-8B809B23C9AB}.Release|x64.ActiveCfg = Release|Win32
+		{B3F4DF88-016D-4479-A063-9E66D9E2B7ED}.Debug|ARM.ActiveCfg = Debug|Win32
+		{B3F4DF88-016D-4479-A063-9E66D9E2B7ED}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B3F4DF88-016D-4479-A063-9E66D9E2B7ED}.Debug|Win32.Build.0 = Debug|Win32
+		{B3F4DF88-016D-4479-A063-9E66D9E2B7ED}.Debug|x64.ActiveCfg = Debug|Win32
+		{B3F4DF88-016D-4479-A063-9E66D9E2B7ED}.Release|ARM.ActiveCfg = Release|Win32
+		{B3F4DF88-016D-4479-A063-9E66D9E2B7ED}.Release|Win32.ActiveCfg = Release|Win32
+		{B3F4DF88-016D-4479-A063-9E66D9E2B7ED}.Release|Win32.Build.0 = Release|Win32
+		{B3F4DF88-016D-4479-A063-9E66D9E2B7ED}.Release|x64.ActiveCfg = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
