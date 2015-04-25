@@ -43,39 +43,20 @@ namespace MonkSVG {
   
   void OpenVG_SVGHandler::draw() {
     
-    vgSeti(VG_MATRIX_MODE, VG_MATRIX_PATH_USER_TO_SURFACE);
-    
-    // clear out the transform stack
-    _transform_stack.clear();
-    
-    float m[9];
-    vgGetMatrix( m );
-    // assume the current openvg matrix is like the camera matrix and should always be applied first
-    Transform2d top;
-    Transform2d::multiply( top, Transform2d(m), rootTransform() );	// multiply by the root transform
-    pushTransform( top );
-    
-    // SVG is origin at the top, left (openvg is origin at the bottom, left)
-    // so need to flip
-//		Transform2d flip;
-//		flip.setScale( 1, -1 );
-//		pushTransform( flip );
+   // vgSeti(VG_MATRIX_MODE, VG_MATRIX_PATH_USER_TO_SURFACE);
     
     if( _batch ) {
-      vgLoadMatrix( topTransform().m );
       vgDrawBatchMNK( _batch );
     } else {
       draw_recursive( _root_group );
     }
     
-    vgLoadMatrix( m );	// restore matrix
-    _transform_stack.clear();
   }
   
   void OpenVG_SVGHandler::draw_recursive( group_t& group ) {
     
     // push the group matrix onto the stack
-    pushTransform( group.transform ); vgLoadMatrix( topTransform().m );
+    //pushTransform( group.transform );
     
     for ( std::list<path_object_t>::iterator it = group.path_objects.begin(); it != group.path_objects.end(); it++ ) {
       path_object_t& po = *it;
@@ -99,93 +80,41 @@ namespace MonkSVG {
       // set the fill rule
       vgSeti( VG_FILL_RULE, po.fill_rule );
       // trasnform
-      pushTransform( po.transform );	vgLoadMatrix( topTransform().m );
+      //pushTransform( po.transform );
       vgDrawPath( po.path, draw_params );
-      popTransform();	vgLoadMatrix( topTransform().m );
+      //popTransform();
     }
     
     for ( std::list<group_t>::iterator it = group.children.begin(); it != group.children.end(); it++ ) {
       draw_recursive( *it );
     }
     
-    popTransform();	vgLoadMatrix( topTransform().m );
+    //popTransform();
   }
   
-  void OpenVG_SVGHandler::optimize() {
+    
+  void OpenVG_SVGHandler::dump(void **vertices, size_t *size) {
         
-    if( _batch ) {
-      vgDestroyBatchMNK( _batch );
-      _batch = 0;
-    }
-    // use the monkvg batch extension to greatly optimize rendering.  don't need this for
-    // other OpenVG implementations
-    _batch = vgCreateBatchMNK();
-    
-    vgBeginBatchMNK( _batch ); { // draw
-
-      // clear out the transform stack
-      _transform_stack.clear();
-      
-      float m[9];
-      vgGetMatrix( m );
-      // assume the current openvg matrix is like the camera matrix and should always be applied first
-      Transform2d top;
-      Transform2d::multiply( top, Transform2d(m), rootTransform() );	// multiply by the root transform
-      pushTransform( top );
-      
-      // SVG is origin at the top, left (openvg is origin at the bottom, left)
-      // so need to flip
-      //		Transform2d flip;
-      //		flip.setScale( 1, -1 );
-      //		pushTransform( flip );
-      
-      draw_recursive( _root_group );
-      
-      vgLoadMatrix( m );	// restore matrix
-      _transform_stack.clear();
-
-      
-    } vgEndBatchMNK( _batch );
-    
-  }
-    
-    void OpenVG_SVGHandler::dump(void **vertices, size_t *size) {
-        
-        VGBatchMNK temp;
-        temp = vgCreateBatchMNK();
+      VGBatchMNK temp;
+      temp = vgCreateBatchMNK();
     
     vgBeginBatchMNK( temp ); 
         
-        {
+      {
             
-      // clear the transform stack
-      _transform_stack.clear();
-            
-            // save matrix
-      VGfloat m[9];
-      vgGetMatrix( m );
-            
-      // assume the current openvg matrix is like the camera matrix and should always be applied first
-      Transform2d top;
-      Transform2d::multiply( top, Transform2d(m), rootTransform() );	// multiply by the root transform
-      pushTransform( top );
+          // draw
+    draw_recursive( _root_group );
       
-            // draw
-      draw_recursive( _root_group );
-      
-            // restore matrix
-      vgLoadMatrix( m );
+          // clear the transform stack
+          _transform_stack.clear();
             
-            // clear the transform stack
-            _transform_stack.clear();
-            
-    } 
+  } 
         
-        vgDumpBatchMNK( temp, vertices, size );
-        vgEndBatchMNK( temp );
-        vgDestroyBatchMNK( temp );
+      vgDumpBatchMNK( temp, vertices, size );
+      vgEndBatchMNK( temp );
+      vgDestroyBatchMNK( temp );
         
-    }
+  }
   
   void OpenVG_SVGHandler::onGroupBegin() {
     _mode = kGroupParseMode;

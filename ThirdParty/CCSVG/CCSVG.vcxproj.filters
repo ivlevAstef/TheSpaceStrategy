@@ -31,27 +31,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\CCSVG.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\CCSVGAnimate.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\CCSVGAnimation.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\CCSVGAnimationCache.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\CCSVGCache.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\CCSVGSource.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\CCSVGSprite.h">
-      <Filter>include</Filter>
-    </ClInclude>
     <ClInclude Include="src\include\MonkSVG\mkOpenVG_SVG.h">
       <Filter>src\include\MonkSVG</Filter>
     </ClInclude>
@@ -79,28 +58,17 @@
     <ClInclude Include="src\include\tinyxml\tinyxml.h">
       <Filter>src\include\tinyxml</Filter>
     </ClInclude>
+    <ClInclude Include="include\SVGTexture2D.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SVGDefines.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SVGSprite.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="src\ccsvg\CCSVGAnimate.mm">
-      <Filter>src\ccsvg</Filter>
-    </None>
-    <None Include="src\ccsvg\CCSVGAnimation.mm">
-      <Filter>src\ccsvg</Filter>
-    </None>
-    <None Include="src\ccsvg\CCSVGAnimationCache.mm">
-      <Filter>src\ccsvg</Filter>
-    </None>
-    <None Include="src\ccsvg\CCSVGCache.mm">
-      <Filter>src\ccsvg</Filter>
-    </None>
-    <None Include="src\ccsvg\CCSVGSprite.mm">
-      <Filter>src\ccsvg</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="src\ccsvg\CCSVGSource.cpp">
-      <Filter>src\ccsvg</Filter>
-    </ClCompile>
     <ClCompile Include="src\svg\mkOpenVG_SVG.cpp">
       <Filter>src\svg</Filter>
     </ClCompile>
@@ -118,6 +86,12 @@
     </ClCompile>
     <ClCompile Include="src\tinyxml\tinyxmlparser.cpp">
       <Filter>src\tinyxml</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ccsvg\SVGTexture2D.cpp">
+      <Filter>src\ccsvg</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ccsvg\SVGSprite.cpp">
+      <Filter>src\ccsvg</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

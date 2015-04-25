@@ -37,8 +37,7 @@ namespace MonkSVG {
     virtual ~OpenVG_SVGHandler();
     
     void draw();
-        void dump( void **vertices, size_t *size );
-    void optimize();
+    void dump( void **vertices, size_t *size );
     
     const Transform2d& rootTransform() { return _root_transform; }
     void setRootTransform( const Transform2d& t ) { _root_transform = t; }

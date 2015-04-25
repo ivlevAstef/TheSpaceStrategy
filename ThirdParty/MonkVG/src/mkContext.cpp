@@ -13,29 +13,6 @@ using namespace MonkVG;
 
 //static VGContext *g_context = NULL;
 
-VG_API_CALL VGboolean vgCreateContextSH(VGint width, VGint height)
-{
-	IContext::instance().Initialize();
-
-	IContext::instance().setWidth( width );
-	IContext::instance().setHeight( height );
-	IContext::instance().resize();
-	
-	return VG_TRUE;
-}
-
-VG_API_CALL void vgResizeSurfaceSH(VGint width, VGint height)
-{
-	IContext::instance().setWidth( width );
-	IContext::instance().setHeight( height );
-	IContext::instance().resize();
-
-}
-
-VG_API_CALL void vgDestroyContextSH()
-{
-}
-
 VG_API_CALL void VG_API_ENTRY vgSetf (VGuint type, VGfloat value) VG_API_EXIT {
 	IContext::instance().set( type, value );
 }
@@ -68,11 +45,6 @@ VG_API_CALL void VG_API_ENTRY vgGetiv(VGuint type, VGint count, VGint * values) 
 	
 }
 
-/* Masking and Clearing */
-VG_API_CALL void VG_API_ENTRY vgClear(VGint x, VGint y, VGint width, VGint height) VG_API_EXIT {
-	IContext::instance().clear( x, y, width, height );
-}
-
 
 /*--------------------------------------------------
  * Returns the oldest error pending on the current
@@ -89,8 +61,6 @@ namespace MonkVG {
 	
 	IContext::IContext() 
 		:	_error( VG_NO_ERROR )
-		,	_width( 0 )
-		,	_height( 0 )
 		,	_stroke_line_width( 1.0f )
 		,	_stroke_paint( 0 )
 		,	_fill_paint( 0 )

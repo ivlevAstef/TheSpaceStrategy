@@ -499,12 +499,12 @@ namespace MonkSVG {
     std::regex values_separator(";");
     std::regex key_value_separator(":");
 
-    std::sregex_iterator values_tokens(ps.begin(), ps.end(), values_separator);
+    std::regex_token_iterator<std::string::iterator> values_tokens(ps.begin(), ps.end(), values_separator,-1);
+    std::regex_token_iterator<std::string::iterator> rend;
 
-
-    for (; values_tokens != std::sregex_iterator(); ++values_tokens) {
+    for (; values_tokens != rend; ++values_tokens) {
       std::string values = values_tokens->str();
-      std::sregex_iterator key_value_tokens(values.begin(), values.end(), key_value_separator);
+      std::regex_token_iterator<std::string::iterator> key_value_tokens(values.begin(), values.end(), key_value_separator, -1);
       auto k = key_value_tokens;
       auto v = ++key_value_tokens;
       //cout << *k << ":" << *v << endl;

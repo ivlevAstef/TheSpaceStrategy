@@ -15,28 +15,28 @@
 #include "glImage.h"
 
 namespace MonkVG {
-	
-	
-	class OpenGLPaint : public IPaint {
-	public:
-		OpenGLPaint();
-		virtual ~OpenGLPaint();
-		void setGLState();
-		void buildLinearGradientImage( VGfloat pathWidth, VGfloat pathHeight );
-		void buildRadialGradientImage( VGfloat pathWidth, VGfloat pathHeight );
-		void buildLinear2x3GradientImage( VGfloat pathWidth, VGfloat pathHeight );
-		void buildRadial2x3GradientImage( VGfloat pathWidth, VGfloat pathHeight );
-		void buildGradientImage( VGfloat pathWidth, VGfloat pathHeight );
-		virtual bool isDirty() { return _isDirty; }
-		virtual void setIsDirty( bool b ) { _isDirty = b; }
-		
-		OpenGLImage* getGradientImage() { return (OpenGLImage*)_gradientImage; }
-		
-	private:
-		bool		_isDirty;
-		VGImage		_gradientImage;
-		
-		
-	};
+  
+  
+  class OpenGLPaint : public IPaint {
+  public:
+    OpenGLPaint();
+    virtual ~OpenGLPaint();
+
+    void buildLinearGradientImage( VGfloat pathWidth, VGfloat pathHeight );
+    void buildRadialGradientImage( VGfloat pathWidth, VGfloat pathHeight );
+    void buildLinear2x3GradientImage( VGfloat pathWidth, VGfloat pathHeight );
+    void buildRadial2x3GradientImage( VGfloat pathWidth, VGfloat pathHeight );
+    void buildGradientImage( VGfloat pathWidth, VGfloat pathHeight );
+    virtual bool isDirty() { return _isDirty; }
+    virtual void setIsDirty( bool b ) { _isDirty = b; }
+    
+    OpenGLImage* getGradientImage() { return (OpenGLImage*)_gradientImage; }
+
+  private:
+    bool		_isDirty;
+    VGImage		_gradientImage;
+    
+    
+  };
 }
 #endif // __qzPaint_h__

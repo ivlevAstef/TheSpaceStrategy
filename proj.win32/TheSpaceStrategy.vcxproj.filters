@@ -10,8 +10,8 @@
     <Filter Include="src">
       <UniqueIdentifier>{bb6c862e-70e9-49d9-81b7-3829a6f50471}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ThirdParty">
-      <UniqueIdentifier>{191c4ad1-4c80-4729-85f4-31a6b85372a2}</UniqueIdentifier>
+    <Filter Include="src\Components">
+      <UniqueIdentifier>{38e527d0-48fc-444f-81f2-50ce0d9c58e6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -35,51 +35,10 @@
     <ClInclude Include="..\Classes\HelloWorldScene.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\ThirdParty\CCSVG\inc\CCSVG.h">
-      <Filter>ThirdParty</Filter>
-    </ClInclude>
-    <ClInclude Include="..\ThirdParty\CCSVG\inc\CCSVGAnimate.h">
-      <Filter>ThirdParty</Filter>
-    </ClInclude>
-    <ClInclude Include="..\ThirdParty\CCSVG\inc\CCSVGAnimation.h">
-      <Filter>ThirdParty</Filter>
-    </ClInclude>
-    <ClInclude Include="..\ThirdParty\CCSVG\inc\CCSVGAnimationCache.h">
-      <Filter>ThirdParty</Filter>
-    </ClInclude>
-    <ClInclude Include="..\ThirdParty\CCSVG\inc\CCSVGCache.h">
-      <Filter>ThirdParty</Filter>
-    </ClInclude>
-    <ClInclude Include="..\ThirdParty\CCSVG\inc\CCSVGSource.h">
-      <Filter>ThirdParty</Filter>
-    </ClInclude>
-    <ClInclude Include="..\ThirdParty\CCSVG\inc\CCSVGSprite.h">
-      <Filter>ThirdParty</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">
       <Filter>resource</Filter>
     </ResourceCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\ThirdParty\CCSVG\src\CCSVGAnimate.mm">
-      <Filter>ThirdParty</Filter>
-    </None>
-    <None Include="..\ThirdParty\CCSVG\src\CCSVGAnimation.mm">
-      <Filter>ThirdParty</Filter>
-    </None>
-    <None Include="..\ThirdParty\CCSVG\src\CCSVGAnimationCache.mm">
-      <Filter>ThirdParty</Filter>
-    </None>
-    <None Include="..\ThirdParty\CCSVG\src\CCSVGCache.mm">
-      <Filter>ThirdParty</Filter>
-    </None>
-    <None Include="..\ThirdParty\CCSVG\src\CCSVGSprite.mm">
-      <Filter>ThirdParty</Filter>
-    </None>
-    <None Include="..\ThirdParty\CCSVG\src\CCSVGSource.cpp">
-      <Filter>ThirdParty</Filter>
-    </None>
   </ItemGroup>
 </Project>

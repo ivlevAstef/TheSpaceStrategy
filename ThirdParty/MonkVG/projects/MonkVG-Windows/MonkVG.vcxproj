@@ -41,8 +41,8 @@
     <_ProjectFileVersion>12.0.30501.0</_ProjectFileVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
-    <IntDir>$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)$(Configuration).win32\</OutDir>
+    <IntDir>$(Configuration).win32\</IntDir>
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -113,10 +113,10 @@
     <ClCompile Include="..\..\src\opengl\glPath.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\include\VG\openvg.h" />
-    <ClInclude Include="..\..\include\VG\vgext.h" />
-    <ClInclude Include="..\..\include\VG\vgplatform.h" />
-    <ClInclude Include="..\..\include\VG\vgu.h" />
+    <ClInclude Include="..\..\include\MonkVG\openvg.h" />
+    <ClInclude Include="..\..\include\MonkVG\vgext.h" />
+    <ClInclude Include="..\..\include\MonkVG\vgplatform.h" />
+    <ClInclude Include="..\..\include\MonkVG\vgu.h" />
     <ClInclude Include="..\..\src\mkBaseObject.h" />
     <ClInclude Include="..\..\src\mkBatch.h" />
     <ClInclude Include="..\..\src\mkCommon.h" />

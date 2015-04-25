@@ -101,18 +101,6 @@
     <ClInclude Include="..\..\src\mkPath.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\VG\openvg.h">
-      <Filter>Header Files\VG</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\VG\vgext.h">
-      <Filter>Header Files\VG</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\VG\vgplatform.h">
-      <Filter>Header Files\VG</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\VG\vgu.h">
-      <Filter>Header Files\VG</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\src\opengl\glBatch.h">
       <Filter>Header Files\opengl</Filter>
     </ClInclude>
@@ -133,6 +121,18 @@
     </ClInclude>
     <ClInclude Include="..\..\src\opengl\glPlatform.h">
       <Filter>Header Files\opengl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\MonkVG\openvg.h">
+      <Filter>Header Files\VG</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\MonkVG\vgext.h">
+      <Filter>Header Files\VG</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\MonkVG\vgplatform.h">
+      <Filter>Header Files\VG</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\MonkVG\vgu.h">
+      <Filter>Header Files\VG</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

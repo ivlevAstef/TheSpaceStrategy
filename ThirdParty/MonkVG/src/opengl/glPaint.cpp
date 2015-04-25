@@ -28,13 +28,6 @@ namespace MonkVG {
 		}
 	}
 	
-	void OpenGLPaint::setGLState() {
-		if ( isDirty() ) {
-			const VGfloat* c = getPaintColor();
-			glColor4f(c[0], c[1], c[2], c[3] );
-		}
-	}
-	
 	void OpenGLPaint::buildLinearGradientImage( VGfloat pathWidth, VGfloat pathHeight ) {
 		// generated image sizes
 		const int width = 64, height = 64;

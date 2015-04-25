@@ -52,8 +52,6 @@ namespace MonkVG {
 		
 		std::vector<vertex_t>	_vertices;
 		size_t					_vertexCount;
-		GLuint					_vbo;
-
 		
 	};
 }
