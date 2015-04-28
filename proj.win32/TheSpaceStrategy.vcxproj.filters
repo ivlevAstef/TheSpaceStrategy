@@ -13,6 +13,15 @@
     <Filter Include="src\Components">
       <UniqueIdentifier>{38e527d0-48fc-444f-81f2-50ce0d9c58e6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Components\View">
+      <UniqueIdentifier>{fdb357fb-b206-4865-94ca-448aab1ed986}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Components\Features">
+      <UniqueIdentifier>{f460403a-f14c-4a79-ab9b-337b9f2dab10}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Objects">
+      <UniqueIdentifier>{ba162c9c-3596-40f7-8875-66bf803cd32c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -24,6 +33,18 @@
     <ClCompile Include="..\Classes\HelloWorldScene.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Components\View\GameView.cpp">
+      <Filter>src\Components\View</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Components\View\GameLayer.cpp">
+      <Filter>src\Components\View</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Objects\Scene.cpp">
+      <Filter>src\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Objects\MainBase.cpp">
+      <Filter>src\Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -34,6 +55,24 @@
     </ClInclude>
     <ClInclude Include="..\Classes\HelloWorldScene.h">
       <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Components\View\GameView.h">
+      <Filter>src\Components\View</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Objects\MainBase.h">
+      <Filter>src\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Objects\Object.h">
+      <Filter>src\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Objects\Scene.h">
+      <Filter>src\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Components\Component.h">
+      <Filter>src\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Components\View\GameLayer.h">
+      <Filter>src\Components\View</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

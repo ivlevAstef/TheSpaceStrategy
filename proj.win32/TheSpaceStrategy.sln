@@ -10,6 +10,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TheSpaceStrategy", "TheSpac
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libcocos2d", "..\..\cocos2d\cocos\2d\libcocos2d.vcxproj", "{98A51BA8-FC3A-415B-AC8F-8C7BD464E93E}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SIAUtils", "..\..\..\SIAUtils\SIAUtils.vcxproj", "{AE72A98C-9826-42DB-9B93-1C034D12C179}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|ARM = Debug|ARM
@@ -35,6 +37,14 @@ Global
 		{98A51BA8-FC3A-415B-AC8F-8C7BD464E93E}.Release|Win32.ActiveCfg = Release|Win32
 		{98A51BA8-FC3A-415B-AC8F-8C7BD464E93E}.Release|Win32.Build.0 = Release|Win32
 		{98A51BA8-FC3A-415B-AC8F-8C7BD464E93E}.Release|x64.ActiveCfg = Release|Win32
+		{AE72A98C-9826-42DB-9B93-1C034D12C179}.Debug|ARM.ActiveCfg = Debug|Win32
+		{AE72A98C-9826-42DB-9B93-1C034D12C179}.Debug|Win32.ActiveCfg = Debug|Win32
+		{AE72A98C-9826-42DB-9B93-1C034D12C179}.Debug|Win32.Build.0 = Debug|Win32
+		{AE72A98C-9826-42DB-9B93-1C034D12C179}.Debug|x64.ActiveCfg = Debug|Win32
+		{AE72A98C-9826-42DB-9B93-1C034D12C179}.Release|ARM.ActiveCfg = Release|Win32
+		{AE72A98C-9826-42DB-9B93-1C034D12C179}.Release|Win32.ActiveCfg = Release|Win32
+		{AE72A98C-9826-42DB-9B93-1C034D12C179}.Release|Win32.Build.0 = Release|Win32
+		{AE72A98C-9826-42DB-9B93-1C034D12C179}.Release|x64.ActiveCfg = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
