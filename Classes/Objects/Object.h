@@ -19,20 +19,10 @@ namespace Objects
       return static_cast<ComponentType*>(getComponent(ComponentType::sComponentName()));
     }
 
-    Components::Component* getComponent(const char* name) {
-      auto findRes = m_components.find(name);
-      if (findRes != m_components.end()) {
-        return findRes->second;
-      }
-      return nullptr;
-    }
+    Components::Component* getComponent(const char* name);
 
   protected:
-    void addComponent(Components::Component* component) {
-      if (nullptr != component) {
-        m_components[component->componentName()] = component;
-      }
-    }
+    void addComponent(Components::Component* component);
 
     std::map<std::string, Components::Component*> m_components;
   };

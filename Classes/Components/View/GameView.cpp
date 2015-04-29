@@ -1,5 +1,6 @@
 #include "GameView.h"
 #include "cocos2d.h"
+#include "logger/SIAUtils_Logger.h"
 
 USING_NS_CC;
 
@@ -12,12 +13,17 @@ GameView* GameView::create(std::string viewId) {
     return view;
   }
 
+  SIA_LOG_ERR("can't create gameView");
   CC_SAFE_DELETE(view);
   return nullptr;
 }
 
 GameView::GameView(std::string viewId) {
-  init();
+  SIA_CHECK_RET(!init(), ERR);
+
+  SIA_LOG_FUNC("%s", viewId);
   sprite = Sprite::create("images/gameviews/" + viewId + ".png");
-  this->addChild(sprite);
+
+  SIA_CHECK_RET(sprite == nullptr, ERR);
+  addChild(sprite);
 }
