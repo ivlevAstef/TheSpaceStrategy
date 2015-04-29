@@ -14,6 +14,6 @@ Components::Component* Object::getComponent(const char* name) {
 void Object::addComponent(Components::Component* component) {
   SIA_CHECK_RET(component == nullptr, WRN);
 
-  SIA_LOG_INFO("Add component with name: %s", component->componentName());
+  SIA_LOG_INFO("Add component: %s", component->componentName());
   m_components[component->componentName()] = component;
 }

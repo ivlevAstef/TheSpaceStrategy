@@ -41,6 +41,7 @@ void GameLayer::setBackground(std::string backgroundId) {
   Size visibleSize = Director::getInstance()->getVisibleSize();
   background->setPosition(visibleSize.width*0.5f, visibleSize.height*0.5f);
   addChild(background, -1, backgroundTag);
+  SIA_LOG_DBG("set background %s", backgroundId.c_str());
 }
 
 void GameLayer::modificationBackground(cocos2d::Color3B color) {

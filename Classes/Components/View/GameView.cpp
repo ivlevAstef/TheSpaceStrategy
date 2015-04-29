@@ -21,7 +21,7 @@ GameView* GameView::create(std::string viewId) {
 GameView::GameView(std::string viewId) {
   SIA_CHECK_RET(!init(), ERR);
 
-  SIA_LOG_FUNC("%s", viewId);
+  SIA_LOG_FUNC("%s", viewId.c_str());
   sprite = Sprite::create("images/gameviews/" + viewId + ".png");
 
   SIA_CHECK_RET(sprite == nullptr, ERR);
