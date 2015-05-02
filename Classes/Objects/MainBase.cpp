@@ -9,6 +9,9 @@ std::shared_ptr<MainBase> MainBase::create() {
 }
 
 MainBase::MainBase() {
+  m_features.Int("MAX HP") = 100;
+  m_features.Int("HP") = 100;
+
   auto view = GameView::create("MainBase");
   view->setCell(4, 4);
   addComponent(view);

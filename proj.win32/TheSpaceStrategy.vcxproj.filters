@@ -16,9 +16,6 @@
     <Filter Include="src\Components\View">
       <UniqueIdentifier>{fdb357fb-b206-4865-94ca-448aab1ed986}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\Components\Features">
-      <UniqueIdentifier>{f460403a-f14c-4a79-ab9b-337b9f2dab10}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\Objects">
       <UniqueIdentifier>{ba162c9c-3596-40f7-8875-66bf803cd32c}</UniqueIdentifier>
     </Filter>
@@ -48,6 +45,9 @@
     <ClCompile Include="..\Classes\Objects\Object.cpp">
       <Filter>src\Objects</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Components\Features.cpp">
+      <Filter>src\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -76,6 +76,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Components\View\GameLayer.h">
       <Filter>src\Components\View</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Components\Features.h">
+      <Filter>src\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

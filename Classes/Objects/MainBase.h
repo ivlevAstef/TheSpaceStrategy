@@ -9,6 +9,7 @@ namespace Objects
 {
   class MainBase: public Object {
   public:
+  public:
     static std::shared_ptr<MainBase> create();
 
     MainBase();
