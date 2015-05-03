@@ -22,6 +22,8 @@ namespace Objects
 
     Components::Component* getComponent(const char* name);
 
+    virtual void update() = 0;
+
   protected:
     void addComponent(Components::Component* component);
 

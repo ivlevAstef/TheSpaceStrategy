@@ -19,6 +19,12 @@
     <Filter Include="src\Objects">
       <UniqueIdentifier>{ba162c9c-3596-40f7-8875-66bf803cd32c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Objects\Building">
+      <UniqueIdentifier>{34fa8bee-ef66-4aed-bd2b-a08962772e5e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Components\Data">
+      <UniqueIdentifier>{65f026f5-ae81-4e15-9816-f75508c0caa8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -39,14 +45,26 @@
     <ClCompile Include="..\Classes\Objects\Scene.cpp">
       <Filter>src\Objects</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Objects\MainBase.cpp">
-      <Filter>src\Objects</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Objects\Object.cpp">
       <Filter>src\Objects</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Components\Features.cpp">
       <Filter>src\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Objects\Building\MainBase.cpp">
+      <Filter>src\Objects\Building</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Objects\Building\BuildJoin.cpp">
+      <Filter>src\Objects\Building</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Components\Data\Area.cpp">
+      <Filter>src\Components\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Objects\Building\Build.cpp">
+      <Filter>src\Objects\Building</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Components\Data\Entity.cpp">
+      <Filter>src\Components\Data</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -62,9 +80,6 @@
     <ClInclude Include="..\Classes\Components\View\GameView.h">
       <Filter>src\Components\View</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Objects\MainBase.h">
-      <Filter>src\Objects</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Objects\Object.h">
       <Filter>src\Objects</Filter>
     </ClInclude>
@@ -79,6 +94,24 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Components\Features.h">
       <Filter>src\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Objects\Building\MainBase.h">
+      <Filter>src\Objects\Building</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Objects\Building\Build.h">
+      <Filter>src\Objects\Building</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Objects\Building\BuildJoin.h">
+      <Filter>src\Objects\Building</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Components\GameArea.h">
+      <Filter>src\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Components\Data\Area.h">
+      <Filter>src\Components\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Components\Data\Entity.h">
+      <Filter>src\Components\Data</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

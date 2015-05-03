@@ -5,13 +5,18 @@
 
 #include "Object.h"
 #include "Components/View/GameLayer.h"
+#include "Components/Data/Area.h"
 #include <memory>
+#include <vector>
 
 namespace Objects
 {
+  class Scene;
+  typedef std::shared_ptr<Scene> ScenePtr;
+
   class Scene: public Object {
   public:
-    static std::shared_ptr<Scene> create();
+    static ScenePtr create();
     
     inline Components::View::GameLayer* getGameLayer() const {
       return m_cacheGameLayer;
@@ -21,8 +26,13 @@ namespace Objects
 
     Scene();
 
+    virtual void update() override;
+
   private:
     Components::View::GameLayer* m_cacheGameLayer;
+    Components::Data::Area* m_cacheArea;
+
+    std::vector<ObjectPtr> m_objects;
   };
 };
 

@@ -140,11 +140,15 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y</Command>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
+    <ClCompile Include="..\Classes\Components\Data\Area.cpp" />
+    <ClCompile Include="..\Classes\Components\Data\Entity.cpp" />
     <ClCompile Include="..\Classes\Components\Features.cpp" />
     <ClCompile Include="..\Classes\Components\View\GameLayer.cpp" />
     <ClCompile Include="..\Classes\Components\View\GameView.cpp" />
     <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
-    <ClCompile Include="..\Classes\Objects\MainBase.cpp" />
+    <ClCompile Include="..\Classes\Objects\Building\Build.cpp" />
+    <ClCompile Include="..\Classes\Objects\Building\BuildJoin.cpp" />
+    <ClCompile Include="..\Classes\Objects\Building\MainBase.cpp" />
     <ClCompile Include="..\Classes\Objects\Object.cpp" />
     <ClCompile Include="..\Classes\Objects\Scene.cpp" />
     <ClCompile Include="main.cpp" />
@@ -152,11 +156,16 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y</Command>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h" />
     <ClInclude Include="..\Classes\Components\Component.h" />
+    <ClInclude Include="..\Classes\Components\Data\Area.h" />
+    <ClInclude Include="..\Classes\Components\Data\Entity.h" />
     <ClInclude Include="..\Classes\Components\Features.h" />
+    <ClInclude Include="..\Classes\Components\GameArea.h" />
     <ClInclude Include="..\Classes\Components\View\GameLayer.h" />
     <ClInclude Include="..\Classes\Components\View\GameView.h" />
     <ClInclude Include="..\Classes\HelloWorldScene.h" />
-    <ClInclude Include="..\Classes\Objects\MainBase.h" />
+    <ClInclude Include="..\Classes\Objects\Building\Build.h" />
+    <ClInclude Include="..\Classes\Objects\Building\BuildJoin.h" />
+    <ClInclude Include="..\Classes\Objects\Building\MainBase.h" />
     <ClInclude Include="..\Classes\Objects\Object.h" />
     <ClInclude Include="..\Classes\Objects\Scene.h" />
     <ClInclude Include="main.h" />

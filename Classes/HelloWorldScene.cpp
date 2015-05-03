@@ -1,6 +1,5 @@
 #include "HelloWorldScene.h"
-#include "Objects/Scene.h"
-#include "Objects/MainBase.h"
+#include "Objects/Building/MainBase.h"
 
 USING_NS_CC;
 
@@ -32,13 +31,19 @@ bool HelloWorld::init()
     //Size visibleSize = Director::getInstance()->getVisibleSize();
     //Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-    auto scene = Objects::Scene::create();
-    auto mainbase = Objects::MainBase::create();
-    scene->addObject(mainbase);
+    m_pScene = Objects::Scene::create();
+    auto mainbase = Objects::Building::MainBase::create();
+    m_pScene->addObject(mainbase);
 
-    this->addChild(scene->getGameLayer());
+    this->addChild(m_pScene->getGameLayer());
     
+    scheduleUpdate();
+
     return true;
+}
+
+void HelloWorld::update(float delta) {
+  m_pScene->update();
 }
 
 

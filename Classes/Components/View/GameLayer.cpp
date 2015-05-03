@@ -22,8 +22,6 @@ GameLayer* GameLayer::create() {
 
 GameLayer::GameLayer() {
   SIA_CHECK_RET(!init(), ERR);
-
-  scheduleUpdate();
 }
 
 void GameLayer::addGameView(GameView* child) {
@@ -49,19 +47,4 @@ void GameLayer::modificationBackground(cocos2d::Color3B color) {
   SIA_CHECK_RET(back == nullptr, WRN);
 
   back->setColor(color);
-}
-
-void GameLayer::update(float delta) {
-  for (Node* child: _children) {
-    if (gameViewTag == child->getTag()) {
-      GameView* gView = static_cast<GameView*>(child);
-      if (gView) {
-        SIAUtils::Position pos = gView->cell();
-
-        gView->setPosition(pos.x * 100, pos.y * 100);
-      } else {
-        SIA_LOG_WRN("in game view tag find no game view");
-      }
-    }
-  }
 }

@@ -24,8 +24,6 @@ namespace Components
       void setBackground(std::string backgroundId);
       void modificationBackground(cocos2d::Color3B color);
 
-      virtual void update(float delta) override;
-
     private:
       GameLayer();
     };

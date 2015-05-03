@@ -18,6 +18,7 @@ namespace Components
     };
 
   public:
+
     FeatureType Type(std::string name);
     __int32& Int(std::string name);
     unsigned __int32& uInt(std::string name);
