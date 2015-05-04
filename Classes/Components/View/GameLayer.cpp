@@ -48,3 +48,53 @@ void GameLayer::modificationBackground(cocos2d::Color3B color) {
 
   back->setColor(color);
 }
+
+void GameLayer::onEnter() {
+  Layer::onEnter();
+
+  // Register Touch Event
+  auto dispatcher = Director::getInstance()->getEventDispatcher();
+  auto listener = EventListenerTouchOneByOne::create();
+
+  listener->onTouchBegan = CC_CALLBACK_2(GameLayer::onTouchBegan, this);
+  listener->onTouchMoved = CC_CALLBACK_2(GameLayer::onTouchMoved, this);
+  listener->onTouchCancelled = CC_CALLBACK_2(GameLayer::onTouchCancelled, this);
+  listener->onTouchEnded = CC_CALLBACK_2(GameLayer::onTouchEnded, this);
+
+  dispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+}
+void GameLayer::onExit() {
+  Layer::onExit();
+}
+
+bool GameLayer::onTouchBegan(Touch* touch, Event* unused_event) {
+  Vec2 pos = convertTouchToNodeSpace(touch);
+
+  for (auto pChild : getChildren()) {
+    if (pChild && pChild->getTag() == gameViewTag) {
+      GameView* pView = static_cast<GameView*>(pChild);
+      if (pView) {
+        if (pView->hasPointWithSelect(pos)) {
+          ///TODO: save select object
+          return true;
+        }
+      } else {
+        SIA_LOG_WRN("incorrect data to gamelayer");
+      }
+
+    }
+  }
+
+  return false;
+}
+
+void GameLayer::onTouchMoved(Touch* touch, Event* unused_event) {
+
+}
+
+void GameLayer::onTouchEnded(Touch* touch, Event* unused_event) {
+
+}
+
+void GameLayer::onTouchCancelled(Touch* touch, Event* unused_event) {
+}

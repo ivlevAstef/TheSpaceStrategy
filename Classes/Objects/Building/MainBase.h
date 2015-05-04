@@ -16,6 +16,9 @@ namespace Objects
       MainBase();
 
       virtual void update() override;
+
+    private:
+      void init();
     };
   };
 };

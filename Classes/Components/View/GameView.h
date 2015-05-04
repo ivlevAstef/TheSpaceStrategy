@@ -5,6 +5,7 @@
 
 #include "cocos2d.h"
 #include "../Component.h"
+#include "event/Event.h"
 #include <string>
 #include <memory>
 
@@ -17,13 +18,21 @@ namespace Components
       DEFINE_COMPONENT(GameView);
 
       static GameView* create(std::string viewId);
+      bool hasPoint(const cocos2d::Vec2& pos);
+      bool hasPointWithSelect(const cocos2d::Vec2& pos);
 
     private:
       GameView(std::string viewId);
 
+    public:
+      typedef SIAUtils::Delegate<GameView*> DSelect;
+
+      SIAUtils::FriendEvent<GameView, GameView*> select;
+
     private:
       cocos2d::Sprite* sprite;
     };
+
   };
 };
 

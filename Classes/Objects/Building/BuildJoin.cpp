@@ -10,6 +10,5 @@ std::shared_ptr<BuildJoin> BuildJoin::create() {
 
 BuildJoin::BuildJoin() {
   /*auto view = GameView::create("MainBase");
-  view->setCell(4, 4);
   addComponent(view);*/
 }

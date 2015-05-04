@@ -26,4 +26,25 @@ GameView::GameView(std::string viewId) {
 
   SIA_CHECK_RET(sprite == nullptr, ERR);
   addChild(sprite);
+
+  setContentSize(sprite->getContentSize());
+}
+
+bool GameView::hasPoint(const Vec2& pos) {
+  const Vec2 selfPos = getPosition();
+  const Size selfSize = getContentSize();
+  const Rect rect = Rect(selfPos.x - selfSize.width * 0.5, 
+                          selfPos.y - selfSize.height * 0.5, 
+                          selfSize.width, selfSize.height);
+
+  return rect.origin.x < pos.x && pos.x < rect.origin.x + rect.size.width &&
+         rect.origin.y < pos.y && pos.y < rect.origin.y + rect.size.height;
+}
+
+bool GameView::hasPointWithSelect(const cocos2d::Vec2& pos) {
+  if (hasPoint(pos)) {
+    select(this);
+    return true;
+  }
+  return false;
 }

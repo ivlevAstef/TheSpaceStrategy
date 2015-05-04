@@ -11,25 +11,18 @@ namespace Components
 {
   namespace Data
   {
+    class Area;
     class Entity : public Component {
     private:
-      static const int CELL_POSITION_X = 100;
-      static const int CELL_POSITION_Y = 100;
+      friend class Area;
     public:
       DEFINE_COMPONENT(Entity);
 
       static Entity* create();
 
-      inline void setCell(SIAUtils::Position pos) {
-        m_cell = pos;
-        m_real.x = CELL_POSITION_X * pos.x;
-        m_real.y = CELL_POSITION_Y * pos.y;
-      }
-      inline void setCell(int x, int y) {
-        m_cell.x = x; m_cell.y = y;
-        m_real.x = CELL_POSITION_X * x;
-        m_real.y = CELL_POSITION_Y * y;
-      }
+      inline void setCell(SIAUtils::Position pos) { m_cell = pos; }
+      inline void setCell(int x, int y) { m_cell.x = x; m_cell.y = y; }
+
       inline const SIAUtils::Position& cell() const {
         return m_cell;
       }

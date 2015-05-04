@@ -6,6 +6,8 @@
 #include "../Component.h"
 #include "Entity.h"
 
+#include <vector>
+
 namespace Components
 {
   namespace Data
@@ -19,7 +21,12 @@ namespace Components
       void addEntity(Entity* pEntity);
       void removeEntity(Entity* pEntity);
 
+      void update();
+
       static bool convert(const int x,const int y, float& toX, float& toY);
+
+    private:
+      std::vector<Entity*> m_pEntities;
     };
   };
 };

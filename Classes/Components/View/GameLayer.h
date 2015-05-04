@@ -26,6 +26,14 @@ namespace Components
 
     private:
       GameLayer();
+
+      virtual void onEnter() override;
+      virtual void onExit() override;
+
+      virtual bool onTouchBegan(cocos2d::Touch*     touch, cocos2d::Event* unused_event) override;
+      virtual void onTouchMoved(cocos2d::Touch*     touch, cocos2d::Event* unused_event) override;
+      virtual void onTouchEnded(cocos2d::Touch*     touch, cocos2d::Event* unused_event) override;
+      virtual void onTouchCancelled(cocos2d::Touch* touch, cocos2d::Event* unused_event) override;
     };
   };
 };

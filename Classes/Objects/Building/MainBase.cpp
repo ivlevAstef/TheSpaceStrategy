@@ -18,6 +18,7 @@ MainBase::MainBase() {
   auto pView = GameView::create("MainBase");
   addComponent(pView);
 
+  init();
 
   auto pEntity = getComponent<Entity>();
   SIA_ASSERT(pEntity != nullptr);
@@ -32,4 +33,13 @@ void MainBase::update() {
   SIA_ASSERT(pView != nullptr);
 
   pView->setPosition(pEntity->pos().x, pEntity->pos().y);
+}
+
+void MainBase::init() {
+  auto pView = getComponent<GameView>();
+  SIA_ASSERT(pView != nullptr);
+
+  pView->select += GameView::DSelect([] (GameView* view) {
+    SIA_LOG_DBG("Select %d", view);
+  });
 }
