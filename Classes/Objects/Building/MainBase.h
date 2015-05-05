@@ -11,14 +11,15 @@ namespace Objects
   {
     class MainBase : public Build {
     public:
-      static std::shared_ptr<MainBase> create();
+      static std::shared_ptr<MainBase> create(int x, int y);
 
-      MainBase();
+      MainBase(int x, int y);
 
       virtual void update() override;
 
     private:
       void init();
+
     };
   };
 };

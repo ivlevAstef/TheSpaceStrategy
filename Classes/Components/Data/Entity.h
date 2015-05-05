@@ -18,6 +18,8 @@ namespace Components
     public:
       DEFINE_COMPONENT(Entity);
 
+      Entity();
+
       static Entity* create();
 
       inline void setCell(SIAUtils::Position pos) { m_cell = pos; }
@@ -31,9 +33,13 @@ namespace Components
         return m_real;
       }
 
+      inline bool physical() const { return m_physical; }
+
     protected:
       SIAUtils::Position m_cell;
       SIAUtils::Position m_real;
+
+      bool m_physical;
     };
   };
 };

@@ -22,7 +22,7 @@ namespace Objects
       return m_cacheGameLayer;
     }
 
-    void addObject(ObjectPtr pObject);
+    bool addObject(ObjectPtr pObject);
 
     Scene();
 

@@ -24,19 +24,21 @@ Scene::Scene() {
 
 }
 
-void Scene::addObject(ObjectPtr pObject) {
-  SIA_CHECK_RET(pObject.get() == nullptr, WRN);
-  m_objects.push_back(pObject);
+bool Scene::addObject(ObjectPtr pObject) {
+  SIA_CHECK_ZERO(pObject.get() == nullptr, WRN);
 
+  auto pEntity = pObject->getComponent<Entity>();
+  if (m_cacheArea && pEntity) {
+    SIA_CHECK_ZERO(!m_cacheArea->addEntity(pEntity), DBG);
+  }
+
+  m_objects.push_back(pObject);
   auto pView = pObject->getComponent<GameView>();
   if (m_cacheGameLayer && pView) {
     m_cacheGameLayer->addGameView(pView);
   }
 
-  auto pEntity = pObject->getComponent<Entity>();
-  if (m_cacheArea && pEntity) {
-    m_cacheArea->addEntity(pEntity);
-  }
+  return true;
 }
 
 void Scene::update() {

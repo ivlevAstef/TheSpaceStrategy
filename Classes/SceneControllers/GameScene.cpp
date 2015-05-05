@@ -21,8 +21,10 @@ bool GameScene::init() {
 
   scheduleUpdate();
 
-  auto mainbase = Objects::Building::MainBase::create();
-  m_pScene->addObject(mainbase);
+  for (size_t i = 0; i < 5; i++) {
+    auto mainbase = Objects::Building::MainBase::create(4, 4);
+    m_pScene->addObject(mainbase);
+  }
 
   return true;
 }

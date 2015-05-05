@@ -7,11 +7,11 @@ using namespace Objects::Building;
 using namespace Components::Data;
 using namespace Components::View;
 
-std::shared_ptr<MainBase> MainBase::create() {
-  return std::make_shared<MainBase>();
+std::shared_ptr<MainBase> MainBase::create(int x, int y) {
+  return std::make_shared<MainBase>(x, y);
 }
 
-MainBase::MainBase() {
+MainBase::MainBase(int x, int y) {
   m_features.Int("MAX HP") = 100;
   m_features.Int("HP") = 100;
 
@@ -22,7 +22,7 @@ MainBase::MainBase() {
 
   auto pEntity = getComponent<Entity>();
   SIA_ASSERT(pEntity != nullptr);
-  pEntity->setCell(4, 4);
+  pEntity->setCell(x, y);
 }
 
 void MainBase::update() {
