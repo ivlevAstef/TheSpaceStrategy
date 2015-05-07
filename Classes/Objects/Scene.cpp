@@ -20,7 +20,7 @@ Scene::Scene() {
 
   m_cacheGameLayer->setBackground("background");
   m_cacheGameLayer->modificationBackground(cocos2d::Color3B(50, 50, 100));
-
+  m_cacheGameLayer->setGridView(m_cacheArea->width(), m_cacheArea->height(), m_cacheArea->cellSize());
 
 }
 

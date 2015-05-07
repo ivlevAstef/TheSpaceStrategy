@@ -24,6 +24,8 @@ namespace Components
       void setBackground(std::string backgroundId);
       void modificationBackground(cocos2d::Color3B color);
 
+      void setGridView(size_t width, size_t height, size_t cellSize);
+
     private:
       GameLayer();
 
@@ -34,6 +36,10 @@ namespace Components
       virtual void onTouchMoved(cocos2d::Touch*     touch, cocos2d::Event* unused_event) override;
       virtual void onTouchEnded(cocos2d::Touch*     touch, cocos2d::Event* unused_event) override;
       virtual void onTouchCancelled(cocos2d::Touch* touch, cocos2d::Event* unused_event) override;
+
+    private:
+      cocos2d::Sprite* m_background;
+      cocos2d::Layer* m_area;
     };
   };
 };

@@ -73,10 +73,10 @@ bool Area::checkEntityPosition(const SIAUtils::Position& position) {
 
 void Area::update() {
   static const SIAUtils::Position translated[Cell::maxPhysicalEntity] = {
-    SIAUtils::Position(cellSize*0.25f, cellSize*0.25f),
-    SIAUtils::Position(cellSize*0.25f, cellSize*0.75f),
-    SIAUtils::Position(cellSize*0.75f, cellSize*0.25f),
-    SIAUtils::Position(cellSize*0.75f, cellSize*0.75f)
+    SIAUtils::Position(sCellSize*0.25f, sCellSize*0.25f),
+    SIAUtils::Position(sCellSize*0.25f, sCellSize*0.75f),
+    SIAUtils::Position(sCellSize*0.75f, sCellSize*0.25f),
+    SIAUtils::Position(sCellSize*0.75f, sCellSize*0.75f)
   };
 
   SIA_ASSERT(m_cells.size() == m_width * m_height);
@@ -93,8 +93,8 @@ void Area::update() {
         continue;
       }
 
-      pEntity->m_real.x = x * cellSize + translated[trIter].x;
-      pEntity->m_real.y = y * cellSize + translated[trIter].y;
+      pEntity->m_real.x = x * sCellSize + translated[trIter].x;
+      pEntity->m_real.y = y * sCellSize + translated[trIter].y;
 
       trIter++;
     }

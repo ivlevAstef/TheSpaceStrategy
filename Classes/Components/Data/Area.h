@@ -14,15 +14,15 @@ namespace Components
   {
     class Area : public Component {
     public:
-      static const size_t defaultWidth = 64;
-      static const size_t defaultHeight = 64;
+      static const size_t sDefaultWidth = 64;
+      static const size_t sDefaultHeight = 64;
 
-      static const size_t cellSize = 100;
+      static const size_t sCellSize = 100;
     public:
       DEFINE_COMPONENT(Area);
 
       Area() : m_width(0), m_height(0) {
-        setSize(defaultWidth, defaultHeight);
+        setSize(sDefaultWidth, sDefaultHeight);
       }
 
       static Area* create();
@@ -36,6 +36,10 @@ namespace Components
 
       static bool convert(const int x,const int y, float& toX, float& toY);
 
+
+      inline size_t width() const { return m_width; }
+      inline size_t height() const { return m_height; }
+      inline size_t cellSize() const { return sCellSize; }
 
     private:
       bool addPhysicEntity(Entity* pEntity);

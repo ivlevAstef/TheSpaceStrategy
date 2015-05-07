@@ -145,6 +145,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y</Command>
     <ClCompile Include="..\Classes\Components\Features.cpp" />
     <ClCompile Include="..\Classes\Components\View\GameLayer.cpp" />
     <ClCompile Include="..\Classes\Components\View\GameView.cpp" />
+    <ClCompile Include="..\Classes\Components\View\GridView.cpp" />
     <ClCompile Include="..\Classes\Objects\Building\Build.cpp" />
     <ClCompile Include="..\Classes\Objects\Building\BuildJoin.cpp" />
     <ClCompile Include="..\Classes\Objects\Building\MainBase.cpp" />
@@ -162,6 +163,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y</Command>
     <ClInclude Include="..\Classes\Components\GameArea.h" />
     <ClInclude Include="..\Classes\Components\View\GameLayer.h" />
     <ClInclude Include="..\Classes\Components\View\GameView.h" />
+    <ClInclude Include="..\Classes\Components\View\GridView.h" />
     <ClInclude Include="..\Classes\Objects\Building\Build.h" />
     <ClInclude Include="..\Classes\Objects\Building\BuildJoin.h" />
     <ClInclude Include="..\Classes\Objects\Building\MainBase.h" />

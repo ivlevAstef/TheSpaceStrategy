@@ -1,12 +1,14 @@
 #include "GameLayer.h"
 #include "cocos2d.h"
 #include "logger/SIAUtils_Logger.h"
+#include "GridView.h"
 
 using namespace Components::View;
 USING_NS_CC;
 
 static const int backgroundTag = 100;
 static const int gameViewTag = 101;
+static const int gridViewTag = 102;
 
 GameLayer* GameLayer::create() {
   GameLayer* view = new (std::nothrow)GameLayer();
@@ -22,23 +24,42 @@ GameLayer* GameLayer::create() {
 
 GameLayer::GameLayer() {
   SIA_CHECK_RET(!init(), ERR);
+  
+  m_background = nullptr;
+
+  m_area = Layer::create();
+  addChild(m_area, 1);
+}
+
+void GameLayer::setGridView(size_t width, size_t height, size_t cellSize) {
+  SIA_ASSERT(m_area);
+
+  Size size = getContentSize();
+  GridView* grid = GridView::create(width, height, cellSize);
+  grid->setContentSize(size);
+
+  m_area->addChild(grid);
+
+  m_area->setContentSize(Size(width*cellSize, height*cellSize));
 }
 
 void GameLayer::addGameView(GameView* child) {
+  SIA_ASSERT(m_area);
   SIA_CHECK_RET(child == nullptr, ERR);
+
   SIA_LOG_DBG("Add game view");
-  addChild(child, 1, gameViewTag);
+  m_area->addChild(child, 1, gameViewTag);
 }
 
 void GameLayer::setBackground(std::string backgroundId) {
   removeChildByTag(backgroundTag, true);
-  Sprite* background = Sprite::create("images/backgrounds/" + backgroundId + ".png");
+  m_background = Sprite::create("images/backgrounds/" + backgroundId + ".png");
 
-  SIA_CHECK_RET(background == nullptr, ERR);
+  SIA_CHECK_RET(m_background == nullptr, ERR);
 
-  Size visibleSize = Director::getInstance()->getVisibleSize();
-  background->setPosition(visibleSize.width*0.5f, visibleSize.height*0.5f);
-  addChild(background, -1, backgroundTag);
+  Size size = getContentSize();
+  m_background->setPosition(size.width*0.5f, size.height*0.5f);
+  addChild(m_background, -1, backgroundTag);
   SIA_LOG_DBG("set background %s", backgroundId.c_str());
 }
 
@@ -70,7 +91,7 @@ void GameLayer::onExit() {
 bool GameLayer::onTouchBegan(Touch* touch, Event* unused_event) {
   Vec2 pos = convertTouchToNodeSpace(touch);
 
-  for (auto pChild : getChildren()) {
+  for (auto pChild : m_area->getChildren()) {
     if (pChild && pChild->getTag() == gameViewTag) {
       GameView* pView = static_cast<GameView*>(pChild);
       if (pView) {

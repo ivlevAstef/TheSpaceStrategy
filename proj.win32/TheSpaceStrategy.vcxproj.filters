@@ -69,6 +69,9 @@
     <ClCompile Include="..\Classes\SceneControllers\GameScene.cpp">
       <Filter>src\SceneControllers</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Components\View\GridView.cpp">
+      <Filter>src\Components\View</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -115,6 +118,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\SceneControllers\GameScene.h">
       <Filter>src\SceneControllers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Components\View\GridView.h">
+      <Filter>src\Components\View</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
