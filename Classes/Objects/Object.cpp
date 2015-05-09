@@ -17,3 +17,15 @@ void Object::addComponent(Components::Component* component) {
   SIA_LOG_INFO("Add component: %s", component->componentName());
   m_components[component->componentName()] = component;
 }
+
+void Object::eraseComponent(Components::Component* component) {
+  SIA_CHECK_RET(component == nullptr, WRN);
+
+  SIA_LOG_INFO("Erase component: %s", component->componentName());
+
+  auto find = m_components.find(component->componentName());
+  
+  SIA_CHECK_RET(find == m_components.end(), WRN);
+  
+  m_components.erase(find);
+}

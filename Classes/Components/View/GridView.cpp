@@ -85,3 +85,20 @@ void GridView::draw(Renderer* renderer, const Mat4& transform, uint32_t flags) {
 
   DrawNode::draw(renderer, transform, flags);
 }
+
+bool GridView::convert(cocos2d::Touch* touch, size_t& resX, size_t& resY, Vec2& move) {
+  SIA_ASSERT(touch);
+  Vec2 pos = convertTouchToNodeSpace(touch);
+
+  int x = pos.x / m_cellSize;
+  int y = pos.y / m_cellSize;
+
+  if (x < 0 || x > m_width || y < 0 || y > m_height) {
+    return false;
+  }
+
+  resX = x;
+  resY = y;
+  move = Vec2(pos.x - x * m_cellSize, pos.y - y * m_cellSize);
+  return true;
+}

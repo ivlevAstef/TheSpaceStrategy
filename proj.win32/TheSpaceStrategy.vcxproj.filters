@@ -28,6 +28,9 @@
     <Filter Include="src\SceneControllers">
       <UniqueIdentifier>{d81fd550-6484-4b31-9d10-4f0bbfd29d35}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Components\InterfaceView">
+      <UniqueIdentifier>{42e09ddf-0fea-40ca-848d-3c30da9f1ab9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -71,6 +74,15 @@
     </ClCompile>
     <ClCompile Include="..\Classes\Components\View\GridView.cpp">
       <Filter>src\Components\View</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Objects\Building\AbstractBuild.cpp">
+      <Filter>src\Objects\Building</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Components\InterfaceView\BuildButtonLayer.cpp">
+      <Filter>src\Components\InterfaceView</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Components\InterfaceView\BuildButtonView.cpp">
+      <Filter>src\Components\InterfaceView</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -121,6 +133,15 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Components\View\GridView.h">
       <Filter>src\Components\View</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Objects\Building\AbstractBuild.h">
+      <Filter>src\Objects\Building</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Components\InterfaceView\BuildButtonLayer.h">
+      <Filter>src\Components\InterfaceView</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Components\InterfaceView\BuildButtonView.h">
+      <Filter>src\Components\InterfaceView</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

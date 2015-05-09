@@ -17,6 +17,13 @@ namespace Components
 
       virtual void draw(cocos2d::Renderer *renderer, const cocos2d::Mat4& transform, uint32_t flags) override;
 
+      bool convert(cocos2d::Touch* touch, size_t& x, size_t& y, cocos2d::Vec2& move);
+
+      inline size_t width() const { return m_width; }
+      inline size_t height() const { return m_height; }
+
+      inline size_t cellSize() const { return m_cellSize; }
+
     private:
       GridView(size_t width, size_t height, size_t cellSize);
 

@@ -1,11 +1,13 @@
 #include "Scene.h"
 #include "Components/Data/Entity.h"
 #include "Components/View/GameView.h"
+#include "Components/InterfaceView/BuildButtonLayer.h"
 #include "logger/SIAUtils_Logger.h"
 
 using namespace Objects;
 using namespace Components::Data;
 using namespace Components::View;
+using namespace Components::InterfaceView;
 
 ScenePtr Scene::create() {
   return std::make_shared<Scene>();
@@ -14,13 +16,45 @@ ScenePtr Scene::create() {
 Scene::Scene() {
   addComponent(Area::create());
   m_cacheArea = getComponent<Area>();
+  SIA_ASSERT(m_cacheArea);
 
   addComponent(GameLayer::create());
   m_cacheGameLayer = getComponent<GameLayer>();
+  SIA_ASSERT(m_cacheGameLayer);
 
   m_cacheGameLayer->setBackground("background");
   m_cacheGameLayer->modificationBackground(cocos2d::Color3B(50, 50, 100));
   m_cacheGameLayer->setGridView(m_cacheArea->width(), m_cacheArea->height(), m_cacheArea->cellSize());
+
+  using std::placeholders::_1;
+  using std::placeholders::_2;
+  using std::placeholders::_3;
+  m_cacheGameLayer->clickCell += GameLayer::DClickCell(std::bind(&Scene::clickCell, this, _1, _2, _3));
+}
+
+void Scene::clickCell(size_t x, size_t y, cocos2d::Vec2 pos) {
+  auto pButtonLayer = getComponent<BuildButtonLayer>();
+
+  if (pButtonLayer) {
+    SIA_LOG_WRN("Build Button Layer already.");
+    return;
+  }
+
+  addComponent(BuildButtonLayer::create(pos));
+  pButtonLayer = getComponent<BuildButtonLayer>();
+  SIA_ASSERT(pButtonLayer);
+
+  //TODO: create normal
+  m_cacheGameLayer->addChild(pButtonLayer, 100);
+
+  pButtonLayer->close += BuildButtonLayer::DClose([this] (BuildButtonLayer* layer) { 
+    m_cacheGameLayer->removeChild(layer);
+    eraseComponent(layer);
+  });
+
+  pButtonLayer->pick += BuildButtonLayer::DPick([this] (std::string pickId) {
+    SIA_LOG_INFO("PICK pickID");
+  });
 
 }
 

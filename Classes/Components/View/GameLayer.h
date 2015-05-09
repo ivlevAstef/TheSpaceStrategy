@@ -5,6 +5,7 @@
 
 #include "../Component.h"
 #include "GameView.h"
+#include "GridView.h"
 #include "cocos2d.h"
 #include <memory>
 #include <vector>
@@ -26,6 +27,9 @@ namespace Components
 
       void setGridView(size_t width, size_t height, size_t cellSize);
 
+      typedef SIAUtils::Delegate<size_t, size_t, cocos2d::Vec2> DClickCell;
+      SIAUtils::FriendEvent<GameLayer, size_t, size_t, cocos2d::Vec2> clickCell;
+
     private:
       GameLayer();
 
@@ -37,7 +41,9 @@ namespace Components
       virtual void onTouchEnded(cocos2d::Touch*     touch, cocos2d::Event* unused_event) override;
       virtual void onTouchCancelled(cocos2d::Touch* touch, cocos2d::Event* unused_event) override;
 
+      
     private:
+      GridView* m_grid;
       cocos2d::Sprite* m_background;
       cocos2d::Layer* m_area;
     };

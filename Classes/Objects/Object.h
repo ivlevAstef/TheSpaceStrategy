@@ -26,6 +26,7 @@ namespace Objects
 
   protected:
     void addComponent(Components::Component* component);
+    void eraseComponent(Components::Component* component);
 
     std::map<std::string, Components::Component*> m_components;
 

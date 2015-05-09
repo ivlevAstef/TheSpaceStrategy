@@ -1,7 +1,6 @@
 #include "GameLayer.h"
 #include "cocos2d.h"
 #include "logger/SIAUtils_Logger.h"
-#include "GridView.h"
 
 using namespace Components::View;
 USING_NS_CC;
@@ -35,10 +34,10 @@ void GameLayer::setGridView(size_t width, size_t height, size_t cellSize) {
   SIA_ASSERT(m_area);
 
   Size size = getContentSize();
-  GridView* grid = GridView::create(width, height, cellSize);
-  grid->setContentSize(size);
+  m_grid = GridView::create(width, height, cellSize);
+  m_grid->setContentSize(size);
 
-  m_area->addChild(grid);
+  m_area->addChild(m_grid);
 
   m_area->setContentSize(Size(width*cellSize, height*cellSize));
 }
@@ -102,8 +101,16 @@ bool GameLayer::onTouchBegan(Touch* touch, Event* unused_event) {
       } else {
         SIA_LOG_WRN("incorrect data to gamelayer");
       }
-
     }
+  }
+
+  size_t x = 0;
+  size_t y = 0;
+  Vec2 move(0, 0);
+  if (m_grid->convert(touch, x, y, move)) {
+    pos -= move;
+    pos += Vec2(m_grid->cellSize() / 2, m_grid->cellSize() / 2);
+    clickCell(x, y, pos);
   }
 
   return false;

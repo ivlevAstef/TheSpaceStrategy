@@ -29,6 +29,9 @@ namespace Objects
     virtual void update() override;
 
   private:
+    void clickCell(size_t x, size_t y, cocos2d::Vec2 pos);
+
+  private:
     Components::View::GameLayer* m_cacheGameLayer;
     Components::Data::Area* m_cacheArea;
 
