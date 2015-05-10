@@ -25,15 +25,17 @@ BuildButtonView::BuildButtonView(std::string viewId) {
   m_viewId = viewId;
 
   SIA_LOG_FUNC("%s", m_viewId.c_str());
-  button = ui::Button::create("images/gameviews/" + m_viewId + ".png");
-  SIA_ASSERT(button);
+  m_button = ui::Button::create("images/gameviews/" + m_viewId + ".png");
+  SIA_ASSERT(m_button);
 
-  button->addClickEventListener(ui::Widget::ccWidgetClickCallback([this] (Ref*) {
+  m_button->addClickEventListener(ui::Widget::ccWidgetClickCallback([this] (Ref*) {
     SIA_LOG_DBG("click on button with id:%s", m_viewId.c_str());
+    this->retain();
     click(this);
+    this->release();
   }));
 
-  addChild(button);
+  addChild(m_button);
 
-  setContentSize(button->getContentSize());
+  setContentSize(m_button->getContentSize());
 }

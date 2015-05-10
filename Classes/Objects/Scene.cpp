@@ -4,6 +4,8 @@
 #include "Components/InterfaceView/BuildButtonLayer.h"
 #include "logger/SIAUtils_Logger.h"
 
+#include "Building/BuildFabric.h"
+
 using namespace Objects;
 using namespace Components::Data;
 using namespace Components::View;
@@ -33,27 +35,37 @@ Scene::Scene() {
 }
 
 void Scene::clickCell(size_t x, size_t y, cocos2d::Vec2 pos) {
+  static size_t lastX = 0;
+  static size_t lastY = 0;
+
   auto pButtonLayer = getComponent<BuildButtonLayer>();
 
   if (pButtonLayer) {
-    SIA_LOG_WRN("Build Button Layer already.");
-    return;
+    eraseComponent(pButtonLayer);
+    m_cacheGameLayer->removeChild(pButtonLayer);
+
+    if (lastX == x && lastY == y) {
+      return;
+    }
   }
 
+  lastX = x;
+  lastY = y;
   addComponent(BuildButtonLayer::create(pos));
   pButtonLayer = getComponent<BuildButtonLayer>();
   SIA_ASSERT(pButtonLayer);
 
-  //TODO: create normal
   m_cacheGameLayer->addChild(pButtonLayer, 100);
 
-  pButtonLayer->close += BuildButtonLayer::DClose([this] (BuildButtonLayer* layer) { 
-    m_cacheGameLayer->removeChild(layer);
-    eraseComponent(layer);
-  });
-
-  pButtonLayer->pick += BuildButtonLayer::DPick([this] (std::string pickId) {
+  pButtonLayer->pick += BuildButtonLayer::DPick([this, x, y] (BuildButtonLayer* layer, std::string pickId) {
+    SIA_ASSERT(layer);
     SIA_LOG_INFO("PICK pickID");
+    auto newBuild = Objects::Building::BuildFabric::create(pickId, x, y);
+    SIA_CHECK_RET(nullptr == newBuild, WRN);
+    addObject(newBuild);
+
+    eraseComponent(layer);
+    m_cacheGameLayer->removeChild(layer);
   });
 
 }

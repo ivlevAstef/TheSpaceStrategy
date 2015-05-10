@@ -19,9 +19,18 @@ BuildButtonLayer* BuildButtonLayer::create(cocos2d::Vec2 pos) {
 BuildButtonLayer::BuildButtonLayer(cocos2d::Vec2 pos) {
   SIA_CHECK_RET(!init(), ERR);
 
-  BuildButtonView* buttonMainBase = BuildButtonView::create("MainBase");
-  this->addChild(buttonMainBase);
+  BuildButtonView::DClick clickButton([this] (BuildButtonView* view) {
+    SIA_ASSERT(view);
+    this->retain();
+    pick(this, view->viewId());
+    this->release();
+  });
 
+  BuildButtonView* buttonMainBase = BuildButtonView::create("MainBase");
+  buttonMainBase->setPosition(-80, 0);
+  buttonMainBase->click += clickButton;
+
+  this->addChild(buttonMainBase);
 
   this->setPosition(pos);
 }

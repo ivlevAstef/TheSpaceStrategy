@@ -75,14 +75,14 @@
     <ClCompile Include="..\Classes\Components\View\GridView.cpp">
       <Filter>src\Components\View</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Objects\Building\AbstractBuild.cpp">
-      <Filter>src\Objects\Building</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Components\InterfaceView\BuildButtonLayer.cpp">
       <Filter>src\Components\InterfaceView</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Components\InterfaceView\BuildButtonView.cpp">
       <Filter>src\Components\InterfaceView</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Objects\Building\BuildFabric.cpp">
+      <Filter>src\Objects\Building</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -134,14 +134,14 @@
     <ClInclude Include="..\Classes\Components\View\GridView.h">
       <Filter>src\Components\View</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Objects\Building\AbstractBuild.h">
-      <Filter>src\Objects\Building</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Components\InterfaceView\BuildButtonLayer.h">
       <Filter>src\Components\InterfaceView</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Components\InterfaceView\BuildButtonView.h">
       <Filter>src\Components\InterfaceView</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Objects\Building\BuildFabric.h">
+      <Filter>src\Objects\Building</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

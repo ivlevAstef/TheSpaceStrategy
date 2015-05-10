@@ -90,20 +90,6 @@ void GameLayer::onExit() {
 bool GameLayer::onTouchBegan(Touch* touch, Event* unused_event) {
   Vec2 pos = convertTouchToNodeSpace(touch);
 
-  for (auto pChild : m_area->getChildren()) {
-    if (pChild && pChild->getTag() == gameViewTag) {
-      GameView* pView = static_cast<GameView*>(pChild);
-      if (pView) {
-        if (pView->hasPointWithSelect(pos)) {
-          ///TODO: save select object
-          return true;
-        }
-      } else {
-        SIA_LOG_WRN("incorrect data to gamelayer");
-      }
-    }
-  }
-
   size_t x = 0;
   size_t y = 0;
   Vec2 move(0, 0);

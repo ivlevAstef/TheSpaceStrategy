@@ -19,6 +19,8 @@ namespace Components
 
       static BuildButtonView* create(std::string viewId);
 
+      inline const std::string& viewId() const { return m_viewId; }
+
     public:
       BuildButtonView(std::string viewId);
 
@@ -31,7 +33,7 @@ namespace Components
 
     private:
       std::string m_viewId;
-      cocos2d::ui::Widget* button;
+      cocos2d::ui::Widget* m_button;
     };
   }
 }
