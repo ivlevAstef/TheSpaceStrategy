@@ -87,28 +87,46 @@ void GameLayer::onExit() {
   Layer::onExit();
 }
 
-bool GameLayer::onTouchBegan(Touch* touch, Event* unused_event) {
+bool GameLayer::createData(cocos2d::Touch* touch, Common::GameTouchData& data) {
   Vec2 pos = convertTouchToNodeSpace(touch);
 
   size_t x = 0;
   size_t y = 0;
-  Vec2 move(0, 0);
-  if (m_grid->convert(touch, x, y, move)) {
-    pos -= move;
-    pos += Vec2(m_grid->cellSize() / 2, m_grid->cellSize() / 2);
-    clickCell(x, y, pos);
-  }
+  if (m_grid->convert(touch, x, y)) {
+    Vec2 center = convertToNodeSpace(m_grid->getCenter(x, y));
 
+    data = {pos, center, x, y};
+    return true;
+  }
+  return false;
+}
+
+bool GameLayer::onTouchBegan(Touch* touch, Event* unused_event) {
+  Common::GameTouchData data;
+  if (createData(touch, data)) {
+    Common::GameTouchEvents::touchBegan(data);
+    return true;
+  }
   return false;
 }
 
 void GameLayer::onTouchMoved(Touch* touch, Event* unused_event) {
-
+  Common::GameTouchData data;
+  if (createData(touch, data)) {
+    Common::GameTouchEvents::touchMoved(data);
+  }
 }
 
 void GameLayer::onTouchEnded(Touch* touch, Event* unused_event) {
-
+  Common::GameTouchData data;
+  if (createData(touch, data)) {
+    Common::GameTouchEvents::touchEnded(data);
+  }
 }
 
 void GameLayer::onTouchCancelled(Touch* touch, Event* unused_event) {
+  Common::GameTouchData data;
+  if (createData(touch, data)) {
+    Common::GameTouchEvents::touchEnded(data);
+  }
 }

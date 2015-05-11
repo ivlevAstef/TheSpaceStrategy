@@ -17,7 +17,8 @@ namespace Components
 
       virtual void draw(cocos2d::Renderer *renderer, const cocos2d::Mat4& transform, uint32_t flags) override;
 
-      bool convert(cocos2d::Touch* touch, size_t& x, size_t& y, cocos2d::Vec2& move);
+      bool convert(cocos2d::Touch* touch, size_t& x, size_t& y);
+      cocos2d::Vec2 getCenter(size_t x, size_t y);
 
       inline size_t width() const { return m_width; }
       inline size_t height() const { return m_height; }

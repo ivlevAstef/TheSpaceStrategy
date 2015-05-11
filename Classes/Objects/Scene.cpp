@@ -10,6 +10,7 @@ using namespace Objects;
 using namespace Components::Data;
 using namespace Components::View;
 using namespace Components::InterfaceView;
+using namespace Common;
 
 ScenePtr Scene::create() {
   return std::make_shared<Scene>();
@@ -29,45 +30,39 @@ Scene::Scene() {
   m_cacheGameLayer->setGridView(m_cacheArea->width(), m_cacheArea->height(), m_cacheArea->cellSize());
 
   using std::placeholders::_1;
-  using std::placeholders::_2;
-  using std::placeholders::_3;
-  m_cacheGameLayer->clickCell += GameLayer::DClickCell(std::bind(&Scene::clickCell, this, _1, _2, _3));
+  GameTouchEvents::touchBegan += GameTouchEvents::DTouchBegan(this, std::bind(&Scene::touchBegan, this, _1));
 }
 
-void Scene::clickCell(size_t x, size_t y, cocos2d::Vec2 pos) {
+Scene::~Scene() {
+  GameTouchEvents::touchBegan.clean(this);
+}
+
+void Scene::touchBegan(Common::GameTouchData data) {
   static size_t lastX = 0;
   static size_t lastY = 0;
 
   auto pButtonLayer = getComponent<BuildButtonLayer>();
 
-  if (pButtonLayer) {
-    eraseComponent(pButtonLayer);
-    m_cacheGameLayer->removeChild(pButtonLayer);
+  SIA_ASSERT(nullptr == pButtonLayer);
 
-    if (lastX == x && lastY == y) {
-      return;
-    }
-  }
-
-  lastX = x;
-  lastY = y;
-  addComponent(BuildButtonLayer::create(pos));
+  addComponent(BuildButtonLayer::create(data.worldCellCenterPos));
   pButtonLayer = getComponent<BuildButtonLayer>();
   SIA_ASSERT(pButtonLayer);
 
   m_cacheGameLayer->addChild(pButtonLayer, 100);
 
-  pButtonLayer->pick += BuildButtonLayer::DPick([this, x, y] (BuildButtonLayer* layer, std::string pickId) {
-    SIA_ASSERT(layer);
+  pButtonLayer->pick += BuildButtonLayer::DPick(this, [this, data] (std::string pickId) {
     SIA_LOG_INFO("PICK pickID");
-    auto newBuild = Objects::Building::BuildFabric::create(pickId, x, y);
+    auto newBuild = Objects::Building::BuildFabric::create(pickId, data.x, data.y);
     SIA_CHECK_RET(nullptr == newBuild, WRN);
     addObject(newBuild);
-
-    eraseComponent(layer);
-    m_cacheGameLayer->removeChild(layer);
   });
 
+  pButtonLayer->close += BuildButtonLayer::DClose(this, [this] (BuildButtonLayer* layer) {
+    SIA_ASSERT(layer);
+    eraseComponent(layer);
+    m_cacheGameLayer->removeChild(layer);
+  }, true);
 }
 
 bool Scene::addObject(ObjectPtr pObject) {

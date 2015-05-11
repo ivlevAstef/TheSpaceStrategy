@@ -31,6 +31,9 @@
     <Filter Include="src\Components\InterfaceView">
       <UniqueIdentifier>{42e09ddf-0fea-40ca-848d-3c30da9f1ab9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Common">
+      <UniqueIdentifier>{1c4cff50-1109-46bf-bf27-85adfb275acc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -83,6 +86,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\Objects\Building\BuildFabric.cpp">
       <Filter>src\Objects\Building</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Common\GameTouchEvents.cpp">
+      <Filter>src\Common</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -142,6 +148,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Objects\Building\BuildFabric.h">
       <Filter>src\Objects\Building</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Common\GameTouchEvents.h">
+      <Filter>src\Common</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

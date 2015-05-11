@@ -140,6 +140,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y</Command>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
+    <ClCompile Include="..\Classes\Common\GameTouchEvents.cpp" />
     <ClCompile Include="..\Classes\Components\Data\Area.cpp" />
     <ClCompile Include="..\Classes\Components\Data\Entity.cpp" />
     <ClCompile Include="..\Classes\Components\Features.cpp" />
@@ -159,6 +160,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y</Command>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h" />
+    <ClInclude Include="..\Classes\Common\GameTouchEvents.h" />
     <ClInclude Include="..\Classes\Components\Component.h" />
     <ClInclude Include="..\Classes\Components\Data\Area.h" />
     <ClInclude Include="..\Classes\Components\Data\Entity.h" />

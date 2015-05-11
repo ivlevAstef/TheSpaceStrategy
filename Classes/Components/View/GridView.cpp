@@ -76,7 +76,7 @@ void GridView::draw(Renderer* renderer, const Mat4& transform, uint32_t flags) {
       moveVertices(vertices, xBegin - cellWidth, yBegin + yI*cellHeight);
 
       for (int xI = -1; xI < width + 1; xI++) {
-        drawPoly(&vertices[0], vertices.size(), true, Color4F(0.1, 0.05, 0.3, 1.0));
+        drawPoly(&vertices[0], vertices.size(), true, Color4F(0.1f, 0.05f, 0.3f, 1.0f));
 
         moveVertices(vertices, cellWidth, 0);
       }
@@ -86,19 +86,22 @@ void GridView::draw(Renderer* renderer, const Mat4& transform, uint32_t flags) {
   DrawNode::draw(renderer, transform, flags);
 }
 
-bool GridView::convert(cocos2d::Touch* touch, size_t& resX, size_t& resY, Vec2& move) {
+bool GridView::convert(cocos2d::Touch* touch, size_t& resX, size_t& resY) {
   SIA_ASSERT(touch);
   Vec2 pos = convertTouchToNodeSpace(touch);
 
   int x = pos.x / m_cellSize;
   int y = pos.y / m_cellSize;
 
-  if (x < 0 || x > m_width || y < 0 || y > m_height) {
+  if (x < 0 || x > (int)m_width || y < 0 || y > (int)m_height) {
     return false;
   }
 
-  resX = x;
-  resY = y;
-  move = Vec2(pos.x - x * m_cellSize, pos.y - y * m_cellSize);
+  resX = (size_t)x;
+  resY = (size_t)y;
   return true;
+}
+
+cocos2d::Vec2 GridView::getCenter(size_t x, size_t y) {
+  return convertToWorldSpace(Vec2((x * m_cellSize) + m_cellSize / 2, (y * m_cellSize) + m_cellSize / 2));
 }

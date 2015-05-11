@@ -6,6 +6,7 @@
 #include "Object.h"
 #include "Components/View/GameLayer.h"
 #include "Components/Data/Area.h"
+#include "Common/GameTouchEvents.h"
 #include <memory>
 #include <vector>
 
@@ -25,11 +26,12 @@ namespace Objects
     bool addObject(ObjectPtr pObject);
 
     Scene();
+    ~Scene();
 
     virtual void update() override;
 
   private:
-    void clickCell(size_t x, size_t y, cocos2d::Vec2 pos);
+    void touchBegan(Common::GameTouchData data);
 
   private:
     Components::View::GameLayer* m_cacheGameLayer;

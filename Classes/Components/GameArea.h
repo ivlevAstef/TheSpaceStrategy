@@ -9,7 +9,7 @@ namespace Components
 {
   class GameArea : public Component {
   public:
-
+    
 
   private:
   };

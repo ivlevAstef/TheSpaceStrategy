@@ -18,11 +18,16 @@ namespace Components
       DEFINE_COMPONENT(BuildButtonLayer);
 
       static BuildButtonLayer* create(cocos2d::Vec2 pos);
+
+      ~BuildButtonLayer();
       
     public:
 
-      typedef SIAUtils::Delegate<BuildButtonLayer*, std::string> DPick;
-      SIAUtils::FriendEvent<BuildButtonLayer, BuildButtonLayer*, std::string> pick;
+      typedef SIAUtils::Delegate<std::string> DPick;
+      SIAUtils::FriendEvent<BuildButtonLayer, std::string> pick;
+
+      typedef SIAUtils::Delegate<BuildButtonLayer*> DClose;
+      SIAUtils::FriendEvent<BuildButtonLayer, BuildButtonLayer*> close;
 
     private:
       BuildButtonLayer(cocos2d::Vec2 pos);

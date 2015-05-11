@@ -39,7 +39,7 @@ void MainBase::init() {
   auto pView = getComponent<GameView>();
   SIA_ASSERT(pView != nullptr);
 
-  pView->select += GameView::DSelect([] (GameView* view) {
+  pView->select += GameView::DSelect(this, [] (GameView* view) {
     SIA_LOG_DBG("Select %d", view);
   });
 }
