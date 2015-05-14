@@ -34,17 +34,37 @@ namespace Components
       virtual void onEnter() override;
       virtual void onExit() override;
 
-      virtual bool onTouchBegan(cocos2d::Touch*     touch, cocos2d::Event* unused_event) override;
-      virtual void onTouchMoved(cocos2d::Touch*     touch, cocos2d::Event* unused_event) override;
-      virtual void onTouchEnded(cocos2d::Touch*     touch, cocos2d::Event* unused_event) override;
-      virtual void onTouchCancelled(cocos2d::Touch* touch, cocos2d::Event* unused_event) override;
+      bool onTouchBegan(cocos2d::Touch*     touch, cocos2d::Event* unused_event);
+      void onTouchMoved(cocos2d::Touch*     touch, cocos2d::Event* unused_event);
+      void onTouchEnded(cocos2d::Touch*     touch, cocos2d::Event* unused_event);
+      void onTouchCancelled(cocos2d::Touch* touch, cocos2d::Event* unused_event);
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
+      void onMouseDown(cocos2d::Event* event);
+      void onMouseMoved(cocos2d::Event* event);
+      void onMouseUp(cocos2d::Event* event);
 
+#endif
+
+      void move(cocos2d::Vec2 move);
       
       bool createData(cocos2d::Touch* touch, Common::GameTouchData& data);
     private:
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
+      cocos2d::Vec2 m_previousCursorLocation;
+#endif
+
+      class AreaLayer: public cocos2d::Layer {
+      public:
+        static AreaLayer* create();
+
+      private:
+        void visitGameView(cocos2d::Node* node, cocos2d::Renderer* renderer, const cocos2d::Mat4 &transform, uint32_t flags);
+        virtual void visit(cocos2d::Renderer *renderer, const cocos2d::Mat4& transform, uint32_t flags) override;
+      };
+
       GridView* m_grid;
       cocos2d::Sprite* m_background;
-      cocos2d::Layer* m_area;
+      AreaLayer* m_area;
     };
   };
 };

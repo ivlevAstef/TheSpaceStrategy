@@ -26,14 +26,14 @@ GameLayer::GameLayer() {
   
   m_background = nullptr;
 
-  m_area = Layer::create();
+  m_area = AreaLayer::create();
   addChild(m_area, 1);
 }
 
 void GameLayer::setGridView(size_t width, size_t height, size_t cellSize) {
   SIA_ASSERT(m_area);
 
-  Size size = getContentSize();
+  Size size = Director::getInstance()->getWinSize();
   m_grid = GridView::create(width, height, cellSize);
   m_grid->setContentSize(size);
 
@@ -82,9 +82,36 @@ void GameLayer::onEnter() {
   listener->onTouchEnded = CC_CALLBACK_2(GameLayer::onTouchEnded, this);
 
   dispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
+  auto mouseListener = EventListenerMouse::create();
+
+  mouseListener->onMouseDown = CC_CALLBACK_1(GameLayer::onMouseDown, this);
+  mouseListener->onMouseMove = CC_CALLBACK_1(GameLayer::onMouseMoved, this);
+  mouseListener->onMouseUp = CC_CALLBACK_1(GameLayer::onMouseUp, this);
+
+  dispatcher->addEventListenerWithSceneGraphPriority(mouseListener, this);
+#endif
 }
+
 void GameLayer::onExit() {
   Layer::onExit();
+}
+
+static double normalizeNumber(double n, double size, double step) {
+  if (n < -step + size) {
+    n += step * ((int)(-n / step));
+  }
+  if (n > size) {
+    n -= step * (1 + (int)(n / step));
+  }
+  return n;
+}
+
+static Vec2 normalizeVec(Vec2 vec, Size size, Size step) {
+  vec.x = normalizeNumber(vec.x, size.width, step.width);
+  vec.y = normalizeNumber(vec.y, size.height, step.height);
+  return vec;
 }
 
 bool GameLayer::createData(cocos2d::Touch* touch, Common::GameTouchData& data) {
@@ -95,10 +122,30 @@ bool GameLayer::createData(cocos2d::Touch* touch, Common::GameTouchData& data) {
   if (m_grid->convert(touch, x, y)) {
     Vec2 center = convertToNodeSpace(m_grid->getCenter(x, y));
 
+    pos = normalizeVec(pos, getContentSize(), m_area->getContentSize());
+    center = normalizeVec(center, getContentSize(), m_area->getContentSize());
     data = {pos, center, x, y};
     return true;
   }
   return false;
+}
+
+//TODO:create utils
+void GameLayer::move(cocos2d::Vec2 move) {
+  SIA_LOG_INFO("Move on (%f,%f)", move.x, move.y);
+  cocos2d::Vec2 newPos = m_area->getPosition() + move;
+
+  newPos = normalizeVec(newPos, getContentSize(), m_area->getContentSize());
+
+  m_area->setPosition(newPos);
+  m_grid->setPosition(-newPos);
+
+  ///TODO: create normal cycling background
+  Vec2 backPos = m_background->getPosition();
+  backPos += move * 0.1;
+  //backPos.x = normalizeNumber(backPos.x, 0, m_background->getContentSize().width);
+  //backPos.y = normalizeNumber(backPos.y, 0, m_background->getContentSize().height);
+  m_background->setPosition(backPos);
 }
 
 bool GameLayer::onTouchBegan(Touch* touch, Event* unused_event) {
@@ -129,4 +176,92 @@ void GameLayer::onTouchCancelled(Touch* touch, Event* unused_event) {
   if (createData(touch, data)) {
     Common::GameTouchEvents::touchEnded(data);
   }
+}
+
+void GameLayer::onMouseDown(cocos2d::Event* event) {
+  EventMouse* eMouse = static_cast<EventMouse*>(event);
+  if (eMouse) {
+    m_previousCursorLocation = eMouse->getLocationInView();
+  }
+}
+
+void GameLayer::onMouseMoved(cocos2d::Event* event) {
+  EventMouse* eMouse = static_cast<EventMouse*>(event);
+  if (eMouse) {
+    auto location = eMouse->getLocationInView();
+    if (MOUSE_BUTTON_RIGHT == eMouse->getMouseButton()) {
+      move(location - m_previousCursorLocation);
+    }
+    m_previousCursorLocation = location;
+  }
+}
+
+void GameLayer::onMouseUp(cocos2d::Event* event) {
+
+}
+
+/////////////////////////////////////////////////////////////////////
+static inline float getPair(float coordinate, float size) {
+  return coordinate < size*0.5 ? coordinate + size : coordinate - size;
+}
+
+GameLayer::AreaLayer* GameLayer::AreaLayer::create() {
+  AreaLayer* area = new (std::nothrow)AreaLayer();
+  if (area) {
+    area->autorelease();
+    return area;
+  }
+
+  SIA_LOG_ERR("can't create areaLayer");
+  CC_SAFE_DELETE(area);
+  return nullptr;
+}
+
+
+void GameLayer::AreaLayer::visitGameView(Node* node, Renderer* renderer, const Mat4 &transform, uint32_t flags) {
+  SIA_ASSERT(node);
+
+  Vec2 pos = node->getPosition();
+  Vec2 pairPos = Vec2(getPair(pos.x, getContentSize().width), getPair(pos.y, getContentSize().height));
+
+  node->visit(renderer, transform, flags);
+
+  node->setPosition(pairPos.x, pos.y);
+  node->visit(renderer, transform, flags);
+
+  node->setPosition(pos.x, pairPos.y);
+  node->visit(renderer, transform, flags);
+
+  node->setPosition(pairPos.x, pairPos.y);
+  node->visit(renderer, transform, flags);
+
+  node->setPosition(pos);
+}
+
+void GameLayer::AreaLayer::visit(Renderer* renderer, const Mat4 &parentTransform, uint32_t parentFlags) {
+  if (!_visible) {
+    return;
+  }
+
+  uint32_t flags = processParentFlags(parentTransform, parentFlags);
+
+  _director->pushMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_MODELVIEW);
+  _director->loadMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_MODELVIEW, _modelViewTransform);
+
+  if (!_children.empty()) {
+    sortAllChildren();
+
+    for (int i = 0; i < _children.size(); i++) {
+      auto node = _children.at(i);
+      if (node) {
+        if (node->getTag() == gameViewTag) {
+          visitGameView(node, renderer, _modelViewTransform, flags);
+        } else {
+          node->visit(renderer, _modelViewTransform, flags);
+        }
+      }
+    }
+  }
+
+  _director->popMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_MODELVIEW);
 }

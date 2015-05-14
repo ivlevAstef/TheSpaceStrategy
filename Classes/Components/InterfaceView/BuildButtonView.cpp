@@ -26,13 +26,13 @@ BuildButtonView::BuildButtonView(std::string viewId) {
 
   SIA_LOG_FUNC("%s", m_viewId.c_str());
 
-  m_normal = Sprite::create("images/gameviews/" + m_viewId + ".png");
+  m_normal = Sprite::create("images/gameviews/builds/" + m_viewId + ".png");
   SIA_ASSERT(m_normal);
 
-  m_select = Sprite::create("images/gameviews/" + m_viewId + ".png");
+  m_select = Sprite::create("images/gameviews/builds/" + m_viewId + ".png");
   SIA_ASSERT(m_select);
 
-  m_disable = Sprite::create("images/gameviews/" + m_viewId + ".png");
+  m_disable = Sprite::create("images/gameviews/builds/" + m_viewId + ".png");
   SIA_ASSERT(m_disable);
 
 

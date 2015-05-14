@@ -28,6 +28,8 @@ namespace Components
     private:
       GridView(size_t width, size_t height, size_t cellSize);
 
+      cocos2d::Vec2 normalizePosition(cocos2d::Vec2 pos);
+
     private:
       size_t m_width;
       size_t m_height;

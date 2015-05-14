@@ -22,7 +22,7 @@ GameView::GameView(std::string viewId) {
   SIA_CHECK_RET(!init(), ERR);
 
   SIA_LOG_FUNC("%s", viewId.c_str());
-  sprite = Sprite::create("images/gameviews/" + viewId + ".png");
+  sprite = Sprite::create("images/gameviews/builds/" + viewId + ".png");
 
   SIA_CHECK_RET(sprite == nullptr, ERR);
   addChild(sprite);

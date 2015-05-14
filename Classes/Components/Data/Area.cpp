@@ -73,10 +73,10 @@ bool Area::checkEntityPosition(const SIAUtils::Position& position) {
 
 void Area::update() {
   static const SIAUtils::Position translated[Cell::maxPhysicalEntity] = {
-    SIAUtils::Position(sCellSize*0.25f, sCellSize*0.25f),
-    SIAUtils::Position(sCellSize*0.25f, sCellSize*0.75f),
-    SIAUtils::Position(sCellSize*0.75f, sCellSize*0.25f),
-    SIAUtils::Position(sCellSize*0.75f, sCellSize*0.75f)
+    SIAUtils::Position(sCellSize*0.5f, sCellSize*0.75f),
+    SIAUtils::Position(sCellSize*0.75f, sCellSize*0.5f),
+    SIAUtils::Position(sCellSize*0.5f, sCellSize*0.25f),
+    SIAUtils::Position(sCellSize*0.25f, sCellSize*0.5f)
   };
 
   SIA_ASSERT(m_cells.size() == m_width * m_height);
