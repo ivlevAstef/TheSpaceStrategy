@@ -6,7 +6,6 @@
 #include <map>
 #include <memory>
 #include "Components/Component.h"
-#include "Components/Features.h"
 
 namespace Objects
 {
@@ -28,10 +27,8 @@ namespace Objects
     void addComponent(Components::Component* component);
     void eraseComponent(Components::Component* component);
 
+  private:
     std::map<std::string, Components::Component*> m_components;
-
-  protected:
-    Components::Features m_features;
   };
 
 };

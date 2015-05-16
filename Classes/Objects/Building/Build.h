@@ -12,6 +12,7 @@ namespace Objects
     class Build : public Object {
     public:
       Build();
+      virtual ~Build();
     };
   };
 };

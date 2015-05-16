@@ -24,6 +24,7 @@ namespace Objects
     }
 
     bool addObject(ObjectPtr pObject);
+    void eraseObject(ObjectPtr pObject);
 
     Scene();
     ~Scene();

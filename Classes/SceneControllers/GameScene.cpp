@@ -1,7 +1,8 @@
 #include "GameScene.h"
-#include "Objects/Building/MainBase.h"
+#include "Objects/Building/BuildFabric.h"
 
 using namespace SceneControllers;
+using namespace Objects::Building;
 USING_NS_CC;
 
 Scene* GameScene::createScene() {
@@ -23,15 +24,19 @@ bool GameScene::init() {
 
   for (size_t i = 0; i < 4; i++) {
     for (size_t j = 0; j < i + 1; j++) {
-      auto mainbase = Objects::Building::MainBase::create(i * 10, 4);
+      auto mainbase = BuildFabric::create("MainBase", i * 10, 4);
       m_pScene->addObject(mainbase);
+      auto pylon = BuildFabric::create("Pylon", i * 10, 4);
+      m_pScene->addObject(pylon);
     }
   }
 
   for (size_t i = 0; i < 4; i++) {
     for (size_t j = 0; j < i + 1; j++) {
-      auto mainbase = Objects::Building::MainBase::create(4, i*10);
+      auto mainbase = BuildFabric::create("MainBase", 4, i * 10);
       m_pScene->addObject(mainbase);
+      auto pylon = BuildFabric::create("Pylon", 4, i * 10);
+      m_pScene->addObject(pylon);
     }
   }
 

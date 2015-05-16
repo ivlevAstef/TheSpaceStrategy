@@ -50,6 +50,14 @@ void GameLayer::addGameView(GameView* child) {
   m_area->addChild(child, 1, gameViewTag);
 }
 
+void GameLayer::eraseGameView(GameView* child) {
+  SIA_ASSERT(m_area);
+  SIA_CHECK_RET(child == nullptr, ERR);
+
+  SIA_LOG_DBG("Erase game view");
+  m_area->removeChild(child);
+}
+
 void GameLayer::setBackground(std::string backgroundId) {
   removeChildByTag(backgroundTag, true);
   m_background = Sprite::create("images/backgrounds/" + backgroundId + ".png");

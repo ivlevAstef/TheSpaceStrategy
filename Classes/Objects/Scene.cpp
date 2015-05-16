@@ -26,7 +26,7 @@ Scene::Scene() {
   SIA_ASSERT(m_cacheGameLayer);
 
   m_cacheGameLayer->setBackground("background");
-  m_cacheGameLayer->modificationBackground(cocos2d::Color3B(50, 50, 100));
+  m_cacheGameLayer->modificationBackground(cocos2d::Color3B(150, 150, 200));
   m_cacheGameLayer->setGridView(m_cacheArea->width(), m_cacheArea->height(), m_cacheArea->cellSize());
 
   using std::placeholders::_1;
@@ -79,7 +79,28 @@ bool Scene::addObject(ObjectPtr pObject) {
     m_cacheGameLayer->addGameView(pView);
   }
 
+  SIA_LOG_DBG("Added object on scene.");
   return true;
+}
+
+void Scene::eraseObject(ObjectPtr pObject) {
+  SIA_CHECK_RET(pObject.get() == nullptr, WRN);
+
+  auto pEntity = pObject->getComponent<Entity>();
+  if (m_cacheArea && pEntity) {
+    m_cacheArea->removeEntity(pEntity);
+  }
+
+  auto pView = pObject->getComponent<GameView>();
+  if (m_cacheGameLayer && pView) {
+    m_cacheGameLayer->eraseGameView(pView);
+  }
+
+  m_objects.erase(std::remove_if(m_objects.begin(), m_objects.end(), [&pObject] (ObjectPtr& pObj) {
+    return pObject.get() == pObj.get();
+  }), m_objects.end());
+
+  SIA_LOG_DBG("Removed object from scene.");
 }
 
 void Scene::update() {

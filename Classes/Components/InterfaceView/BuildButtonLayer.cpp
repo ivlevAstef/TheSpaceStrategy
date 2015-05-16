@@ -25,9 +25,13 @@ BuildButtonLayer::BuildButtonLayer(Vec2 pos) {
   SIA_CHECK_RET(!init(), ERR);
 
   BuildButtonView* buttonMainBase = BuildButtonView::create("MainBase");
-  buttonMainBase->setPosition(-75, 0);
-
+  buttonMainBase->setPosition(-50, 0);
   this->addChild(buttonMainBase);
+
+
+  BuildButtonView* buttonPylon = BuildButtonView::create("Pylon");
+  buttonPylon->setPosition(50, 0);
+  this->addChild(buttonPylon);
 
   this->setPosition(pos);
 

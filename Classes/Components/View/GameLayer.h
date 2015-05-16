@@ -22,6 +22,7 @@ namespace Components
       static GameLayer* create();
 
       void addGameView(GameView* child);
+      void eraseGameView(GameView* child);
 
       void setBackground(std::string backgroundId);
       void modificationBackground(cocos2d::Color3B color);

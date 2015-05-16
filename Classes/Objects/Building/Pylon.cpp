@@ -1,4 +1,4 @@
-#include "MainBase.h"
+#include "Pylon.h"
 #include "Components/View/GameView.h"
 #include "Components/Data/Entity.h"
 #include "logger/SIAUtils_Logger.h"
@@ -9,12 +9,12 @@ using namespace Components::Data;
 using namespace Components::View;
 using namespace Common;
 
-std::shared_ptr<MainBase> MainBase::create(int x, int y) {
-  return std::make_shared<MainBase>(x, y);
+std::shared_ptr<Pylon> Pylon::create(int x, int y) {
+  return std::make_shared<Pylon>(x, y);
 }
 
-MainBase::MainBase(int x, int y) {
-  auto pView = GameView::create("MainBase");
+Pylon::Pylon(int x, int y) {
+  auto pView = GameView::create("Pylon");
   addComponent(pView);
 
   init();
@@ -23,15 +23,14 @@ MainBase::MainBase(int x, int y) {
   SIA_ASSERT(pEntity != nullptr);
   pEntity->setCell(x, y);
 
-  pEntity->features().Int(FeatureNames::ID) = Entity::MainBase;
+  pEntity->features().Int(FeatureNames::ID) = Entity::Pylon;
   pEntity->features().Int(FeatureNames::maxHP) = 100;
   pEntity->features().Int(FeatureNames::HP) = 100;
-  pEntity->features().Bool(FeatureNames::generator) = true;
-  pEntity->features().Int(FeatureNames::generatedEnergy) = 25;
+  pEntity->features().Bool(FeatureNames::generator) = false;
   pEntity->features().Bool(FeatureNames::physic) = true;
 }
 
-void MainBase::update() {
+void Pylon::update() {
   auto pEntity = getComponent<Entity>();
   SIA_ASSERT(pEntity != nullptr);
 
@@ -41,7 +40,7 @@ void MainBase::update() {
   pView->setPosition(pEntity->pos().x, pEntity->pos().y);
 }
 
-void MainBase::init() {
+void Pylon::init() {
   auto pView = getComponent<GameView>();
   SIA_ASSERT(pView != nullptr);
 

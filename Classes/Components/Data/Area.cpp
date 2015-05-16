@@ -8,6 +8,7 @@ Area* Area::create() {
 }
 
 bool Area::addEntity(Entity* pEntity) {
+  SIA_LOG_FUNC("");
   SIA_ASSERT(pEntity);
   for (Entity* pIterEntity : m_pEntities) {
     if (pEntity == pIterEntity) {
@@ -25,29 +26,48 @@ bool Area::addEntity(Entity* pEntity) {
 }
 
 bool Area::addPhysicEntity(Entity* pEntity) {
+  SIA_LOG_FUNC("");
   SIA_ASSERT(pEntity);
   SIA_ASSERT(pEntity->physical());
 
   SIAUtils::Position pos = pEntity->cell();
-  if (!checkEntityPosition(pos)) {
-    return false;
+  SIA_CHECK_ZERO(!checkEntityPosition(pos), WRN);
+  
+  if (m_cells[pos.y*m_width + pos.x].addEntity(pEntity)) {
+    calculateRealPosFor(pEntity);
+    return true;
   }
 
-  return m_cells[pos.y*m_width + pos.x].addEntity(pEntity);
+  return false;
 }
 
 void Area::removeEntity(Entity* pEntity) {
+  SIA_LOG_FUNC("");
   SIA_ASSERT(pEntity);
   for (size_t i = 0; i < m_pEntities.size(); i++) {
     if (pEntity == m_pEntities[i]) {
       m_pEntities.erase(m_pEntities.begin() + i);
+
+      if (pEntity->physical()) {
+        removePhysicEntity(pEntity);
+      }
       return;
     }
   }
 }
 
-void Area::setSize(size_t width, size_t height)
-{
+void Area::removePhysicEntity(Entity* pEntity) {
+  SIA_LOG_FUNC("");
+  SIA_ASSERT(pEntity);
+  SIA_ASSERT(pEntity->physical());
+
+  SIAUtils::Position pos = pEntity->cell();
+  SIA_CHECK_RET(!checkEntityPosition(pos), WRN);
+
+  m_cells[pos.y*m_width + pos.x].removeEntity(pEntity);
+}
+
+void Area::setSize(size_t width, size_t height) {
   if (m_width != width || m_height != height) {
     m_cells.clear();
 
@@ -58,8 +78,27 @@ void Area::setSize(size_t width, size_t height)
   }
 }
 
-void Area::recalculateCells() {
+void Area::calculateRealPosFor(Entity* pEntity) {
+  static const SIAUtils::Position translated[Cell::maxPhysicalEntity] = {
+    SIAUtils::Position(sCellSize*0.5f, sCellSize*0.8f),
+    SIAUtils::Position(sCellSize*0.8f, sCellSize*0.5f),
+    SIAUtils::Position(sCellSize*0.5f, sCellSize*0.2f),
+    SIAUtils::Position(sCellSize*0.2f, sCellSize*0.5f)
+  };
 
+  SIAUtils::Position pos = pEntity->cell();
+
+  if (Entity::Pylon == pEntity->type()) {
+    pEntity->m_real.x = pos.x * sCellSize + sCellSize * 0.5f;
+    pEntity->m_real.y = pos.y * sCellSize + sCellSize * 0.5f;
+    return;
+  }
+
+  size_t trIndex = m_cells[pos.y*m_width + pos.x].pPhysicalEntities.size();
+  SIA_ASSERT(trIndex > 0);
+
+  pEntity->m_real.x = pos.x * sCellSize + translated[trIndex - 1].x;
+  pEntity->m_real.y = pos.y * sCellSize + translated[trIndex - 1].y;
 }
 
 bool Area::checkEntityPosition(const SIAUtils::Position& position) {
@@ -71,34 +110,14 @@ bool Area::checkEntityPosition(const SIAUtils::Position& position) {
   return true;
 }
 
-void Area::update() {
-  static const SIAUtils::Position translated[Cell::maxPhysicalEntity] = {
-    SIAUtils::Position(sCellSize*0.5f, sCellSize*0.75f),
-    SIAUtils::Position(sCellSize*0.75f, sCellSize*0.5f),
-    SIAUtils::Position(sCellSize*0.5f, sCellSize*0.25f),
-    SIAUtils::Position(sCellSize*0.25f, sCellSize*0.5f)
-  };
+void Area::updateEnergy() {
 
+}
+
+void Area::update() {
   SIA_ASSERT(m_cells.size() == m_width * m_height);
 
-  for (size_t i = 0; i < m_cells.size(); i++) {
-    int x = (int)(i % m_width);
-    int y = (int)(i / m_width);
-
-    size_t trIter = 0;
-
-    for (Entity* pEntity : m_cells[i].pPhysicalEntities) {
-      if (pEntity->cell().x != x || pEntity->cell().y != y) {
-        SIA_LOG_ERR("physical entity moved...");
-        continue;
-      }
-
-      pEntity->m_real.x = x * sCellSize + translated[trIter].x;
-      pEntity->m_real.y = y * sCellSize + translated[trIter].y;
-
-      trIter++;
-    }
-  }
+  updateEnergy();
 }
 
 bool Area::convert(const int x, const int y, float& toX, float& toY) {
@@ -110,13 +129,42 @@ bool Area::convert(const int x, const int y, float& toX, float& toY) {
 bool Area::Cell::addEntity(Entity* pEntity) {
   SIA_ASSERT(pEntity);
 
-  if (!pEntity->physical()) {
+  SIA_CHECK_ONE(!pEntity->physical(), INFO);
+
+  if (Entity::Pylon == pEntity->type()) {
+    SIA_CHECK_ZERO(pPylon, DBG);
+    
+    SIA_LOG_DBG("Add pylon on area");
+    pPylon = pEntity;
     return true;
   }
 
   if (pPhysicalEntities.size() < maxPhysicalEntity) {
+    SIA_LOG_DBG("Add entity on area");
     pPhysicalEntities.push_back(pEntity);
     return true;
   }
   return false;
+}
+
+void Area::Cell::removeEntity(Entity* pEntity) {
+  SIA_ASSERT(pEntity);
+
+  SIA_CHECK_RET(!pEntity->physical(), INFO);
+
+  if (pEntity == pPylon) {
+    SIA_LOG_DBG("Remove pylon from area");
+    pPylon = nullptr;
+    return;
+  }
+
+  for (size_t i = 0; i < pPhysicalEntities.size(); i++) {
+    if (pPhysicalEntities[i] == pEntity) {
+      SIA_LOG_DBG("Remove entity from area");
+      pPhysicalEntities.erase(pPhysicalEntities.begin() + i);
+      return;
+    }
+  }
+
+  SIA_LOG_WRN("Can't remove entity from area");
 }

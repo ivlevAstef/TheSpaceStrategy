@@ -54,13 +54,7 @@
     <ClCompile Include="..\Classes\Objects\Object.cpp">
       <Filter>src\Objects</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Components\Features.cpp">
-      <Filter>src\Components</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Objects\Building\MainBase.cpp">
-      <Filter>src\Objects\Building</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Objects\Building\BuildJoin.cpp">
       <Filter>src\Objects\Building</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Components\Data\Area.cpp">
@@ -90,6 +84,15 @@
     <ClCompile Include="..\Classes\Common\GameTouchEvents.cpp">
       <Filter>src\Common</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Common\Features.cpp">
+      <Filter>src\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Common\FeatureNames.cpp">
+      <Filter>src\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Objects\Building\Pylon.cpp">
+      <Filter>src\Objects\Building</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -113,16 +116,10 @@
     <ClInclude Include="..\Classes\Components\View\GameLayer.h">
       <Filter>src\Components\View</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Components\Features.h">
-      <Filter>src\Components</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Objects\Building\MainBase.h">
       <Filter>src\Objects\Building</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Objects\Building\Build.h">
-      <Filter>src\Objects\Building</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Objects\Building\BuildJoin.h">
       <Filter>src\Objects\Building</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Components\GameArea.h">
@@ -151,6 +148,15 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Common\GameTouchEvents.h">
       <Filter>src\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Common\Features.h">
+      <Filter>src\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Common\FeatureNames.h">
+      <Filter>src\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Objects\Building\Pylon.h">
+      <Filter>src\Objects\Building</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

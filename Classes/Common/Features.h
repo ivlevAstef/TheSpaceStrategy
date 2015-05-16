@@ -1,17 +1,20 @@
 /*Author: Ivlev Alexander (stef).*/
 #pragma once
-#ifndef _COMPONENTS_FEATURES_H__
-#define _COMPONENTS_FEATURES_H__
+#ifndef _COMMON_FEATURES_H__
+#define _COMMON_FEATURES_H__
 
 #include <unordered_map>
 #include <vector>
 
-namespace Components
+namespace Common
 {
   class Features {
   public:
+    typedef size_t Cache;
+
     enum FeatureType {
       eFT_Undefined,
+      eFT_Bool,
       eFT_Int,
       eFT_UInt,
       eFT_Float
@@ -20,20 +23,23 @@ namespace Components
   public:
 
     FeatureType Type(std::string name);
+    bool& Bool(std::string name);
     __int32& Int(std::string name);
     unsigned __int32& uInt(std::string name);
     float& Float(std::string name);
 
-    FeatureType Type(size_t cache);
-    __int32& Int(size_t cache);
-    unsigned __int32& uInt(size_t cache);
-    float& Float(size_t cache);
+    FeatureType Type(Cache cache) const;
+    bool& Bool(Cache cache) const;
+    __int32& Int(Cache cache) const;
+    unsigned __int32& uInt(Cache cache) const;
+    float& Float(Cache cache) const;
 
-    size_t Cache(std::string name);
+    Cache cache(std::string name);
 
   private:
     union FeatureValue {
       void* undefined;
+      bool b;
       __int32 i;
       unsigned __int32 ui;
       float f;
@@ -42,7 +48,7 @@ namespace Components
     struct Feature {
       FeatureType type;
       FeatureValue v;
-      size_t cache;
+      Cache cache;
 
       Feature() : type(eFT_Undefined), cache(0) {
         v.undefined = nullptr;
@@ -55,4 +61,4 @@ namespace Components
 
 };
 
-#endif // _COMPONENTS_FEATURES_H__
+#endif // _COMMON_FEATURES_H__

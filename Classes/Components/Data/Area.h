@@ -43,9 +43,13 @@ namespace Components
 
     private:
       bool addPhysicEntity(Entity* pEntity);
+      void removePhysicEntity(Entity* pEntity);
       bool checkEntityPosition(const SIAUtils::Position& position);
       void clearCells();
-      void recalculateCells();
+      void calculateRealPosFor(Entity* pEntity);
+
+      void updateEnergy();
+
 
     private:
       size_t m_width;
@@ -59,8 +63,12 @@ namespace Components
         static const size_t maxPhysicalEntity = 4;
 
         std::vector<Entity*> pPhysicalEntities;
+        Entity* pPylon;
+
+        Cell() : pPylon(nullptr) { }
 
         bool addEntity(Entity* pEntity);
+        void removeEntity(Entity* pEntity);
       };
 
 
