@@ -65,7 +65,9 @@ namespace Components
         std::vector<Entity*> pPhysicalEntities;
         Entity* pPylon;
 
-        Cell() : pPylon(nullptr) { }
+        Cell() : pPylon(nullptr) {
+          pPhysicalEntities.resize(maxPhysicalEntity, nullptr);
+        }
 
         bool addEntity(Entity* pEntity);
         void removeEntity(Entity* pEntity);

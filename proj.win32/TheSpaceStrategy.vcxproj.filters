@@ -93,6 +93,12 @@
     <ClCompile Include="..\Classes\Objects\Building\Pylon.cpp">
       <Filter>src\Objects\Building</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Objects\Building\GeneralMineral.cpp">
+      <Filter>src\Objects\Building</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Objects\Building\Minerals.cpp">
+      <Filter>src\Objects\Building</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -156,6 +162,12 @@
       <Filter>src\Common</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Objects\Building\Pylon.h">
+      <Filter>src\Objects\Building</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Objects\Building\GetterMineral.h">
+      <Filter>src\Objects\Building</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Objects\Building\Minerals.h">
       <Filter>src\Objects\Building</Filter>
     </ClInclude>
   </ItemGroup>

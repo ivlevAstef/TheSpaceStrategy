@@ -40,6 +40,17 @@ bool GameScene::init() {
     }
   }
 
+  auto getterMineral = BuildFabric::create("GetterMineral", 5, 5);
+  m_pScene->addObject(getterMineral);
+
+  for (size_t i = 0; i < 50; i++) {
+    int x = rand() % 32;
+    int y = rand() % 32;
+
+    auto minerals = BuildFabric::create("Minerals", x, y);
+    m_pScene->addObject(minerals);
+  }
+
   return true;
 }
 

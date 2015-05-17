@@ -94,11 +94,13 @@ void Area::calculateRealPosFor(Entity* pEntity) {
     return;
   }
 
-  size_t trIndex = m_cells[pos.y*m_width + pos.x].pPhysicalEntities.size();
-  SIA_ASSERT(trIndex > 0);
-
-  pEntity->m_real.x = pos.x * sCellSize + translated[trIndex - 1].x;
-  pEntity->m_real.y = pos.y * sCellSize + translated[trIndex - 1].y;
+  size_t trIndex = 0;
+  for (; trIndex < Cell::maxPhysicalEntity; trIndex++) {
+    if (pEntity = m_cells[pos.y*m_width + pos.x].pPhysicalEntities[trIndex]) {
+      pEntity->m_real.x = pos.x * sCellSize + translated[trIndex].x;
+      pEntity->m_real.y = pos.y * sCellSize + translated[trIndex].y;
+    }
+  }
 }
 
 bool Area::checkEntityPosition(const SIAUtils::Position& position) {
@@ -139,11 +141,14 @@ bool Area::Cell::addEntity(Entity* pEntity) {
     return true;
   }
 
-  if (pPhysicalEntities.size() < maxPhysicalEntity) {
-    SIA_LOG_DBG("Add entity on area");
-    pPhysicalEntities.push_back(pEntity);
-    return true;
+  for (size_t i = 0; i < maxPhysicalEntity; i++) {
+    if (pPhysicalEntities[i] == nullptr) {
+      SIA_LOG_DBG("Add entity on area");
+      pPhysicalEntities[i] = pEntity;
+      return true;
+    }
   }
+  
   return false;
 }
 
@@ -161,7 +166,7 @@ void Area::Cell::removeEntity(Entity* pEntity) {
   for (size_t i = 0; i < pPhysicalEntities.size(); i++) {
     if (pPhysicalEntities[i] == pEntity) {
       SIA_LOG_DBG("Remove entity from area");
-      pPhysicalEntities.erase(pPhysicalEntities.begin() + i);
+      pPhysicalEntities[i] = nullptr;
       return;
     }
   }

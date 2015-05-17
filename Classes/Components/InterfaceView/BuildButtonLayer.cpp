@@ -33,6 +33,10 @@ BuildButtonLayer::BuildButtonLayer(Vec2 pos) {
   buttonPylon->setPosition(50, 0);
   this->addChild(buttonPylon);
 
+  BuildButtonView* buttonGetterMineral = BuildButtonView::create("GetterMineral");
+  buttonGetterMineral->setPosition(0, -50);
+  this->addChild(buttonGetterMineral);
+
   this->setPosition(pos);
 
 

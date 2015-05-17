@@ -17,7 +17,9 @@ namespace Components
     public:
       enum EntityType {
         MainBase,
-        Pylon
+        Pylon,
+        GetterMineral,
+        Minerals,
       };
     private:
       friend class Area;
