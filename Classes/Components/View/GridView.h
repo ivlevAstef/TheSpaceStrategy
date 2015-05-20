@@ -4,6 +4,7 @@
 #define _COMPONENTS_VIEW_GRID_VIEW_H__
 
 #include "cocos2d.h"
+#include "../Component.h"
 #include <memory>
 #include <vector>
 
@@ -11,8 +12,11 @@ namespace Components
 {
   namespace View
   {
-    class GridView: public cocos2d::DrawNode {
+    class GridView: public cocos2d::DrawNode, public Component {
     public:
+      DEFINE_COMPONENT(GridView);
+      DEFINE_COCOS2DX_COMPONENT
+
       static GridView* create(size_t width, size_t height, size_t cellSize);
 
       virtual void draw(cocos2d::Renderer *renderer, const cocos2d::Mat4& transform, uint32_t flags) override;

@@ -16,6 +16,7 @@ namespace Components
     class BuildButtonLayer: public cocos2d::Node, public Component {
     public:
       DEFINE_COMPONENT(BuildButtonLayer);
+      DEFINE_COCOS2DX_COMPONENT
 
       static BuildButtonLayer* create(cocos2d::Vec2 pos);
 

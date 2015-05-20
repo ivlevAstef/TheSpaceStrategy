@@ -7,15 +7,8 @@ USING_NS_CC;
 using namespace Components::View;
 
 GameView* GameView::create(std::string viewId) {
-  GameView* view = new (std::nothrow)GameView(viewId);
-  if (view) {
-    view->autorelease();
-    return view;
-  }
-
-  SIA_LOG_ERR("can't create gameView");
-  CC_SAFE_DELETE(view);
-  return nullptr;
+  COMPONENT_ALLOC(GameView)(viewId);
+  COMPONENT_INIT(GameView);
 }
 
 GameView::GameView(std::string viewId) {

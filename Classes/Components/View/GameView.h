@@ -16,6 +16,7 @@ namespace Components
     class GameView: public cocos2d::Node, public Component {
     public:
       DEFINE_COMPONENT(GameView);
+      DEFINE_COCOS2DX_COMPONENT
 
       static GameView* create(std::string viewId);
       bool hasPoint(const cocos2d::Vec2& pos);

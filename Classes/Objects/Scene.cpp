@@ -60,8 +60,8 @@ void Scene::touchBegan(Common::GameTouchData data) {
 
   pButtonLayer->close += BuildButtonLayer::DClose(this, [this] (BuildButtonLayer* layer) {
     SIA_ASSERT(layer);
-    eraseComponent(layer);
     m_cacheGameLayer->removeChild(layer);
+    eraseComponent(layer);
   }, true);
 }
 

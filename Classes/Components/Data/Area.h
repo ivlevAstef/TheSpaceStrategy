@@ -12,7 +12,7 @@ namespace Components
 {
   namespace Data
   {
-    class Area : public Component {
+    class Area: public ComponentRef {
     public:
       static const size_t sDefaultWidth = 32;
       static const size_t sDefaultHeight = 32;

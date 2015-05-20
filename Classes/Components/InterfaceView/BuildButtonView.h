@@ -16,6 +16,7 @@ namespace Components
     class BuildButtonView: public cocos2d::Node, public Component {
     public:
       DEFINE_COMPONENT(BuildButtonView);
+      DEFINE_COCOS2DX_COMPONENT
 
       static BuildButtonView* create(std::string viewId);
 

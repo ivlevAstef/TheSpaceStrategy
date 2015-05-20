@@ -8,15 +8,8 @@ USING_NS_CC;
 using namespace Components::InterfaceView;
 
 BuildButtonView* BuildButtonView::create(std::string viewId) {
-  BuildButtonView* view = new (std::nothrow)BuildButtonView(viewId);
-  if (view) {
-    view->autorelease();
-    return view;
-  }
-
-  SIA_LOG_ERR("can't create button view");
-  CC_SAFE_DELETE(view);
-  return nullptr;
+  COMPONENT_ALLOC(BuildButtonView)(viewId);
+  COMPONENT_INIT(BuildButtonView);
 }
 
 BuildButtonView::BuildButtonView(std::string viewId) {
@@ -36,7 +29,7 @@ BuildButtonView::BuildButtonView(std::string viewId) {
   SIA_ASSERT(m_disable);
 
 
-  m_select->setScale(0.8);
+  m_select->setScale(0.8f);
   m_disable->setColor(Color3B(100,100,100));
 
   

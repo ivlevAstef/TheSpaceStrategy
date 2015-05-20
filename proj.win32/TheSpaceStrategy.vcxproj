@@ -141,10 +141,10 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y</Command>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\Common\FeatureNames.cpp" />
-    <ClCompile Include="..\Classes\Common\Features.cpp" />
     <ClCompile Include="..\Classes\Common\GameTouchEvents.cpp" />
     <ClCompile Include="..\Classes\Components\Data\Area.cpp" />
     <ClCompile Include="..\Classes\Components\Data\Entity.cpp" />
+    <ClCompile Include="..\Classes\Components\Data\Features.cpp" />
     <ClCompile Include="..\Classes\Components\InterfaceView\BuildButtonLayer.cpp" />
     <ClCompile Include="..\Classes\Components\InterfaceView\BuildButtonView.cpp" />
     <ClCompile Include="..\Classes\Components\View\GameLayer.cpp" />
@@ -164,11 +164,11 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y</Command>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h" />
     <ClInclude Include="..\Classes\Common\FeatureNames.h" />
-    <ClInclude Include="..\Classes\Common\Features.h" />
     <ClInclude Include="..\Classes\Common\GameTouchEvents.h" />
     <ClInclude Include="..\Classes\Components\Component.h" />
     <ClInclude Include="..\Classes\Components\Data\Area.h" />
     <ClInclude Include="..\Classes\Components\Data\Entity.h" />
+    <ClInclude Include="..\Classes\Components\Data\Features.h" />
     <ClInclude Include="..\Classes\Components\GameArea.h" />
     <ClInclude Include="..\Classes\Components\InterfaceView\BuildButtonLayer.h" />
     <ClInclude Include="..\Classes\Components\InterfaceView\BuildButtonView.h" />

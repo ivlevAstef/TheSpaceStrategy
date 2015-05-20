@@ -10,15 +10,8 @@ static const int gameViewTag = 101;
 static const int gridViewTag = 102;
 
 GameLayer* GameLayer::create() {
-  GameLayer* view = new (std::nothrow)GameLayer();
-  if (view) {
-    view->autorelease();
-    return view;
-  }
-
-  SIA_LOG_ERR("can't create gameLayer");
-  CC_SAFE_DELETE(view);
-  return nullptr;
+  COMPONENT_ALLOC(GameLayer)();
+  COMPONENT_INIT(GameLayer);
 }
 
 GameLayer::GameLayer() {
@@ -150,7 +143,7 @@ void GameLayer::move(cocos2d::Vec2 move) {
 
   ///TODO: create normal cycling background
   Vec2 backPos = m_background->getPosition();
-  backPos += move * 0.1;
+  backPos += move * 0.1f;
   //backPos.x = normalizeNumber(backPos.x, 0, m_background->getContentSize().width);
   //backPos.y = normalizeNumber(backPos.y, 0, m_background->getContentSize().height);
   m_background->setPosition(backPos);

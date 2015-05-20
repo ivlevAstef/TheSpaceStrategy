@@ -4,7 +4,8 @@
 using namespace Components::Data;
 
 Area* Area::create() {
-  return new Area();
+  COMPONENT_ALLOC(Area)();
+  COMPONENT_INIT(Area);
 }
 
 bool Area::addEntity(Entity* pEntity) {
@@ -96,7 +97,7 @@ void Area::calculateRealPosFor(Entity* pEntity) {
 
   size_t trIndex = 0;
   for (; trIndex < Cell::maxPhysicalEntity; trIndex++) {
-    if (pEntity = m_cells[pos.y*m_width + pos.x].pPhysicalEntities[trIndex]) {
+    if (pEntity == m_cells[pos.y*m_width + pos.x].pPhysicalEntities[trIndex]) {
       pEntity->m_real.x = pos.x * sCellSize + translated[trIndex].x;
       pEntity->m_real.y = pos.y * sCellSize + translated[trIndex].y;
     }

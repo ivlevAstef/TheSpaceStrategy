@@ -42,6 +42,7 @@ bool GameScene::init() {
 
   auto getterMineral = BuildFabric::create("GetterMineral", 5, 5);
   m_pScene->addObject(getterMineral);
+  m_pScene->eraseObject(getterMineral);
 
   for (size_t i = 0; i < 50; i++) {
     int x = rand() % 32;

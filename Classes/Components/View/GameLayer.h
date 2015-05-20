@@ -18,6 +18,7 @@ namespace Components
     class GameLayer: public cocos2d::Layer, public Component {
     public:
       DEFINE_COMPONENT(GameLayer);
+      DEFINE_COCOS2DX_COMPONENT
 
       static GameLayer* create();
 

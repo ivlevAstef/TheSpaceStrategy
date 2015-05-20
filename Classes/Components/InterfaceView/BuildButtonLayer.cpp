@@ -8,15 +8,8 @@ using namespace Components::InterfaceView;
 USING_NS_CC;
 
 BuildButtonLayer* BuildButtonLayer::create(Vec2 pos) {
-  BuildButtonLayer* view = new (std::nothrow)BuildButtonLayer(pos);
-  if (view) {
-    view->autorelease();
-    return view;
-  }
-
-  SIA_LOG_ERR("can't create button layer");
-  CC_SAFE_DELETE(view);
-  return nullptr;
+  COMPONENT_ALLOC(BuildButtonLayer)(pos);
+  COMPONENT_INIT(BuildButtonLayer);
 }
 
 

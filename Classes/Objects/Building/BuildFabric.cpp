@@ -21,4 +21,5 @@ std::shared_ptr<Build> BuildFabric::create(std::string bId, size_t x, size_t y) 
   if ("Minerals" == bId) {
     return Minerals::create(x, y);
   }
+  return std::shared_ptr<Build>(nullptr);
 }

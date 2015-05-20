@@ -1,7 +1,12 @@
 #include "Features.h"
 #include "logger/SIAUtils_Logger.h"
 
-using namespace Common;
+using namespace Components::Data;
+
+Features* Features::create() {
+  COMPONENT_ALLOC(Features)();
+  COMPONENT_INIT(Features);
+}
 
 Features::FeatureType Features::Type(std::string name) {
   return m_features[name].type;

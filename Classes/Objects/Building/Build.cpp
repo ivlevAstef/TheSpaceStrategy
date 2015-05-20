@@ -1,16 +1,22 @@
 #include "Build.h"
 #include "Components/Data/Entity.h"
+#include "Components/Data/Features.h"
 
 using namespace Objects::Building;
+using namespace Components::Data;
 
 Build::Build() {
-  addComponent(Components::Data::Entity::create());
+  addComponent(Features::create());
+  auto features = getComponent<Features>();
+
+  if (features) {
+    addComponent(Entity::create(features));
+  }
 }
 
 Build::~Build() {
   auto pEntity = getComponent<Components::Data::Entity>();
   if (pEntity) {
     eraseComponent(pEntity);
-    Components::Data::Entity::free(pEntity);
   }
 }

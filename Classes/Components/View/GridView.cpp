@@ -5,15 +5,8 @@ using namespace Components::View;
 USING_NS_CC;
 
 GridView* GridView::create(size_t width, size_t height, size_t cellSize) {
-  GridView* view = new (std::nothrow)GridView(width, height, cellSize);
-  if (view) {
-    view->autorelease();
-    return view;
-  }
-
-  SIA_LOG_ERR("can't create gridView");
-  CC_SAFE_DELETE(view);
-  return nullptr;
+  COMPONENT_ALLOC(GridView)(width, height, cellSize);
+  COMPONENT_INIT(GridView);
 }
 
 GridView::GridView(size_t width, size_t height, size_t cellSize) {
