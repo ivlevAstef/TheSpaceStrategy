@@ -23,14 +23,13 @@ namespace Components
   virtual const char* componentName() const override { return #CLASS; }
 
 #define DEFINE_COCOS2DX_COMPONENT \
-  private: \
+  public: \
       virtual void cRetain() final { \
         this->retain(); \
       } \
       virtual void cRelease() final { \
         this->release(); \
-      } \
-  public:
+      }
 
 
 

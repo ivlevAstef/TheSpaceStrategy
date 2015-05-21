@@ -6,6 +6,7 @@
 #include "../Component.h"
 #include <unordered_map>
 #include <vector>
+#include <memory>
 
 namespace Components
 {
@@ -42,6 +43,8 @@ namespace Components
 
       Cache cache(std::string name);
 
+      void erase(std::string name);
+
     private:
       union FeatureValue {
         void* undefined;
@@ -61,8 +64,12 @@ namespace Components
         }
       };
 
-      std::unordered_map<std::string, Feature> m_features;
-      std::vector<Feature*> m_cache;
+      typedef std::shared_ptr<Feature> FeaturePtr;
+
+      FeaturePtr& get(const std::string& name);
+
+      std::unordered_map<std::string, FeaturePtr> m_features;
+      std::vector<FeaturePtr> m_cache;
     };
   };
 };

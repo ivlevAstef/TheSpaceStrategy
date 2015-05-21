@@ -34,6 +34,12 @@
     <Filter Include="src\Common">
       <UniqueIdentifier>{1c4cff50-1109-46bf-bf27-85adfb275acc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Components\Modificator">
+      <UniqueIdentifier>{db4f037d-f778-4638-8baa-c428d6a8cb4d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Components\Data\Modificator">
+      <UniqueIdentifier>{14aad341-b6ba-482c-b5a3-85d4c232d6cc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -98,6 +104,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\Components\Data\Features.cpp">
       <Filter>src\Components\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Components\Data\Modificator\EnergyGenerator.cpp">
+      <Filter>src\Components\Data\Modificator</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -169,6 +178,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Components\Data\Features.h">
       <Filter>src\Components\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Components\Data\Modificator\EnergyGenerator.h">
+      <Filter>src\Components\Data\Modificator</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

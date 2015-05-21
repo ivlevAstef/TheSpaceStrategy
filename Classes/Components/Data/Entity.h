@@ -27,9 +27,7 @@ namespace Components
       DEFINE_COMPONENT(Entity);
 
       Entity(Features* features);
-      ~Entity() {
-
-      }
+      ~Entity();
 
       static Entity* create(Features* features);
 

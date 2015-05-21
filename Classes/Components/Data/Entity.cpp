@@ -10,11 +10,19 @@ Entity* Entity::create(Features* features) {
   COMPONENT_INIT(Entity);
 }
 
-Entity::Entity(Features* features) : m_features(features) {
+Entity::Entity(Features* features) {
+  SIA_ASSERT(features);
+  m_features = features;
+  m_features->cRetain();
+
   m_physical = m_features->cache(FeatureNames::physic);
   m_generator = m_features->cache(FeatureNames::generator);
   m_energy = m_features->cache(FeatureNames::energy);
   m_entityType = m_features->cache(FeatureNames::ID);
+}
+
+Entity::~Entity() {
+  m_features->cRelease();
 }
 
 Entity::EntityType Entity::type() const {

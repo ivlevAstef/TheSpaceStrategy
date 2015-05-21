@@ -8,20 +8,28 @@ Features* Features::create() {
   COMPONENT_INIT(Features);
 }
 
+Features::FeaturePtr& Features::get(const std::string& name) {
+  FeaturePtr& feature = m_features[name];
+  if (nullptr == feature.get()) {
+    feature.reset(new Feature());
+  }
+  return feature;
+}
+
 Features::FeatureType Features::Type(std::string name) {
-  return m_features[name].type;
+  return get(name)->type;
 }
 bool& Features::Bool(std::string name) {
-  return m_features[name].v.b;
+  return get(name)->v.b;
 }
 __int32& Features::Int(std::string name) {
-  return m_features[name].v.i;
+  return get(name)->v.i;
 }
 unsigned __int32& Features::uInt(std::string name) {
-  return m_features[name].v.ui;
+  return get(name)->v.ui;
 }
 float& Features::Float(std::string name) {
-  return m_features[name].v.f;
+  return get(name)->v.f;
 }
 
 Features::FeatureType Features::Type(Cache cache) const {
@@ -45,11 +53,20 @@ float& Features::Float(Cache cache) const {
   return m_cache[cache - 1]->v.f;
 }
 
-Features::Cache Features::cache(std::string name) {
-  Feature& feature = m_features[name];
-  if (0 == feature.cache) {
-    m_cache.push_back(&feature);
-    feature.cache = m_cache.size();
+void Features::erase(std::string name) {
+  FeaturePtr& feature = m_features[name];
+  if (nullptr != feature.get()) {
+    feature->type = eFT_Undefined;
+    feature->v.undefined = nullptr;
   }
-  return feature.cache;
+  m_features.erase(name);
+}
+
+Features::Cache Features::cache(std::string name) {
+  std::shared_ptr<Feature> feature = get(name);
+  if (0 == feature->cache) {
+    m_cache.push_back(feature);
+    feature->cache = m_cache.size();
+  }
+  return feature->cache;
 }

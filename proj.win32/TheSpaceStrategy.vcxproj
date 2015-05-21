@@ -145,6 +145,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y</Command>
     <ClCompile Include="..\Classes\Components\Data\Area.cpp" />
     <ClCompile Include="..\Classes\Components\Data\Entity.cpp" />
     <ClCompile Include="..\Classes\Components\Data\Features.cpp" />
+    <ClCompile Include="..\Classes\Components\Data\Modificator\EnergyGenerator.cpp" />
     <ClCompile Include="..\Classes\Components\InterfaceView\BuildButtonLayer.cpp" />
     <ClCompile Include="..\Classes\Components\InterfaceView\BuildButtonView.cpp" />
     <ClCompile Include="..\Classes\Components\View\GameLayer.cpp" />
@@ -169,6 +170,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y</Command>
     <ClInclude Include="..\Classes\Components\Data\Area.h" />
     <ClInclude Include="..\Classes\Components\Data\Entity.h" />
     <ClInclude Include="..\Classes\Components\Data\Features.h" />
+    <ClInclude Include="..\Classes\Components\Data\Modificator\EnergyGenerator.h" />
     <ClInclude Include="..\Classes\Components\GameArea.h" />
     <ClInclude Include="..\Classes\Components\InterfaceView\BuildButtonLayer.h" />
     <ClInclude Include="..\Classes\Components\InterfaceView\BuildButtonView.h" />
