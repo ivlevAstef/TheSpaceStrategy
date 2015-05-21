@@ -23,11 +23,11 @@ Minerals::Minerals(int x, int y) {
   SIA_ASSERT(pEntity != nullptr);
   pEntity->setCell(x, y);
 
-  pEntity->features().Int(FeatureNames::ID) = Entity::Minerals;
-  pEntity->features().Int(FeatureNames::maxHP) = 1000;
-  pEntity->features().Int(FeatureNames::HP) = 1000;
-  pEntity->features().Bool(FeatureNames::generator) = false;
-  pEntity->features().Bool(FeatureNames::physic) = true;
+  pEntity->features()[FeatureNames::ID] = Entity::Minerals;
+  pEntity->features()[FeatureNames::maxHP] = 1000;
+  pEntity->features()[FeatureNames::HP] = 1000;
+  pEntity->features()[FeatureNames::generator] = false;
+  pEntity->features()[FeatureNames::physic] = true;
 }
 
 void Minerals::update() {

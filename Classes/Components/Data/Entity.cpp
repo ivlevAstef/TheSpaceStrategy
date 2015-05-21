@@ -26,5 +26,5 @@ Entity::~Entity() {
 }
 
 Entity::EntityType Entity::type() const {
-  return static_cast<EntityType>(m_features->Int(m_entityType));
+  return static_cast<EntityType>((__int32)(*m_features)[m_entityType]);
 }

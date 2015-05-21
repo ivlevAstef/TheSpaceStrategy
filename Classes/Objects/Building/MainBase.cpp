@@ -23,12 +23,12 @@ MainBase::MainBase(int x, int y) {
   SIA_ASSERT(pEntity != nullptr);
   pEntity->setCell(x, y);
 
-  pEntity->features().Int(FeatureNames::ID) = Entity::MainBase;
-  pEntity->features().Int(FeatureNames::maxHP) = 100;
-  pEntity->features().Int(FeatureNames::HP) = 100;
-  pEntity->features().Bool(FeatureNames::generator) = true;
-  pEntity->features().Int(FeatureNames::generatedEnergy) = 25;
-  pEntity->features().Bool(FeatureNames::physic) = true;
+  pEntity->features()[FeatureNames::ID] = Entity::MainBase;
+  pEntity->features()[FeatureNames::maxHP] = 100;
+  pEntity->features()[FeatureNames::HP] = 100;
+  pEntity->features()[FeatureNames::generator] = true;
+  pEntity->features()[FeatureNames::generatedEnergy] = 25;
+  pEntity->features()[FeatureNames::physic] = true;
 }
 
 void MainBase::update() {

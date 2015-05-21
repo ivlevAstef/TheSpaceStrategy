@@ -18,8 +18,8 @@ EnergyGenerator::EnergyGenerator(Features* features) {
   m_features = features;
   m_features->cRetain();
 
-  m_features->Bool(generator) = true;
-  m_features->Int(generatedEnergy) = 0;
+  (*m_features)[generator] = true;
+  (*m_features)[generatedEnergy] = 0;
 }
 
 EnergyGenerator::~EnergyGenerator() {

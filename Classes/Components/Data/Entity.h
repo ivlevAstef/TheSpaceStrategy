@@ -42,9 +42,9 @@ namespace Components
         return m_real;
       }
 
-      inline bool physical() const { return m_features->Bool(m_physical); }
-      inline bool generator() const { return m_features->Bool(m_generator); }
-      inline bool energy() const { return m_features->Bool(m_energy); }
+      inline bool physical() const { return (*m_features)[m_physical]; }
+      inline bool generator() const { return (*m_features)[m_generator]; }
+      inline bool energy() const { return (*m_features)[m_energy]; }
 
       EntityType type() const;
       inline Features& features() { return *m_features; }

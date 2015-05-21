@@ -23,11 +23,11 @@ GetterMineral::GetterMineral(int x, int y) {
   SIA_ASSERT(pEntity != nullptr);
   pEntity->setCell(x, y);
 
-  pEntity->features().Int(FeatureNames::ID) = Entity::GetterMineral;
-  pEntity->features().Int(FeatureNames::maxHP) = 50;
-  pEntity->features().Int(FeatureNames::HP) = 50;
-  pEntity->features().Bool(FeatureNames::generator) = false;
-  pEntity->features().Bool(FeatureNames::physic) = true;
+  pEntity->features()[FeatureNames::ID] = Entity::GetterMineral;
+  pEntity->features()[FeatureNames::maxHP] = 50;
+  pEntity->features()[FeatureNames::HP] = 50;
+  pEntity->features()[FeatureNames::generator] = false;
+  pEntity->features()[FeatureNames::physic] = true;
 }
 
 void GetterMineral::update() {
