@@ -8,8 +8,6 @@ namespace Common {
   class FeatureNames {
   public:
     static const char* energy;
-    static const char* generator;
-    static const char* generatedEnergy;
     static const char* physic;
     static const char* HP;
     static const char* maxHP;

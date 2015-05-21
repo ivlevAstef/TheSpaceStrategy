@@ -23,11 +23,14 @@ Pylon::Pylon(int x, int y) {
   SIA_ASSERT(pEntity != nullptr);
   pEntity->setCell(x, y);
 
-  pEntity->features()[FeatureNames::ID] = Entity::Pylon;
-  pEntity->features()[FeatureNames::maxHP] = 100;
-  pEntity->features()[FeatureNames::HP] = 100;
-  pEntity->features()[FeatureNames::generator] = false;
-  pEntity->features()[FeatureNames::physic] = true;
+  auto pFeatures = getComponent<Features>();
+  SIA_ASSERT(pFeatures != nullptr);
+  auto features = *pFeatures;
+
+  features[FeatureNames::ID] = Entity::Pylon;
+  features[FeatureNames::maxHP] = 100;
+  features[FeatureNames::HP] = 100;
+  features[FeatureNames::physic] = true;
 }
 
 void Pylon::update() {

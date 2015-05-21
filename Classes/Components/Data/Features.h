@@ -78,6 +78,10 @@ namespace Components
 
       static Features* create();
 
+      bool is(std::string name) const;
+
+      Feature& operator[](std::string name) const;///unsafe used only with 'is'
+
       Feature& operator[](std::string name);
       Feature& operator[](Cache cache) const;
 

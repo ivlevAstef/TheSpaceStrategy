@@ -43,7 +43,6 @@ namespace Components
       }
 
       inline bool physical() const { return (*m_features)[m_physical]; }
-      inline bool generator() const { return (*m_features)[m_generator]; }
       inline bool energy() const { return (*m_features)[m_energy]; }
 
       EntityType type() const;
@@ -54,7 +53,6 @@ namespace Components
       SIAUtils::Position m_real;
 
       Features::Cache m_physical;
-      Features::Cache m_generator;
       Features::Cache m_energy;
       Features::Cache m_entityType;
 

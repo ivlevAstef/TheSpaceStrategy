@@ -31,3 +31,10 @@ void Object::eraseComponent(Components::Component* component) {
   m_components.erase(find);
   component->cRelease();
 }
+
+Object::~Object() {
+  for (auto component : m_components) {
+    component.second->cRelease();
+  }
+  m_components.clear();
+}

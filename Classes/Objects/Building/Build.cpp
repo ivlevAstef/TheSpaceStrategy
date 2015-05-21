@@ -15,8 +15,4 @@ Build::Build() {
 }
 
 Build::~Build() {
-  auto pEntity = getComponent<Components::Data::Entity>();
-  if (pEntity) {
-    eraseComponent(pEntity);
-  }
 }

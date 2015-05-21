@@ -106,7 +106,7 @@ void Area::calculateRealPosFor(Entity* pEntity) {
 
 bool Area::checkEntityPosition(const SIAUtils::Position& position) {
   if (position.x < 0 || position.x > (int)m_width ||
-      position.y < 0 || position.y >(int)m_height) {
+      position.y < 0 || position.y > (int)m_height) {
     SIA_LOG_DBG("incorrect entity position: (%d,%d)", position.x, position.y);
     return false;
   }
@@ -121,10 +121,6 @@ void Area::update() {
   SIA_ASSERT(m_cells.size() == m_width * m_height);
 
   updateEnergy();
-}
-
-bool Area::convert(const int x, const int y, float& toX, float& toY) {
-  return true;
 }
 
 //////////////////////////////////////Cell

@@ -14,19 +14,21 @@ namespace Components
     namespace Modificator
     {
       class EnergyGenerator: public ComponentRef {
-      public:
-        static const char* generator;
-        static const char* generatedEnergy;
-
       private:
         friend class Area;
       public:
         DEFINE_COMPONENT(EnergyGenerator);
 
-        static EnergyGenerator* create(Features* features);
+        static EnergyGenerator* create(Features* features, double generatedEnergy);
 
-        EnergyGenerator(Features* features);
+        EnergyGenerator(Features* features, double generatedEnergy);
         ~EnergyGenerator();
+
+        void setGeneratedEnergy(double generatedEnergy);
+
+
+        static bool isGenerator(const Features& features);
+        static double getGeneratedEnergy(const Features& features);
 
       private:
         Features* m_features;

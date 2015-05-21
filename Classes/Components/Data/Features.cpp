@@ -104,6 +104,18 @@ Features::FeaturePtr& Features::get(const std::string& name) {
   return feature;
 }
 
+bool Features::is(std::string name) const {
+  auto feature = m_features.find(name);
+  return feature != m_features.end() && nullptr != feature->second.get();
+}
+
+Feature& Features::operator[](std::string name) const {
+  auto feature = m_features.find(name);
+  SIA_ASSERT(feature != m_features.end() && nullptr != feature->second.get());
+
+  return *feature->second.get();
+  
+}
 
 Feature& Features::operator[](std::string name) {
   return *get(name);

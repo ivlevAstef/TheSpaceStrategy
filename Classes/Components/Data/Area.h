@@ -34,9 +34,6 @@ namespace Components
 
       void setSize(size_t width, size_t height);
 
-      static bool convert(const int x,const int y, float& toX, float& toY);
-
-
       inline size_t width() const { return m_width; }
       inline size_t height() const { return m_height; }
       inline size_t cellSize() const { return sCellSize; }

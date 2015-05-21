@@ -93,9 +93,6 @@
     <ClCompile Include="..\Classes\Objects\Building\Pylon.cpp">
       <Filter>src\Objects\Building</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Objects\Building\GeneralMineral.cpp">
-      <Filter>src\Objects\Building</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Objects\Building\Minerals.cpp">
       <Filter>src\Objects\Building</Filter>
     </ClCompile>
@@ -104,6 +101,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\Components\Data\Modificator\EnergyGenerator.cpp">
       <Filter>src\Components\Data\Modificator</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Objects\Building\GetterMineral.cpp">
+      <Filter>src\Objects\Building</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

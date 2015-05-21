@@ -1,6 +1,7 @@
 #include "MainBase.h"
 #include "Components/View/GameView.h"
 #include "Components/Data/Entity.h"
+#include "Components/Data/Modificator/EnergyGenerator.h"
 #include "logger/SIAUtils_Logger.h"
 #include "Common/FeatureNames.h"
 
@@ -23,12 +24,16 @@ MainBase::MainBase(int x, int y) {
   SIA_ASSERT(pEntity != nullptr);
   pEntity->setCell(x, y);
 
-  pEntity->features()[FeatureNames::ID] = Entity::MainBase;
-  pEntity->features()[FeatureNames::maxHP] = 100;
-  pEntity->features()[FeatureNames::HP] = 100;
-  pEntity->features()[FeatureNames::generator] = true;
-  pEntity->features()[FeatureNames::generatedEnergy] = 25;
-  pEntity->features()[FeatureNames::physic] = true;
+  auto pFeatures = getComponent<Features>();
+  SIA_ASSERT(pFeatures != nullptr);
+  auto features = *pFeatures;
+
+  features[FeatureNames::ID] = Entity::MainBase;
+  features[FeatureNames::maxHP] = 100;
+  features[FeatureNames::HP] = 100;
+  features[FeatureNames::physic] = true;
+
+  addComponent(Modificator::EnergyGenerator::create(pFeatures, 25));
 }
 
 void MainBase::update() {

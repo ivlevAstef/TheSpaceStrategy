@@ -16,7 +16,6 @@ Entity::Entity(Features* features) {
   m_features->cRetain();
 
   m_physical = m_features->cache(FeatureNames::physic);
-  m_generator = m_features->cache(FeatureNames::generator);
   m_energy = m_features->cache(FeatureNames::energy);
   m_entityType = m_features->cache(FeatureNames::ID);
 }

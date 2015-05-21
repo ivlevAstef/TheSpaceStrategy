@@ -153,7 +153,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y</Command>
     <ClCompile Include="..\Classes\Components\View\GridView.cpp" />
     <ClCompile Include="..\Classes\Objects\Building\Build.cpp" />
     <ClCompile Include="..\Classes\Objects\Building\BuildFabric.cpp" />
-    <ClCompile Include="..\Classes\Objects\Building\GeneralMineral.cpp" />
+    <ClCompile Include="..\Classes\Objects\Building\GetterMineral.cpp" />
     <ClCompile Include="..\Classes\Objects\Building\MainBase.cpp" />
     <ClCompile Include="..\Classes\Objects\Building\Minerals.cpp" />
     <ClCompile Include="..\Classes\Objects\Building\Pylon.cpp" />
