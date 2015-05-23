@@ -1,7 +1,9 @@
 #include "Area.h"
 #include "logger/SIAUtils_Logger.h"
+#include "Common/GridMath.h"
 
 using namespace Components::Data;
+using namespace Common;
 
 Area* Area::create() {
   COMPONENT_ALLOC(Area)();
@@ -80,26 +82,22 @@ void Area::setSize(size_t width, size_t height) {
 }
 
 void Area::calculateRealPosFor(Entity* pEntity) {
-  static const SIAUtils::Position translated[Cell::maxPhysicalEntity] = {
-    SIAUtils::Position(sCellSize*0.5f, sCellSize*0.8f),
-    SIAUtils::Position(sCellSize*0.8f, sCellSize*0.5f),
-    SIAUtils::Position(sCellSize*0.5f, sCellSize*0.2f),
-    SIAUtils::Position(sCellSize*0.2f, sCellSize*0.5f)
-  };
-
   SIAUtils::Position pos = pEntity->cell();
 
   if (Entity::Pylon == pEntity->type()) {
-    pEntity->m_real.x = pos.x * sCellSize + sCellSize * 0.5f;
-    pEntity->m_real.y = pos.y * sCellSize + sCellSize * 0.5f;
+    cocos2d::Vec2 center = GridMath::center(pos.x, pos.y);
+    pEntity->m_real.x = center.x;
+    pEntity->m_real.y = center.y;
     return;
   }
 
   size_t trIndex = 0;
-  for (; trIndex < Cell::maxPhysicalEntity; trIndex++) {
+  for (; trIndex < GridMath::MaxCellBuilds; trIndex++) {
     if (pEntity == m_cells[pos.y*m_width + pos.x].pPhysicalEntities[trIndex]) {
-      pEntity->m_real.x = pos.x * sCellSize + translated[trIndex].x;
-      pEntity->m_real.y = pos.y * sCellSize + translated[trIndex].y;
+      cocos2d::Vec2 entityPos = GridMath::build(pos.x, pos.y, trIndex);
+      pEntity->m_real.x = entityPos.x;
+      pEntity->m_real.y = entityPos.y;
+      break;
     }
   }
 }
@@ -125,6 +123,10 @@ void Area::update() {
 
 //////////////////////////////////////Cell
 
+Area::Cell::Cell() : pPylon(nullptr) {
+  pPhysicalEntities.resize(GridMath::MaxCellBuilds, nullptr);
+}
+
 bool Area::Cell::addEntity(Entity* pEntity) {
   SIA_ASSERT(pEntity);
 
@@ -138,7 +140,7 @@ bool Area::Cell::addEntity(Entity* pEntity) {
     return true;
   }
 
-  for (size_t i = 0; i < maxPhysicalEntity; i++) {
+  for (size_t i = 0; i < GridMath::MaxCellBuilds; i++) {
     if (pPhysicalEntities[i] == nullptr) {
       SIA_LOG_DBG("Add entity on area");
       pPhysicalEntities[i] = pEntity;

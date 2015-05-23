@@ -142,6 +142,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y</Command>
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\Common\FeatureNames.cpp" />
     <ClCompile Include="..\Classes\Common\GameTouchEvents.cpp" />
+    <ClCompile Include="..\Classes\Common\GridMath.cpp" />
     <ClCompile Include="..\Classes\Components\Data\Area.cpp" />
     <ClCompile Include="..\Classes\Components\Data\Entity.cpp" />
     <ClCompile Include="..\Classes\Components\Data\Features.cpp" />
@@ -166,6 +167,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y</Command>
     <ClInclude Include="..\Classes\AppDelegate.h" />
     <ClInclude Include="..\Classes\Common\FeatureNames.h" />
     <ClInclude Include="..\Classes\Common\GameTouchEvents.h" />
+    <ClInclude Include="..\Classes\Common\GridMath.h" />
     <ClInclude Include="..\Classes\Components\Component.h" />
     <ClInclude Include="..\Classes\Components\Data\Area.h" />
     <ClInclude Include="..\Classes\Components\Data\Entity.h" />

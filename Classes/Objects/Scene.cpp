@@ -27,7 +27,7 @@ Scene::Scene() {
 
   m_cacheGameLayer->setBackground("background");
   m_cacheGameLayer->modificationBackground(cocos2d::Color3B(150, 150, 200));
-  m_cacheGameLayer->setGridView(m_cacheArea->width(), m_cacheArea->height(), m_cacheArea->cellSize());
+  m_cacheGameLayer->setGridView(m_cacheArea->width(), m_cacheArea->height());
 
   using std::placeholders::_1;
   GameTouchEvents::touchBegan += GameTouchEvents::DTouchBegan(this, std::bind(&Scene::touchBegan, this, _1));

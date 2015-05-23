@@ -1,8 +1,10 @@
 #include "GameLayer.h"
 #include "cocos2d.h"
 #include "logger/SIAUtils_Logger.h"
+#include "Common/GridMath.h"
 
 using namespace Components::View;
+using namespace Common;
 USING_NS_CC;
 
 static const int backgroundTag = 100;
@@ -23,16 +25,16 @@ GameLayer::GameLayer() {
   addChild(m_area, 1);
 }
 
-void GameLayer::setGridView(size_t width, size_t height, size_t cellSize) {
+void GameLayer::setGridView(size_t width, size_t height) {
   SIA_ASSERT(m_area);
 
   Size size = Director::getInstance()->getWinSize();
-  m_grid = GridView::create(width, height, cellSize);
+  m_grid = GridView::create(width, height);
   m_grid->setContentSize(size);
 
   m_area->addChild(m_grid);
 
-  m_area->setContentSize(Size(width*cellSize, height*cellSize));
+  m_area->setContentSize(Size(width*GridMath::GridCellSize, height*GridMath::GridCellSize));
 }
 
 void GameLayer::addGameView(GameView* child) {

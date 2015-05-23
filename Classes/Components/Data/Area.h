@@ -17,7 +17,6 @@ namespace Components
       static const size_t sDefaultWidth = 32;
       static const size_t sDefaultHeight = 32;
 
-      static const size_t sCellSize = 100;
     public:
       DEFINE_COMPONENT(Area);
 
@@ -36,7 +35,6 @@ namespace Components
 
       inline size_t width() const { return m_width; }
       inline size_t height() const { return m_height; }
-      inline size_t cellSize() const { return sCellSize; }
 
     private:
       bool addPhysicEntity(Entity* pEntity);
@@ -55,16 +53,10 @@ namespace Components
       std::vector<Entity*> m_pEntities;
 
       struct Cell {
-        static const size_t width = 100;
-        static const size_t height = 100;
-        static const size_t maxPhysicalEntity = 4;
-
         std::vector<Entity*> pPhysicalEntities;
         Entity* pPylon;
 
-        Cell() : pPylon(nullptr) {
-          pPhysicalEntities.resize(maxPhysicalEntity, nullptr);
-        }
+        Cell();
 
         bool addEntity(Entity* pEntity);
         void removeEntity(Entity* pEntity);

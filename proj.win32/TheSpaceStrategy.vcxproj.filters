@@ -105,6 +105,9 @@
     <ClCompile Include="..\Classes\Objects\Building\GetterMineral.cpp">
       <Filter>src\Objects\Building</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Common\GridMath.cpp">
+      <Filter>src\Common</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -178,6 +181,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Components\Data\Modificator\EnergyGenerator.h">
       <Filter>src\Components\Data\Modificator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Common\GridMath.h">
+      <Filter>src\Common</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

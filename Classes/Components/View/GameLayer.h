@@ -28,7 +28,7 @@ namespace Components
       void setBackground(std::string backgroundId);
       void modificationBackground(cocos2d::Color3B color);
 
-      void setGridView(size_t width, size_t height, size_t cellSize);
+      void setGridView(size_t width, size_t height);
 
     private:
       GameLayer();
