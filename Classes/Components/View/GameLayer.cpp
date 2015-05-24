@@ -224,21 +224,7 @@ GameLayer::AreaLayer* GameLayer::AreaLayer::create() {
 void GameLayer::AreaLayer::visitGameView(Node* node, Renderer* renderer, const Mat4 &transform, uint32_t flags) {
   SIA_ASSERT(node);
 
-  Vec2 pos = node->getPosition();
-  Vec2 pairPos = Vec2(getPair(pos.x, getContentSize().width), getPair(pos.y, getContentSize().height));
-
   node->visit(renderer, transform, flags);
-
-  node->setPosition(pairPos.x, pos.y);
-  node->visit(renderer, transform, flags);
-
-  node->setPosition(pos.x, pairPos.y);
-  node->visit(renderer, transform, flags);
-
-  node->setPosition(pairPos.x, pairPos.y);
-  node->visit(renderer, transform, flags);
-
-  node->setPosition(pos);
 }
 
 void GameLayer::AreaLayer::visit(Renderer* renderer, const Mat4 &parentTransform, uint32_t parentFlags) {

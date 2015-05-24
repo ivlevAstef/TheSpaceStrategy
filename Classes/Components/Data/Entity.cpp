@@ -20,6 +20,13 @@ Entity::Entity(Features* features) {
   m_entityType = m_features->cache(FeatureNames::ID);
 }
 
+void Entity::setCellPos(SIAUtils::Point2D<size_t> pos) {
+  m_cell = pos;
+}
+void Entity::setPos(SIAUtils::Point2D<float> pos) {
+  m_pos = pos;
+}
+
 Entity::~Entity() {
   m_features->cRelease();
 }

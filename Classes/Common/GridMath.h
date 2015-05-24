@@ -16,6 +16,7 @@ namespace Common
   class GridMath {
   public:
     static const double GridCellSize;
+
 #if defined(USE_4_MODEL) || defined(USE_8_MODEL)
     static const size_t MaxCellBuilds = 4;
 #elif defined(USE_6_MODEL)

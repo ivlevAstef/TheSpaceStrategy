@@ -31,15 +31,18 @@ namespace Components
 
       static Entity* create(Features* features);
 
-      inline void setCell(SIAUtils::Position pos) { m_cell = pos; }
-      inline void setCell(int x, int y) { m_cell.x = x; m_cell.y = y; }
+      void setCellPos(SIAUtils::Point2D<size_t> pos);
+      void setPos(SIAUtils::Point2D<float> pos);
 
-      inline const SIAUtils::Position& cell() const {
+      inline void setCellPos(size_t x, size_t y) { setCellPos({x, y}); }
+      inline void setPos(float x, float y) { setPos({x, y}); }
+
+      inline const SIAUtils::Point2D<size_t>& cell() const {
         return m_cell;
       }
 
-      inline const SIAUtils::Position& pos() const {
-        return m_real;
+      inline const SIAUtils::Point2D<float>& pos() const {
+        return m_pos;
       }
 
       inline bool physical() const { return (*m_features)[m_physical]; }
@@ -49,8 +52,8 @@ namespace Components
       inline Features& features() { return *m_features; }
 
     protected:
-      SIAUtils::Position m_cell;
-      SIAUtils::Position m_real;
+      SIAUtils::Point2D<size_t> m_cell;
+      SIAUtils::Point2D<float> m_pos;
 
       Features::Cache m_physical;
       Features::Cache m_energy;

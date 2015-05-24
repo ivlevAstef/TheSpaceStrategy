@@ -39,7 +39,7 @@ namespace Components
     private:
       bool addPhysicEntity(Entity* pEntity);
       void removePhysicEntity(Entity* pEntity);
-      bool checkEntityPosition(const SIAUtils::Position& position);
+      bool checkEntityPosition(const SIAUtils::Point2D<size_t>& position);
       void clearCells();
       void calculateRealPosFor(Entity* pEntity);
 

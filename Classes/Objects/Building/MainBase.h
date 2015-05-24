@@ -11,9 +11,9 @@ namespace Objects
   {
     class MainBase : public Build {
     public:
-      static std::shared_ptr<MainBase> create(int x, int y);
+      static std::shared_ptr<MainBase> create(size_t x, size_t y);
 
-      MainBase(int x, int y);
+      MainBase(size_t x, size_t y);
 
       virtual void update() override;
 

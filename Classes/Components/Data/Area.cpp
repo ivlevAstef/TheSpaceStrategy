@@ -33,7 +33,7 @@ bool Area::addPhysicEntity(Entity* pEntity) {
   SIA_ASSERT(pEntity);
   SIA_ASSERT(pEntity->physical());
 
-  SIAUtils::Position pos = pEntity->cell();
+  SIAUtils::Point2D<size_t> pos = pEntity->cell();
   SIA_CHECK_ZERO(!checkEntityPosition(pos), WRN);
   
   if (m_cells[pos.y*m_width + pos.x].addEntity(pEntity)) {
@@ -64,7 +64,7 @@ void Area::removePhysicEntity(Entity* pEntity) {
   SIA_ASSERT(pEntity);
   SIA_ASSERT(pEntity->physical());
 
-  SIAUtils::Position pos = pEntity->cell();
+  SIAUtils::Point2D<size_t> pos = pEntity->cell();
   SIA_CHECK_RET(!checkEntityPosition(pos), WRN);
 
   m_cells[pos.y*m_width + pos.x].removeEntity(pEntity);
@@ -82,12 +82,11 @@ void Area::setSize(size_t width, size_t height) {
 }
 
 void Area::calculateRealPosFor(Entity* pEntity) {
-  SIAUtils::Position pos = pEntity->cell();
+  SIAUtils::Point2D<size_t> pos = pEntity->cell();
 
   if (Entity::Pylon == pEntity->type()) {
     cocos2d::Vec2 center = GridMath::center(pos.x, pos.y);
-    pEntity->m_real.x = center.x;
-    pEntity->m_real.y = center.y;
+    pEntity->setPos(center.x, center.y);
     return;
   }
 
@@ -95,16 +94,14 @@ void Area::calculateRealPosFor(Entity* pEntity) {
   for (; trIndex < GridMath::MaxCellBuilds; trIndex++) {
     if (pEntity == m_cells[pos.y*m_width + pos.x].pPhysicalEntities[trIndex]) {
       cocos2d::Vec2 entityPos = GridMath::build(pos.x, pos.y, trIndex);
-      pEntity->m_real.x = entityPos.x;
-      pEntity->m_real.y = entityPos.y;
+      pEntity->setPos(entityPos.x, entityPos.y);
       break;
     }
   }
 }
 
-bool Area::checkEntityPosition(const SIAUtils::Position& position) {
-  if (position.x < 0 || position.x > (int)m_width ||
-      position.y < 0 || position.y > (int)m_height) {
+bool Area::checkEntityPosition(const SIAUtils::Point2D<size_t>& position) {
+  if (position.x > m_width || position.y > m_height) {
     SIA_LOG_DBG("incorrect entity position: (%d,%d)", position.x, position.y);
     return false;
   }

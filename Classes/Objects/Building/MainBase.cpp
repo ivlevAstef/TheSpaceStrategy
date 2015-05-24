@@ -10,11 +10,11 @@ using namespace Components::Data;
 using namespace Components::View;
 using namespace Common;
 
-std::shared_ptr<MainBase> MainBase::create(int x, int y) {
+std::shared_ptr<MainBase> MainBase::create(size_t x, size_t y) {
   return std::make_shared<MainBase>(x, y);
 }
 
-MainBase::MainBase(int x, int y) {
+MainBase::MainBase(size_t x, size_t y) {
   auto pView = GameView::create("MainBase");
   addComponent(pView);
 
@@ -22,7 +22,7 @@ MainBase::MainBase(int x, int y) {
 
   auto pEntity = getComponent<Entity>();
   SIA_ASSERT(pEntity != nullptr);
-  pEntity->setCell(x, y);
+  pEntity->setCellPos(x, y);
 
   auto pFeatures = getComponent<Features>();
   SIA_ASSERT(pFeatures != nullptr);

@@ -11,6 +11,7 @@ const __int32 Feature::UndefinedInt = INT32_MAX;
 const unsigned __int32 Feature::UndefinedUInt = UINT32_MAX;
 const float Feature::UndefinedFloat = FLT_MAX;
 const double Feature::UndefinedDouble = DBL_MAX;
+const Feature::Point Feature::UndefinedPoint = { FLT_MAX, FLT_MAX };
 
 #define GET_VALUE(TYPE, UNDEFINED) \
 switch (m_type) { \
@@ -47,6 +48,7 @@ Feature::operator bool() const {
     case eFT_UInt32: return m_value.ui != 0;
     case eFT_Float: return m_value.f != 0;
     case eFT_Double: return m_value.d != 0;
+    case eFT_Point: return m_value.p.x != 0 || m_value.p.y != 0;
     default: return UndefinedBool;
   }
 }
@@ -67,6 +69,9 @@ Feature::operator float() const {
 }
 Feature::operator double() const {
   GET_VALUE(double, UndefinedDouble);
+}
+Feature::operator Point() const {
+  return (eFT_Point == m_type) ? m_value.p : UndefinedPoint;
 }
 
 Feature& Feature::operator=(bool value) {
@@ -90,6 +95,11 @@ Feature& Feature::operator=(float value) {
 Feature& Feature::operator=(double value) {
   SET_VALUE(eFT_Double, d);
 }
+
+Feature& Feature::operator=(Point value) {
+  SET_VALUE(eFT_Point, p);
+}
+
 
 Features* Features::create() {
   COMPONENT_ALLOC(Features)();

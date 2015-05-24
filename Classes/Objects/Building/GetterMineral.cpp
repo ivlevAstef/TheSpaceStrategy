@@ -9,11 +9,11 @@ using namespace Components::Data;
 using namespace Components::View;
 using namespace Common;
 
-std::shared_ptr<GetterMineral> GetterMineral::create(int x, int y) {
+std::shared_ptr<GetterMineral> GetterMineral::create(size_t x, size_t y) {
   return std::make_shared<GetterMineral>(x, y);
 }
 
-GetterMineral::GetterMineral(int x, int y) {
+GetterMineral::GetterMineral(size_t x, size_t y) {
   auto pView = GameView::create("GetterMineral");
   addComponent(pView);
 
@@ -21,7 +21,7 @@ GetterMineral::GetterMineral(int x, int y) {
 
   auto pEntity = getComponent<Entity>();
   SIA_ASSERT(pEntity != nullptr);
-  pEntity->setCell(x, y);
+  pEntity->setCellPos(x, y);
 
   auto pFeatures = getComponent<Features>();
   SIA_ASSERT(pFeatures != nullptr);

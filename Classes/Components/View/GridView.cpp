@@ -39,7 +39,8 @@ void GridView::draw(Renderer* renderer, const Mat4& transform, uint32_t flags) {
     for (size_t x = 0; x < m_width; x++) {
       for (size_t y = 0; y < m_height; y++) {
         cellView = GridMath::cellView(x, y, -pos);
-        drawPoly(&cellView[0], cellView.size(), true, Color4F(0.1f, 0.05f, 0.5f, 1.0f));
+        //drawPoly(&cellView[0], cellView.size(), true, Color4F(0.1f, 0.05f, 0.3f, 1.0f));
+        drawPoly(&cellView[0], cellView.size(), true, Color4F(0.5f, 0.25f, 0.6f, 1.0f));
       }
     }
   }  

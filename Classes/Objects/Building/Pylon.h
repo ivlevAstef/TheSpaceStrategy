@@ -11,9 +11,9 @@ namespace Objects
   {
     class Pylon: public Build {
     public:
-      static std::shared_ptr<Pylon> create(int x, int y);
+      static std::shared_ptr<Pylon> create(size_t x, size_t y);
 
-      Pylon(int x, int y);
+      Pylon(size_t x, size_t y);
 
       virtual void update() override;
 

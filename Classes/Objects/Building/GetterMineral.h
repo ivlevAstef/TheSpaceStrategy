@@ -11,9 +11,9 @@ namespace Objects
   {
     class GetterMineral: public Build {
     public:
-      static std::shared_ptr<GetterMineral> create(int x, int y);
+      static std::shared_ptr<GetterMineral> create(size_t x, size_t y);
 
-      GetterMineral(int x, int y);
+      GetterMineral(size_t x, size_t y);
 
       virtual void update() override;
 

@@ -14,6 +14,11 @@ namespace Components
   {
     class Feature {
     public:
+      struct Point {
+        float x;
+        float y;
+      };
+
       static const bool UndefinedBool;
       static const signed char UndefinedChar;
       static const unsigned char UndefinedUChar;
@@ -21,6 +26,7 @@ namespace Components
       static const unsigned __int32 UndefinedUInt;
       static const float UndefinedFloat;
       static const double UndefinedDouble;
+      static const Point UndefinedPoint;
 
       enum FeatureType {
         eFT_Undefined,
@@ -30,7 +36,8 @@ namespace Components
         eFT_Int32,
         eFT_UInt32,
         eFT_Float,
-        eFT_Double
+        eFT_Double,
+        eFT_Point
       };
 
     public:
@@ -45,6 +52,7 @@ namespace Components
       operator unsigned __int32() const;
       operator float() const;
       operator double() const;
+      operator Point() const;
 
       Feature& operator=(bool value);
       Feature& operator=(signed char value);
@@ -53,6 +61,7 @@ namespace Components
       Feature& operator=(unsigned __int32 value);
       Feature& operator=(float value);
       Feature& operator=(double value);
+      Feature& operator=(Point value);
 
     private:
       union FeatureValue {
@@ -64,6 +73,7 @@ namespace Components
         unsigned __int32 ui;
         float f;
         double d;
+        Point p;
       };
 
       FeatureType m_type;
