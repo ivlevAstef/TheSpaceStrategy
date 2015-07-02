@@ -1,40 +1,31 @@
 /*Author: Ivlev Alexander (stef).*/
 #pragma once
-#ifndef _COMMON_GAME_TOUCH_EVENTS_H__
-#define _COMMON_GAME_TOUCH_EVENTS_H__
+#ifndef _SIA_THE_SPACE_STRATEGY_GAME_TOUCH_EVENTS_H__
+#define _SIA_THE_SPACE_STRATEGY_GAME_TOUCH_EVENTS_H__
 
 #include "event/Event.h"
-#include "cocos2d.h"
+#include "math/SIAUtils_Point2D.h"
 
-namespace Components
-{
-  namespace View
-  {
-    class GameLayer;
-  };
+namespace Objects {
+  class Scene;
 };
 
 namespace Common
 {
-  struct GameTouchData {
-    cocos2d::Vec2 worldPos; ///on game layer position
-    cocos2d::Vec2 worldCellCenterPos; ///on game layer position
-    size_t x;
-    size_t y;
-  };
+  typedef SIAUtils::Point2D<double> TouchPos;
 
   class GameTouchEvents {
   public:
-    typedef SIAUtils::Delegate<GameTouchData> DTouchBegan;
-    static SIAUtils::FriendEvent<Components::View::GameLayer, GameTouchData> touchBegan;
+    typedef SIAUtils::Delegate<TouchPos> DTouchBegan;
+    static SIAUtils::FriendEvent<Objects::Scene, TouchPos> touchBegan;
 
-    typedef SIAUtils::Delegate<GameTouchData> DTouchMoved;
-    static SIAUtils::FriendEvent<Components::View::GameLayer, GameTouchData> touchMoved;
+    typedef SIAUtils::Delegate<TouchPos> DTouchMoved;
+    static SIAUtils::FriendEvent<Objects::Scene, TouchPos> touchMoved;
 
-    typedef SIAUtils::Delegate<GameTouchData> DTouchEnded;
-    static SIAUtils::FriendEvent<Components::View::GameLayer, GameTouchData> touchEnded;
+    typedef SIAUtils::Delegate<TouchPos> DTouchEnded;
+    static SIAUtils::FriendEvent<Objects::Scene, TouchPos> touchEnded;
 
   };
 };
 
-#endif // _COMMON_GAME_TOUCH_EVENTS_H__
+#endif // _SIA_THE_SPACE_STRATEGY_GAME_TOUCH_EVENTS_H__

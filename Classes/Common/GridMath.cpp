@@ -5,49 +5,77 @@
 using namespace Common;
 USING_NS_CC;
 
-#ifdef USE_6_MODEL
-#define SQRT3 1.732050807568877
-#endif
-
 const double GridMath::GridCellSize = 100;
 
-SIAUtils::Position GridMath::cellPos(cocos2d::Vec2 pos) {
+cocos2d::Vec2 GridMath::convert(double u, double v) {
 #if defined(USE_4_MODEL) || defined(USE_8_MODEL)
-  return SIAUtils::Position(pos.x / GridCellSize,
-                            pos.y / GridCellSize);
+  return Vec2(x * GridCellSize + GridCellSize*0.5,
+              y * GridCellSize + GridCellSize*0.5);
 #elif defined(USE_6_MODEL)
-  double x = (pos.x + pos.y*SQRT3) / (SQRT3 * GridCellSize);
-  double y = (pos.y*SQRT3 - pos.x) / (SQRT3 * GridCellSize);
+  return Vec2(GridCellSize*SQRT3*0.5 * (u - v),
+    GridCellSize*0.5 * (u + v));
+#else
+#error Defined Model Type
+#endif
+}
 
-  int xZero = x;
-  int yZero = y;
-  double xN = x - (double)xZero;
-  double yN = y - (double)yZero;
+SIAUtils::Point2D<double> GridMath::convert(cocos2d::Vec2 pos) {
+#if defined(USE_4_MODEL) || defined(USE_8_MODEL)
+  double u = pos.x / GridCellSize;
+  double v = pos.y / GridCellSize;
+#elif defined(USE_6_MODEL)
+  double u = (pos.x + pos.y*SQRT3) / (SQRT3 * GridCellSize);
+  double v = (pos.y*SQRT3 - pos.x) / (SQRT3 * GridCellSize);
+#else
+#error Defined Model Type
+#endif
+  return {u, v};
+}
 
-  bool xSmall = xN < 0.5;
-  bool ySmall = yN < 0.5;
+static void normalize(int& value, size_t size) {
+  value += size * (value < 0 ? (1 + (size_t)(-value / size)) : -(size_t)(value / size));
+}
 
-  if (!(xSmall ^ ySmall)) {///(x > 0.5 y > 0.5) or ( x < 0.5 y < 0.5)
-    return SIAUtils::Position(xZero + !xSmall, yZero + !ySmall);
+static SIAUtils::Point2D<size_t> normalize(int x, int y, size_t width, size_t height) {
+  normalize(x, width);
+  normalize(y, height);
+  return SIAUtils::Point2D<size_t>(x, y);
+}
+
+SIAUtils::Point2D<size_t> GridMath::cell(double u, double v, size_t width, size_t height) {
+#if defined(USE_4_MODEL) || defined(USE_8_MODEL)
+  return normalize(u, v, width, height);
+#elif defined(USE_6_MODEL)
+  int uZero = u;///floor
+  int vZero = v;///floor
+
+  double uN = u - (double)uZero;
+  double vN = v - (double)vZero;
+
+  bool uSmall = uN < 0.5;
+  bool vSmall = vN < 0.5;
+
+  if (!(uSmall ^ vSmall)) {///(x > 0.5 y > 0.5) or ( x < 0.5 y < 0.5)
+    return normalize(uZero + !uSmall, vZero + !vSmall, width, height);
   }
 
   ///x > 0.5 y < 0.5
-  if (!xSmall && ySmall) {
-    size_t xT = (1 + yN < 2.0 * xN) ? 1 : 0;
-    size_t yT = (xN < 2.0 * yN) ? 1 : 0;
-    if (0 == xT && 1 == yT) {
-      xT = yT = (xN < 1.0 - yN) ? 0 : 1;
+  if (!uSmall && vSmall) {
+    size_t uT = (1 + vN < 2.0 * uN) ? 1 : 0;
+    size_t vT = (uN < 2.0 * vN) ? 1 : 0;
+    if (0 == uT && 1 == vT) {
+      uT = vT = (uN < 1.0 - vN) ? 0 : 1;
     }
 
-    return SIAUtils::Position(xZero + xT, yZero + yT);
+    return normalize(uZero + uT, vZero + vT, width, height);
   } else { ///y > 0.5 x < 0.5
-    size_t xT = (yN < 2.0 * xN) ? 1 : 0;
-    size_t yT = (1 + xN < 2.0 * yN) ? 1 : 0;
-    if (0 == yT && 1 == xT) {
-      xT = yT = (yN < 1.0 - xN) ? 0 : 1;
+    size_t uT = (vN < 2.0 * uN) ? 1 : 0;
+    size_t vT = (1 + uN < 2.0 * vN) ? 1 : 0;
+    if (0 == vT && 1 == uT) {
+      uT = vT = (vN < 1.0 - uN) ? 0 : 1;
     }
 
-    return SIAUtils::Position(xZero + xT, yZero + yT);
+    return normalize(uZero + uT, vZero + vT, width, height);
   }
 #else
 #error Defined Model Type
@@ -56,15 +84,7 @@ SIAUtils::Position GridMath::cellPos(cocos2d::Vec2 pos) {
 
 
 cocos2d::Vec2 GridMath::center(size_t x, size_t y) {
-#if defined(USE_4_MODEL) || defined(USE_8_MODEL)
-  return Vec2(x * GridCellSize + GridCellSize*0.5, 
-              y * GridCellSize + GridCellSize*0.5);
-#elif defined(USE_6_MODEL)
-  return Vec2(GridCellSize*SQRT3*0.5 * ((int)x - (int)y),
-              GridCellSize*0.5 * (x + y));
-#else
-#error Defined Model Type
-#endif
+  return convert(x, y);
 }
 
 cocos2d::Vec2 GridMath::build(size_t x, size_t y, size_t index) {
@@ -94,11 +114,10 @@ cocos2d::Vec2 GridMath::build(size_t x, size_t y, size_t index) {
 }
 
 
-std::vector<cocos2d::Vec2> GridMath::cellView(size_t x, size_t y, cocos2d::Vec2 translate) {
-  double cellHalfSize = GridCellSize * 0.5;
+const std::vector<cocos2d::Vec2>& GridMath::cellView() {
+  static double cellHalfSize = GridCellSize * 0.5;
 #ifdef USE_4_MODEL
-  static const size_t viewCount = 4;
-  static const Vec2 cellPos[viewCount] = {
+  static const std::vector<cocos2d::Vec2> cellPos = {
     Vec2(-cellHalfSize,-cellHalfSize),
     Vec2( cellHalfSize,-cellHalfSize),
     Vec2( cellHalfSize, cellHalfSize),
@@ -107,10 +126,10 @@ std::vector<cocos2d::Vec2> GridMath::cellView(size_t x, size_t y, cocos2d::Vec2 
 #elif defined(USE_8_MODEL)
 #define SQRT2 1.414213562373095
   static const size_t viewCount = 8;
-  double octaEdge = GridCellSize / (SQRT2 + 1.0);
-  double octaB = GridCellSize / (SQRT2 + 2.0);
+  static double octaEdge = GridCellSize / (SQRT2 + 1.0);
+  static double octaB = GridCellSize / (SQRT2 + 2.0);
 
-  static const Vec2 cellPos[viewCount] = {
+  static const std::vector<cocos2d::Vec2> cellPos = {
     Vec2(-cellHalfSize, octaB - cellHalfSize),
     Vec2(-cellHalfSize, octaB + octaEdge - cellHalfSize),
     Vec2(octaB - cellHalfSize, cellHalfSize),
@@ -122,8 +141,7 @@ std::vector<cocos2d::Vec2> GridMath::cellView(size_t x, size_t y, cocos2d::Vec2 
   };
 
 #elif defined(USE_6_MODEL)
-  static const size_t viewCount = 6;
-  static const Vec2 cellPos[viewCount] = {
+  static const std::vector<cocos2d::Vec2> cellPos = {
     Vec2(-cellHalfSize / SQRT3, -cellHalfSize),
     Vec2(-GridCellSize / SQRT3, 0),
     Vec2(-cellHalfSize / SQRT3, cellHalfSize),
@@ -135,15 +153,7 @@ std::vector<cocos2d::Vec2> GridMath::cellView(size_t x, size_t y, cocos2d::Vec2 
 #else
 #error Defined Model Type
 #endif
-
-  std::vector<cocos2d::Vec2> res;
-  res.resize(viewCount);
-  Vec2 center = GridMath::center(x, y);
-  for (size_t i = 0; i < viewCount; i++) {
-    res[i] = center + cellPos[i] + translate;
-  }
-
-  return res;
+  return cellPos;
 }
 
 const std::vector<SIAUtils::Position>& GridMath::neighborhood() {

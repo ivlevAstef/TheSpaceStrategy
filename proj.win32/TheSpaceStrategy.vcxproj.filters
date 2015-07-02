@@ -13,29 +13,29 @@
     <Filter Include="src\Components">
       <UniqueIdentifier>{38e527d0-48fc-444f-81f2-50ce0d9c58e6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\Components\View">
-      <UniqueIdentifier>{fdb357fb-b206-4865-94ca-448aab1ed986}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\Objects">
       <UniqueIdentifier>{ba162c9c-3596-40f7-8875-66bf803cd32c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\Objects\Building">
-      <UniqueIdentifier>{34fa8bee-ef66-4aed-bd2b-a08962772e5e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\Components\Data">
-      <UniqueIdentifier>{65f026f5-ae81-4e15-9816-f75508c0caa8}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\SceneControllers">
       <UniqueIdentifier>{d81fd550-6484-4b31-9d10-4f0bbfd29d35}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\Components\InterfaceView">
-      <UniqueIdentifier>{42e09ddf-0fea-40ca-848d-3c30da9f1ab9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\Common">
       <UniqueIdentifier>{1c4cff50-1109-46bf-bf27-85adfb275acc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\Components\Data\Modificator">
-      <UniqueIdentifier>{14aad341-b6ba-482c-b5a3-85d4c232d6cc}</UniqueIdentifier>
+    <Filter Include="src\Models">
+      <UniqueIdentifier>{99c81baf-9f50-478b-b7d1-32a045c5b6ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Views">
+      <UniqueIdentifier>{fdb357fb-b206-4865-94ca-448aab1ed986}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Views\InterfaceView">
+      <UniqueIdentifier>{42e09ddf-0fea-40ca-848d-3c30da9f1ab9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Models\Common">
+      <UniqueIdentifier>{44c4ac21-526b-4741-9cfb-22fbdc7a893a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Views\Common">
+      <UniqueIdentifier>{3d0e46c1-b917-4afa-981f-746f911ee6c9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -45,67 +45,61 @@
     <ClCompile Include="..\Classes\AppDelegate.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Components\View\GameView.cpp">
-      <Filter>src\Components\View</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Components\View\GameLayer.cpp">
-      <Filter>src\Components\View</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Objects\Scene.cpp">
       <Filter>src\Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Objects\Object.cpp">
-      <Filter>src\Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Objects\Building\MainBase.cpp">
-      <Filter>src\Objects\Building</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Components\Data\Area.cpp">
-      <Filter>src\Components\Data</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Objects\Building\Build.cpp">
-      <Filter>src\Objects\Building</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Components\Data\Entity.cpp">
-      <Filter>src\Components\Data</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\SceneControllers\GameScene.cpp">
       <Filter>src\SceneControllers</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Components\View\GridView.cpp">
-      <Filter>src\Components\View</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Components\InterfaceView\BuildButtonLayer.cpp">
-      <Filter>src\Components\InterfaceView</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Components\InterfaceView\BuildButtonView.cpp">
-      <Filter>src\Components\InterfaceView</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Objects\Building\BuildFabric.cpp">
-      <Filter>src\Objects\Building</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Common\GameTouchEvents.cpp">
-      <Filter>src\Common</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Common\FeatureNames.cpp">
       <Filter>src\Common</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Objects\Building\Pylon.cpp">
-      <Filter>src\Objects\Building</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Objects\Building\Minerals.cpp">
-      <Filter>src\Objects\Building</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Components\Data\Features.cpp">
-      <Filter>src\Components\Data</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Components\Data\Modificator\EnergyGenerator.cpp">
-      <Filter>src\Components\Data\Modificator</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Objects\Building\GetterMineral.cpp">
-      <Filter>src\Objects\Building</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Common\GridMath.cpp">
+      <Filter>src\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Common\CircularMath.cpp">
+      <Filter>src\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Models\Entity.cpp">
+      <Filter>src\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Models\Area.cpp">
+      <Filter>src\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Views\GameView.cpp">
+      <Filter>src\Views</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Views\GridView.cpp">
+      <Filter>src\Views</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Views\GameLayer.cpp">
+      <Filter>src\Views</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Views\InterfaceView\BuildButtonLayer.cpp">
+      <Filter>src\Views\InterfaceView</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Views\InterfaceView\BuildButtonView.cpp">
+      <Filter>src\Views\InterfaceView</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Common\Features.cpp">
+      <Filter>src\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Components\ComponentContainer.cpp">
+      <Filter>src\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Models\Entity_Factory.cpp">
+      <Filter>src\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Objects\Object.cpp">
+      <Filter>src\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Models\Common\ModelMath.cpp">
+      <Filter>src\Models\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Models\Grid.cpp">
+      <Filter>src\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Common\GameTouchEvents.cpp">
       <Filter>src\Common</Filter>
     </ClCompile>
   </ItemGroup>
@@ -116,73 +110,82 @@
     <ClInclude Include="..\Classes\AppDelegate.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Components\View\GameView.h">
-      <Filter>src\Components\View</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Objects\Object.h">
       <Filter>src\Objects</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Objects\Scene.h">
       <Filter>src\Objects</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Components\Component.h">
-      <Filter>src\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Components\View\GameLayer.h">
-      <Filter>src\Components\View</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Objects\Building\MainBase.h">
-      <Filter>src\Objects\Building</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Objects\Building\Build.h">
-      <Filter>src\Objects\Building</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Components\GameArea.h">
-      <Filter>src\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Components\Data\Area.h">
-      <Filter>src\Components\Data</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Components\Data\Entity.h">
-      <Filter>src\Components\Data</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\SceneControllers\GameScene.h">
       <Filter>src\SceneControllers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Components\View\GridView.h">
-      <Filter>src\Components\View</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Components\InterfaceView\BuildButtonLayer.h">
-      <Filter>src\Components\InterfaceView</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Components\InterfaceView\BuildButtonView.h">
-      <Filter>src\Components\InterfaceView</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Objects\Building\BuildFabric.h">
-      <Filter>src\Objects\Building</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Common\GameTouchEvents.h">
-      <Filter>src\Common</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Common\FeatureNames.h">
       <Filter>src\Common</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Objects\Building\Pylon.h">
-      <Filter>src\Objects\Building</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Objects\Building\GetterMineral.h">
-      <Filter>src\Objects\Building</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Objects\Building\Minerals.h">
-      <Filter>src\Objects\Building</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Components\Data\Features.h">
-      <Filter>src\Components\Data</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Components\Data\Modificator\EnergyGenerator.h">
-      <Filter>src\Components\Data\Modificator</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Common\GridMath.h">
+      <Filter>src\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Objects\SceneInterface.h">
+      <Filter>src\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Common\CircularMath.h">
+      <Filter>src\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Components\EnergyGenerator.h">
+      <Filter>src\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Components\IComponent.h">
+      <Filter>src\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Models\Entity.h">
+      <Filter>src\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Models\Area.h">
+      <Filter>src\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Views\GameLayer.h">
+      <Filter>src\Views</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Views\GameView.h">
+      <Filter>src\Views</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Views\GridView.h">
+      <Filter>src\Views</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Views\InterfaceView\BuildButtonLayer.h">
+      <Filter>src\Views\InterfaceView</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Views\InterfaceView\BuildButtonView.h">
+      <Filter>src\Views\InterfaceView</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Common\Features.h">
+      <Filter>src\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Components\ComponentContainer.h">
+      <Filter>src\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Common\Cocos2dDefines.h">
+      <Filter>src\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Models\Entity_Factory.h">
+      <Filter>src\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Components\TransmitterEnergy.h">
+      <Filter>src\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Components\Build.h">
+      <Filter>src\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Models\Common\ModelMath.h">
+      <Filter>src\Models\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Models\Grid.h">
+      <Filter>src\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Views\Common\ViewMath.h">
+      <Filter>src\Views\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Common\GameTouchEvents.h">
       <Filter>src\Common</Filter>
     </ClInclude>
   </ItemGroup>

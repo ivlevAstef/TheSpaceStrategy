@@ -1,11 +1,14 @@
 /*Author: Ivlev Alexander (stef).*/
 #pragma once
-#ifndef _OBJECTS_OBJECT_H__
-#define _OBJECTS_OBJECT_H__
+#ifndef _SIA_THE_SPACE_STRATEGY_OBJECT_H__
+#define _SIA_THE_SPACE_STRATEGY_OBJECT_H__
 
-#include <map>
+#include <string>
 #include <memory>
-#include "Components/Component.h"
+#include "SceneInterface.h"
+
+#include "Models/Entity.h"
+#include "Views/GameView.h"
 
 namespace Objects
 {
@@ -14,24 +17,24 @@ namespace Objects
 
   class Object {
   public:
-    template<typename ComponentType>
-    ComponentType* getComponent() {
-      return static_cast<ComponentType*>(getComponent(ComponentType::sComponentName()));
+    static ObjectPtr create(std::string objName, double x, double y) {
+      return ObjectPtr(new Object(objName, x, y));
     }
 
-    Components::Component* getComponent(const char* name);
+    Object(std::string objName, double x, double y);
+
+    virtual void update(SceneInterfacePtr pScene);
 
     virtual ~Object();
-    virtual void update() = 0;
+
+    Views::GameView* view() const { return m_pView; }
+    Models::EntityPtr entity() const { return m_pEntity; }
 
   protected:
-    void addComponent(Components::Component* component);
-    void eraseComponent(Components::Component* component);
-
-  private:
-    std::map<std::string, Components::Component*> m_components;
+    Models::EntityPtr m_pEntity;
+    Views::GameView* m_pView;
   };
 
 };
 
-#endif // _OBJECTS_OBJECT_H__
+#endif // _SIA_THE_SPACE_STRATEGY_OBJECT_H__

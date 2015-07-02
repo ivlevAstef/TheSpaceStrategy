@@ -1,7 +1,7 @@
 /*Author: Ivlev Alexander (stef).*/
 #pragma once
-#ifndef _SCENE_CONTROLLERS_GAME_SCENE_H__
-#define _SCENE_CONTROLLERS_GAME_SCENE_H__
+#ifndef _SIA_THE_SPACE_STRATEGY_SCENE_CONTROLLERS_GAME_SCENE_H__
+#define _SIA_THE_SPACE_STRATEGY_SCENE_CONTROLLERS_GAME_SCENE_H__
 
 #include "cocos2d.h"
 #include "Objects/Scene.h"
@@ -23,4 +23,4 @@ namespace SceneControllers
   };
 };
 
-#endif // _SCENE_CONTROLLERS_GAME_SCENE_H__
+#endif // _SIA_THE_SPACE_STRATEGY_SCENE_CONTROLLERS_GAME_SCENE_H__

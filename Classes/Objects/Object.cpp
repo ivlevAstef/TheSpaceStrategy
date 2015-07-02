@@ -1,40 +1,32 @@
 #include "Object.h"
+
+#include "Models/Entity_Factory.h"
+#include "Views/GameView.h"
+
 #include "logger/SIAUtils_Logger.h"
 
+using namespace Common;
+using namespace Views;
+using namespace Models;
 using namespace Objects;
 
-Components::Component* Object::getComponent(const char* name) {
-  auto findRes = m_components.find(name);
+Object::Object(std::string objName, double x, double y) {
+  m_pEntity = Entity::Factory::createBuildByName(objName);
+  m_pEntity->setPos(x, y);
 
-  SIA_CHECK_ZERO(findRes == m_components.end(), WRN);
+  m_pView = GameView::create(objName);
 
-  return findRes->second;
+  m_pView->select += GameView::DSelect(this, [] (GameView* view) {
+    SIA_LOG_DBG("Select %d", view);
+  });
 }
 
-void Object::addComponent(Components::Component* component) {
-  SIA_CHECK_RET(component == nullptr, WRN);
-
-  SIA_LOG_INFO("Add component: %s", component->componentName());
-  component->cRetain();
-  m_components[component->componentName()] = component;
-}
-
-void Object::eraseComponent(Components::Component* component) {
-  SIA_CHECK_RET(component == nullptr, WRN);
-
-  SIA_LOG_INFO("Erase component: %s", component->componentName());
-
-  auto find = m_components.find(component->componentName());
-  
-  SIA_CHECK_RET(find == m_components.end(), WRN);
-  
-  m_components.erase(find);
-  component->cRelease();
+void Object::update(SceneInterfacePtr pScene) {
+  if (m_pEntity.get() && m_pView) {
+    ViewPos pos = pScene->viewMath().convert(m_pEntity->pos());
+    m_pView->setPosition(pos);
+  }
 }
 
 Object::~Object() {
-  for (auto component : m_components) {
-    component.second->cRelease();
-  }
-  m_components.clear();
 }

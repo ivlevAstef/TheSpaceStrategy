@@ -1,13 +1,13 @@
 /*Author: Ivlev Alexander (stef).*/
 #pragma once
-#ifndef _OBJECTS_SCENE_H__
-#define _OBJECTS_SCENE_H__
+#ifndef _SIA_THE_SPACE_STRATEGY_SCENE_H__
+#define _SIA_THE_SPACE_STRATEGY_SCENE_H__
 
 #include "Object.h"
-#include "Components/View/GameLayer.h"
-#include "Components/Data/Area.h"
-#include "Common/GameTouchEvents.h"
-#include <memory>
+#include "Views/GameLayer.h"
+#include "Views/InterfaceView/BuildButtonLayer.h"
+#include "Models/Area.h"
+#include "SceneInterface.h"
 #include <vector>
 
 namespace Objects
@@ -15,31 +15,42 @@ namespace Objects
   class Scene;
   typedef std::shared_ptr<Scene> ScenePtr;
 
-  class Scene: public Object {
+  class Scene: public SceneInterface {
   public:
-    static ScenePtr create();
+    static ScenePtr create(size_t width, size_t height);
     
-    inline Components::View::GameLayer* getGameLayer() const {
-      return m_cacheGameLayer;
+    inline Views::GameLayer* getGameLayer() const {
+      return m_pGameLayer;
     }
 
     bool addObject(ObjectPtr pObject);
     void eraseObject(ObjectPtr pObject);
 
-    Scene();
+    Scene(size_t width, size_t height);
     ~Scene();
 
-    virtual void update() override;
+    void update(SceneInterfacePtr pScene);
+
+    virtual const Common::ViewMath& viewMath() const override {
+      return m_viewMath;
+    }
 
   private:
-    void touchBegan(Common::GameTouchData data);
+    void touchBegan(cocos2d::Touch* touch);
+    void touchMoved(cocos2d::Touch* touch);
+    void touchEnded(cocos2d::Touch* touch);
+    void move(cocos2d::Vec2 moveDt);
 
   private:
-    Components::View::GameLayer* m_cacheGameLayer;
-    Components::Data::Area* m_cacheArea;
+    Views::GameLayer* m_pGameLayer;
+    Views::GridView* m_pGridView;
+    Views::BuildButtonLayer* m_pButtonLayer;
+    Models::AreaPtr m_pArea;
 
-    std::vector<ObjectPtr> m_objects;
+    std::vector<ObjectPtr> m_pObjects;
+
+    Common::ViewMath m_viewMath;
   };
 };
 
-#endif // _OBJECTS_SCENE_H__
+#endif // _SIA_THE_SPACE_STRATEGY_SCENE_H__

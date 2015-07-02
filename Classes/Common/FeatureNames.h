@@ -1,7 +1,7 @@
 /*Author: Ivlev Alexander (stef).*/
 #pragma once
-#ifndef _COMMON_FEATURE_NAMES_H__
-#define _COMMON_FEATURE_NAMES_H__
+#ifndef _SIA_THE_SPACE_STRATEGY_FEATURE_NAMES_H__
+#define _SIA_THE_SPACE_STRATEGY_FEATURE_NAMES_H__
 
 namespace Common {
 
@@ -18,4 +18,4 @@ namespace Common {
 };
 
 
-#endif // _COMMON_FEATURE_NAMES_H__
+#endif // _SIA_THE_SPACE_STRATEGY_FEATURE_NAMES_H__

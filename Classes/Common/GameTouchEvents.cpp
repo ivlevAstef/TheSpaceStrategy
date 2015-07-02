@@ -1,8 +1,7 @@
 #include "GameTouchEvents.h"
-//#include "Components/View/GameLayer.h"
 
 using namespace Common;
 
-SIAUtils::FriendEvent<Components::View::GameLayer, GameTouchData> GameTouchEvents::touchBegan;
-SIAUtils::FriendEvent<Components::View::GameLayer, GameTouchData> GameTouchEvents::touchMoved;
-SIAUtils::FriendEvent<Components::View::GameLayer, GameTouchData> GameTouchEvents::touchEnded;
+SIAUtils::FriendEvent<Objects::Scene, GameTouchData> GameTouchEvents::touchBegan;
+SIAUtils::FriendEvent<Objects::Scene, GameTouchData> GameTouchEvents::touchMoved;
+SIAUtils::FriendEvent<Objects::Scene, GameTouchData> GameTouchEvents::touchEnded;

@@ -1,8 +1,7 @@
 #include "GameScene.h"
-#include "Objects/Building/BuildFabric.h"
+#include "Objects/Object.h"
 
 using namespace SceneControllers;
-using namespace Objects::Building;
 USING_NS_CC;
 
 Scene* GameScene::createScene() {
@@ -17,38 +16,38 @@ bool GameScene::init() {
     return false;
   }
 
-  m_pScene = Objects::Scene::create();
+  m_pScene = Objects::Scene::create(32, 32);
   this->addChild(m_pScene->getGameLayer());
 
   scheduleUpdate();
 
   for (size_t i = 0; i < 4; i++) {
     for (size_t j = 0; j < i + 1; j++) {
-      auto mainbase = BuildFabric::create("MainBase", i * 10, 4);
+      auto mainbase = Objects::Object::create("MainBase", i * 10, 4);
       m_pScene->addObject(mainbase);
-      auto pylon = BuildFabric::create("Pylon", i * 10, 4);
+      auto pylon = Objects::Object::create("Pylon", i * 10, 4);
       m_pScene->addObject(pylon);
     }
   }
 
   for (size_t i = 0; i < 4; i++) {
     for (size_t j = 0; j < i + 1; j++) {
-      auto mainbase = BuildFabric::create("MainBase", 4, i * 10);
+      auto mainbase = Objects::Object::create("MainBase", 4, i * 10);
       m_pScene->addObject(mainbase);
-      auto pylon = BuildFabric::create("Pylon", 4, i * 10);
+      auto pylon = Objects::Object::create("Pylon", 4, i * 10);
       m_pScene->addObject(pylon);
     }
   }
 
-  auto getterMineral = BuildFabric::create("GetterMineral", 5, 5);
+  auto getterMineral = Objects::Object::create("MinerMinerals", 5, 5);
   m_pScene->addObject(getterMineral);
   m_pScene->eraseObject(getterMineral);
 
-  for (size_t i = 0; i < 50; i++) {
+  for (size_t i = 0; i < 500; i++) {
     int x = rand() % 32;
     int y = rand() % 32;
 
-    auto minerals = BuildFabric::create("Minerals", x, y);
+    auto minerals = Objects::Object::create("Minerals", x, y);
     m_pScene->addObject(minerals);
   }
 
@@ -56,5 +55,5 @@ bool GameScene::init() {
 }
 
 void GameScene::update(float delta) {
-  m_pScene->update();
+  m_pScene->update(m_pScene);
 }
