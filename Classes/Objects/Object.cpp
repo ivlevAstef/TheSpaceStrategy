@@ -10,9 +10,9 @@ using namespace Views;
 using namespace Models;
 using namespace Objects;
 
-Object::Object(std::string objName, double x, double y) {
+Object::Object(std::string objName, Common::EntityPos pos) {
   m_pEntity = Entity::Factory::createBuildByName(objName);
-  m_pEntity->setPos(x, y);
+  m_pEntity->setPos(pos);
 
   m_pView = GameView::create(objName);
 

@@ -17,11 +17,11 @@ namespace Objects
 
   class Object {
   public:
-    static ObjectPtr create(std::string objName, double x, double y) {
-      return ObjectPtr(new Object(objName, x, y));
+    static ObjectPtr create(std::string objName, Common::EntityPos pos) {
+      return ObjectPtr(new Object(objName, pos));
     }
 
-    Object(std::string objName, double x, double y);
+    Object(std::string objName, Common::EntityPos pos);
 
     virtual void update(SceneInterfacePtr pScene);
 

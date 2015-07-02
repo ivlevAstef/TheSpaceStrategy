@@ -23,23 +23,23 @@ bool GameScene::init() {
 
   for (size_t i = 0; i < 4; i++) {
     for (size_t j = 0; j < i + 1; j++) {
-      auto mainbase = Objects::Object::create("MainBase", i * 10, 4);
+      auto mainbase = Objects::Object::create("MainBase", Common::EntityPos(i * 10, 4));
       m_pScene->addObject(mainbase);
-      auto pylon = Objects::Object::create("Pylon", i * 10, 4);
+      auto pylon = Objects::Object::create("Pylon", Common::EntityPos(i * 10, 4));
       m_pScene->addObject(pylon);
     }
   }
 
   for (size_t i = 0; i < 4; i++) {
     for (size_t j = 0; j < i + 1; j++) {
-      auto mainbase = Objects::Object::create("MainBase", 4, i * 10);
+      auto mainbase = Objects::Object::create("MainBase", Common::EntityPos(4, i * 10));
       m_pScene->addObject(mainbase);
-      auto pylon = Objects::Object::create("Pylon", 4, i * 10);
+      auto pylon = Objects::Object::create("Pylon", Common::EntityPos(4, i * 10));
       m_pScene->addObject(pylon);
     }
   }
 
-  auto getterMineral = Objects::Object::create("MinerMinerals", 5, 5);
+  auto getterMineral = Objects::Object::create("MinerMinerals", Common::EntityPos(5, 5));
   m_pScene->addObject(getterMineral);
   m_pScene->eraseObject(getterMineral);
 
@@ -47,7 +47,7 @@ bool GameScene::init() {
     int x = rand() % 32;
     int y = rand() % 32;
 
-    auto minerals = Objects::Object::create("Minerals", x, y);
+    auto minerals = Objects::Object::create("Minerals", Common::EntityPos(x, y));
     m_pScene->addObject(minerals);
   }
 

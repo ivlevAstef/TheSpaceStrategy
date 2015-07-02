@@ -27,12 +27,12 @@ bool BuildButtonLayer::init(Vec2 pos) {
 
 
   GameTouchEvents::touchMoved += GameTouchEvents::DTouchMoved(this, [this] (TouchPos touchPos) {
+    Vec2 pos = getPosition();
+    pos = Vec2(touchPos.x - pos.x, touchPos.y - pos.y);
+
     for (Node* child : getChildren()) {
       BuildButtonView* button = static_cast<BuildButtonView*>(child);
       SIA_ASSERT(child);
-      
-      Vec2 pos = getPosition();
-      pos = Vec2(pos.x - touchPos.x, pos.y - touchPos.y);
 
       if (button->containsPoint(pos)) {
         button->select();

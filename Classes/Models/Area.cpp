@@ -28,7 +28,7 @@ private:
 
 bool Area::addEntity(EntityPtr pEntity) {
   SIA_LOG_FUNC("");
-  SIA_ASSERT(pEntity);
+  SIA_ASSERT(pEntity.get());
   for (EntityPtr pIterEntity : m_pEntities) {
     if (pEntity.get() == pIterEntity.get()) {
       return false;

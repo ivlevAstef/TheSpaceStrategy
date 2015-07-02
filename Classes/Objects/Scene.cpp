@@ -58,8 +58,8 @@ void Scene::touchBegan(cocos2d::Touch* touch) {
   m_pGameLayer->addChild(m_pButtonLayer, 100);
 
    m_pButtonLayer->pick += BuildButtonLayer::DPick(this, [this, centerPos] (std::string pickId) {
-    SIA_LOG_INFO("PICK pickID");
-    auto newBuild = Object::create(pickId, centerPos.x, centerPos.y);
+    SIA_LOG_INFO("PICK %s", pickId);
+    auto newBuild = Object::create(pickId, m_viewMath.convert(centerPos));
     SIA_CHECK_RET(nullptr == newBuild.get(), WRN);
     addObject(newBuild);
   });
