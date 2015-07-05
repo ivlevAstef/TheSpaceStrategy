@@ -7,7 +7,9 @@
 #include "GridView.h"
 
 #include "cocos2d.h"
+
 #include "Common/ViewMath.h"
+#include "Models/Area.h"
 #include <memory>
 #include <vector>
 
@@ -29,14 +31,14 @@ namespace Views
     void modificationBackground(cocos2d::Color3B color);
 
   public:
-    typedef SIAUtils::Delegate<cocos2d::Touch*> DTouchBegan;
-    SIAUtils::FriendEvent<GameLayer, cocos2d::Touch*> touchBegan;
+    typedef SIAUtils::Delegate<cocos2d::Vec2> DTouchBegan;
+    SIAUtils::FriendEvent<GameLayer, cocos2d::Vec2> touchBegan;
 
-    typedef SIAUtils::Delegate<cocos2d::Touch*> DTouchMoved;
-    SIAUtils::FriendEvent<GameLayer, cocos2d::Touch*> touchMoved;
+    typedef SIAUtils::Delegate<cocos2d::Vec2> DTouchMoved;
+    SIAUtils::FriendEvent<GameLayer, cocos2d::Vec2> touchMoved;
 
-    typedef SIAUtils::Delegate<cocos2d::Touch*> DTouchEnded;
-    SIAUtils::FriendEvent<GameLayer, cocos2d::Touch*> touchEnded;
+    typedef SIAUtils::Delegate<cocos2d::Vec2> DTouchEnded;
+    SIAUtils::FriendEvent<GameLayer, cocos2d::Vec2> touchEnded;
 
     typedef SIAUtils::Delegate<cocos2d::Vec2> DMove;
     SIAUtils::FriendEvent<GameLayer, cocos2d::Vec2> move;

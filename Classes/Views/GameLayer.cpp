@@ -13,7 +13,7 @@ static const int gridViewTag = 102;
 
 bool GameLayer::init() {
   SIA_CHECK_ZERO(!Layer::init(), ERR);
-  
+
   m_background = nullptr;
   m_gridView = nullptr;
 
@@ -114,20 +114,20 @@ void GameLayer::update(const Common::ViewMath& viewMath) {
 }
 
 bool GameLayer::onTouchBegan(Touch* touch, Event* unused_event) {
-  this->touchBegan(touch);
+  this->touchBegan(m_area->convertTouchToNodeSpace(touch));
   return true;
 }
 
 void GameLayer::onTouchMoved(Touch* touch, Event* unused_event) {
-  this->touchMoved(touch);
+  this->touchMoved(m_area->convertTouchToNodeSpace(touch));
 }
 
 void GameLayer::onTouchEnded(Touch* touch, Event* unused_event) {
-  this->touchEnded(touch);
+  this->touchEnded(m_area->convertTouchToNodeSpace(touch));
 }
 
 void GameLayer::onTouchCancelled(Touch* touch, Event* unused_event) {
-  this->touchEnded(touch);
+  this->touchEnded(m_area->convertTouchToNodeSpace(touch));
 }
 
 void GameLayer::onMouseDown(cocos2d::Event* event) {

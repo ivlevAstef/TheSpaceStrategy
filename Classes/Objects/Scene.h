@@ -36,9 +36,9 @@ namespace Objects
     }
 
   private:
-    void touchBegan(cocos2d::Touch* touch);
-    void touchMoved(cocos2d::Touch* touch);
-    void touchEnded(cocos2d::Touch* touch);
+    void touchBegan(cocos2d::Vec2 touch);
+    void touchMoved(cocos2d::Vec2 touch);
+    void touchEnded(cocos2d::Vec2 touch);
     void move(cocos2d::Vec2 moveDt);
 
   private:

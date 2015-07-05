@@ -194,6 +194,9 @@
     <ClInclude Include="..\Classes\Models\EntityArray.h">
       <Filter>src\Models</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\Models\Grid_Cell.h">
+      <Filter>src\Models</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

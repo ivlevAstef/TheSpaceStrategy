@@ -17,6 +17,7 @@ namespace Common
 {
   typedef cocos2d::Vec2 ViewPos;
   typedef cocos2d::Vec2 ViewScale;
+  typedef cocos2d::Size ViewSize;
 
   class ViewMath {
   public:
@@ -28,12 +29,8 @@ namespace Common
       return m_windowPos;
     }
 
-    void setWindowPos(ViewPos windowPos) {
-      m_windowPos = windowPos;
-    }
-
-    void moveWindow(ViewPos dtWindowPos) {
-      m_windowPos += dtWindowPos;
+    ViewSize windowSize() const {
+      return m_windowSize;
     }
 
     ViewPos convert(EntityPos pos) const {
@@ -56,8 +53,21 @@ namespace Common
       return ViewScale(100, 100);
     }
 
+    void setWindowPos(ViewPos windowPos) {
+      m_windowPos = windowPos;
+    }
+
+    void setWindowSize(ViewSize windowSize) {
+      m_windowSize = windowSize;
+    }
+
+    void moveWindow(ViewPos dtWindowPos) {
+      m_windowPos += dtWindowPos;
+    }
+
   private:
     ViewPos m_windowPos;
+    ViewSize m_windowSize;
   };
 };
 

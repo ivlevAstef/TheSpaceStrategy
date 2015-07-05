@@ -23,7 +23,7 @@ Scene::Scene(size_t width, size_t height) {
   m_pGameLayer = GameLayer::create();
   SIA_ASSERT(m_pGameLayer);
 
-  m_pGridView = GridView::create(width, height);
+  m_pGridView = GridView::create(m_pArea->grid());
   SIA_ASSERT(m_pGridView);
 
   m_pGameLayer->setBackground("background");
@@ -40,19 +40,19 @@ Scene::Scene(size_t width, size_t height) {
 Scene::~Scene() {
 }
 
-void Scene::touchBegan(cocos2d::Touch* touch) {
-  cocos2d::Vec2 pos = m_pGameLayer->convertTouchToNodeSpace(touch);
-  GameTouchEvents::touchBegan(TouchPos(pos.x, pos.y));
+static TouchPos touchPos(cocos2d::Vec2 pos, ViewPos winPos) {
+  auto tPos = pos + winPos;
+  return TouchPos(tPos.x, tPos.y);
+}
+
+void Scene::touchBegan(cocos2d::Vec2 pos) {
+  GameTouchEvents::touchBegan(touchPos(pos, m_viewMath.windowPos()));
 
   ViewPos centerPos = m_viewMath.center(pos);
 
-  /*if (!m_circularMath.activeZone(data.x, data.y)) {
-    return;
-  }*/
-
   SIA_ASSERT(nullptr == m_pButtonLayer);
 
-  m_pButtonLayer = BuildButtonLayer::create(centerPos); 
+  m_pButtonLayer = BuildButtonLayer::create(centerPos + m_viewMath.windowPos());
   SIA_ASSERT(m_pButtonLayer);
 
   m_pGameLayer->addChild(m_pButtonLayer, 100);
@@ -71,13 +71,11 @@ void Scene::touchBegan(cocos2d::Touch* touch) {
   }, true);
 }
 
-void Scene::touchMoved(cocos2d::Touch* touch) {
-  cocos2d::Vec2 pos = m_pGameLayer->convertTouchToNodeSpace(touch);
-  GameTouchEvents::touchMoved(TouchPos(pos.x, pos.y));
+void Scene::touchMoved(cocos2d::Vec2 pos) {
+  GameTouchEvents::touchMoved(touchPos(pos, m_viewMath.windowPos()));
 }
-void Scene::touchEnded(cocos2d::Touch* touch) {
-  cocos2d::Vec2 pos = m_pGameLayer->convertTouchToNodeSpace(touch);
-  GameTouchEvents::touchEnded(TouchPos(pos.x, pos.y));
+void Scene::touchEnded(cocos2d::Vec2 pos) {
+  GameTouchEvents::touchEnded(touchPos(pos, m_viewMath.windowPos()));
 }
 
 void Scene::move(cocos2d::Vec2 moveDt) {
@@ -124,6 +122,8 @@ void Scene::eraseObject(ObjectPtr pObject) {
 
 void Scene::update(SceneInterfacePtr pScene) {
   SIA_ASSERT(pScene.get() == this);
+
+  m_viewMath.setWindowSize(m_pGameLayer->getContentSize());
 
   m_pArea->update();
   m_pGameLayer->update(m_viewMath);

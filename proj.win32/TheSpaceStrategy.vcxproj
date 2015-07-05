@@ -184,6 +184,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y</Command>
     <ClInclude Include="..\Classes\Models\EntityArray.h" />
     <ClInclude Include="..\Classes\Models\Entity_Factory.h" />
     <ClInclude Include="..\Classes\Models\Grid.h" />
+    <ClInclude Include="..\Classes\Models\Grid_Cell.h" />
     <ClInclude Include="..\Classes\Objects\Object.h" />
     <ClInclude Include="..\Classes\Objects\Scene.h" />
     <ClInclude Include="..\Classes\Objects\SceneInterface.h" />

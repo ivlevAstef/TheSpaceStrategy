@@ -66,5 +66,5 @@ bool Area::setupEntity(EntityPtr pEntity) {
 }
 
 void Area::update() {
-  m_grid.update(m_Entities);
+  m_pGrid->update(m_Entities);
 }
