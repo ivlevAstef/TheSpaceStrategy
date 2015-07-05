@@ -2,7 +2,7 @@
 
 using namespace Models;
 
-void Grid::update(const std::vector<EntityPtr>& pEntities) {
+void Grid::update(const EntityArray& pEntities) {
 
 }
 

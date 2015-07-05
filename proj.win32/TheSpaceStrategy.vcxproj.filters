@@ -102,6 +102,9 @@
     <ClCompile Include="..\Classes\Common\GameTouchEvents.cpp">
       <Filter>src\Common</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Models\EntityArray.cpp">
+      <Filter>src\Models</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -187,6 +190,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Common\GameTouchEvents.h">
       <Filter>src\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Models\EntityArray.h">
+      <Filter>src\Models</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

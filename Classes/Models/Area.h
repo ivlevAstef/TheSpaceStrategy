@@ -12,6 +12,7 @@
 
 #include "Grid.h"
 #include "Entity.h"
+#include "EntityArray.h"
 
 #include <functional>
 #include <vector>
@@ -29,14 +30,12 @@ namespace Models
       void update();
 
    private:
-      void findEntityInCell(Common::CellPos pos, std::function<void (EntityPtr entity)> FindResultCallback);
-
       bool setupEntity(EntityPtr pEntity);
 
     private:
       Grid m_grid;
 
-      std::vector<EntityPtr> m_pEntities;
+      EntityArray m_Entities;
     };
 
     typedef std::shared_ptr<Area> AreaPtr;

@@ -21,14 +21,13 @@ namespace Common
   class ModelMath {
   public:
     enum PosIndex {
-      ePosIndexBegin = 0,
       eTop = 0,
       eBottom = 1,
       eLeft = 2,
       eRight = 3,
-      ePosIndexOnlyBuildCount = 4,
       eCenter = 4,
-      ePosIndexCount = 5
+      ePosIndexCount = 5,
+      eUndefined = ePosIndexCount
     };
 
   public:
@@ -36,6 +35,7 @@ namespace Common
 
     static EntityPos center(CellPos pos);
     static EntityPos buildPos(CellPos pos, PosIndex buildIndex);
+    static PosIndex buildPos(EntityPos pos);
 
     static double distance(EntityPos p1, EntityPos p2);
   };

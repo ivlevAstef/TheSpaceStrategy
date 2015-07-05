@@ -2,6 +2,14 @@
 
 using namespace Common;
 
+static const EntityPos buildTr[ModelMath::ePosIndexCount] = {
+  EntityPos(0, 0.3),
+  EntityPos(0.3, 0),
+  EntityPos(0, -0.3),
+  EntityPos(-0.3, 0),
+  EntityPos(0, 0)
+};
+
 CellPos ModelMath::cell(EntityPos pos) {
   return CellPos((int)pos.x, (int)pos.y);
 }
@@ -11,18 +19,24 @@ EntityPos ModelMath::center(CellPos pos) {
 }
 
 EntityPos ModelMath::buildPos(CellPos pos, PosIndex buildIndex) {
-  static const EntityPos translated[ePosIndexOnlyBuildCount] = {
-    EntityPos(0, 0.3),
-    EntityPos(0.3, 0),
-    EntityPos(0, -0.3),
-    EntityPos(-0.3, 0)
-  };
-
   auto entPos = center(pos);
-  entPos.x += translated[buildIndex].x;
-  entPos.y += translated[buildIndex].y;
+  entPos.x += buildTr[buildIndex].x;
+  entPos.y += buildTr[buildIndex].y;
   
   return entPos;
+}
+
+ModelMath::PosIndex ModelMath::buildPos(EntityPos pos) {
+  auto centerPos = center(cell(pos));
+  double trX = pos.x - centerPos.x;
+  double trY = pos.y - centerPos.y;
+ 
+  for (size_t i = 0; i < ePosIndexCount; i++) {
+    if (abs(trX - buildTr[i].x) < 1.0e-3 && abs(trY - buildTr[i].y) < 1.0e-3) {
+      return static_cast<PosIndex>(i);
+    }
+  }
+  return eUndefined;
 }
 
 double ModelMath::distance(EntityPos p1, EntityPos p2) {

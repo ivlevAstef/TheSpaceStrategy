@@ -10,10 +10,7 @@
 #ifndef _SIA_THE_SPACE_STRATEGY_GRID_H__
 #define _SIA_THE_SPACE_STRATEGY_GRID_H__
 
-#include "Entity.h"
-
-#include <functional>
-#include <vector>
+#include "EntityArray.h"
 
 namespace Models
 {
@@ -23,7 +20,7 @@ namespace Models
       setSize(width, height);
     }
 
-    void update(const std::vector<EntityPtr>& pEntities);
+    void update(const EntityArray& entities);
 
     void setSize(size_t width, size_t height);
 

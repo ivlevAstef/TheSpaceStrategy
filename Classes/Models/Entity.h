@@ -17,15 +17,10 @@
 
 namespace Models
 {
-  class Area;
   class Entity : public Components::ComponentContainer {
   public:
     class Factory;
     friend class Factory;
-
-  private:
-    friend class Area;
-
 	public:
     void setPos(Common::EntityPos pos);
     inline void setPos(double x, double y) { setPos({x, y}); }
