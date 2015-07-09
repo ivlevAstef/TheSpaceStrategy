@@ -9,13 +9,13 @@
 
 namespace Components
 {
-	class ComponentContainer {
-	public:
-		template<typename ComponentType>
-		std::shared_ptr<ComponentType> as() {
-			IComponentPtr component = as(ComponentType::sComponentName());
+  class ComponentContainer {
+  public:
+    template<typename ComponentType>
+    std::shared_ptr<ComponentType> as() {
+      IComponentPtr component = as(ComponentType::sComponentName());
       return std::static_pointer_cast<ComponentType>(component);
-		}
+    }
 
     template<typename ComponentType>
     bool is() {
@@ -23,15 +23,15 @@ namespace Components
     }
 
     bool is(const char* name);
-		IComponentPtr as(const char* name);
+    IComponentPtr as(const char* name);
 
-	protected:
-		void addComponent(IComponentPtr component);
-		void eraseComponent(IComponentPtr component);
+  protected:
+    void addComponent(IComponentPtr component);
+    void eraseComponent(IComponentPtr component);
 
-	private:
-		std::map<std::string, IComponentPtr> m_components;
-	};
+  private:
+    std::map<std::string, IComponentPtr> m_components;
+  };
 
 };
 

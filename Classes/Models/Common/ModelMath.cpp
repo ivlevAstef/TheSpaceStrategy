@@ -1,4 +1,6 @@
 #include "ModelMath.h"
+#include "SIALogger.h"
+SIASetModuleName(Model);
 
 using namespace Common;
 
@@ -19,6 +21,7 @@ EntityPos ModelMath::center(CellPos pos) {
 }
 
 EntityPos ModelMath::buildPos(CellPos pos, PosIndex buildIndex) {
+  SIAAssert(0 <= buildIndex && buildIndex <= ePosIndexCount);
   auto entPos = center(pos);
   entPos.x += buildTr[buildIndex].x;
   entPos.y += buildTr[buildIndex].y;
@@ -40,5 +43,6 @@ ModelMath::PosIndex ModelMath::buildPos(EntityPos pos) {
 }
 
 double ModelMath::distance(EntityPos p1, EntityPos p2) {
+  SIAAssertMsg(false, "Distance function not implemented.");
   return 0;
 }

@@ -1,27 +1,29 @@
 #include "Area.h"
-#include "logger/SIAUtils_Logger.h"
+#include "SIALogger.h"
 #include "Common/GridMath.h"
 #include "Components/Build.h"
 #include "Components/TransmitterEnergy.h"
 #include "Common/ModelMath.h"
+
+SIASetModuleName(Model);
 
 using namespace Models;
 using namespace Common;
 using namespace Components;
 
 bool Area::addEntity(EntityPtr pEntity) {
-  SIA_LOG_FUNC("");
-  SIA_ASSERT(pEntity.get());
+  SIAAssert(pEntity.get());
   
   if (setupEntity(pEntity)) {
     return m_Entities.add(pEntity);
   }
+
+  SIADebug("Can't setup entity.");
   return false;
 }
 
 void Area::removeEntity(EntityPtr pEntity) {
-  SIA_LOG_FUNC("");
-  SIA_ASSERT(pEntity.get());
+  SIAAssert(pEntity.get());
   m_Entities.remove(pEntity);
 }
 
@@ -44,6 +46,7 @@ bool Area::setupEntity(EntityPtr pEntity) {
       if (!buildsPosIndex[index]) {
         auto buildPos = ModelMath::buildPos(cell, index);
         pEntity->setPos(buildPos);
+        SIAInfo("Set build pos to point: {%f,%f}.", buildPos.x, buildPos.y);
         return true;
       }
       return false;

@@ -2,78 +2,37 @@
 <ArrayOfArrayOfArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ArrayOfArrayOfString>
     <ArrayOfString>
-      <string>D:\Projects\Repository\TheSpaceStrategy\TheSpaceStrategy\Classes\SceneControllers\GameScene.cpp</string>
+      <string>D:\Projects\Repository\TheSpaceStrategy\TheSpaceStrategy\Classes\Views\GridView.cpp</string>
+      <string>D:\Projects\Repository\TheSpaceStrategy\TheSpaceStrategy\Classes\Views\GridView.h</string>
     </ArrayOfString>
     <ArrayOfString>
-      <string>D:\Projects\Repository\TheSpaceStrategy\TheSpaceStrategy\Classes\Views\InterfaceView\BuildButtonLayer.cpp</string>
-      <string>D:\Projects\Repository\TheSpaceStrategy\TheSpaceStrategy\Classes\Views\InterfaceView\BuildButtonLayer.h</string>
+      <string>D:\Projects\Repository\TheSpaceStrategy\TheSpaceStrategy\Classes\Models\EntityArray.cpp</string>
+      <string>D:\Projects\Repository\TheSpaceStrategy\TheSpaceStrategy\Classes\Models\EntityArray.h</string>
     </ArrayOfString>
     <ArrayOfString>
-      <string>D:\Projects\Repository\TheSpaceStrategy\TheSpaceStrategy\Classes\Views\InterfaceView\BuildButtonView.cpp</string>
-      <string>D:\Projects\Repository\TheSpaceStrategy\TheSpaceStrategy\Classes\Views\InterfaceView\BuildButtonView.h</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>D:\Projects\Repository\TheSpaceStrategy\TheSpaceStrategy\Classes\Objects\Object.cpp</string>
-      <string>D:\Projects\Repository\TheSpaceStrategy\TheSpaceStrategy\Classes\Objects\Object.h</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>D:\Projects\Repository\TheSpaceStrategy\TheSpaceStrategy\Classes\Objects\Scene.cpp</string>
-      <string>D:\Projects\Repository\TheSpaceStrategy\TheSpaceStrategy\Classes\Objects\Scene.h</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>D:\Projects\Repository\TheSpaceStrategy\TheSpaceStrategy\Classes\Views\GameLayer.cpp</string>
+      <string>D:\Projects\Repository\TheSpaceStrategy\TheSpaceStrategy\Classes\Models\Entity.h</string>
     </ArrayOfString>
     <ArrayOfString>
       <string>D:\Projects\Repository\TheSpaceStrategy\TheSpaceStrategy\Classes\Models\Area.cpp</string>
       <string>D:\Projects\Repository\TheSpaceStrategy\TheSpaceStrategy\Classes\Models\Area.h</string>
     </ArrayOfString>
     <ArrayOfString>
-      <string>D:\Projects\Repository\TheSpaceStrategy\TheSpaceStrategy\Classes\Models\Entity.cpp</string>
-      <string>D:\Projects\Repository\TheSpaceStrategy\TheSpaceStrategy\Classes\Models\Entity.h</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>D:\Projects\Repository\TheSpaceStrategy\TheSpaceStrategy\Classes\Common\GameTouchEvents.cpp</string>
-      <string>D:\Projects\Repository\TheSpaceStrategy\TheSpaceStrategy\Classes\Common\GameTouchEvents.h</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>D:\Projects\Repository\TheSpaceStrategy\TheSpaceStrategy\Classes\Objects\SceneInterface.h</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>D:\Projects\Repository\TheSpaceStrategy\TheSpaceStrategy\Classes\Views\Common\ViewMath.h</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>D:\Projects\Repository\TheSpaceStrategy\TheSpaceStrategy\Classes\Views\GridView.cpp</string>
-      <string>D:\Projects\Repository\TheSpaceStrategy\TheSpaceStrategy\Classes\Views\GridView.h</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>D:\Projects\Repository\TheSpaceStrategy\TheSpaceStrategy\Classes\Models\Common\ModelMath.h</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>D:\Projects\Repository\TheSpaceStrategy\TheSpaceStrategy\Classes\Views\GameView.cpp</string>
-      <string>D:\Projects\Repository\TheSpaceStrategy\TheSpaceStrategy\Classes\Views\GameView.h</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>D:\Projects\Repository\TheSpaceStrategy\TheSpaceStrategy\Classes\Common\GridMath.h</string>
-    </ArrayOfString>
-    <ArrayOfString>
       <string>D:\Projects\Repository\TheSpaceStrategy\TheSpaceStrategy\Classes\Models\Grid.cpp</string>
       <string>D:\Projects\Repository\TheSpaceStrategy\TheSpaceStrategy\Classes\Models\Grid.h</string>
     </ArrayOfString>
     <ArrayOfString>
-      <string>c:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\functional</string>
+      <string>D:\Projects\Repository\TheSpaceStrategy\TheSpaceStrategy\Classes\Views\GameLayer.cpp</string>
+      <string>D:\Projects\Repository\TheSpaceStrategy\TheSpaceStrategy\Classes\Views\GameLayer.h</string>
     </ArrayOfString>
     <ArrayOfString>
-      <string>c:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\xrefwrap</string>
+      <string>D:\Projects\Repository\TheSpaceStrategy\TheSpaceStrategy\Classes\Objects\Scene.cpp</string>
+      <string>D:\Projects\Repository\TheSpaceStrategy\TheSpaceStrategy\Classes\Objects\Scene.h</string>
     </ArrayOfString>
     <ArrayOfString>
-      <string>D:\Projects\Repository\TheSpaceStrategy\TheSpaceStrategy\Classes\Components\Build.h</string>
+      <string>D:\Projects\Repository\TheSpaceStrategy\TheSpaceStrategy\Classes\Views\InterfaceView\BuildButtonView.cpp</string>
     </ArrayOfString>
     <ArrayOfString>
-      <string>D:\Projects\Repository\SIAUtils\sources\event\Delegate.h</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>D:\Projects\Repository\SIAUtils\sources\logger\SIAUtils_Logger.cpp</string>
-      <string>D:\Projects\Repository\SIAUtils\sources\logger\SIAUtils_Logger.h</string>
+      <string>D:\Projects\Repository\TheSpaceStrategy\TheSpaceStrategy\Classes\Objects\Object.h</string>
     </ArrayOfString>
   </ArrayOfArrayOfString>
 </ArrayOfArrayOfArrayOfString>

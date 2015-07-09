@@ -1,15 +1,18 @@
 #include "EntityArray.h"
-#include "logger/SIAUtils_Logger.h"
+#include "SIALogger.h"
 #include "Common/ModelMath.h"
+
+SIASetModuleName(Model);
 
 using namespace Models;
 using namespace Common;
 
 bool EntityArray::add(EntityPtr pEntity) {
-  SIA_ASSERT(pEntity.get());
+  SIAAssert(pEntity.get());
 
   for (EntityPtr pIterEntity : m_pEntities) {
     if (pEntity.get() == pIterEntity.get()) {
+      SIAError("Already add entity to array.");
       return false;
     }
   }
@@ -20,7 +23,7 @@ bool EntityArray::add(EntityPtr pEntity) {
 }
 
 bool EntityArray::remove(EntityPtr pEntity) {
-  SIA_ASSERT(pEntity.get());
+  SIAAssert(pEntity.get());
 
   for (size_t i = 0; i < m_pEntities.size(); i++) {
     if (pEntity == m_pEntities[i]) {
@@ -29,10 +32,12 @@ bool EntityArray::remove(EntityPtr pEntity) {
     }
   }
 
+  SIAWarning("Can't find entity in array.");
   return false;
 }
 
 void EntityArray::foreachCell(Common::CellPos pos, FindResultCallback callback) const {
+  SIAAssert((bool)callback);
   for (EntityPtr iter : m_pEntities) {
     if (ModelMath::cell(iter->pos()) == pos) {
       if (!callback(iter)) {
@@ -43,6 +48,7 @@ void EntityArray::foreachCell(Common::CellPos pos, FindResultCallback callback) 
 }
 
 void EntityArray::foreach(FindResultCallback callback) const {
+  SIAAssert((bool)callback);
   for (EntityPtr iter : m_pEntities) {
     if (!callback(iter)) {
       break;

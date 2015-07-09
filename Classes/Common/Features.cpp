@@ -1,5 +1,5 @@
 #include "Features.h"
-#include "logger/SIAUtils_Logger.h"
+#include "SIALogger.h"
 #include <cfloat>
 
 using namespace Common;
@@ -120,7 +120,7 @@ bool Features::is(std::string name) const {
 
 Feature& Features::operator[](std::string name) const {
   auto feature = m_features.find(name);
-  SIA_ASSERT(feature != m_features.end() && nullptr != feature->second.get());
+  SIAAssert(feature != m_features.end() && nullptr != feature->second.get());
 
   return *feature->second.get();
   
@@ -130,7 +130,7 @@ Feature& Features::operator[](std::string name) {
   return *get(name);
 }
 Feature& Features::operator[](Cache cache) const {
-  SIA_ASSERT(cache);
+  SIAAssert(cache);
   return *m_cache[cache - 1];
 }
 

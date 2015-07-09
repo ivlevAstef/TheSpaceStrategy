@@ -1,6 +1,5 @@
 #include "Entity.h"
 #include "Common/FeatureNames.h"
-#include "logger/SIAUtils_Logger.h"
 
 using namespace Models;
 using namespace Common;

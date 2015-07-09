@@ -1,30 +1,42 @@
 #include "BuildButtonLayer.h"
 #include "BuildButtonView.h"
-#include "logger/SIAUtils_Logger.h"
+#include "SIALogger.h"
 #include "Common/GameTouchEvents.h"
+
+SIASetModuleName(View);
 
 using namespace Common;
 using namespace Views;
 USING_NS_CC;
 
 bool BuildButtonLayer::init(Vec2 pos) {
-  SIA_CHECK_ZERO(!Node::init(), ERR);
+  SIACheckRetValue(!Node::init(), false);
 
   BuildButtonView* buttonMainBase = BuildButtonView::create("MainBase");
-  buttonMainBase->setPosition(-50, 0);
-  this->addChild(buttonMainBase);
-
+  if (buttonMainBase) {
+    buttonMainBase->setPosition(-50, 0);
+    this->addChild(buttonMainBase);
+  } else {
+    SIAError("Can't create button main base.");
+  }
 
   BuildButtonView* buttonPylon = BuildButtonView::create("Pylon");
-  buttonPylon->setPosition(50, 0);
-  this->addChild(buttonPylon);
+  if (buttonPylon) {
+    buttonPylon->setPosition(50, 0);
+    this->addChild(buttonPylon);
+  } else {
+    SIAError("Can't create button pylon.");
+  }
 
-  BuildButtonView* buttonGetterMineral = BuildButtonView::create("MinerMinerals");
-  buttonGetterMineral->setPosition(0, -50);
-  this->addChild(buttonGetterMineral);
+  BuildButtonView* buttonMinerMineral = BuildButtonView::create("MinerMinerals");
+  if (buttonMinerMineral) {
+    buttonMinerMineral->setPosition(0, -50);
+    this->addChild(buttonMinerMineral);
+  } else {
+    SIAError("Can't create button miner mineral.");
+  }
 
   this->setPosition(pos);
-
 
   GameTouchEvents::touchMoved += GameTouchEvents::DTouchMoved(this, [this] (TouchPos touchPos) {
     Vec2 pos = getPosition();
@@ -32,7 +44,7 @@ bool BuildButtonLayer::init(Vec2 pos) {
 
     for (Node* child : getChildren()) {
       BuildButtonView* button = static_cast<BuildButtonView*>(child);
-      SIA_ASSERT(child);
+      SIAFatalAssert(button);
 
       if (button->containsPoint(pos)) {
         button->select();
@@ -40,12 +52,13 @@ bool BuildButtonLayer::init(Vec2 pos) {
         button->normal();
       }
     }
+
   });
 
   GameTouchEvents::touchEnded += GameTouchEvents::DTouchEnded(this, [this] (TouchPos) {
     for (Node* child : getChildren()) {
       BuildButtonView* button = static_cast<BuildButtonView*>(child);
-      SIA_ASSERT(child);
+      SIAFatalAssert(button);
 
       if (button->isSelect()) {
         pick(button->viewId());
@@ -54,6 +67,10 @@ bool BuildButtonLayer::init(Vec2 pos) {
 
     close(this);
   });
+
+  SIADebug("Init Build button layer in pos:{%f,%f}.", pos.x, pos.y);
+
+  return true;
 }
 
 BuildButtonLayer::~BuildButtonLayer() {

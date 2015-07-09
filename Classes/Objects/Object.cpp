@@ -3,7 +3,9 @@
 #include "Models/Entity_Factory.h"
 #include "Views/GameView.h"
 
-#include "logger/SIAUtils_Logger.h"
+#include "SIALogger.h"
+
+SIASetModuleName(Object);
 
 using namespace Common;
 using namespace Views;
@@ -12,20 +14,27 @@ using namespace Objects;
 
 Object::Object(std::string objName, Common::EntityPos pos) {
   m_pEntity = Entity::Factory::createBuildByName(objName);
+  SIAFatalAssert(m_pEntity.get());
+
   m_pEntity->setPos(pos);
 
   m_pView = GameView::create(objName);
+  SIAFatalAssert(m_pView);
 
   m_pView->select += GameView::DSelect(this, [] (GameView* view) {
-    SIA_LOG_DBG("Select %d", view);
+    SIADebug("Select %d", view);
   });
 }
 
 void Object::update(SceneInterfacePtr pScene) {
-  if (m_pEntity.get() && m_pView) {
-    ViewPos pos = pScene->viewMath().convert(m_pEntity->pos());
-    m_pView->setPosition(pos);
-  }
+  SIAAssert(pScene.get());
+
+  SIAAssert(m_pEntity.get());
+  SIAAssert(m_pView);
+
+  ViewPos pos = pScene->viewMath().convert(m_pEntity->pos());
+  m_pView->setPosition(pos);
+
 }
 
 Object::~Object() {

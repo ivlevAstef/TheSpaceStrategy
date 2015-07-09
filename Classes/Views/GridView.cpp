@@ -1,20 +1,27 @@
 #include "GridView.h"
-#include "logger/SIAUtils_Logger.h"
+#include "SIALogger.h"
 #include "Common/GridMath.h"
 
 #include "Models/Common/ModelMath.h"
+
+SIASetModuleName(View);
 
 using namespace Views;
 using namespace Common;
 USING_NS_CC;
 
 bool GridView::init(Models::ConstGridPtr grid) {
-  SIA_CHECK_ZERO(!DrawNode::init(), ERR);
+  SIACheckRetValue(!DrawNode::init(), false);
 
   m_pModel = grid;
+
+  SIADebug("Create grid view.");
+  return true;
 }
 
 void GridView::draw(Renderer* renderer, const Mat4& transform, uint32_t flags) {
+  SIACheckRet(!m_pModel.get());
+
   if ((flags & FLAGS_TRANSFORM_DIRTY) == flags) {
     clear();
 

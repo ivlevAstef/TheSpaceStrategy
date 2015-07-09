@@ -2,8 +2,10 @@
 #include "Models/Entity.h"
 #include "Views/GameView.h"
 #include "Views/InterfaceView/BuildButtonLayer.h"
-#include "logger/SIAUtils_Logger.h"
+#include "SIALogger.h"
 #include "Common/GameTouchEvents.h"
+
+SIASetModuleName(Object);
 
 using namespace Objects;
 using namespace Views;
@@ -18,13 +20,13 @@ Scene::Scene(size_t width, size_t height) {
   m_pButtonLayer = nullptr;
 
   m_pArea = std::make_shared<Area>(width, height);
-  SIA_ASSERT(m_pArea);
+  SIAFatalAssert(m_pArea.get());
 
   m_pGameLayer = GameLayer::create();
-  SIA_ASSERT(m_pGameLayer);
+  SIAFatalAssert(m_pGameLayer);
 
   m_pGridView = GridView::create(m_pArea->grid());
-  SIA_ASSERT(m_pGridView);
+  SIAFatalAssert(m_pGridView);
 
   m_pGameLayer->setBackground("background");
   m_pGameLayer->modificationBackground(cocos2d::Color3B(150, 150, 200));
@@ -50,22 +52,23 @@ void Scene::touchBegan(cocos2d::Vec2 pos) {
 
   ViewPos centerPos = m_viewMath.center(pos);
 
-  SIA_ASSERT(nullptr == m_pButtonLayer);
+  SIAAssert(!m_pButtonLayer);
 
   m_pButtonLayer = BuildButtonLayer::create(centerPos + m_viewMath.windowPos());
-  SIA_ASSERT(m_pButtonLayer);
+  SIAFatalAssert(m_pButtonLayer);
 
   m_pGameLayer->addChild(m_pButtonLayer, 100);
 
-   m_pButtonLayer->pick += BuildButtonLayer::DPick(this, [this, centerPos] (std::string pickId) {
-    SIA_LOG_INFO("PICK %s", pickId);
+  m_pButtonLayer->pick += BuildButtonLayer::DPick(this, [this, centerPos] (std::string pickId) {
+    SIAInfo("Pick build with name:%s.", pickId);
     auto newBuild = Object::create(pickId, m_viewMath.convert(centerPos));
-    SIA_CHECK_RET(nullptr == newBuild.get(), WRN);
+    SIACheckRet(!newBuild.get());
     addObject(newBuild);
   });
 
   m_pButtonLayer->close += BuildButtonLayer::DClose(this, [this] (BuildButtonLayer* layer) {
-    SIA_ASSERT(layer);
+    SIAAssert(layer);
+    SIAAssert(m_pButtonLayer == layer);
     m_pButtonLayer = nullptr;
     m_pGameLayer->removeChild(layer);
   }, true);
@@ -83,45 +86,50 @@ void Scene::move(cocos2d::Vec2 moveDt) {
 }
 
 bool Scene::addObject(ObjectPtr pObject) {
-  SIA_CHECK_ZERO(pObject.get() == nullptr, WRN);
+  SIACheckRetValue(!pObject.get(), false);
+
+  SIAAssert(m_pArea.get());
+  SIAAssert(m_pGameLayer);
 
   auto pEntity = pObject->entity();
-  if (m_pArea.get() && pEntity.get()) {
-    SIA_CHECK_ZERO(!m_pArea->addEntity(pEntity), DBG);
-  }
+  SIAAssert(pEntity.get());
+  SIACheckRetValue(!m_pArea->addEntity(pEntity), false);
+
+  auto pView = pObject->view();
+  SIAAssert(pView);
+  m_pGameLayer->addGameView(pView);
 
   m_pObjects.push_back(pObject);
-  auto pView = pObject->view();
-  if (m_pGameLayer && pView) {
-    m_pGameLayer->addGameView(pView);
-  }
 
-  SIA_LOG_DBG("Added object on scene.");
+  SIADebug("Added object on scene.");
   return true;
 }
 
 void Scene::eraseObject(ObjectPtr pObject) {
-  SIA_CHECK_RET(pObject.get() == nullptr, WRN);
+  SIACheckRet(!pObject.get());
+
+  SIAAssert(m_pArea.get());
+  SIAAssert(m_pGameLayer);
 
   auto pEntity = pObject->entity();
-  if (m_pArea.get() && pEntity.get()) {
-    m_pArea->removeEntity(pEntity);
-  }
+  SIAAssert(pEntity.get());
+  m_pArea->removeEntity(pEntity);
 
   auto pView = pObject->view();
-  if (m_pGameLayer && pView) {
-    m_pGameLayer->eraseGameView(pView);
-  }
+  SIAAssert(pView);
+  m_pGameLayer->eraseGameView(pView);
 
   m_pObjects.erase(std::remove_if(m_pObjects.begin(), m_pObjects.end(), [&pObject] (ObjectPtr& pObj) {
     return pObject.get() == pObj.get();
   }), m_pObjects.end());
 
-  SIA_LOG_DBG("Removed object from scene.");
+  SIADebug("Removed object from scene.");
 }
 
 void Scene::update(SceneInterfacePtr pScene) {
-  SIA_ASSERT(pScene.get() == this);
+  SIAAssert(pScene.get() == this);
+  SIAAssert(m_pArea.get());
+  SIAAssert(m_pGameLayer);
 
   m_viewMath.setWindowSize(m_pGameLayer->getContentSize());
 
@@ -129,6 +137,7 @@ void Scene::update(SceneInterfacePtr pScene) {
   m_pGameLayer->update(m_viewMath);
 
   for (ObjectPtr pObject : m_pObjects) {
+    SIAAssert(pObject.get());
     pObject->update(pScene);
   }
 }

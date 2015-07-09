@@ -1,7 +1,9 @@
 #include "GameLayer.h"
 #include "cocos2d.h"
-#include "logger/SIAUtils_Logger.h"
+#include "SIALogger.h"
 #include "Common/GridMath.h"
+
+SIASetModuleName(View);
 
 using namespace Views;
 using namespace Common;
@@ -12,41 +14,42 @@ static const int gameViewTag = 101;
 static const int gridViewTag = 102;
 
 bool GameLayer::init() {
-  SIA_CHECK_ZERO(!Layer::init(), ERR);
+  SIACheckRetValue(!Layer::init(), false);
 
   m_background = nullptr;
   m_gridView = nullptr;
 
   m_area = Layer::create();
+  SIAFatalAssert(m_area);
   addChild(m_area, 1);
 
   return true;
 }
 
 void GameLayer::addGameView(GameView* child) {
-  SIA_ASSERT(m_area);
-  SIA_CHECK_RET(child == nullptr, ERR);
+  SIACheckRet(!child);
+  SIAAssert(m_area);
 
-  SIA_LOG_DBG("Add game view");
+  SIADebug("Add game view.");
   m_area->addChild(child, 1, gameViewTag);
 }
 
 void GameLayer::eraseGameView(GameView* child) {
-  SIA_ASSERT(m_area);
-  SIA_CHECK_RET(child == nullptr, ERR);
+  SIACheckRet(!child);
+  SIAAssert(m_area);
 
-  SIA_LOG_DBG("Erase game view");
+  SIADebug("Erase game view.");
   m_area->removeChild(child);
 }
 
 void GameLayer::setGridView(GridView* gridView) {
   m_gridView = gridView;
-  SIA_CHECK_RET(gridView == nullptr, DBG);
+  SIACheckRet(!gridView);
 
   gridView->setPosition(0, 0);
 
   addChild(gridView, 0, gridViewTag);
-  SIA_LOG_DBG("set gridView");
+  SIADebug("Set gridView.");
 
 }
 
@@ -54,17 +57,17 @@ void GameLayer::setBackground(std::string backgroundId) {
   removeChildByTag(backgroundTag, true);
   m_background = Sprite::create("images/backgrounds/" + backgroundId + ".png");
 
-  SIA_CHECK_RET(m_background == nullptr, ERR);
+  SIACheckRet(!m_background);
 
   Size size = getContentSize();
   m_background->setPosition(size.width*0.5f, size.height*0.5f);
   addChild(m_background, -1, backgroundTag);
-  SIA_LOG_DBG("set background %s", backgroundId.c_str());
+  SIADebug("set background with id:%s.", backgroundId.c_str());
 }
 
 void GameLayer::modificationBackground(cocos2d::Color3B color) {
   Node* back = getChildByTag(backgroundTag);
-  SIA_CHECK_RET(back == nullptr, WRN);
+  SIACheckRet(!back);
 
   back->setColor(color);
 }
@@ -75,6 +78,8 @@ void GameLayer::onEnter() {
   // Register Touch Event
   auto dispatcher = Director::getInstance()->getEventDispatcher();
   auto listener = EventListenerTouchOneByOne::create();
+  SIACheckRet(!dispatcher);
+  SIACheckRet(!listener);
 
   listener->onTouchBegan = CC_CALLBACK_2(GameLayer::onTouchBegan, this);
   listener->onTouchMoved = CC_CALLBACK_2(GameLayer::onTouchMoved, this);
@@ -85,6 +90,7 @@ void GameLayer::onEnter() {
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
   auto mouseListener = EventListenerMouse::create();
+  SIACheckRet(!mouseListener);
 
   mouseListener->onMouseDown = CC_CALLBACK_1(GameLayer::onMouseDown, this);
   mouseListener->onMouseMove = CC_CALLBACK_1(GameLayer::onMouseMoved, this);
@@ -99,6 +105,8 @@ void GameLayer::onExit() {
 }
 
 void GameLayer::update(const Common::ViewMath& viewMath) {
+  SIAAssert(m_area);
+
   if (m_gridView) {
     m_gridView->update(viewMath);
   }
@@ -109,24 +117,30 @@ void GameLayer::update(const Common::ViewMath& viewMath) {
   Vec2 backPos = viewMath.windowPos() * 0.1f;
   backPos.x += size.width * 0.5f;
   backPos.y += size.height * 0.5f;
-  
-  m_background->setPosition(backPos);
+
+  if (m_background) {
+    m_background->setPosition(backPos);
+  }
 }
 
 bool GameLayer::onTouchBegan(Touch* touch, Event* unused_event) {
+  SIAAssert(m_area);
   this->touchBegan(m_area->convertTouchToNodeSpace(touch));
   return true;
 }
 
 void GameLayer::onTouchMoved(Touch* touch, Event* unused_event) {
+  SIAAssert(m_area);
   this->touchMoved(m_area->convertTouchToNodeSpace(touch));
 }
 
 void GameLayer::onTouchEnded(Touch* touch, Event* unused_event) {
+  SIAAssert(m_area);
   this->touchEnded(m_area->convertTouchToNodeSpace(touch));
 }
 
 void GameLayer::onTouchCancelled(Touch* touch, Event* unused_event) {
+  SIAAssert(m_area);
   this->touchEnded(m_area->convertTouchToNodeSpace(touch));
 }
 

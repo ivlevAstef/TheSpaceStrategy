@@ -1,21 +1,24 @@
 #include "GameView.h"
 #include "cocos2d.h"
-#include "logger/SIAUtils_Logger.h"
+#include "SIALogger.h"
+
+SIASetModuleName(View);
 
 USING_NS_CC;
 
 using namespace Views;
 
 bool GameView::init(std::string viewId) {
-  SIA_CHECK_ZERO(!Node::init(), ERR);
+  SIACheckRetValue(!Node::init(), false);
 
-  SIA_LOG_FUNC("%s", viewId.c_str());
   sprite = Sprite::create("images/gameviews/builds/" + viewId + ".png");
+  SIACheckRetValue(!sprite, false);
 
-  SIA_CHECK_ZERO(sprite == nullptr, ERR);
   addChild(sprite);
 
   setContentSize(sprite->getContentSize());
+
+  SIADebug("Game view init with id:%s.", viewId.c_str());
 
   return true;
 }

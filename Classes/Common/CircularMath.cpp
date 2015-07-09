@@ -1,6 +1,6 @@
 #include "CircularMath.h"
 #include "GridMath.h"
-#include "logger/SIAUtils_Logger.h"
+#include "SIALogger.h"
 
 using namespace Common;
 
@@ -31,7 +31,7 @@ void CircularMath::moveOffset(cocos2d::Vec2 offsetDt) {
   normalize(m_offset.x, m_size.width);
   normalize(m_offset.y, m_size.height);
 
-  SIA_LOG_TRACE("Move offset on (%f,%f) to (%f,%f)", offsetDt.x, offsetDt.y, m_offset.x, m_offset.y);
+  SIATrace("Move offset on (%f,%f) to (%f,%f)", offsetDt.x, offsetDt.y, m_offset.x, m_offset.y);
 }
 
 SIAUtils::Point2D<size_t> CircularMath::cellPos(cocos2d::Vec2 position) const {

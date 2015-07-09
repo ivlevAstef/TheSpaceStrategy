@@ -1,10 +1,12 @@
 #include "Grid.h"
 #include "Grid_Cell.h"
 
-#include "logger/SIAUtils_Logger.h"
+#include "SIALogger.h"
 #include "Common/ModelMath.h"
 #include "Components/EnergyGenerator.h"
 #include "Components/TransmitterEnergy.h"
+
+SIASetModuleName(Model);
 
 using namespace Models;
 using namespace Common;
@@ -17,7 +19,7 @@ void Grid::update(const EntityArray& entities) {
     CellPos cellPos = ModelMath::cell(iter->pos());
     Cell* cell = getCell(cellPos.x, cellPos.y);
 
-    if (nullptr != cell) {
+    if (cell) {
       cell->m_isGenerator |= iter->is<EnergyGenerator>();
       cell->m_isTransmitter |= iter->is<TransmitterEnergy>();
     }
@@ -51,6 +53,7 @@ void Grid::cleanCells() {
 void Grid::foreach(int x, int y, 
                    int width, int height, 
                    std::function<void(size_t, size_t , const Cell&)> cell) const {
+  SIAAssert((bool)cell);
   size_t bX = INTERVAL(0, x, (int)m_width);
   size_t bY = INTERVAL(0, y, (int)m_height);
 
@@ -65,7 +68,7 @@ void Grid::foreach(int x, int y,
 }
 
 Cell* Grid::getCell(int x, int y) {
-  SIA_ASSERT(m_Cells.size() == m_width * m_height);
+  SIAAssert(m_Cells.size() == m_width * m_height);
   
   if (x < 0 || y < 0 || (size_t)x > m_width || (size_t)y > m_height) {
     return nullptr;

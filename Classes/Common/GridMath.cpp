@@ -1,5 +1,5 @@
 #include "GridMath.h"
-#include "logger/SIAUtils_Logger.h"
+#include "SIALogger.h"
 #include <cmath>
 
 using namespace Common;
@@ -88,7 +88,7 @@ cocos2d::Vec2 GridMath::center(size_t x, size_t y) {
 }
 
 cocos2d::Vec2 GridMath::build(size_t x, size_t y, size_t index) {
-  SIA_ASSERT(index < MaxCellBuilds);
+  SIAAssert(index < MaxCellBuilds);
 #if defined(USE_4_MODEL) || defined(USE_8_MODEL)
   static const Vec2 translated[MaxCellBuilds] = {
     Vec2(0, GridCellSize*0.3f),

@@ -209,6 +209,9 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y</Command>
   <ItemGroup>
     <ResourceCompile Include="game.rc" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="proj.win32.licenseheader" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
