@@ -32,11 +32,20 @@ void GridView::draw(Renderer* renderer, const Mat4& transform, uint32_t flags) {
 
     auto winModelPos = m_viewMath.convert(Vec2(winPos.x - winSize.width * 0.5, winPos.y + winSize.height * 0.5));
 
+#define SQRT2 1.414213562373095
+    double halfScale = (scale.x + scale.y) / (2.0 * 2.0);
+    double octaEdge = 2.0 * halfScale / (SQRT2 + 1.0);
+    double octaB = 2.0 * halfScale / (SQRT2 + 2.0);
+
     const std::vector<cocos2d::Vec2> zeroCellPoint = {
-      Vec2(-scale.x * 0.5f,-scale.y * 0.5f),
-      Vec2( scale.x * 0.5f,-scale.y * 0.5f),
-      Vec2( scale.x * 0.5f, scale.y * 0.5f),
-      Vec2(-scale.x * 0.5f, scale.y * 0.5f)
+      Vec2(-halfScale, octaB - halfScale),
+      Vec2(-halfScale, octaB + octaEdge - halfScale),
+      Vec2(octaB - halfScale, halfScale),
+      Vec2(octaB + octaEdge - halfScale, halfScale),
+      Vec2(halfScale, octaB + octaEdge - halfScale),
+      Vec2(halfScale, octaB - halfScale),
+      Vec2(octaB + octaEdge - halfScale, -halfScale),
+      Vec2(octaB - halfScale, -halfScale)
     };
 
     std::vector<cocos2d::Vec2> cellPoints(zeroCellPoint.size());
