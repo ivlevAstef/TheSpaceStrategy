@@ -26,8 +26,11 @@ void GridView::draw(Renderer* renderer, const Mat4& transform, uint32_t flags) {
     clear();
 
     auto winPos = m_viewMath.windowPos();
+
     auto winSize = m_viewMath.windowSize();
     auto scale = m_viewMath.scale();
+
+    auto winModelPos = m_viewMath.convert(Vec2(winPos.x - winSize.width * 0.5, winPos.y + winSize.height * 0.5));
 
     const std::vector<cocos2d::Vec2> zeroCellPoint = {
       Vec2(-scale.x * 0.5f,-scale.y * 0.5f),
@@ -38,12 +41,11 @@ void GridView::draw(Renderer* renderer, const Mat4& transform, uint32_t flags) {
 
     std::vector<cocos2d::Vec2> cellPoints(zeroCellPoint.size());
 
-    int bX = -winPos.x / scale.x;
-    int bY = -winPos.y / scale.y;
-    int width = 2 + (winSize.width / scale.x);
-    int height = 2 + (winSize.height / scale.y);
+    int bX = -winModelPos.x;
+    int bY = -winModelPos.y;
+    int size = (winSize.width / scale.x + winSize.height / scale.y) / sqrt(2);
 
-    m_pModel->foreach(bX, bY, width, height, 
+    m_pModel->foreach(bX, bY, size, size, 
       [this, &zeroCellPoint, &cellPoints] (size_t x, size_t y, const Models::Cell& cell) {
 
       auto posCenter = m_viewMath.convert(ModelMath::center(CellPos(x, y)));

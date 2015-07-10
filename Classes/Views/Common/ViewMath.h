@@ -20,6 +20,9 @@ namespace Common
   typedef cocos2d::Size ViewSize;
 
   class ViewMath {
+  private:
+    #define sCos45 0.70710678118
+    #define sSin45 0.70710678118
   public:
     ViewMath() {
       m_windowPos = ViewPos(0, 0);
@@ -34,11 +37,17 @@ namespace Common
     }
 
     ViewPos convert(EntityPos pos) const {
-      return ViewPos(pos.x * scale().x, pos.y * scale().y);
+      double x = pos.x * sCos45 - pos.y * sSin45;
+      double y = pos.x * sSin45 + pos.y * sCos45;
+
+      return ViewPos(x * scale().x, y * scale().y);
     }
 
     EntityPos convert(cocos2d::Vec2 pos) const {
-      return EntityPos(pos.x / scale().x, pos.y / scale().y);
+      double x = pos.x * sCos45 + pos.y * sSin45;
+      double y = - pos.x * sSin45 + pos.y * sCos45;
+
+      return EntityPos(x / scale().x, y / scale().y);
     }
 
     ViewPos center(ViewPos pos) const {
