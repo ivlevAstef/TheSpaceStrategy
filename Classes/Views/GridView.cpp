@@ -1,6 +1,5 @@
 #include "GridView.h"
 #include "SIALogger.h"
-#include "Common/GridMath.h"
 
 #include "Models/Common/ModelMath.h"
 
@@ -65,11 +64,11 @@ void GridView::draw(Renderer* renderer, const Mat4& transform, uint32_t flags) {
 
       Color4F fillColor = Color4F(0.0f, 0.0f, 0.0f, 0.0f);
       if (cell.isGenerator()) {
-        fillColor = Color4F(0.5f, 0.0f, 0.5f, 0.5f);
+        fillColor = Color4F(0.8f, 0.0f, 0.5f, 0.5f);
       } else if (cell.isEnergy()) {
         fillColor = Color4F(0.5f, 0.5f, 0.8f, 0.5f);
       } else if (cell.isTransmitter()) {
-        fillColor = Color4F(0.0f, 0.8f, 0.0f, 0.5f);
+        fillColor = Color4F(0.5f, 0.8f, 0.5f, 0.5f);
       }
 
       float borderWidth = 1;

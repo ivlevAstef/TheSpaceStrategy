@@ -1,7 +1,6 @@
 #include "GameLayer.h"
 #include "cocos2d.h"
 #include "SIALogger.h"
-#include "Common/GridMath.h"
 
 SIASetModuleName(View);
 

@@ -17,21 +17,36 @@ namespace Models
     friend class Grid;
   public:
 
-    inline bool isEnergy() const { return m_isEnergy; }
-    inline bool isGenerator() const { return m_isGenerator; }
-    inline bool isTransmitter() const { return m_isTransmitter; }
+    inline bool isEnergy() const { return m_energyNode.isEnergy; }
+    inline bool isGenerator() const { return m_energyNode.isGenerator; }
+    inline bool isTransmitter() const { return m_energyNode.isTransmitter; }
 
   private:
+    struct EnergyNode {
+      std::vector<EnergyNode*> joins;
+      bool isTransmitter;
+      bool isEnergy;
+      bool isGenerator;
+    };
+
+    bool isJoined() const { return m_energyNode.isGenerator || m_energyNode.isTransmitter; }
+
+    void addJoinIfNeed(Cell* checkCell) {
+      if (checkCell && checkCell->isJoined()) {
+        checkCell->m_energyNode.joins.push_back(&m_energyNode);
+        m_energyNode.joins.push_back(&checkCell->m_energyNode);
+      }
+    }
+
     void clean() {
-      m_isEnergy = false;
-      m_isTransmitter = false;
-      m_isGenerator = false;
+      m_energyNode.joins.clear();
+      m_energyNode.isEnergy = false;
+      m_energyNode.isTransmitter = false;
+      m_energyNode.isGenerator = false;
     }
 
   private:
-    bool m_isEnergy;
-    bool m_isGenerator;
-    bool m_isTransmitter;
+    EnergyNode m_energyNode;
   };
 };
 

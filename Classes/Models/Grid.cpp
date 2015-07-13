@@ -15,18 +15,53 @@ using namespace Components;
 void Grid::update(const EntityArray& entities) {
   cleanCells();
 
-  entities.foreach([this] (EntityPtr iter) -> bool {
+  std::list<Cell::EnergyNode*> generators;
+
+  entities.foreach([this, &generators] (EntityPtr iter) -> bool {
     CellPos cellPos = ModelMath::cell(iter->pos());
     Cell* cell = getCell(cellPos.x, cellPos.y);
 
     if (cell) {
-      cell->m_isGenerator |= iter->is<EnergyGenerator>();
-      cell->m_isTransmitter |= iter->is<TransmitterEnergy>();
+      bool isGenerator = iter->is<EnergyGenerator>();
+      bool isTransmitter = iter->is<TransmitterEnergy>();
+
+      if (isGenerator) {
+        generators.push_back(&cell->m_energyNode);
+        cell->m_energyNode.isGenerator = true;
+      }
+
+
+      cell->m_energyNode.isTransmitter |= isTransmitter;
+
+      if (cell->isJoined()) {
+        cell->addJoinIfNeed(getCell(cellPos.x - 1, cellPos.y));
+        cell->addJoinIfNeed(getCell(cellPos.x, cellPos.y - 1));
+        cell->addJoinIfNeed(getCell(cellPos.x + 1, cellPos.y));
+        cell->addJoinIfNeed(getCell(cellPos.x, cellPos.y + 1));
+      }
+
     }
 
     return true;
   });
 
+
+  for (auto node : generators) {
+    distributeEnergyFrom(node);
+  }
+
+}
+
+void Grid::distributeEnergyFrom(Cell::EnergyNode* node) {
+  if (!node || node->isEnergy) {
+    return;
+  }
+
+  node->isEnergy = true;
+
+  for (auto join : node->joins) {
+    distributeEnergyFrom(join);
+  }
 
 }
 

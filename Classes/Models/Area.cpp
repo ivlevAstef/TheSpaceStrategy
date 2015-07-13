@@ -1,6 +1,5 @@
 #include "Area.h"
 #include "SIALogger.h"
-#include "Common/GridMath.h"
 #include "Components/Build.h"
 #include "Components/TransmitterEnergy.h"
 #include "Common/ModelMath.h"

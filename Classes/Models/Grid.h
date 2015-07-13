@@ -37,6 +37,8 @@ namespace Models
 
     Cell* getCell(int x, int y);
 
+    void distributeEnergyFrom(Cell::EnergyNode* node);
+
   private:
     size_t m_width;
     size_t m_height;
