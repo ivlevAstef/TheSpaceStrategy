@@ -111,6 +111,9 @@
     <ClCompile Include="..\Classes\Actions\Building.cpp">
       <Filter>src\Actions</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Actions\Process.cpp">
+      <Filter>src\Actions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">

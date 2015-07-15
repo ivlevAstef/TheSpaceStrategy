@@ -15,17 +15,19 @@ SIASetModuleName(Actions);
 
 using namespace Actions;
 
-ActionPtr Action::Factory::createActionByName(std::string name, Properties::PropertyContainer& properties, const Common::Features& setting) {
-  if ("building" == name) {
-    SIADebug("Create state for name:%s.", name.c_str());
-    return ActionPtr(new Building(properties, setting));
+ActionPtr Action::Factory::createAction(ActionDataPtr pActionData, Properties::PropertyContainer& properties) {
+  SIAFatalAssert(pActionData.get());
+
+  if (Building::actionName() == pActionData->name()) {
+    SIADebug("Create state for name:%s.", pActionData->name().c_str());
+    return ActionPtr(new Building(properties, pActionData->setting()));
   }
 
-  if ("inaction" == name) {
-    SIADebug("Create state for name:%s.", name.c_str());
+  if (Inaction::actionName() == pActionData->name()) {
+    SIADebug("Create state for name:%s.", pActionData->name().c_str());
     return ActionPtr(new Inaction(properties));
   }
 
-  SIAError("Can't find state with name:%s.", name.c_str());
+  SIAError("Can't find state with name:%s.", pActionData->name().c_str());
   return ActionPtr(nullptr);
 }

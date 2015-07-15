@@ -48,3 +48,25 @@ PropertyContainer& PropertyContainer::operator-=(IPropertyPtr property) {
 
   return *this;
 }
+
+void PropertyContainer::activate(const char* name) {
+  auto find = m_unactive.find(name);
+
+  SIACheckRet(find == m_unactive.end());
+  SIACheckRet(find->second.get() == nullptr);
+
+  SIAInfo("Activate property: %s.", name);
+  m_properties[name] = find->second;
+  m_unactive.erase(find);
+}
+
+void PropertyContainer::deactivate(const char* name) {
+  auto find = m_properties.find(name);
+
+  SIACheckRet(find == m_properties.end());
+  SIACheckRet(find->second.get() == nullptr);
+
+  SIAInfo("DeActivate property: %s.", name);
+  m_unactive[name] = find->second;
+  m_properties.erase(find);
+}

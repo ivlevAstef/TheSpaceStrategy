@@ -145,6 +145,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y</Command>
     <ClCompile Include="..\Classes\Actions\Action.cpp" />
     <ClCompile Include="..\Classes\Actions\Action_Factory.cpp" />
     <ClCompile Include="..\Classes\Actions\Building.cpp" />
+    <ClCompile Include="..\Classes\Actions\Process.cpp" />
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\Common\FeatureNames.cpp" />
     <ClCompile Include="..\Classes\Common\Features.cpp" />

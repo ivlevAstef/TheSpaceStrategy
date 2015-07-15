@@ -16,7 +16,7 @@ namespace Actions
 {
   class Action::Factory {
   public:
-    static ActionPtr createActionByName(std::string name, Properties::PropertyContainer& properties, const Common::Features& setting);
+    static ActionPtr createAction(ActionDataPtr pActionData, Properties::PropertyContainer& properties);
 
   };
 }

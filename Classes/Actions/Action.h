@@ -37,7 +37,7 @@ namespace Actions
 
   protected:
 
-    inline Properties::PropertyContainer& properties() const {
+    inline Properties::PropertyContainer& properties() {
       return m_properties;
     }
 
@@ -47,6 +47,21 @@ namespace Actions
 
     Properties::PropertyContainer& m_properties;
   };
+
+  class ActionData {
+  public:
+    ActionData(std::string name, const Common::Features setting) : m_name(name), m_setting(setting) {
+    }
+
+    inline std::string name() const { return m_name; }
+    inline const Common::Features& setting() const { return m_setting; }
+
+  private:
+    std::string m_name;
+    const Common::Features m_setting;
+  };
+
+  typedef std::shared_ptr<ActionData> ActionDataPtr;
 };
 
 #endif // _SIA_THE_SPACE_STRATEGY_ACTION_H__

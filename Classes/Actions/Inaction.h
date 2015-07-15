@@ -20,6 +20,13 @@ namespace Actions
 
     }
 
+    static const char* actionName() {
+      return "inaction";
+    }
+    static ActionDataPtr createActionData() {
+      return ActionDataPtr(new ActionData(actionName(), Common::Features()));
+    }
+
     virtual State update(double dt) override {
       if (checkDeath()) {
         return sDeath;
