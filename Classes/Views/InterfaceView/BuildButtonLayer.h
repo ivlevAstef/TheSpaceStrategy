@@ -3,7 +3,7 @@
 #ifndef _SIA_THE_SPACE_STRATEGY_INTERFACE_VIEW_BUILD_BUTTON_LAYER_H__
 #define _SIA_THE_SPACE_STRATEGY_INTERFACE_VIEW_BUILD_BUTTON_LAYER_H__
 
-#include "event/Event.h"
+#include "SIAEvent.h"
 
 #include "cocos2d.h"
 #include "Common/Cocos2dDefines.h"
@@ -20,11 +20,11 @@ namespace Views
     ~BuildButtonLayer();
       
   public:
-    typedef SIAUtils::Delegate<std::string> DPick;
-    SIAUtils::FriendEvent<BuildButtonLayer, std::string> pick;
+    typedef SIA::Delegate<std::string> DPick;
+    SIA::FriendEvent<BuildButtonLayer, std::string> pick;
 
-    typedef SIAUtils::Delegate<BuildButtonLayer*> DClose;
-    SIAUtils::FriendEvent<BuildButtonLayer, BuildButtonLayer*> close;
+    typedef SIA::Delegate<BuildButtonLayer*> DClose;
+    SIA::FriendEvent<BuildButtonLayer, BuildButtonLayer*> close;
   };
 }
 

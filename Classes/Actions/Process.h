@@ -17,14 +17,25 @@ namespace Actions
   class Process {
   public:
 
-    Process(Properties::PropertyContainer& properties) : m_properties(properties) {
+    Process(Properties::PropertyContainer& properties);
 
-    }
+    void update(double dt);
 
-    void update(double dt) {
-    }
+    bool setCurrentAction(ActionDataPtr pActionData);
+
+    bool addJoin(ActionDataPtr pActionData, Action::State state, ActionDataPtr pToActionData);
 
   private:
+    ActionDataPtr actionDataFor(Action::State state);
+
+
+  private:
+    typedef std::map<Action::State, ActionDataPtr> ActionStateMap;
+
+    std::map<ActionDataPtr, ActionStateMap> m_joins;
+    ActionDataPtr m_pCurrentActionData;
+
+    ActionPtr m_pCurrentAction;
 
     Properties::PropertyContainer& m_properties;
   };

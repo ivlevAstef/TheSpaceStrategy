@@ -2,6 +2,6 @@
 
 using namespace Common;
 
-SIAUtils::FriendEvent<Objects::Scene, TouchPos> GameTouchEvents::touchBegan;
-SIAUtils::FriendEvent<Objects::Scene, TouchPos> GameTouchEvents::touchMoved;
-SIAUtils::FriendEvent<Objects::Scene, TouchPos> GameTouchEvents::touchEnded;
+SIA::FriendEvent<Objects::Scene, TouchPos> GameTouchEvents::touchBegan;
+SIA::FriendEvent<Objects::Scene, TouchPos> GameTouchEvents::touchMoved;
+SIA::FriendEvent<Objects::Scene, TouchPos> GameTouchEvents::touchEnded;

@@ -7,9 +7,13 @@
 #include "Properties/TransmitterEnergy.h"
 #include "Properties/Build.h"
 
+#include "Actions/Building.h"
+#include "Actions/Inaction.h"
+
 SIASetModuleName(Model);
 
 using namespace Models;
+using namespace Actions;
 
 EntityPtr Entity::Factory::createBuildByName(std::string name) {
   auto entity = EntityPtr(new Models::Entity());
@@ -46,6 +50,12 @@ bool Entity::Factory::initMainBase(Entity& entity) {
   entity.prop() += Properties::Build::create();
   entity.prop() += Properties::EnergyGenerator::create(25.0);
 
+  ActionDataPtr building = Building::createActionData(5.0);
+  ActionDataPtr inaction = Inaction::createActionData();
+
+  entity.proc().addJoin(building, Building::sComplete, inaction);
+  entity.proc().setCurrentAction(building);
+
   return true;
 }
 
@@ -59,6 +69,12 @@ bool Entity::Factory::initPylon(Entity& entity) {
 
   entity.prop() += Properties::Build::create();
   entity.prop() += Properties::TransmitterEnergy::create(1.0);
+
+  ActionDataPtr building = Building::createActionData(10.0);
+  ActionDataPtr inaction = Inaction::createActionData();
+
+  entity.proc().addJoin(building, Building::sComplete, inaction);
+  entity.proc().setCurrentAction(building);
 
   return true;
 }

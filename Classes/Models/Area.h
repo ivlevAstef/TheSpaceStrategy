@@ -38,7 +38,7 @@ namespace Models
     private:
       GridPtr m_pGrid;
 
-      EntityArray m_Entities;
+      EntityArray m_entities;
     };
 
     typedef std::shared_ptr<Area> AreaPtr;

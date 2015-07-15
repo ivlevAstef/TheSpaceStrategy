@@ -38,6 +38,10 @@ namespace Models
       return m_properties;
     }
 
+    Actions::Process& proc() {
+      return m_process;
+    }
+
   protected:
     Entity();
 

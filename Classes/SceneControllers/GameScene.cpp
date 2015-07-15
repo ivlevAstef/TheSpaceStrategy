@@ -55,5 +55,5 @@ bool GameScene::init() {
 }
 
 void GameScene::update(float delta) {
-  m_pScene->update(m_pScene);
+  m_pScene->update(m_pScene, delta);
 }

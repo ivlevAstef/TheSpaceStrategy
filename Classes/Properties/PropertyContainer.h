@@ -35,8 +35,22 @@ namespace Properties
     PropertyContainer& operator+=(IPropertyPtr property);
     PropertyContainer& operator-=(IPropertyPtr property);
 
+    template<typename PropertyType>
+    void activate() {
+      activate(PropertyType::sPropertyName());
+    }
+    template<typename PropertyType>
+    void deactivate() {
+      deactivate(PropertyType::sPropertyName());
+    }
+
+    void activate(const char* name);
+    void deactivate(const char* name);
+
   private:
     std::map<std::string, IPropertyPtr> m_properties;
+
+    std::map<std::string, IPropertyPtr> m_unactive;
   };
 
 };

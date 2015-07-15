@@ -49,9 +49,9 @@ void GridView::draw(Renderer* renderer, const Mat4& transform, uint32_t flags) {
 
     std::vector<cocos2d::Vec2> cellPoints(zeroCellPoint.size());
 
-    int bX = -winModelPos.x;
-    int bY = -winModelPos.y;
-    int size = (winSize.width / scale.x + winSize.height / scale.y) / sqrt(2);
+    int bX = -winModelPos.x - 1;
+    int bY = -winModelPos.y - 1;
+    int size = 1 + ((winSize.width / scale.x + winSize.height / scale.y) / sqrt(2));
 
     m_pModel->foreach(bX, bY, size, size, 
       [this, &zeroCellPoint, &cellPoints] (size_t x, size_t y, const Models::Cell& cell) {

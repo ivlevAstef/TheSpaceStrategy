@@ -29,7 +29,7 @@ namespace Objects
     Scene(size_t width, size_t height);
     ~Scene();
 
-    void update(SceneInterfacePtr pScene);
+    void update(SceneInterfacePtr pScene, double dt);
 
     virtual const Common::ViewMath& viewMath() const override {
       return m_viewMath;

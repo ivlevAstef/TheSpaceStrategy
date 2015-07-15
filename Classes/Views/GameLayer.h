@@ -31,17 +31,17 @@ namespace Views
     void modificationBackground(cocos2d::Color3B color);
 
   public:
-    typedef SIAUtils::Delegate<cocos2d::Vec2> DTouchBegan;
-    SIAUtils::FriendEvent<GameLayer, cocos2d::Vec2> touchBegan;
+    typedef SIA::Delegate<cocos2d::Vec2> DTouchBegan;
+    SIA::FriendEvent<GameLayer, cocos2d::Vec2> touchBegan;
 
-    typedef SIAUtils::Delegate<cocos2d::Vec2> DTouchMoved;
-    SIAUtils::FriendEvent<GameLayer, cocos2d::Vec2> touchMoved;
+    typedef SIA::Delegate<cocos2d::Vec2> DTouchMoved;
+    SIA::FriendEvent<GameLayer, cocos2d::Vec2> touchMoved;
 
-    typedef SIAUtils::Delegate<cocos2d::Vec2> DTouchEnded;
-    SIAUtils::FriendEvent<GameLayer, cocos2d::Vec2> touchEnded;
+    typedef SIA::Delegate<cocos2d::Vec2> DTouchEnded;
+    SIA::FriendEvent<GameLayer, cocos2d::Vec2> touchEnded;
 
-    typedef SIAUtils::Delegate<cocos2d::Vec2> DMove;
-    SIAUtils::FriendEvent<GameLayer, cocos2d::Vec2> move;
+    typedef SIA::Delegate<cocos2d::Vec2> DMove;
+    SIA::FriendEvent<GameLayer, cocos2d::Vec2> move;
 
   private:
     virtual void onEnter() override;

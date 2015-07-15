@@ -40,6 +40,12 @@
     <Filter Include="src\Actions">
       <UniqueIdentifier>{019afe9b-b343-49c7-a2f8-a25a26fa5552}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Utils">
+      <UniqueIdentifier>{3a3d4d51-2d66-4fe5-8e00-430181922436}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Utils\Private">
+      <UniqueIdentifier>{5678efda-91fb-4fa5-8a91-b9501bbff859}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -110,6 +116,12 @@
     </ClCompile>
     <ClCompile Include="..\Classes\Actions\Building.cpp">
       <Filter>src\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Actions\Process.cpp">
+      <Filter>src\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Utils\Private\SIALogger.cpp">
+      <Filter>src\Utils\Private</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -211,6 +223,21 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Actions\Process.h">
       <Filter>src\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Utils\SIALogger.h">
+      <Filter>src\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Utils\SIAPoint2D.h">
+      <Filter>src\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Utils\SIASingleton.h">
+      <Filter>src\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Utils\SIADelegate.h">
+      <Filter>src\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Utils\SIAEvent.h">
+      <Filter>src\Utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

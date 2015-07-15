@@ -3,7 +3,7 @@
 #ifndef _SIA_THE_SPACE_STRATEGY_INTERFACE_VIEW_BUILD_BUTTON_VIEW_H__
 #define _SIA_THE_SPACE_STRATEGY_INTERFACE_VIEW_BUILD_BUTTON_VIEW_H__
 
-#include "event/Event.h"
+#include "SIAEvent.h"
 
 #include "cocos2d.h"
 #include "Common/Cocos2dDefines.h"

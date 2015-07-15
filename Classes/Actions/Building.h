@@ -22,11 +22,16 @@ namespace Actions
   public:
     Building(Properties::PropertyContainer& properties, const Common::Features& setting);
 
-    static Common::Features createSetting(double buildingTime);
+    static const char* actionName() { return "building"; }
+    static ActionDataPtr createActionData(double buildingTime);
 
     inline double progress() const { return m_currentTime / m_buildingTime; }
 
     virtual State update(double dt) override;
+
+  private:
+    void begin();
+    void end();
 
   private:
     double m_buildingTime;

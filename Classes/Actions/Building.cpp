@@ -6,10 +6,15 @@
 //Copyright (c) SIA 2015. All Right Reserved.
 //
 #include "Building.h"
+
+#include "Properties/EnergyGenerator.h"
+#include "Properties/TransmitterEnergy.h"
+
 #include "SIALogger.h"
 SIASetModuleName(Actions);
 
 using namespace Actions;
+using namespace Properties;
 
 Action::State Building::sComplete = "complete";
 
@@ -17,14 +22,15 @@ Building::Building(Properties::PropertyContainer& properties, const Common::Feat
   SIAFatalAssert(setting.is("time"));
 
   m_buildingTime = setting["time"];
+  begin();
 }
 
-Common::Features Building::createSetting(double buildingTime) {
-  Common::Features res;
+ActionDataPtr Building::createActionData(double buildingTime) {
+  Common::Features setting;
 
-  res["time"] = buildingTime;
+  setting["time"] = buildingTime;
 
-  return res;
+  return ActionDataPtr(new ActionData(actionName(), setting));
 }
 
 
@@ -37,8 +43,19 @@ Action::State Building::update(double dt) {
 
   if (m_currentTime >= m_buildingTime) {
     m_currentTime = m_buildingTime;
+    end();
     return sComplete;
   }
 
   return sExecuting;
+}
+
+void Building::begin() {
+  properties().deactivate<EnergyGenerator>();
+  properties().deactivate<TransmitterEnergy>();
+}
+
+void Building::end() {
+  properties().activate<EnergyGenerator>();
+  properties().activate<TransmitterEnergy>();
 }

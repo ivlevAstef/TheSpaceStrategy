@@ -14,7 +14,7 @@ bool Area::addEntity(EntityPtr pEntity) {
   SIAAssert(pEntity.get());
   
   if (setupEntity(pEntity)) {
-    return m_Entities.add(pEntity);
+    return m_entities.add(pEntity);
   }
 
   SIADebug("Can't setup entity.");
@@ -23,7 +23,7 @@ bool Area::addEntity(EntityPtr pEntity) {
 
 void Area::removeEntity(EntityPtr pEntity) {
   SIAAssert(pEntity.get());
-  m_Entities.remove(pEntity);
+  m_entities.remove(pEntity);
 }
 
 bool Area::setupEntity(EntityPtr pEntity) {
@@ -31,7 +31,7 @@ bool Area::setupEntity(EntityPtr pEntity) {
     bool buildsPosIndex[ModelMath::ePosIndexCount] = { false };
     CellPos cell = ModelMath::cell(pEntity->pos());
 
-    m_Entities.foreachCell(cell, [&pEntity, &buildsPosIndex] (EntityPtr iter) {
+    m_entities.foreachCell(cell, [&pEntity, &buildsPosIndex] (EntityPtr iter) {
       if (iter->prop().is<Build>()) {
         auto posIndex = ModelMath::buildPos(iter->pos());
         if (posIndex != ModelMath::eUndefined) {
@@ -68,5 +68,6 @@ bool Area::setupEntity(EntityPtr pEntity) {
 }
 
 void Area::update(double dt) {
-  m_pGrid->update(m_Entities);
+  m_entities.update(dt);
+  m_pGrid->update(m_entities);
 }

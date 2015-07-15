@@ -10,13 +10,13 @@
 #ifndef _SIA_THE_SPACE_STRATEGY_MODEL_MATH_H__
 #define _SIA_THE_SPACE_STRATEGY_MODEL_MATH_H__
 
-#include "math/SIAUtils_Point2D.h"
+#include "SIAPoint2D.h"
 #include <memory>
 
 namespace Common
 {
-  typedef SIAUtils::Point2D<int> CellPos;
-  typedef SIAUtils::Point2D<double> EntityPos;
+  typedef SIA::Point2D<int> CellPos;
+  typedef SIA::Point2D<double> EntityPos;
 
   class ModelMath {
   public:
