@@ -16,7 +16,6 @@ namespace States
 {
   class Building : public State {
   public:
-    static std::string Name;
 
     static StateStatus sComplete;
 

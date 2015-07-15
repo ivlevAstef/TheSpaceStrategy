@@ -1,11 +1,10 @@
 //
 //File: IProperty.h
-//Description: Base interface for property.
+//Description: 
 //Author: Ivlev Alexander. Stef
 //Created: 9:23 28/4/2015
 //Copyright (c) SIA 2015. All Right Reserved.
 //
-
 
 #pragma once
 #ifndef _SIA_THE_SPACE_STRATEGY_IPROPERTY_H__

@@ -1,8 +1,8 @@
 //
-//File:  EnergyGenerator.h
-//Description: Property respondent for generated energy.
+//File: EnergyGenerator.h
+//Description: 
 //Author: Ivlev Alexander. Stef
-//Created: 25/06/2015
+//Created: 9:03 21/5/2015
 //Copyright (c) SIA 2015. All Right Reserved.
 //
 

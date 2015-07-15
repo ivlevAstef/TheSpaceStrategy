@@ -1,8 +1,8 @@
 //
-//File:  TransmitterEnergy.h
-//Description: Property respondent for Broadcast Energy.
+//File: TransmitterEnergy.h
+//Description: 
 //Author: Ivlev Alexander. Stef
-//Created: 25/06/2015
+//Created: 9:27 25/6/2015
 //Copyright (c) SIA 2015. All Right Reserved.
 //
 
