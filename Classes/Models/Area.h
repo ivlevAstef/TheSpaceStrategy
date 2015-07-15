@@ -28,7 +28,7 @@ namespace Models
       bool addEntity(EntityPtr pEntity);
       void removeEntity(EntityPtr pEntity);
 
-      void update();
+      void update(double dt);
 
       inline ConstGridPtr grid() const { return m_pGrid; }
 

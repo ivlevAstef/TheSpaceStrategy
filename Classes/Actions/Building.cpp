@@ -1,12 +1,19 @@
+//
+//File: Building.cpp
+//Description: 
+//Author: Ivlev Alexander. Stef
+//Created: 10:23 15/7/2015
+//Copyright (c) SIA 2015. All Right Reserved.
+//
 #include "Building.h"
 #include "SIALogger.h"
-SIASetModuleName(States);
+SIASetModuleName(Actions);
 
-using namespace States;
+using namespace Actions;
 
-State::StateStatus Building::sComplete = "complete";
+Action::State Building::sComplete = "complete";
 
-Building::Building(Properties::PropertyContainer& properties, const Common::Features& setting) : State(properties) {
+Building::Building(Properties::PropertyContainer& properties, const Common::Features& setting) : Action(properties) {
   SIAFatalAssert(setting.is("time"));
 
   m_buildingTime = setting["time"];
@@ -21,8 +28,8 @@ Common::Features Building::createSetting(double buildingTime) {
 }
 
 
-State::StateStatus Building::update(double dt) {
-  if (checkDeath) {
+Action::State Building::update(double dt) {
+  if (checkDeath()) {
     return sDeath;
   }
 

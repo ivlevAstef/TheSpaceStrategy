@@ -36,6 +36,12 @@ bool EntityArray::remove(EntityPtr pEntity) {
   return false;
 }
 
+void EntityArray::update(double dt) {
+  for (EntityPtr pIterEntity : m_pEntities) {
+    pIterEntity->update(dt);
+  }
+}
+
 void EntityArray::foreachCell(Common::CellPos pos, FindResultCallback callback) const {
   SIAAssert((bool)callback);
   for (EntityPtr iter : m_pEntities) {

@@ -9,19 +9,19 @@
 #ifndef _SIA_THE_SPACE_STRATEGY_INACTION_H__
 #define _SIA_THE_SPACE_STRATEGY_INACTION_H__
 
-#include "State.h"
+#include "Action.h"
 #include "Common/Features.h"
 
-namespace States
+namespace Actions
 {
-  class Inaction: public State {
+  class Inaction: public Action {
   public:
-    Inaction(Properties::PropertyContainer& properties) : State(properties) {
+    Inaction(Properties::PropertyContainer& properties) : Action(properties) {
 
     }
 
-    virtual StateStatus update(double dt) override {
-      if (checkDeath) {
+    virtual State update(double dt) override {
+      if (checkDeath()) {
         return sDeath;
       }
 

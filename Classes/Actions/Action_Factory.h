@@ -1,5 +1,5 @@
 //
-//File: State_Factory.h
+//File: Action_Factory.h
 //Description: 
 //Author: Ivlev Alexander. Stef
 //Created: 10:37 15/7/2015
@@ -10,13 +10,13 @@
 #ifndef _SIA_THE_SPACE_STRATEGY_STATE_FACTORY_H__
 #define _SIA_THE_SPACE_STRATEGY_STATE_FACTORY_H__
 
-#include "State.h"
+#include "Action.h"
 
-namespace States
+namespace Actions
 {
-  class State::Factory {
+  class Action::Factory {
   public:
-    static StatePtr createStateByName(std::string name, Properties::PropertyContainer& properties, const Common::Features& setting);
+    static ActionPtr createActionByName(std::string name, Properties::PropertyContainer& properties, const Common::Features& setting);
 
   };
 }

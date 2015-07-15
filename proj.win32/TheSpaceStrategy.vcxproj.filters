@@ -34,11 +34,11 @@
     <Filter Include="src\Views\Common">
       <UniqueIdentifier>{3d0e46c1-b917-4afa-981f-746f911ee6c9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\States">
-      <UniqueIdentifier>{019afe9b-b343-49c7-a2f8-a25a26fa5552}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\Properties">
       <UniqueIdentifier>{38e527d0-48fc-444f-81f2-50ce0d9c58e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Actions">
+      <UniqueIdentifier>{019afe9b-b343-49c7-a2f8-a25a26fa5552}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -102,14 +102,14 @@
     <ClCompile Include="..\Classes\Properties\PropertyContainer.cpp">
       <Filter>src\Properties</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\States\State.cpp">
-      <Filter>src\States</Filter>
+    <ClCompile Include="..\Classes\Actions\Action.cpp">
+      <Filter>src\Actions</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\States\Building.cpp">
-      <Filter>src\States</Filter>
+    <ClCompile Include="..\Classes\Actions\Action_Factory.cpp">
+      <Filter>src\Actions</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\States\State_Factory.cpp">
-      <Filter>src\States</Filter>
+    <ClCompile Include="..\Classes\Actions\Building.cpp">
+      <Filter>src\Actions</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -182,15 +182,6 @@
     <ClInclude Include="..\Classes\Models\Grid_Cell.h">
       <Filter>src\Models</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Common\NextFrameEvents.h">
-      <Filter>src\Common</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\States\Building.h">
-      <Filter>src\States</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\States\State.h">
-      <Filter>src\States</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Properties\Build.h">
       <Filter>src\Properties</Filter>
     </ClInclude>
@@ -206,11 +197,20 @@
     <ClInclude Include="..\Classes\Properties\TransmitterEnergy.h">
       <Filter>src\Properties</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\States\Inaction.h">
-      <Filter>src\States</Filter>
+    <ClInclude Include="..\Classes\Actions\Action.h">
+      <Filter>src\Actions</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\States\State_Factory.h">
-      <Filter>src\States</Filter>
+    <ClInclude Include="..\Classes\Actions\Action_Factory.h">
+      <Filter>src\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Actions\Building.h">
+      <Filter>src\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Actions\Inaction.h">
+      <Filter>src\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Actions\Process.h">
+      <Filter>src\Actions</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

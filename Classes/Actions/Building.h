@@ -10,14 +10,14 @@
 #ifndef _SIA_THE_SPACE_STRATEGY_BUILDING_H__
 #define _SIA_THE_SPACE_STRATEGY_BUILDING_H__
 
-#include "State.h"
+#include "Action.h"
 
-namespace States
+namespace Actions
 {
-  class Building : public State {
+  class Building : public Action {
   public:
 
-    static StateStatus sComplete;
+    static State sComplete;
 
   public:
     Building(Properties::PropertyContainer& properties, const Common::Features& setting);
@@ -26,7 +26,7 @@ namespace States
 
     inline double progress() const { return m_currentTime / m_buildingTime; }
 
-    virtual StateStatus update(double dt) override;
+    virtual State update(double dt) override;
 
   private:
     double m_buildingTime;

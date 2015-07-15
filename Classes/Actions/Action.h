@@ -1,40 +1,39 @@
 //
-//File: State.h
+//File: Action.h
 //Description: 
 //Author: Ivlev Alexander. Stef
 //Created: 21:47 14/7/2015
 //Copyright (c) SIA 2015. All Right Reserved.
 //
 
-
 #pragma once
-#ifndef _SIA_THE_SPACE_STRATEGY_STATE_H__
-#define _SIA_THE_SPACE_STRATEGY_STATE_H__
+#ifndef _SIA_THE_SPACE_STRATEGY_ACTION_H__
+#define _SIA_THE_SPACE_STRATEGY_ACTION_H__
 
 #include "Properties/PropertyContainer.h"
 #include "Common/Features.h"
 #include <memory>
 
-namespace States
+namespace Actions
 {
-  class State;
-  typedef std::shared_ptr<State> StatePtr;
+  class Action;
+  typedef std::shared_ptr<Action> ActionPtr;
 
-  class State {
+  class Action {
   public:
     class Factory;
     friend class Factory;
 
-    typedef std::string StateStatus;//e.g. "Executing", "Death"
+    typedef std::string State;//e.g. "Executing", "Death"
 
-    static StateStatus sExecuting;
-    static StateStatus sDeath;
+    static State sExecuting;
+    static State sDeath;
 
   public:
 
-    State(Properties::PropertyContainer& properties);
+    Action(Properties::PropertyContainer& properties);
     
-    virtual StateStatus update(double dt) = 0;
+    virtual State update(double dt) = 0;
 
   protected:
 
@@ -50,4 +49,4 @@ namespace States
   };
 };
 
-#endif // _SIA_THE_SPACE_STRATEGY_STATE_H__
+#endif // _SIA_THE_SPACE_STRATEGY_ACTION_H__

@@ -133,7 +133,7 @@ void Scene::update(SceneInterfacePtr pScene) {
 
   m_viewMath.setWindowSize(m_pGameLayer->getContentSize());
 
-  m_pArea->update();
+  m_pArea->update(0.1);
   m_pGameLayer->update(m_viewMath);
 
   for (ObjectPtr pObject : m_pObjects) {

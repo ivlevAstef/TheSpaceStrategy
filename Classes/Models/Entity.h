@@ -13,11 +13,11 @@
 #include "Common/ModelMath.h"
 #include "Common/Features.h"
 #include "Properties/PropertyContainer.h"
+#include "Actions/Process.h"
 #include <memory>
 
 namespace Models
 {
-  typedef Properties::PropertyContainer Prop;
   class Entity {
   public:
     class Factory;
@@ -26,13 +26,15 @@ namespace Models
     void setPos(Common::EntityPos pos);
     inline void setPos(double x, double y) { setPos({x, y}); }
 
+    void update(double dt);
+
     inline const Common::EntityPos& pos() const {
       return m_pos;
     }
 
     inline const Common::Features& features() { return *m_pFeatures.get(); }
 
-    operator Prop() const {
+    Properties::PropertyContainer& prop() {
       return m_properties;
     }
 
@@ -44,6 +46,7 @@ namespace Models
     Common::FeaturesPtr m_pFeatures;
 
     Properties::PropertyContainer m_properties;
+    Actions::Process m_process;
   };
 
   typedef std::shared_ptr<Entity> EntityPtr;

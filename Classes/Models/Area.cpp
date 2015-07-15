@@ -27,12 +27,12 @@ void Area::removeEntity(EntityPtr pEntity) {
 }
 
 bool Area::setupEntity(EntityPtr pEntity) {
-  if (((Prop)*pEntity).is<Build>()) {
+  if (pEntity->prop().is<Build>()) {
     bool buildsPosIndex[ModelMath::ePosIndexCount] = { false };
     CellPos cell = ModelMath::cell(pEntity->pos());
 
     m_Entities.foreachCell(cell, [&pEntity, &buildsPosIndex] (EntityPtr iter) {
-      if (((Prop)*iter).is<Build>()) {
+      if (iter->prop().is<Build>()) {
         auto posIndex = ModelMath::buildPos(iter->pos());
         if (posIndex != ModelMath::eUndefined) {
           buildsPosIndex[posIndex] = true;
@@ -51,7 +51,7 @@ bool Area::setupEntity(EntityPtr pEntity) {
       return false;
     };
     
-    if (((Prop)*pEntity).is<TransmitterEnergy>()) {
+    if (pEntity->prop().is<TransmitterEnergy>()) {
       return setBuildPos(ModelMath::eCenter);
     } else {
       for (size_t i = 0; i < ModelMath::ePosIndexCount; i++) {
@@ -67,6 +67,6 @@ bool Area::setupEntity(EntityPtr pEntity) {
   return true;
 }
 
-void Area::update() {
+void Area::update(double dt) {
   m_pGrid->update(m_Entities);
 }

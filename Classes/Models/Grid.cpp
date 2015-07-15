@@ -3,14 +3,14 @@
 
 #include "SIALogger.h"
 #include "Common/ModelMath.h"
-#include "Components/EnergyGenerator.h"
-#include "Components/TransmitterEnergy.h"
+#include "Properties/EnergyGenerator.h"
+#include "Properties/TransmitterEnergy.h"
 
 SIASetModuleName(Model);
 
 using namespace Models;
 using namespace Common;
-using namespace Components;
+using namespace Properties;
 
 void Grid::update(const EntityArray& entities) {
   cleanCells();
@@ -22,8 +22,8 @@ void Grid::update(const EntityArray& entities) {
     Cell* cell = getCell(cellPos.x, cellPos.y);
 
     if (cell) {
-      bool isGenerator = iter->is<EnergyGenerator>();
-      bool isTransmitter = iter->is<TransmitterEnergy>();
+      bool isGenerator = iter->prop().is<EnergyGenerator>();
+      bool isTransmitter = iter->prop().is<TransmitterEnergy>();
 
       if (isGenerator) {
         generators.push_back(&cell->m_energyNode);
@@ -95,8 +95,8 @@ void Grid::foreach(int x, int y,
   size_t eX = INTERVAL(0, x + width, (int)m_width);
   size_t eY = INTERVAL(0, y + height, (int)m_height);
 
-  for (int x = bX; x < eX; x++) {
-    for (int y = bY; y < eY; y++) {
+  for (size_t x = bX; x < eX; x++) {
+    for (size_t y = bY; y < eY; y++) {
       cell(x, y, m_Cells.at(y * m_height + x));
     }
   }
