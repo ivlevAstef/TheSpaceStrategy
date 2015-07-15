@@ -11,7 +11,6 @@
 #define _SIA_THE_SPACE_STRATEGY_ENTITY_ARRAY_H__
 
 #include "Entity.h"
-#include "Components/IComponent.h"
 #include <vector>
 #include <functional>
 

@@ -1,14 +1,14 @@
 #include "Area.h"
 #include "SIALogger.h"
-#include "Components/Build.h"
-#include "Components/TransmitterEnergy.h"
+#include "Properties/Build.h"
+#include "Properties/TransmitterEnergy.h"
 #include "Common/ModelMath.h"
 
 SIASetModuleName(Model);
 
 using namespace Models;
 using namespace Common;
-using namespace Components;
+using namespace Properties;
 
 bool Area::addEntity(EntityPtr pEntity) {
   SIAAssert(pEntity.get());
@@ -27,12 +27,12 @@ void Area::removeEntity(EntityPtr pEntity) {
 }
 
 bool Area::setupEntity(EntityPtr pEntity) {
-  if (pEntity->is<Build>()) {
+  if (((Prop)*pEntity).is<Build>()) {
     bool buildsPosIndex[ModelMath::ePosIndexCount] = { false };
     CellPos cell = ModelMath::cell(pEntity->pos());
 
     m_Entities.foreachCell(cell, [&pEntity, &buildsPosIndex] (EntityPtr iter) {
-      if (iter->is<Build>()) {
+      if (((Prop)*iter).is<Build>()) {
         auto posIndex = ModelMath::buildPos(iter->pos());
         if (posIndex != ModelMath::eUndefined) {
           buildsPosIndex[posIndex] = true;
@@ -51,7 +51,7 @@ bool Area::setupEntity(EntityPtr pEntity) {
       return false;
     };
     
-    if (pEntity->is<TransmitterEnergy>()) {
+    if (((Prop)*pEntity).is<TransmitterEnergy>()) {
       return setBuildPos(ModelMath::eCenter);
     } else {
       for (size_t i = 0; i < ModelMath::ePosIndexCount; i++) {

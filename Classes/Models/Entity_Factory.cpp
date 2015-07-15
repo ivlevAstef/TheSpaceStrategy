@@ -3,9 +3,9 @@
 #include "SIALogger.h"
 #include "Common/FeatureNames.h"
 
-#include "Components/EnergyGenerator.h"
-#include "Components/TransmitterEnergy.h"
-#include "Components/Build.h"
+#include "Properties/EnergyGenerator.h"
+#include "Properties/TransmitterEnergy.h"
+#include "Properties/Build.h"
 
 SIASetModuleName(Model);
 
@@ -31,7 +31,7 @@ EntityPtr Entity::Factory::createBuildByName(std::string name) {
     return entity;
   }
  
-  SIAError("Can't find build with name:%s", name.c_str());
+  SIAError("Can't find build with name:%s.", name.c_str());
   return EntityPtr(nullptr);
 }
 
@@ -43,8 +43,8 @@ bool Entity::Factory::initMainBase(Entity& entity) {
   features[Common::FeatureNames::HP] = 100;
   features[Common::FeatureNames::physic] = true;
 
-  entity.addComponent(Components::Build::create());
-  entity.addComponent(Components::EnergyGenerator::create(25.0));
+  (Prop)entity += Properties::Build::create();
+  (Prop)entity += Properties::EnergyGenerator::create(25.0);
 
   return true;
 }
@@ -57,8 +57,8 @@ bool Entity::Factory::initPylon(Entity& entity) {
   features[Common::FeatureNames::HP] = 100;
   features[Common::FeatureNames::physic] = true;
 
-  entity.addComponent(Components::Build::create());
-  entity.addComponent(Components::TransmitterEnergy::create(1.0));
+  (Prop)entity += Properties::Build::create();
+  (Prop)entity += Properties::TransmitterEnergy::create(1.0);
 
   return true;
 }
@@ -70,7 +70,7 @@ bool Entity::Factory::initMinerMinerals(Entity& entity) {
   features[Common::FeatureNames::HP] = 50;
   features[Common::FeatureNames::physic] = true;
 
-  entity.addComponent(Components::Build::create());
+  (Prop)entity += Properties::Build::create();
 
   return true;
 
@@ -83,7 +83,7 @@ bool Entity::Factory::initMinerals(Entity& entity) {
   features[Common::FeatureNames::HP] = 1000;
   features[Common::FeatureNames::physic] = true;
 
-  entity.addComponent(Components::Build::create());
+  (Prop)entity += Properties::Build::create();
 
   return true;
 }

@@ -37,6 +37,9 @@
     <Filter Include="src\Views\Common">
       <UniqueIdentifier>{3d0e46c1-b917-4afa-981f-746f911ee6c9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\States">
+      <UniqueIdentifier>{019afe9b-b343-49c7-a2f8-a25a26fa5552}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -184,6 +187,21 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Models\Grid_Cell.h">
       <Filter>src\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Components\Constructing.h">
+      <Filter>src\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Common\NextFrameEvents.h">
+      <Filter>src\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\States\Passive.h">
+      <Filter>src\States</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\States\Building.h">
+      <Filter>src\States</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\States\State.h">
+      <Filter>src\States</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

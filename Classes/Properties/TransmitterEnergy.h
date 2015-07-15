@@ -1,6 +1,6 @@
 //
 //File:  TransmitterEnergy.h
-//Description: Component respondent for Broadcast Energy.
+//Description: Property respondent for Broadcast Energy.
 //Author: Ivlev Alexander. Stef
 //Created: 25/06/2015
 //Copyright (c) SIA 2015. All Right Reserved.
@@ -10,16 +10,16 @@
 #ifndef _SIA_THE_SPACE_STRATEGY_TRANSMITTER_ENERGY_H__
 #define _SIA_THE_SPACE_STRATEGY_TRANSMITTER_ENERGY_H__
 
-#include "IComponent.h"
+#include "IProperty.h"
 
-namespace Components
+namespace Properties
 {
-  class TransmitterEnergy: public IComponent {
+  class TransmitterEnergy: public IProperty {
   public:
-    DEFINE_COMPONENT(TransmitterEnergy);
+    DEFINE_PROPERTY(TransmitterEnergy);
 
-    static IComponentPtr create(double transmissionRange) {
-      return IComponentPtr(new TransmitterEnergy(transmissionRange));
+    static IPropertyPtr create(double transmissionRange) {
+      return IPropertyPtr(new TransmitterEnergy(transmissionRange));
     }
 
     double transmissionRange() const { return m_transmissionRange; }

@@ -12,16 +12,17 @@
 
 #include "Common/ModelMath.h"
 #include "Common/Features.h"
-#include "Components/ComponentContainer.h"
+#include "Properties/PropertyContainer.h"
 #include <memory>
 
 namespace Models
 {
-  class Entity : public Components::ComponentContainer {
+  typedef Properties::PropertyContainer Prop;
+  class Entity {
   public:
     class Factory;
     friend class Factory;
-	public:
+  public:
     void setPos(Common::EntityPos pos);
     inline void setPos(double x, double y) { setPos({x, y}); }
 
@@ -31,12 +32,18 @@ namespace Models
 
     inline const Common::Features& features() { return *m_pFeatures.get(); }
 
+    operator Prop() const {
+      return m_properties;
+    }
+
   protected:
     Entity();
 
     Common::EntityPos m_pos;
 
     Common::FeaturesPtr m_pFeatures;
+
+    Properties::PropertyContainer m_properties;
   };
 
   typedef std::shared_ptr<Entity> EntityPtr;

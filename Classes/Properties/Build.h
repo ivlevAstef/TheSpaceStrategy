@@ -1,6 +1,6 @@
 //
 //File:  Build.h
-//Description: Component respondent for Build.
+//Description: Property respondent for Build.
 //Author: Ivlev Alexander. Stef
 //Created: 25/06/2015
 //Copyright (c) SIA 2015. All Right Reserved.
@@ -10,16 +10,16 @@
 #ifndef _SIA_THE_SPACE_STRATEGY_BUILD_H__
 #define _SIA_THE_SPACE_STRATEGY_BUILD_H__
 
-#include "IComponent.h"
+#include "IProperty.h"
 
-namespace Components
+namespace Properties
 {
-  class Build: public IComponent {
+  class Build: public IProperty {
   public:
-    DEFINE_COMPONENT(Build);
+    DEFINE_PROPERTY(Build);
 
-    static IComponentPtr create() {
-      return IComponentPtr(new Build());
+    static IPropertyPtr create() {
+      return IPropertyPtr(new Build());
     }
 
   private:
