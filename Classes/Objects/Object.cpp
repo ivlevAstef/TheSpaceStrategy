@@ -14,7 +14,7 @@ using namespace Objects;
 
 Object::Object(std::string objName, Common::EntityPos pos) {
   m_pEntity = Entity::Factory::createBuildByName(objName);
-  SIAFatalAssert(m_pEntity.get());
+  SIAFatalAssert(m_pEntity);
 
   m_pEntity->setPos(pos);
 
@@ -27,9 +27,9 @@ Object::Object(std::string objName, Common::EntityPos pos) {
 }
 
 void Object::update(SceneInterfacePtr pScene) {
-  SIAAssert(pScene.get());
+  SIAAssert(pScene);
 
-  SIAAssert(m_pEntity.get());
+  SIAAssert(m_pEntity);
   SIAAssert(m_pView);
 
   ViewPos pos = pScene->viewMath().convert(m_pEntity->pos());

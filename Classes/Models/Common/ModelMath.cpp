@@ -31,11 +31,10 @@ EntityPos ModelMath::buildPos(CellPos pos, PosIndex buildIndex) {
 
 ModelMath::PosIndex ModelMath::buildPos(EntityPos pos) {
   auto centerPos = center(cell(pos));
-  double trX = pos.x - centerPos.x;
-  double trY = pos.y - centerPos.y;
+  auto tr = pos - centerPos;
  
   for (size_t i = 0; i < ePosIndexCount; i++) {
-    if (abs(trX - buildTr[i].x) < 1.0e-3 && abs(trY - buildTr[i].y) < 1.0e-3) {
+    if (abs(tr.x - buildTr[i].x) < 1.0e-3 && abs(tr.x - buildTr[i].y) < 1.0e-3) {
       return static_cast<PosIndex>(i);
     }
   }

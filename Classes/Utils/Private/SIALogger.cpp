@@ -56,17 +56,17 @@ static std::string stringFormat(const char* fmt, ...) {
 
 using namespace SIA;
 
-void LogLevel::LogToStream(const char *logLevel, MessageData &logInfo) {
+void LogLevel::logToStream(const char *logLevel, MessageData& logInfo) {
   SIAAssert(Logger::single != nullptr);
   logInfo.logLevel = logLevel;
   Logger::single->LogToStream(logInfo);
 }
 
-MessageData::MessageData(const char* lFile, int lLine, const char* lFmt, ...) {
+MessageData::MessageData(const char* lFile, int lLine, const char* lModule, const char* lFmt, ...) {
   logLevel = nullptr;
   file = lFile;
   line = lLine;
-    
+  module = lModule;
 
   std::unique_ptr<char[]> formatted;
   int n = ((int)strlen(lFmt)) * 2;
@@ -78,11 +78,6 @@ MessageData::MessageData(const char* lFile, int lLine, const char* lFmt, ...) {
   va_start(ap, lFmt);
   msg = vStringFormat(lFmt, ap);
   va_end(ap);
-}
-
-MessageData& MessageData::operator<<(const Module& lModule) {
-  module = lModule.module;
-  return *this;
 }
 
 static std::string fileName(std::string filePath) {
@@ -128,7 +123,7 @@ Logger::Logger() {
   std::cout << "Application Start at " << std::put_time(std::localtime(&now_c), "%F %T") << "." << std::endl;
 }
 
-void Logger::LogToStream(const SIA::MessageData &logInfo) {
+void Logger::LogToStream(const SIA::MessageData& logInfo) {
   auto diff = std::chrono::high_resolution_clock::now() - m_startApplicationTime;
     
   auto min = std::chrono::duration_cast<std::chrono::minutes>(diff).count();

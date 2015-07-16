@@ -27,6 +27,7 @@ namespace Objects
     void eraseObject(ObjectPtr pObject);
 
     Scene(size_t width, size_t height);
+    Scene(const Scene&) = delete;
     ~Scene();
 
     void update(SceneInterfacePtr pScene, double dt);

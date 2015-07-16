@@ -20,7 +20,7 @@ Scene::Scene(size_t width, size_t height) {
   m_pButtonLayer = nullptr;
 
   m_pArea = std::make_shared<Area>(width, height);
-  SIAFatalAssert(m_pArea.get());
+  SIAFatalAssert(m_pArea);
 
   m_pGameLayer = GameLayer::create();
   SIAFatalAssert(m_pGameLayer);
@@ -88,11 +88,11 @@ void Scene::move(cocos2d::Vec2 moveDt) {
 bool Scene::addObject(ObjectPtr pObject) {
   SIACheckRetValue(!pObject.get(), false);
 
-  SIAAssert(m_pArea.get());
+  SIAAssert(m_pArea);
   SIAAssert(m_pGameLayer);
 
   auto pEntity = pObject->entity();
-  SIAAssert(pEntity.get());
+  SIAAssert(pEntity);
   SIACheckRetValue(!m_pArea->addEntity(pEntity), false);
 
   auto pView = pObject->view();
@@ -106,13 +106,13 @@ bool Scene::addObject(ObjectPtr pObject) {
 }
 
 void Scene::eraseObject(ObjectPtr pObject) {
-  SIACheckRet(!pObject.get());
+  SIACheckRet(!pObject);
 
-  SIAAssert(m_pArea.get());
+  SIAAssert(m_pArea);
   SIAAssert(m_pGameLayer);
 
   auto pEntity = pObject->entity();
-  SIAAssert(pEntity.get());
+  SIAAssert(pEntity);
   m_pArea->removeEntity(pEntity);
 
   auto pView = pObject->view();
@@ -128,7 +128,7 @@ void Scene::eraseObject(ObjectPtr pObject) {
 
 void Scene::update(SceneInterfacePtr pScene, double dt) {
   SIAAssert(pScene.get() == this);
-  SIAAssert(m_pArea.get());
+  SIAAssert(m_pArea);
   SIAAssert(m_pGameLayer);
 
   m_viewMath.setWindowSize(m_pGameLayer->getContentSize());

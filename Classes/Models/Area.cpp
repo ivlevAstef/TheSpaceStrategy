@@ -11,7 +11,7 @@ using namespace Common;
 using namespace Properties;
 
 bool Area::addEntity(EntityPtr pEntity) {
-  SIAAssert(pEntity.get());
+  SIAAssert(pEntity);
   
   if (setupEntity(pEntity)) {
     return m_entities.add(pEntity);
@@ -22,7 +22,7 @@ bool Area::addEntity(EntityPtr pEntity) {
 }
 
 void Area::removeEntity(EntityPtr pEntity) {
-  SIAAssert(pEntity.get());
+  SIAAssert(pEntity);
   m_entities.remove(pEntity);
 }
 

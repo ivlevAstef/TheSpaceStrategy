@@ -25,9 +25,9 @@ void Process::update(double dt) {
 
   SIACheckRet(nullptr == m_pCurrentActionData.get());
   
-  if (!m_pCurrentAction.get()) {
+  if (!m_pCurrentAction) {
     m_pCurrentAction = Action::Factory::createAction(m_pCurrentActionData, m_properties);
-    SIAAssert(m_pCurrentAction.get());
+    SIAAssert(m_pCurrentAction);
   }
 
   Action::State newState = m_pCurrentAction->update(dt);

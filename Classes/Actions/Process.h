@@ -18,6 +18,8 @@ namespace Actions
   public:
 
     Process(Properties::PropertyContainer& properties);
+    Process(const Process&) = delete;
+    Process& operator=(const Process&) = delete;
 
     void update(double dt);
 

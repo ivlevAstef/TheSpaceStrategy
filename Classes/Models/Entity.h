@@ -44,6 +44,7 @@ namespace Models
 
   protected:
     Entity();
+    Entity(const Entity&) = delete;
 
     Common::EntityPos m_pos;
 

@@ -21,6 +21,8 @@ namespace Models
       setSize(width, height);
     }
 
+    Grid(const Grid&) = delete;
+
     void update(const EntityArray& entities);
 
     void setSize(size_t width, size_t height);

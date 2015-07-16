@@ -32,6 +32,8 @@ namespace Actions
   public:
 
     Action(Properties::PropertyContainer& properties);
+    Action(const Action&) = delete;
+    Action& operator=(const Action&) = delete;
     
     virtual State update(double dt) = 0;
 
@@ -52,6 +54,8 @@ namespace Actions
   public:
     ActionData(std::string name, const Common::Features setting) : m_name(name), m_setting(setting) {
     }
+    ActionData(const ActionData&) = delete;
+    ActionData& operator=(const ActionData&) = delete;
 
     inline std::string name() const { return m_name; }
     inline const Common::Features& setting() const { return m_setting; }
