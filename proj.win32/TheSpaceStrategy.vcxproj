@@ -180,7 +180,12 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y</Command>
     <ClInclude Include="..\Classes\Common\Features.h" />
     <ClInclude Include="..\Classes\Common\GameTouchEvents.h" />
     <ClInclude Include="..\Classes\Models\Area.h" />
+    <ClInclude Include="..\Classes\Models\Commands\ComandController.h" />
+    <ClInclude Include="..\Classes\Models\Commands\ICommand.h" />
+    <ClInclude Include="..\Classes\Models\Common\EntityMutex.h" />
     <ClInclude Include="..\Classes\Models\Common\ModelMath.h" />
+    <ClInclude Include="..\Classes\Models\Common\ReadWriteMutex.h" />
+    <ClInclude Include="..\Classes\Models\Common\TimeStamp.h" />
     <ClInclude Include="..\Classes\Models\Entity.h" />
     <ClInclude Include="..\Classes\Models\EntityArray.h" />
     <ClInclude Include="..\Classes\Models\Entity_Factory.h" />

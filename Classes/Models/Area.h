@@ -28,9 +28,11 @@ namespace Models
       bool addEntity(EntityPtr pEntity);
       void removeEntity(EntityPtr pEntity);
 
-      void update(double dt);
+      void update();
 
-      inline ConstGridPtr grid() const { return m_pGrid; }
+      IGridDrawPtr grid() {
+        return std::static_pointer_cast<IGridDraw>(m_pGrid);
+      }
 
    private:
       bool setupEntity(EntityPtr pEntity);

@@ -126,18 +126,19 @@ void Scene::eraseObject(ObjectPtr pObject) {
   SIADebug("Removed object from scene.");
 }
 
-void Scene::update(SceneInterfacePtr pScene, double dt) {
-  SIAAssert(pScene.get() == this);
+void Scene::draw(SceneInterfacePtr pScene, double dt) {
   SIAAssert(m_pArea);
+  m_pArea->update();
+
+  SIAAssert(pScene.get() == this);
   SIAAssert(m_pGameLayer);
 
   m_viewMath.setWindowSize(m_pGameLayer->getContentSize());
 
-  m_pArea->update(dt);
-  m_pGameLayer->update(m_viewMath);
+  m_pGameLayer->draw(m_viewMath);
 
   for (ObjectPtr pObject : m_pObjects) {
     SIAAssert(pObject.get());
-    pObject->update(pScene);
+    pObject->draw(pScene);
   }
 }

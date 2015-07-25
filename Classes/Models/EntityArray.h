@@ -24,7 +24,7 @@ namespace Models
     bool add(EntityPtr pEntity);
     bool remove(EntityPtr pEntity);
 
-    void update(double dt);
+    void update();
 
     void foreachCell(Common::CellPos pos, FindResultCallback callback) const;
 

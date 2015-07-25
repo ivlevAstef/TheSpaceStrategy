@@ -20,7 +20,7 @@ namespace Views
     COCOS2D_FUNC(GameLayer);
     bool init();
 
-    void update(const Common::ViewMath& viewMath);
+    void draw(const Common::ViewMath& viewMath);
 
     void addGameView(GameView* child);
     void eraseGameView(GameView* child);

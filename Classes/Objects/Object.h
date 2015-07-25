@@ -24,7 +24,7 @@ namespace Objects
     Object(std::string objName, Common::EntityPos pos);
     Object(const Object&) = delete;
 
-    virtual void update(SceneInterfacePtr pScene);
+    virtual void draw(SceneInterfacePtr pScene);
 
     virtual ~Object();
 

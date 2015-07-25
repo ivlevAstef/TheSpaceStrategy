@@ -36,9 +36,9 @@ bool EntityArray::remove(EntityPtr pEntity) {
   return false;
 }
 
-void EntityArray::update(double dt) {
+void EntityArray::update() {
   for (EntityPtr pIterEntity : m_pEntities) {
-    pIterEntity->update(dt);
+    pIterEntity->update();
   }
 }
 

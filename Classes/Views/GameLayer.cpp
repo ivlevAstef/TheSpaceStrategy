@@ -103,11 +103,11 @@ void GameLayer::onExit() {
   Layer::onExit();
 }
 
-void GameLayer::update(const Common::ViewMath& viewMath) {
+void GameLayer::draw(const Common::ViewMath& viewMath) {
   SIAAssert(m_area);
 
   if (m_gridView) {
-    m_gridView->update(viewMath);
+    m_gridView->draw(viewMath);
   }
 
   m_area->setPosition(viewMath.windowPos());

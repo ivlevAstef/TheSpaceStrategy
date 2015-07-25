@@ -67,7 +67,7 @@ bool Area::setupEntity(EntityPtr pEntity) {
   return true;
 }
 
-void Area::update(double dt) {
-  m_entities.update(dt);
+void Area::update() {
+  m_entities.update();
   m_pGrid->update(m_entities);
 }

@@ -46,6 +46,9 @@
     <Filter Include="src\Utils\Private">
       <UniqueIdentifier>{5678efda-91fb-4fa5-8a91-b9501bbff859}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Models\Commands">
+      <UniqueIdentifier>{395d7477-a797-46c7-802a-716120017926}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -238,6 +241,21 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Utils\SIAEvent.h">
       <Filter>src\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Models\Commands\ICommand.h">
+      <Filter>src\Models\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Models\Commands\ComandController.h">
+      <Filter>src\Models\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Models\Common\TimeStamp.h">
+      <Filter>src\Models\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Models\Common\ReadWriteMutex.h">
+      <Filter>src\Models\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Models\Common\EntityMutex.h">
+      <Filter>src\Models\Common</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

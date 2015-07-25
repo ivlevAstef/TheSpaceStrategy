@@ -13,6 +13,8 @@ using namespace Common;
 using namespace Properties;
 
 void Grid::update(const EntityArray& entities) {
+  m_mutex.BeginUpdate();
+
   cleanCells();
 
   std::list<Cell::EnergyNode*> generators;
@@ -50,6 +52,15 @@ void Grid::update(const EntityArray& entities) {
     distributeEnergyFrom(node);
   }
 
+  m_mutex.EndUpdate();
+}
+
+void Grid::draw(std::function<void(const Grid& grid, double dt)> drawFunc) {
+  m_mutex.BeginDraw();
+
+  drawFunc(*this, m_mutex.deltaTime());
+
+  m_mutex.EndDraw();
 }
 
 void Grid::distributeEnergyFrom(Cell::EnergyNode* node) {
@@ -80,6 +91,7 @@ void Grid::cleanCells() {
   }
 }
 
+/*
 #define MIN(V1, V2) (((V1) < (V2)) ? (V1) : (V2))
 #define MAX(V1, V2) (((V1) > (V2)) ? (V1) : (V2))
 
@@ -101,14 +113,24 @@ void Grid::foreach(int x, int y,
     }
   }
 }
+*/
 
-Cell* Grid::getCell(int x, int y) {
+const Cell* Grid::getCell(int x, int y) const {
   SIAAssert(m_Cells.size() == m_width * m_height);
-  
+
   if (x < 0 || y < 0 || (size_t)x > m_width || (size_t)y > m_height) {
     return nullptr;
   }
 
   return &m_Cells.at(y * m_height + x);
+}
 
+Cell* Grid::getCell(int x, int y) {
+  SIAAssert(m_Cells.size() == m_width * m_height);
+
+  if (x < 0 || y < 0 || (size_t)x > m_width || (size_t)y > m_height) {
+    return nullptr;
+  }
+
+  return &m_Cells.at(y * m_height + x);
 }

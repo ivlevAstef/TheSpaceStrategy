@@ -30,7 +30,7 @@ namespace Objects
     Scene(const Scene&) = delete;
     ~Scene();
 
-    void update(SceneInterfacePtr pScene, double dt);
+    void draw(SceneInterfacePtr pScene, double dt);
 
     virtual const Common::ViewMath& viewMath() const override {
       return m_viewMath;

@@ -14,15 +14,15 @@ namespace Views
 {
   class GridView: public cocos2d::DrawNode {
   public:
-    COCOS2D_FUNC1(GridView, Models::ConstGridPtr);
-    bool init(Models::ConstGridPtr);
+    COCOS2D_FUNC1(GridView, Models::IGridDrawPtr);
+    bool init(Models::IGridDrawPtr);
 
-    void update(const Common::ViewMath& viewMath);
+    void draw(const Common::ViewMath& viewMath);
 
     virtual void draw(cocos2d::Renderer *renderer, const cocos2d::Mat4& transform, uint32_t flags) override;
 
   private:
-    Models::ConstGridPtr m_pModel;
+    Models::IGridDrawPtr m_pModel;
 
     Common::ViewMath m_viewMath;
   };

@@ -7,9 +7,10 @@ SIASetModuleName(View);
 
 using namespace Views;
 using namespace Common;
+using namespace Models;
 USING_NS_CC;
 
-bool GridView::init(Models::ConstGridPtr grid) {
+bool GridView::init(Models::IGridDrawPtr grid) {
   SIACheckRetValue(!DrawNode::init(), false);
 
   m_pModel = grid;
@@ -53,37 +54,41 @@ void GridView::draw(Renderer* renderer, const Mat4& transform, uint32_t flags) {
     int bY = -winModelPos.y - 1;
     int size = 1 + ((winSize.width / scale.x + winSize.height / scale.y) / sqrt(2));
 
-    m_pModel->foreach(bX, bY, size, size, 
-      [this, &zeroCellPoint, &cellPoints] (size_t x, size_t y, const Models::Cell& cell) {
+    m_pModel->draw([&bX, &bY, &size, &zeroCellPoint, &cellPoints, this] (const Grid& grid, double dt) {
+      for (int x = bX; x < bX + size; x++) {
+        for (int y = bY; y < bY + size; y++) {
+          const Models::Cell* cell = grid.getCell(x, y);
 
-      auto posCenter = m_viewMath.convert(ModelMath::center(CellPos(x, y)));
+          if (nullptr == cell) {
+            auto posCenter = m_viewMath.convert(ModelMath::center(CellPos(x, y)));
 
-      for (size_t i = 0; i < cellPoints.size(); i++) {
-        cellPoints[i] = zeroCellPoint[i] + posCenter;
+            for (size_t i = 0; i < cellPoints.size(); i++) {
+              cellPoints[i] = zeroCellPoint[i] + posCenter;
+            }
+
+            Color4F fillColor = Color4F(0.0f, 0.0f, 0.0f, 0.0f);
+            if (cell->isGenerator()) {
+              fillColor = Color4F(0.8f, 0.0f, 0.5f, 0.5f);
+            } else if (cell->isEnergy()) {
+              fillColor = Color4F(0.5f, 0.5f, 0.8f, 0.5f);
+            } else if (cell->isTransmitter()) {
+              fillColor = Color4F(0.5f, 0.8f, 0.5f, 0.5f);
+            }
+
+            float borderWidth = 1;
+            const Color4F borderColor = Color4F(0.5f, 0.25f, 0.6f, 1.0f);
+
+            drawPolygon(&cellPoints[0], cellPoints.size(), fillColor, borderWidth, borderColor);
+          }
+        }
       }
-
-      Color4F fillColor = Color4F(0.0f, 0.0f, 0.0f, 0.0f);
-      if (cell.isGenerator()) {
-        fillColor = Color4F(0.8f, 0.0f, 0.5f, 0.5f);
-      } else if (cell.isEnergy()) {
-        fillColor = Color4F(0.5f, 0.5f, 0.8f, 0.5f);
-      } else if (cell.isTransmitter()) {
-        fillColor = Color4F(0.5f, 0.8f, 0.5f, 0.5f);
-      }
-
-      float borderWidth = 1;
-      const Color4F borderColor = Color4F(0.5f, 0.25f, 0.6f, 1.0f);
-
-      drawPolygon(&cellPoints[0], cellPoints.size(), fillColor, borderWidth, borderColor);
-
-      
     });
   }  
   
   DrawNode::draw(renderer, transform, flags);
 }
 
-void GridView::update(const Common::ViewMath& viewMath) {
+void GridView::draw(const Common::ViewMath& viewMath) {
   setPosition(viewMath.windowPos());
   m_viewMath = viewMath;
 }

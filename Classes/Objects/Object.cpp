@@ -26,15 +26,16 @@ Object::Object(std::string objName, Common::EntityPos pos) {
   });
 }
 
-void Object::update(SceneInterfacePtr pScene) {
+void Object::draw(SceneInterfacePtr pScene) {
   SIAAssert(pScene);
 
   SIAAssert(m_pEntity);
   SIAAssert(m_pView);
 
-  ViewPos pos = pScene->viewMath().convert(m_pEntity->pos());
-  m_pView->setPosition(pos);
-
+  m_pEntity->draw( [&pScene, this] (const Entity& entity, double dt) {
+    ViewPos pos = pScene->viewMath().convert(entity.pos());
+    m_pView->setPosition(pos);
+  });
 }
 
 Object::~Object() {

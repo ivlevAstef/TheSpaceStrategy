@@ -12,9 +12,11 @@
 
 #include "Common/ModelMath.h"
 #include "Common/Features.h"
+#include "Common/EntityMutex.h"
 #include "Properties/PropertyContainer.h"
 #include "Actions/Process.h"
 #include <memory>
+#include <functional>
 
 namespace Models
 {
@@ -23,11 +25,13 @@ namespace Models
     class Factory;
     friend class Factory;
   public:
+    void update();
+
+    //return delta time from last update
+    void draw(std::function<void(const Entity& entity, double dt)> drawFunc);
+
     void setPos(Common::EntityPos pos);
     inline void setPos(double x, double y) { setPos({x, y}); }
-
-    void update(double dt);
-
     inline const Common::EntityPos& pos() const {
       return m_pos;
     }
@@ -49,6 +53,8 @@ namespace Models
     Common::EntityPos m_pos;
 
     Common::FeaturesPtr m_pFeatures;
+
+    Common::EntityMutex m_mutex;
 
     Properties::PropertyContainer m_properties;
     Actions::Process m_process;
