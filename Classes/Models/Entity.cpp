@@ -14,7 +14,7 @@ Entity::Entity() : m_process(m_properties) {
 void Entity::update() {
   m_mutex.BeginUpdate();
 
-  m_process.update(m_mutex.deltaTime());
+  m_process.update(m_mutex.timestamp().deltaTime());
 
   m_mutex.EndUpdate();
 }
@@ -24,7 +24,7 @@ void Entity::draw(std::function<void(const Entity& entity, double dt)> drawFunc)
 
   m_mutex.BeginDraw();
 
-  drawFunc(*this, m_mutex.deltaTime());
+  drawFunc(*this, m_mutex.timestamp().deltaTime());
 
   m_mutex.EndDraw();
 }

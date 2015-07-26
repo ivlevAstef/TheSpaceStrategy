@@ -58,7 +58,7 @@ void Grid::update(const EntityArray& entities) {
 void Grid::draw(std::function<void(const Grid& grid, double dt)> drawFunc) {
   m_mutex.BeginDraw();
 
-  drawFunc(*this, m_mutex.deltaTime());
+  drawFunc(*this, m_mutex.timestamp().deltaTime());
 
   m_mutex.EndDraw();
 }

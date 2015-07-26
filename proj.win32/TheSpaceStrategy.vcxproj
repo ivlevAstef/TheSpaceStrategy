@@ -151,7 +151,10 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y</Command>
     <ClCompile Include="..\Classes\Common\Features.cpp" />
     <ClCompile Include="..\Classes\Common\GameTouchEvents.cpp" />
     <ClCompile Include="..\Classes\Models\Area.cpp" />
+    <ClCompile Include="..\Classes\Models\Common\EntityMutex.cpp" />
     <ClCompile Include="..\Classes\Models\Common\ModelMath.cpp" />
+    <ClCompile Include="..\Classes\Models\Common\ReadWriteMutex.cpp" />
+    <ClCompile Include="..\Classes\Models\Common\TimeStamp.cpp" />
     <ClCompile Include="..\Classes\Models\Entity.cpp" />
     <ClCompile Include="..\Classes\Models\EntityArray.cpp" />
     <ClCompile Include="..\Classes\Models\Entity_Factory.cpp" />

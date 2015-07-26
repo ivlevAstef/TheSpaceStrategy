@@ -27,7 +27,6 @@ namespace Models
   public:
     void update();
 
-    //return delta time from last update
     void draw(std::function<void(const Entity& entity, double dt)> drawFunc);
 
     void setPos(Common::EntityPos pos);

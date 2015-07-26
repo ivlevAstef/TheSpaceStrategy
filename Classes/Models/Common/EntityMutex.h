@@ -10,6 +10,9 @@
 #ifndef _SIA_THE_SPACE_STRATEGY_ENTITY_MUTEX_H__
 #define _SIA_THE_SPACE_STRATEGY_ENTITY_MUTEX_H__
 
+#include "ReadWriteMutex.h"
+#include "TimeStamp.h"
+
 namespace Common
 {
   class EntityMutex {
@@ -20,7 +23,11 @@ namespace Common
     void BeginUpdate();
     void EndUpdate();
 
-    double deltaTime() const;
+    const TimeStamp& timestamp() const;
+
+  private:
+    ReadWriteMutex m_rwMutex;
+    TimeStamp m_timestamp;
   };
 };
 

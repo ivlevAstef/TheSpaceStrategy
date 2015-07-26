@@ -126,6 +126,15 @@
     <ClCompile Include="..\Classes\Utils\Private\SIALogger.cpp">
       <Filter>src\Utils\Private</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Models\Common\ReadWriteMutex.cpp">
+      <Filter>src\Models\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Models\Common\TimeStamp.cpp">
+      <Filter>src\Models\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Models\Common\EntityMutex.cpp">
+      <Filter>src\Models\Common</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">

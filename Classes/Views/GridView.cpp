@@ -59,7 +59,7 @@ void GridView::draw(Renderer* renderer, const Mat4& transform, uint32_t flags) {
         for (int y = bY; y < bY + size; y++) {
           const Models::Cell* cell = grid.getCell(x, y);
 
-          if (nullptr == cell) {
+          if (cell) {
             auto posCenter = m_viewMath.convert(ModelMath::center(CellPos(x, y)));
 
             for (size_t i = 0; i < cellPoints.size(); i++) {
