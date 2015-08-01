@@ -25,6 +25,7 @@ namespace Models
   public:
     Grid(size_t width, size_t height) : m_width(0), m_height(0) {
       setSize(width, height);
+      cleanCells();
     }
 
     Grid(const Grid&) = delete;

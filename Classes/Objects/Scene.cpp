@@ -24,6 +24,7 @@ Scene::Scene(size_t width, size_t height) {
   m_pButtonLayer = nullptr;
 
   m_modelController.setArea(std::make_shared<Area>(width, height));
+  m_modelController.start();
 
   m_pGameLayer = GameLayer::create();
   SIAFatalAssert(m_pGameLayer);
@@ -63,7 +64,7 @@ void Scene::touchBegan(cocos2d::Vec2 pos) {
   m_pGameLayer->addChild(m_pButtonLayer, 100);
 
   m_pButtonLayer->pick += BuildButtonLayer::DPick(this, [this, centerPos] (std::string pickId) {
-    SIAInfo("Pick build with name:%s.", pickId);
+    SIAInfo("Pick build with name:%s.", pickId.c_str());
     auto newBuild = Object::create(pickId, m_viewMath.convert(centerPos));
     SIACheckRet(!newBuild.get());
     addObject(newBuild);
@@ -129,7 +130,6 @@ void Scene::eraseObject(ObjectPtr pObject) {
 }
 
 void Scene::draw(SceneInterfacePtr pScene, double dt) {
-  m_modelController.update();
   m_modelController.callCommandsCallback();
 
   SIAAssert(pScene.get() == this);

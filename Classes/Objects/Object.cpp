@@ -19,6 +19,8 @@ Object::Object(std::string objName, Common::EntityPos pos) {
   m_pEntity->setPos(pos);
 
   m_pView = GameView::create(objName);
+  m_pView->retain();
+
   SIAFatalAssert(m_pView);
 
   m_pView->select += GameView::DSelect(this, [] (GameView* view) {
@@ -40,4 +42,5 @@ void Object::draw(SceneInterfacePtr pScene) {
 }
 
 Object::~Object() {
+  m_pView->release();
 }

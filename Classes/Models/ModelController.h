@@ -12,6 +12,8 @@
 
 #include "Commands/CommandController.h"
 #include "Area.h"
+#include <thread>
+#include <atomic>
 
 namespace Models
 {
@@ -20,7 +22,11 @@ namespace Models
     typedef Commands::CommandController::Callback CommandCallback;
   
   public:
+    ModelController();
+
     void setArea(AreaPtr pArea);
+
+    void start();
 
     void pause();
     void resume();
@@ -31,13 +37,17 @@ namespace Models
 
     IGridDrawPtr grid();
 
-  public:///private
+  private:
     void update();
+
+    void run();
 
   private:
     Commands::CommandController m_commandController;
 
     AreaPtr m_pArea;
+    std::thread m_thread;
+    std::atomic_bool m_pause;
   };
 };
 
