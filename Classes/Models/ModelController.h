@@ -31,11 +31,15 @@ namespace Models
     void pause();
     void resume();
 
+    void stop();
+
     void addCommand(Commands::CommandPtr command, CommandCallback success, CommandCallback failed);
 
     void callCommandsCallback();
 
     IGridDrawPtr grid();
+
+    ~ModelController();
 
   private:
     void update();
@@ -48,6 +52,7 @@ namespace Models
     AreaPtr m_pArea;
     std::thread m_thread;
     std::atomic_bool m_pause;
+    std::atomic_bool m_runing;
   };
 };
 

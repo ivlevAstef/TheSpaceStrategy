@@ -21,7 +21,7 @@ bool GameScene::init() {
 
   scheduleUpdate();
 
-  /*for (size_t i = 0; i < 4; i++) {
+  for (size_t i = 0; i < 4; i++) {
     for (size_t j = 0; j < i + 1; j++) {
       auto mainbase = Objects::Object::create("MainBase", Common::EntityPos(i * 10, 4));
       m_pScene->addObject(mainbase);
@@ -49,7 +49,7 @@ bool GameScene::init() {
 
     auto minerals = Objects::Object::create("Minerals", Common::EntityPos(x, y));
     m_pScene->addObject(minerals);
-  }*/
+  }
 
   return true;
 }
