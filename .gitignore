@@ -11,7 +11,7 @@
 # Compiled Dynamic libraries
 *.so
 *.dylib
-*.dll
+#*.dll
 
 # Fortran module files
 *.mod
@@ -23,7 +23,7 @@
 *.lib
 
 # Executables
-*.exe
+#*.exe
 *.out
 *.app
 
@@ -38,3 +38,4 @@
 /proj.win32/*.sdf
 /proj.win32/ipch/monksvg-win.windows-77bc1306/*.ipch
 /proj.win32/ipch/monksvg-win.windowsphone-4ec6635a/*.ipch
+/ThirdParty/MonkVG/projects/MonkVG-Windows/glew/bin
