@@ -5,11 +5,15 @@
 #include "SIALogger.h"
 #include "Common/GameTouchEvents.h"
 
+#include "Models/Commands/AddEntity.h"
+#include "Models/Commands/EraseEntity.h"
+
 SIASetModuleName(Object);
 
 using namespace Objects;
 using namespace Views;
 using namespace Models;
+using namespace Commands;
 using namespace Common;
 
 ScenePtr Scene::create(size_t width, size_t height) {
@@ -19,13 +23,12 @@ ScenePtr Scene::create(size_t width, size_t height) {
 Scene::Scene(size_t width, size_t height) {
   m_pButtonLayer = nullptr;
 
-  m_pArea = std::make_shared<Area>(width, height);
-  SIAFatalAssert(m_pArea);
+  m_modelController.setArea(std::make_shared<Area>(width, height));
 
   m_pGameLayer = GameLayer::create();
   SIAFatalAssert(m_pGameLayer);
 
-  m_pGridView = GridView::create(m_pArea->grid());
+  m_pGridView = GridView::create(m_modelController.grid());
   SIAFatalAssert(m_pGridView);
 
   m_pGameLayer->setBackground("background");
@@ -85,50 +88,49 @@ void Scene::move(cocos2d::Vec2 moveDt) {
   m_viewMath.moveWindow(moveDt);
 }
 
-bool Scene::addObject(ObjectPtr pObject) {
-  SIACheckRetValue(!pObject.get(), false);
-
-  SIAAssert(m_pArea);
+void Scene::addObject(ObjectPtr pObject) {
+  SIACheckRet(!pObject.get());
   SIAAssert(m_pGameLayer);
 
   auto pEntity = pObject->entity();
   SIAAssert(pEntity);
-  SIACheckRetValue(!m_pArea->addEntity(pEntity), false);
 
-  auto pView = pObject->view();
-  SIAAssert(pView);
-  m_pGameLayer->addGameView(pView);
+  m_modelController.addCommand(std::make_shared<Commands::AddEntity>(pEntity), 
+    [pObject, this] () {
+      auto pView = pObject->view();
+      SIAAssert(pView);
+      m_pGameLayer->addGameView(pView);
 
-  m_pObjects.push_back(pObject);
+      m_pObjects.push_back(pObject);
 
-  SIADebug("Added object on scene.");
-  return true;
+      SIADebug("Added object on scene.");
+    }, nullptr);
 }
 
 void Scene::eraseObject(ObjectPtr pObject) {
   SIACheckRet(!pObject);
-
-  SIAAssert(m_pArea);
   SIAAssert(m_pGameLayer);
 
   auto pEntity = pObject->entity();
   SIAAssert(pEntity);
-  m_pArea->removeEntity(pEntity);
 
-  auto pView = pObject->view();
-  SIAAssert(pView);
-  m_pGameLayer->eraseGameView(pView);
+  m_modelController.addCommand(std::make_shared<Commands::EraseEntity>(pEntity),
+    [pObject, this] () {
+    auto pView = pObject->view();
+    SIAAssert(pView);
+    m_pGameLayer->eraseGameView(pView);
 
-  m_pObjects.erase(std::remove_if(m_pObjects.begin(), m_pObjects.end(), [&pObject] (ObjectPtr& pObj) {
-    return pObject.get() == pObj.get();
-  }), m_pObjects.end());
+    m_pObjects.erase(std::remove_if(m_pObjects.begin(), m_pObjects.end(), [&pObject] (ObjectPtr& pObj) {
+      return pObject.get() == pObj.get();
+    }), m_pObjects.end());
 
-  SIADebug("Removed object from scene.");
+    SIADebug("Removed object from scene.");
+  }, nullptr);
 }
 
 void Scene::draw(SceneInterfacePtr pScene, double dt) {
-  SIAAssert(m_pArea);
-  m_pArea->update();
+  m_modelController.update();
+  m_modelController.callCommandsCallback();
 
   SIAAssert(pScene.get() == this);
   SIAAssert(m_pGameLayer);

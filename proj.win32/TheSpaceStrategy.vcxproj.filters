@@ -135,6 +135,18 @@
     <ClCompile Include="..\Classes\Models\Common\EntityMutex.cpp">
       <Filter>src\Models\Common</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Models\Commands\AddEntity.cpp">
+      <Filter>src\Models\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Models\Commands\EraseEntity.cpp">
+      <Filter>src\Models\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Models\Commands\CommandController.cpp">
+      <Filter>src\Models\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Models\ModelController.cpp">
+      <Filter>src\Models</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -254,9 +266,6 @@
     <ClInclude Include="..\Classes\Models\Commands\ICommand.h">
       <Filter>src\Models\Commands</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Models\Commands\ComandController.h">
-      <Filter>src\Models\Commands</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Models\Common\TimeStamp.h">
       <Filter>src\Models\Common</Filter>
     </ClInclude>
@@ -265,6 +274,18 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Models\Common\EntityMutex.h">
       <Filter>src\Models\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Models\ModelController.h">
+      <Filter>src\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Models\Commands\AddEntity.h">
+      <Filter>src\Models\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Models\Commands\EraseEntity.h">
+      <Filter>src\Models\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Models\Commands\CommandController.h">
+      <Filter>src\Models\Commands</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

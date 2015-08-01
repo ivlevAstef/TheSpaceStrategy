@@ -6,7 +6,7 @@
 #include "Object.h"
 #include "Views/GameLayer.h"
 #include "Views/InterfaceView/BuildButtonLayer.h"
-#include "Models/Area.h"
+#include "Models/ModelController.h"
 #include "SceneInterface.h"
 #include <vector>
 
@@ -23,7 +23,7 @@ namespace Objects
       return m_pGameLayer;
     }
 
-    bool addObject(ObjectPtr pObject);
+    void addObject(ObjectPtr pObject);
     void eraseObject(ObjectPtr pObject);
 
     Scene(size_t width, size_t height);
@@ -46,7 +46,7 @@ namespace Objects
     Views::GameLayer* m_pGameLayer;
     Views::GridView* m_pGridView;
     Views::BuildButtonLayer* m_pButtonLayer;
-    Models::AreaPtr m_pArea;
+    Models::ModelController m_modelController;
 
     std::vector<ObjectPtr> m_pObjects;
 

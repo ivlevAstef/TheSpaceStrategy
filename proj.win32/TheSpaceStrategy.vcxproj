@@ -151,6 +151,9 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y</Command>
     <ClCompile Include="..\Classes\Common\Features.cpp" />
     <ClCompile Include="..\Classes\Common\GameTouchEvents.cpp" />
     <ClCompile Include="..\Classes\Models\Area.cpp" />
+    <ClCompile Include="..\Classes\Models\Commands\AddEntity.cpp" />
+    <ClCompile Include="..\Classes\Models\Commands\CommandController.cpp" />
+    <ClCompile Include="..\Classes\Models\Commands\EraseEntity.cpp" />
     <ClCompile Include="..\Classes\Models\Common\EntityMutex.cpp" />
     <ClCompile Include="..\Classes\Models\Common\ModelMath.cpp" />
     <ClCompile Include="..\Classes\Models\Common\ReadWriteMutex.cpp" />
@@ -159,6 +162,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y</Command>
     <ClCompile Include="..\Classes\Models\EntityArray.cpp" />
     <ClCompile Include="..\Classes\Models\Entity_Factory.cpp" />
     <ClCompile Include="..\Classes\Models\Grid.cpp" />
+    <ClCompile Include="..\Classes\Models\ModelController.cpp" />
     <ClCompile Include="..\Classes\Objects\Object.cpp" />
     <ClCompile Include="..\Classes\Objects\Scene.cpp" />
     <ClCompile Include="..\Classes\Properties\PropertyContainer.cpp" />
@@ -183,7 +187,9 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y</Command>
     <ClInclude Include="..\Classes\Common\Features.h" />
     <ClInclude Include="..\Classes\Common\GameTouchEvents.h" />
     <ClInclude Include="..\Classes\Models\Area.h" />
-    <ClInclude Include="..\Classes\Models\Commands\ComandController.h" />
+    <ClInclude Include="..\Classes\Models\Commands\CommandController.h" />
+    <ClInclude Include="..\Classes\Models\Commands\AddEntity.h" />
+    <ClInclude Include="..\Classes\Models\Commands\EraseEntity.h" />
     <ClInclude Include="..\Classes\Models\Commands\ICommand.h" />
     <ClInclude Include="..\Classes\Models\Common\EntityMutex.h" />
     <ClInclude Include="..\Classes\Models\Common\ModelMath.h" />
@@ -194,6 +200,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y</Command>
     <ClInclude Include="..\Classes\Models\Entity_Factory.h" />
     <ClInclude Include="..\Classes\Models\Grid.h" />
     <ClInclude Include="..\Classes\Models\Grid_Cell.h" />
+    <ClInclude Include="..\Classes\Models\ModelController.h" />
     <ClInclude Include="..\Classes\Objects\Object.h" />
     <ClInclude Include="..\Classes\Objects\Scene.h" />
     <ClInclude Include="..\Classes\Objects\SceneInterface.h" />

@@ -21,12 +21,17 @@ bool Area::addEntity(EntityPtr pEntity) {
   return false;
 }
 
-void Area::removeEntity(EntityPtr pEntity) {
+bool Area::eraseEntity(EntityPtr pEntity) {
   SIAAssert(pEntity);
-  m_entities.remove(pEntity);
+  return m_entities.remove(pEntity);
 }
 
 bool Area::setupEntity(EntityPtr pEntity) {
+  if (!(bool)pEntity) {
+    SIAError("Entity can't setup because it's null.");
+    return false;
+  }
+
   if (pEntity->prop().is<Build>()) {
     bool buildsPosIndex[ModelMath::ePosIndexCount] = { false };
     CellPos cell = ModelMath::cell(pEntity->pos());
