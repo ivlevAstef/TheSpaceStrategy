@@ -18,13 +18,23 @@ namespace Views
     bool init(cocos2d::Vec2 pos);
 
     ~BuildButtonLayer();
-      
+
   public:
     typedef SIA::Delegate<std::string> DPick;
     SIA::FriendEvent<BuildButtonLayer, std::string> pick;
 
     typedef SIA::Delegate<BuildButtonLayer*> DClose;
     SIA::FriendEvent<BuildButtonLayer, BuildButtonLayer*> close;
+
+  private:
+    cocos2d::Vec2 buttonPosition(float angleDegrees);
+
+  private:
+    static const float circleRadius;
+    static const float buttonCircleRadius;
+
+    cocos2d::DrawNode* m_pCircleBack;
+    cocos2d::Node* m_pButtonsNode;
   };
 }
 

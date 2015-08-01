@@ -34,7 +34,7 @@ ModelMath::PosIndex ModelMath::buildPos(EntityPos pos) {
   auto tr = pos - centerPos;
  
   for (size_t i = 0; i < ePosIndexCount; i++) {
-    if (abs(tr.x - buildTr[i].x) < 1.0e-3 && abs(tr.x - buildTr[i].y) < 1.0e-3) {
+    if (abs(tr.x - buildTr[i].x) < 1.0e-3 && abs(tr.y - buildTr[i].y) < 1.0e-3) {
       return static_cast<PosIndex>(i);
     }
   }
