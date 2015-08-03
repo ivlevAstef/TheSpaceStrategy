@@ -37,7 +37,7 @@ namespace Models
 
     void callCommandsCallback();
 
-    IGridDrawPtr grid();
+    inline AreaPtr area() const { return m_pArea; }
 
     ~ModelController();
 

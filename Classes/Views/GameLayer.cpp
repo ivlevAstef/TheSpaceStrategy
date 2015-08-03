@@ -12,15 +12,23 @@ static const int backgroundTag = 100;
 static const int gameViewTag = 101;
 static const int gridViewTag = 102;
 
-bool GameLayer::init() {
+bool GameLayer::init(Models::AreaPtr pArea) {
   SIACheckRetValue(!Layer::init(), false);
 
+  m_pAreaModel = pArea;
+
   m_background = nullptr;
-  m_gridView = nullptr;
 
   m_area = Layer::create();
   SIAFatalAssert(m_area);
   addChild(m_area, 1);
+
+  m_pAreaNode = DrawNode::create();
+  if (m_pAreaNode && m_pAreaModel) {
+    addChild(m_pAreaNode);
+  } else {
+    SIAError("Can't create area node");
+  }
 
   return true;
 }
@@ -39,17 +47,6 @@ void GameLayer::eraseGameView(GameView* child) {
 
   SIADebug("Erase game view.");
   m_area->removeChild(child);
-}
-
-void GameLayer::setGridView(GridView* gridView) {
-  m_gridView = gridView;
-  SIACheckRet(!gridView);
-
-  gridView->setPosition(0, 0);
-
-  addChild(gridView, 0, gridViewTag);
-  SIADebug("Set gridView.");
-
 }
 
 void GameLayer::setBackground(std::string backgroundId) {
@@ -106,8 +103,27 @@ void GameLayer::onExit() {
 void GameLayer::draw(const Common::ViewMath& viewMath) {
   SIAAssert(m_area);
 
-  if (m_gridView) {
-    m_gridView->draw(viewMath);
+  if (m_pAreaNode) {
+    SIAAssert(m_pAreaModel);
+
+    EntityPos entityPoints[4] = {
+      ModelMath::center(CellPos(0, 0)) + EntityPos(-M_SQRT1_2, -M_SQRT1_2),
+      ModelMath::center(CellPos(m_pAreaModel->width(), 0)) + EntityPos(M_SQRT1_2, -M_SQRT1_2),
+      ModelMath::center(CellPos(m_pAreaModel->width(), m_pAreaModel->height())) + EntityPos(M_SQRT1_2, M_SQRT1_2),
+      ModelMath::center(CellPos(0, m_pAreaModel->height())) + EntityPos(-M_SQRT1_2, M_SQRT1_2)
+    };
+
+    ViewPos points[4] = {
+      viewMath.convert(entityPoints[0]),
+      viewMath.convert(entityPoints[1]),
+      viewMath.convert(entityPoints[2]),
+      viewMath.convert(entityPoints[3])
+    };
+    
+    m_pAreaNode->clear();
+    m_pAreaNode->drawPoly(points,4, true, Color4F(0.6f, 0.8f, 0.9f, 1.0f));
+
+    m_pAreaNode->setPosition(viewMath.windowPos());
   }
 
   m_area->setPosition(viewMath.windowPos());

@@ -22,7 +22,8 @@ namespace Models
   class Area {
   public:
     Area(size_t width, size_t height) {
-      m_pGrid = GridPtr(new Grid(width, height));
+      m_width = width;
+      m_height = height;
     }
 
     bool addEntity(EntityPtr pEntity);
@@ -30,13 +31,16 @@ namespace Models
 
     void update();
 
-    inline IGridDrawPtr grid() { return std::static_pointer_cast<IGridDraw>(m_pGrid); }
+    inline size_t width() const { return m_width; }
+
+    inline size_t height() const { return m_height; }
 
   private:
     bool setupEntity(EntityPtr pEntity);
 
   private:
-    GridPtr m_pGrid;
+    size_t m_width;
+    size_t m_height;
 
     EntityArray m_entities;
   };

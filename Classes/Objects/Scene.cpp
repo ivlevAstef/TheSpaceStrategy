@@ -26,15 +26,11 @@ Scene::Scene(size_t width, size_t height) {
   m_modelController.setArea(std::make_shared<Area>(width, height));
   m_modelController.start();
 
-  m_pGameLayer = GameLayer::create();
+  m_pGameLayer = GameLayer::create(m_modelController.area());
   SIAFatalAssert(m_pGameLayer);
-
-  m_pGridView = GridView::create(m_modelController.grid());
-  SIAFatalAssert(m_pGridView);
 
   m_pGameLayer->setBackground("background");
   m_pGameLayer->modificationBackground(cocos2d::Color3B(150, 150, 200));
-  m_pGameLayer->setGridView(m_pGridView);
 
   using std::placeholders::_1;
   m_pGameLayer->touchBegan += GameLayer::DTouchBegan(this, std::bind(&Scene::touchBegan, this, _1));
@@ -54,18 +50,16 @@ static TouchPos touchPos(cocos2d::Vec2 pos, ViewPos winPos) {
 void Scene::touchBegan(cocos2d::Vec2 pos) {
   GameTouchEvents::touchBegan(touchPos(pos, m_viewMath.windowPos()));
 
-  ViewPos centerPos = m_viewMath.center(pos);
-
   SIAAssert(!m_pButtonLayer);
 
-  m_pButtonLayer = BuildButtonLayer::create(centerPos + m_viewMath.windowPos());
+  m_pButtonLayer = BuildButtonLayer::create(pos + m_viewMath.windowPos());
   SIAFatalAssert(m_pButtonLayer);
 
   m_pGameLayer->addChild(m_pButtonLayer, 100);
 
-  m_pButtonLayer->pick += BuildButtonLayer::DPick(this, [this, centerPos] (std::string pickId) {
+  m_pButtonLayer->pick += BuildButtonLayer::DPick(this, [this, pos] (std::string pickId) {
     SIAInfo("Pick build with name:%s.", pickId.c_str());
-    auto newBuild = Object::create(pickId, m_viewMath.convert(centerPos));
+    auto newBuild = Object::create(pickId, m_viewMath.convert(pos));
     SIACheckRet(!newBuild.get());
     addObject(newBuild);
   });

@@ -44,7 +44,6 @@ namespace Objects
 
   private:
     Views::GameLayer* m_pGameLayer;
-    Views::GridView* m_pGridView;
     Views::BuildButtonLayer* m_pButtonLayer;
     Models::ModelController m_modelController;
 

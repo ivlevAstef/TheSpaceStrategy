@@ -46,15 +46,9 @@ void ModelController::callCommandsCallback() {
   m_commandController.callCallbacks();
 }
 
-IGridDrawPtr ModelController::grid() {
-  SIAFatalAssert(m_pArea);
-  return m_pArea->grid();
-}
-
 ModelController::~ModelController() {
   stop();
 }
-
 
 void ModelController::update() {
   SIAFatalAssert(m_pArea);

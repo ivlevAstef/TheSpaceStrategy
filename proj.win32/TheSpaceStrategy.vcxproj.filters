@@ -75,9 +75,6 @@
     <ClCompile Include="..\Classes\Views\GameView.cpp">
       <Filter>src\Views</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Views\GridView.cpp">
-      <Filter>src\Views</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Views\GameLayer.cpp">
       <Filter>src\Views</Filter>
     </ClCompile>
@@ -98,9 +95,6 @@
     </ClCompile>
     <ClCompile Include="..\Classes\Models\Common\ModelMath.cpp">
       <Filter>src\Models\Common</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Models\Grid.cpp">
-      <Filter>src\Models</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Common\GameTouchEvents.cpp">
       <Filter>src\Common</Filter>
@@ -182,9 +176,6 @@
     <ClInclude Include="..\Classes\Views\GameView.h">
       <Filter>src\Views</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Views\GridView.h">
-      <Filter>src\Views</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Views\InterfaceView\BuildButtonLayer.h">
       <Filter>src\Views\InterfaceView</Filter>
     </ClInclude>
@@ -203,9 +194,6 @@
     <ClInclude Include="..\Classes\Models\Common\ModelMath.h">
       <Filter>src\Models\Common</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Models\Grid.h">
-      <Filter>src\Models</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Views\Common\ViewMath.h">
       <Filter>src\Views\Common</Filter>
     </ClInclude>
@@ -213,9 +201,6 @@
       <Filter>src\Common</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Models\EntityArray.h">
-      <Filter>src\Models</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Models\Grid_Cell.h">
       <Filter>src\Models</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Properties\Build.h">

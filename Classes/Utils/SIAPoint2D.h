@@ -58,7 +58,7 @@ namespace SIA
     }
 
     inline const Point2D<Type> operator+(const Point2D<Type>& v) const {
-      return Point<Type>(x + v.x, y + v.y);
+      return Point2D<Type>(x + v.x, y + v.y);
     }
     inline Point2D<Type>& operator+=(const Point2D<Type>& v) {
       x += v.x;
@@ -76,11 +76,11 @@ namespace SIA
     }
 
     inline const Point2D<Type> operator-() const {
-      return Point<Type>(-x, -y);
+      return Point2D<Type>(-x, -y);
     }
 
     inline const Point2D<Type> operator*(Type s) const {
-      return Point<Type>(x * s, y * s);
+      return Point2D<Type>(x * s, y * s);
     }
     inline Point2D<Type>& operator*=(Type s) {
       x *= s;
@@ -89,7 +89,7 @@ namespace SIA
     }
 
     inline const Point2D<Type> operator/(Type s) const {
-      return Point<Type>(x / s, y / s);
+      return Point2D<Type>(x / s, y / s);
     }
 
     inline bool operator<(const Point2D<Type>& v) const {

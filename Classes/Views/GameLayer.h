@@ -4,7 +4,6 @@
 #define _SIA_THE_SPACE_STRATEGY_VIEW_GAME_LAYER_H__
 
 #include "GameView.h"
-#include "GridView.h"
 
 #include "cocos2d.h"
 
@@ -17,15 +16,13 @@ namespace Views
 {
   class GameLayer: public cocos2d::Layer {
   public:
-    COCOS2D_FUNC(GameLayer);
-    bool init();
+    COCOS2D_FUNC1(GameLayer, Models::AreaPtr);
+    bool init(Models::AreaPtr pArea);
 
     void draw(const Common::ViewMath& viewMath);
 
     void addGameView(GameView* child);
     void eraseGameView(GameView* child);
-
-    void setGridView(GridView* view);
 
     void setBackground(std::string backgroundId);
     void modificationBackground(cocos2d::Color3B color);
@@ -64,9 +61,11 @@ namespace Views
     cocos2d::Vec2 m_previousCursorLocation;
 #endif
 
+    Models::AreaPtr m_pAreaModel;
+
     cocos2d::Sprite* m_background;
     cocos2d::Layer* m_area;
-    GridView* m_gridView;
+    cocos2d::DrawNode* m_pAreaNode;
   };
 };
 

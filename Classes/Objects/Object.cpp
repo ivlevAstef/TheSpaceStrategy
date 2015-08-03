@@ -38,6 +38,7 @@ void Object::draw(SceneInterfacePtr pScene) {
   m_pEntity->draw( [&pScene, this] (const Entity& entity, double dt) {
     ViewPos pos = pScene->viewMath().convert(entity.pos());
     m_pView->setPosition(pos);
+
   });
 }
 
