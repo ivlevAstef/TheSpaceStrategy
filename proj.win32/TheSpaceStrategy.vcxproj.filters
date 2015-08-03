@@ -141,6 +141,9 @@
     <ClCompile Include="..\Classes\Models\ModelController.cpp">
       <Filter>src\Models</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Models\EntityGrid.cpp">
+      <Filter>src\Models</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -271,6 +274,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Models\Commands\CommandController.h">
       <Filter>src\Models\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Models\EntityGrid.h">
+      <Filter>src\Models</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
