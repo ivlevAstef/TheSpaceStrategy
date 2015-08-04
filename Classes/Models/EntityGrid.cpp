@@ -15,59 +15,84 @@ SIASetModuleName(Models);
 using namespace Models;
 using namespace Common;
 
-EntityGrid::EntityGrid(size_t width, size_t height) : m_grid(width*height + 1, m_cellHash) {
+EntityGrid::EntityGrid(size_t width, size_t height) : m_grid(width*height) {
   m_width = width;
   m_height = height;
-  m_cellHash.width = m_width;
-  m_grid.max_load_factor(1.0);
 }
 
 bool EntityGrid::add(EntityPtr pEntity) {
   SIAAssert(pEntity);
 
-  for (auto cell : m_grid) {
-    if (cell.second == pEntity) {
-      return false;
+  if (pEntity) {
+    auto cellPos = Common::ModelMath::cell(pEntity->pos());
+    int index = getIndex(cellPos);
+
+    if (0 <= index && index < m_grid.size()) {
+      for (auto cell : m_grid[index]) {
+        if (cell == pEntity) {
+          return false;
+        }
+      }
+
+      m_grid[index].push_back(pEntity);
+
+      return true;
     }
   }
-
-  unsafeAdd(pEntity);
-
-  return true;
+  return false;
 }
 
 void EntityGrid::unsafeAdd(EntityPtr pEntity) {
-  m_grid.emplace(ModelMath::cell(pEntity->pos()), pEntity);
+  auto cellPos = Common::ModelMath::cell(pEntity->pos());
+  int index = getIndex(cellPos);
+
+  m_grid[index].push_back(pEntity);
 }
 
 bool EntityGrid::remove(EntityPtr pEntity) {
   SIAAssert(pEntity);
 
-  for (GridType::const_iterator iter = m_grid.begin(); iter != m_grid.end(); ++iter) {
-    if (iter->second == pEntity) {
-      m_grid.erase(iter);
-      return true;
+  if (pEntity) {
+    auto cellPos = Common::ModelMath::cell(pEntity->pos());
+    int index = getIndex(cellPos);
+
+    if (0 <= index && index < m_grid.size()) {
+      for (auto iter = m_grid[index].begin(); iter != m_grid[index].end(); ++iter) {
+        if ((*iter) == pEntity) {
+          m_grid[index].erase(iter);
+          return true;
+        }
+      }
     }
   }
 
   return false;
 }
 
-void EntityGrid::update() {
-  std::stack<EntityPtr> entities;
+bool EntityGrid::update(EntityPtr pEntity) {
+  SIAAssert(pEntity);
 
-  for (GridType::const_iterator iter = m_grid.begin(); iter != m_grid.end(); ) {
-    auto currentPos = ModelMath::cell(iter->second->pos());
-    if (currentPos == iter->first) {
-      ++iter;
-    } else {
-      entities.push(iter->second);
-      iter = m_grid.erase(iter);
+  if (pEntity) {
+    auto cellLastPos = Common::ModelMath::cell(pEntity->lastPos());
+    auto cellPos = Common::ModelMath::cell(pEntity->pos());
+
+    if (cellLastPos != cellPos) {
+      int lastIndex = getIndex(cellLastPos);
+      int index = getIndex(cellPos);
+
+      if (0 <= lastIndex && lastIndex < m_grid.size()) {
+        for (auto iter = m_grid[lastIndex].begin(); iter != m_grid[lastIndex].end(); ++iter) {
+          if ((*iter) == pEntity) {
+            m_grid[lastIndex].erase(iter);
+            break;
+          }
+        }
+
+        if (0 <= index && index < m_grid.size()) {
+          unsafeAdd(pEntity);
+        }
+      }
     }
   }
 
-  while (!entities.empty()) {
-    unsafeAdd(entities.top());
-    entities.pop();
-  }
 }

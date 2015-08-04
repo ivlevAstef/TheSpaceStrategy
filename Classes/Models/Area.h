@@ -13,6 +13,7 @@
 #include "Grid.h"
 #include "Entity.h"
 #include "EntityArray.h"
+#include "EntityGrid.h"
 
 #include <functional>
 #include <vector>
@@ -21,9 +22,7 @@ namespace Models
 {
   class Area {
   public:
-    Area(size_t width, size_t height) {
-      m_width = width;
-      m_height = height;
+    Area(size_t width, size_t height) : m_grid(width, height) {
     }
 
     bool addEntity(EntityPtr pEntity);
@@ -31,18 +30,16 @@ namespace Models
 
     void update();
 
-    inline size_t width() const { return m_width; }
-
-    inline size_t height() const { return m_height; }
+    inline size_t width() const { return m_grid.width(); }
+    inline size_t height() const { return m_grid.height(); }
 
   private:
     bool setupEntity(EntityPtr pEntity);
 
   private:
-    size_t m_width;
-    size_t m_height;
 
     EntityArray m_entities;
+    EntityGrid m_grid;
   };
 
   typedef std::shared_ptr<Area> AreaPtr;

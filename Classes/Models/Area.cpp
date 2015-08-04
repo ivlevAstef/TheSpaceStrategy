@@ -14,16 +14,30 @@ bool Area::addEntity(EntityPtr pEntity) {
   SIAAssert(pEntity);
   
   if (setupEntity(pEntity)) {
-    return m_entities.add(pEntity);
+    bool success = m_entities.add(pEntity);
+    success &= m_grid.add(pEntity);
+
+    if (success) {
+      return true;
+    } else {
+      SIAWarning("Can't add entity. already exist?");
+      m_entities.erase(pEntity);
+      m_grid.erase(pEntity);
+
+      return false;
+    }
+
   }
 
-  SIADebug("Can't setup entity.");
+  SIAWarning("Can't setup entity.");
   return false;
 }
 
 bool Area::eraseEntity(EntityPtr pEntity) {
   SIAAssert(pEntity);
-  return m_entities.remove(pEntity);
+  bool success = m_entities.erase(pEntity);
+  success |= m_grid.erase(pEntity);
+  return success;
 }
 
 bool Area::setupEntity(EntityPtr pEntity) {

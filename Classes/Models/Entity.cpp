@@ -30,5 +30,6 @@ void Entity::draw(std::function<void(const Entity& entity, double dt)> drawFunc)
 }
 
 void Entity::setPos(EntityPos pos) {
+  m_lastPos = m_pos;
   m_pos = pos;
 }

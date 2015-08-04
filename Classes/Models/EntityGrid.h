@@ -21,29 +21,21 @@ namespace Models
 
     bool add(EntityPtr pEntity);
     bool remove(EntityPtr pEntity);
+    bool update(EntityPtr pEntity);
 
-
-
-    void update();
+    inline size_t width() const { return m_width; }
+    inline size_t height() const { return m_height; }
 
   private:
     void unsafeAdd(EntityPtr pEntity);
+    inline int getIndex(const Common::CellPos& cell) const { return m_width * cell.y + cell.x; }
 
   private:
     size_t m_width;
     size_t m_height;
 
-    struct CellHash {
-      size_t width;
+    typedef std::vector<std::list<EntityPtr>> GridType;
 
-      std::size_t operator()(const Common::CellPos& pos) const {
-        return width*pos.y + pos.x;
-      }
-    };
-
-    typedef std::unordered_map<Common::CellPos, EntityPtr, CellHash> GridType;
-
-    CellHash m_cellHash;
     GridType m_grid;
 
   };

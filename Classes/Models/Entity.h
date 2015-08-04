@@ -35,6 +35,10 @@ namespace Models
       return m_pos;
     }
 
+    inline const Common::EntityPos& lastPos() const {
+      return m_lastPos;
+    }
+
     inline const Common::Features& features() { return *m_pFeatures.get(); }
 
     Properties::PropertyContainer& prop() {
@@ -50,6 +54,7 @@ namespace Models
     Entity(const Entity&) = delete;
 
     Common::EntityPos m_pos;
+    Common::EntityPos m_lastPos;
 
     Common::FeaturesPtr m_pFeatures;
 
