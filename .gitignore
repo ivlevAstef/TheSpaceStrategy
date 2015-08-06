@@ -6,7 +6,7 @@
 
 # Precompiled Headers
 *.gch
-*.pch
+#*.pch
 
 # Compiled Dynamic libraries
 *.so
@@ -24,8 +24,8 @@
 
 # Executables
 #*.exe
-*.out
-*.app
+#*.out
+#*.app
 
 # self
 *.tlog
@@ -39,3 +39,4 @@
 /proj.win32/ipch/monksvg-win.windows-77bc1306/*.ipch
 /proj.win32/ipch/monksvg-win.windowsphone-4ec6635a/*.ipch
 /ThirdParty/MonkVG/projects/MonkVG-Windows/glew/bin
+cocos2d

@@ -7,8 +7,8 @@ using namespace Common;
 const bool Feature::UndefinedBool = false;
 const signed char Feature::UndefinedChar = SCHAR_MAX;
 const unsigned char Feature::UndefinedUChar = UCHAR_MAX;
-const __int32 Feature::UndefinedInt = INT32_MAX;
-const unsigned __int32 Feature::UndefinedUInt = UINT32_MAX;
+const int Feature::UndefinedInt = INT32_MAX;
+const unsigned int Feature::UndefinedUInt = UINT32_MAX;
 const float Feature::UndefinedFloat = FLT_MAX;
 const double Feature::UndefinedDouble = DBL_MAX;
 const Feature::Point Feature::UndefinedPoint = { FLT_MAX, FLT_MAX };
@@ -58,11 +58,11 @@ Feature::operator signed char() const {
 Feature::operator unsigned char() const {
   GET_VALUE(unsigned char, UndefinedUChar);
 }
-Feature::operator __int32() const {
-  GET_VALUE(__int32, UndefinedInt);
+Feature::operator int() const {
+  GET_VALUE(int, UndefinedInt);
 }
-Feature::operator unsigned __int32() const {
-  GET_VALUE(unsigned __int32, UndefinedUInt);
+Feature::operator unsigned int() const {
+  GET_VALUE(unsigned int, UndefinedUInt);
 }
 Feature::operator float() const {
   GET_VALUE(float, UndefinedFloat);
@@ -83,10 +83,10 @@ Feature& Feature::operator=(signed char value) {
 Feature& Feature::operator=(unsigned char value) {
   SET_VALUE(eFT_UChar, uc);
 }
-Feature& Feature::operator=(__int32 value) {
+Feature& Feature::operator=(int value) {
   SET_VALUE(eFT_Int32, i);
 }
-Feature& Feature::operator=(unsigned __int32 value) {
+Feature& Feature::operator=(unsigned int value) {
   SET_VALUE(eFT_UInt32, ui);
 }
 Feature& Feature::operator=(float value) {

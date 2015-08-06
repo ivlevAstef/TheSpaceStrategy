@@ -12,6 +12,7 @@
 
 #include "Properties/PropertyContainer.h"
 #include "Common/Features.h"
+#include <string>
 #include <memory>
 
 namespace Actions

@@ -16,10 +16,9 @@
 
 namespace SIA
 {
+  typedef unsigned long long ParentID;
   template<class ...Args>
   class Delegate {
-  public:
-    typedef unsigned long long ParentID;
   private:
     std::function<bool(Args...)> m_execute;
 

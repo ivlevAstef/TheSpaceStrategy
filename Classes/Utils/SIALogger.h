@@ -66,17 +66,17 @@ namespace SIA {
 template<typename T> static T SIADefaultModuleName() { static T value = nullptr; return value; }
 #define SIASetModuleName(NAME) template<> static const char* SIADefaultModuleName<const char*>() { static const char* value = #NAME; return value; }
 
-#define SIAMsg(MSG, ...) (SIA::MessageData(__FILE__, __LINE__, SIADefaultModuleName<const char*>(), MSG, __VA_ARGS__))
+#define SIAMsg(MSG, ...) (SIA::MessageData(__FILE__, __LINE__, SIADefaultModuleName<const char*>(), MSG, ##__VA_ARGS__))
 
-#define SIAFatal(MSG, ...) SIA::Fatal::fast(SIAMsg(MSG, __VA_ARGS__))
-#define SIAError(MSG, ...) SIA::Error::fast(SIAMsg(MSG, __VA_ARGS__))
-#define SIAWarning(MSG, ...) SIA::Warning::fast(SIAMsg(MSG, __VA_ARGS__))
-#define SIADebug(MSG, ...) SIA::Debug::fast(SIAMsg(MSG, __VA_ARGS__))
-#define SIAInfo(MSG, ...) SIA::Info::fast(SIAMsg(MSG, __VA_ARGS__))
-#define SIATrace(MSG, ...) SIA::Trace::fast(SIAMsg(MSG, __VA_ARGS__))
+#define SIAFatal(MSG, ...) SIA::Fatal::fast(SIAMsg(MSG, ##__VA_ARGS__))
+#define SIAError(MSG, ...) SIA::Error::fast(SIAMsg(MSG, ##__VA_ARGS__))
+#define SIAWarning(MSG, ...) SIA::Warning::fast(SIAMsg(MSG, ##__VA_ARGS__))
+#define SIADebug(MSG, ...) SIA::Debug::fast(SIAMsg(MSG, ##__VA_ARGS__))
+#define SIAInfo(MSG, ...) SIA::Info::fast(SIAMsg(MSG, ##__VA_ARGS__))
+#define SIATrace(MSG, ...) SIA::Trace::fast(SIAMsg(MSG, ##__VA_ARGS__))
 
 #define SIAAssert(CONDITION) SIA::Assert::fast((CONDITION) ? true : false, SIAMsg(#CONDITION" failed."))
-#define SIAAssertMsg(CONDITION, MSG, ...) SIA::Assert::fast((CONDITION) ? true : false, SIAMsg(MSG, __VA_ARGS__))
+#define SIAAssertMsg(CONDITION, MSG, ...) SIA::Assert::fast((CONDITION) ? true : false, SIAMsg(MSG, ##__VA_ARGS__))
 
 #define SIAFatalAssert(CONDITION) \
    if((CONDITION) ? false : true) { SIA::Fatal::fast(SIAMsg(#CONDITION" failed.")); }

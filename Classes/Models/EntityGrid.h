@@ -11,7 +11,8 @@
 #define _SIA_THE_SPACE_STRATEGY_ENTITY_GRID_H__
 
 #include "Entity.h"
-#include <unordered_map>
+#include <vector>
+#include <list>
 
 namespace Models
 {
@@ -20,7 +21,7 @@ namespace Models
     EntityGrid(size_t width, size_t height);
 
     bool add(EntityPtr pEntity);
-    bool remove(EntityPtr pEntity);
+    bool erase(EntityPtr pEntity);
     bool update(EntityPtr pEntity);
 
     inline size_t width() const { return m_width; }

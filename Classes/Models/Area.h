@@ -10,7 +10,6 @@
 #ifndef _SIA_THE_SPACE_STRATEGY_AREA_H__
 #define _SIA_THE_SPACE_STRATEGY_AREA_H__
 
-#include "Grid.h"
 #include "Entity.h"
 #include "EntityArray.h"
 #include "EntityGrid.h"

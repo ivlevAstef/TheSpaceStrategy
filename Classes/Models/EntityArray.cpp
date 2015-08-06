@@ -22,7 +22,7 @@ bool EntityArray::add(EntityPtr pEntity) {
   return true;
 }
 
-bool EntityArray::remove(EntityPtr pEntity) {
+bool EntityArray::erase(EntityPtr pEntity) {
   SIAAssert(pEntity);
 
   for (size_t i = 0; i < m_pEntities.size(); i++) {
