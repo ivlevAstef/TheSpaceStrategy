@@ -3,6 +3,7 @@
 #ifndef _SIA_THE_SPACE_STRATEGY_FEATURES_H__
 #define _SIA_THE_SPACE_STRATEGY_FEATURES_H__
 
+#include <string>
 #include <unordered_map>
 #include <vector>
 #include <memory>
@@ -19,8 +20,8 @@ namespace Common
     static const bool UndefinedBool;
     static const signed char UndefinedChar;
     static const unsigned char UndefinedUChar;
-    static const __int32 UndefinedInt;
-    static const unsigned __int32 UndefinedUInt;
+    static const int UndefinedInt;
+    static const unsigned int UndefinedUInt;
     static const float UndefinedFloat;
     static const double UndefinedDouble;
     static const Point UndefinedPoint;
@@ -45,8 +46,8 @@ namespace Common
     operator bool() const;
     operator signed char() const;
     operator unsigned char() const;
-    operator __int32() const;
-    operator unsigned __int32() const;
+    operator int() const;
+    operator unsigned int() const;
     operator float() const;
     operator double() const;
     operator Point() const;
@@ -54,8 +55,8 @@ namespace Common
     Feature& operator=(bool value);
     Feature& operator=(signed char value);
     Feature& operator=(unsigned char value);
-    Feature& operator=(__int32 value);
-    Feature& operator=(unsigned __int32 value);
+    Feature& operator=(int value);
+    Feature& operator=(unsigned int value);
     Feature& operator=(float value);
     Feature& operator=(double value);
     Feature& operator=(Point value);
@@ -66,8 +67,8 @@ namespace Common
     bool b;
     signed char c;
     unsigned char uc;
-    __int32 i;
-    unsigned __int32 ui;
+    int i;
+    unsigned int ui;
     float f;
     double d;
     Point p;

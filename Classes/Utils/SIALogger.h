@@ -67,25 +67,25 @@ namespace SIA {
 template<typename T> static T SIADefaultModuleName() { static T value = nullptr; return value; }
 #define SIASetModuleName(NAME) template<> static const char* SIADefaultModuleName<const char*>() { static const char* value = #NAME; return value; }
 
-#define SIAMsg(MSG, ...) __FILE__, __LINE__, SIADefaultModuleName<const char*>(), MSG, __VA_ARGS__
+#define SIAMsg(MSG, ...) __FILE__, __LINE__, SIADefaultModuleName<const char*>(), MSG, ##__VA_ARGS__
 
-#define SIAFatal(MSG, ...) { SIA::Logger::logToStream("Fatal", SIAMsg(MSG, __VA_ARGS__)); exit(EXIT_FAILURE); }
+#define SIAFatal(MSG, ...) { SIA::Logger::logToStream("Fatal", SIAMsg(MSG, ##__VA_ARGS__)); exit(EXIT_FAILURE); }
 
 #ifdef ENABLE_DEBUG
-  #define SIAError(MSG, ...) { SIA::Logger::logToStream("Error", SIAMsg(MSG, __VA_ARGS__)); exit(EXIT_FAILURE); }
+#define SIAError(MSG, ...) { SIA::Logger::logToStream("Error", SIAMsg(MSG, ##__VA_ARGS__)); exit(EXIT_FAILURE); }
 #else
-  #define SIAError(MSG, ...) { SIA::Logger::logToStream("Error", SIAMsg(MSG, __VA_ARGS__)); }
+#define SIAError(MSG, ...) { SIA::Logger::logToStream("Error", SIAMsg(MSG, ##__VA_ARGS__)); }
 #endif
 
 
-#define SIAWarning(MSG, ...) { SIA::Logger::logToStream("Warning", SIAMsg(MSG, __VA_ARGS__)); }
+#define SIAWarning(MSG, ...) { SIA::Logger::logToStream("Warning", SIAMsg(MSG, ##__VA_ARGS__)); }
 
 #ifdef ENABLE_DEBUG
-  #define SIADebug(MSG, ...) { SIA::Logger::logToStream("Debug", SIAMsg(MSG, __VA_ARGS__)); }
-  #define SIAInfo(MSG, ...) { SIA::Logger::logToStream("Info", SIAMsg(MSG, __VA_ARGS__)); }
+#define SIADebug(MSG, ...) { SIA::Logger::logToStream("Debug", SIAMsg(MSG, ##__VA_ARGS__)); }
+#define SIAInfo(MSG, ...) { SIA::Logger::logToStream("Info", SIAMsg(MSG, ##__VA_ARGS__)); }
 
   #ifdef ENABLE_TRACE
-    #define SIATrace(MSG, ...) { SIA::Logger::logToStream("Trace", SIAMsg(MSG, __VA_ARGS__)); }
+#define SIATrace(MSG, ...) { SIA::Logger::logToStream("Trace", SIAMsg(MSG, ##__VA_ARGS__)); }
   #else
     #define SIATrace(MSG, ...) { }
   #endif
@@ -97,7 +97,7 @@ template<typename T> static T SIADefaultModuleName() { static T value = nullptr;
 
 #ifdef ENABLE_DEBUG
   #define SIAAssertMsg(CONDITION, MSG, ...) if (!(CONDITION)) { \
-      SIA::Logger::logToStream("Assert", SIAMsg(MSG, __VA_ARGS__)); exit(EXIT_FAILURE); \
+      SIA::Logger::logToStream("Assert", SIAMsg(MSG, ##__VA_ARGS__)); exit(EXIT_FAILURE); \
     }
 
   #define SIAAssert(CONDITION) { SIAAssertMsg(CONDITION, #CONDITION" failed."); }

@@ -11,7 +11,8 @@
 #define _SIA_THE_SPACE_STRATEGY_ENTITY_GRID_H__
 
 #include "Entity.h"
-#include <unordered_map>
+#include <vector>
+#include <list>
 
 namespace Models
 {

@@ -159,6 +159,7 @@ void GameLayer::onTouchCancelled(Touch* touch, Event* unused_event) {
   this->touchEnded(m_area->convertTouchToNodeSpace(touch));
 }
 
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
 void GameLayer::onMouseDown(cocos2d::Event* event) {
   EventMouse* eMouse = static_cast<EventMouse*>(event);
   if (eMouse) {
@@ -180,3 +181,4 @@ void GameLayer::onMouseMoved(cocos2d::Event* event) {
 void GameLayer::onMouseUp(cocos2d::Event* event) {
 
 }
+#endif

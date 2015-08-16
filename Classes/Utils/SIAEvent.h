@@ -37,10 +37,10 @@ namespace SIA
       return *this;
     }
 
-    void clean(void* id) {
+    void clean(void* pId) {
       DIterator iter = m_delegates.begin();
       while (iter != m_delegates.end()) {
-        if ((*iter).parentId() == (Delegate<Args...>::ParentID)id) {
+        if ((*iter).parentId() == (ParentID)pId) {
           if (iter == m_iterator) {
             iter = m_delegates.erase(iter);
             m_iterator = iter;
@@ -63,14 +63,16 @@ namespace SIA
   template<class ...Args>
   class PublicEvent: public Event<Args...> {
   public:
+      typedef Event<Args...> Base;
+  public:
     void operator()(Args... argc) {
-      m_iterator = m_delegates.begin();
-      while (m_iterator != m_delegates.end()) {
-        if ((*m_iterator)(argc...)) {
+      Base::m_iterator = Base::m_delegates.begin();
+      while (Base::m_iterator != Base::m_delegates.end()) {
+        if ((*Base::m_iterator)(argc...)) {
           return;
         }
-        if (m_iterator != m_delegates.end()) {
-          ++m_iterator;
+        if (Base::m_iterator != Base::m_delegates.end()) {
+          ++Base::m_iterator;
         }
       }
     }
@@ -78,16 +80,18 @@ namespace SIA
 
   template<class Friend, class ...Args>
   class FriendEvent: public Event<Args...> {
+  public:
+    typedef Event<Args...> Base;
   private:
     friend Friend;
     void operator()(Args... argc) {
-      m_iterator = m_delegates.begin();
-      while (m_iterator != m_delegates.end()) {
-        if ((*m_iterator)(argc...)) {
+      Base::m_iterator = Base::m_delegates.begin();
+      while (Base::m_iterator != Base::m_delegates.end()) {
+        if ((*Base::m_iterator)(argc...)) {
           return;
         }
-        if (m_iterator != m_delegates.end()) {
-          ++m_iterator;
+        if (Base::m_iterator != Base::m_delegates.end()) {
+          ++Base::m_iterator;
         }
       }
     }

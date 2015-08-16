@@ -11,6 +11,8 @@
 #ifndef _SIA_POINT2D_H__
 #define _SIA_POINT2D_H__
 
+#include "stdlib.h"
+
 namespace SIA
 {
   template<typename Type>
