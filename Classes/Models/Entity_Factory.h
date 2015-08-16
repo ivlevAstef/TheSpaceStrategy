@@ -18,6 +18,8 @@ namespace Models {
   public:
     static EntityPtr createBuildByName(std::string name);
 
+    static Common::EntitySize maxEntitySize();
+
   private:
 
     static bool initMainBase(Entity& entity);

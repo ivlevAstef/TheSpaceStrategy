@@ -9,6 +9,7 @@ using namespace Common;
 
 Entity::Entity() : m_process(m_properties) {
   m_pFeatures = std::make_shared<Features>();
+  m_size.set(0, 0);
 }
 
 void Entity::update() {

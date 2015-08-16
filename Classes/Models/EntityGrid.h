@@ -24,12 +24,17 @@ namespace Models
     bool erase(EntityPtr pEntity);
     bool update(EntityPtr pEntity);
 
+    std::list<EntityPtr> get(const Common::CellPos& cell) const;
+    std::list<EntityPtr> collision(const EntityPtr& pEntity) const;
+
     inline size_t width() const { return m_width; }
     inline size_t height() const { return m_height; }
 
   private:
     void unsafeAdd(EntityPtr pEntity);
     inline int getIndex(const Common::CellPos& cell) const { return m_width * cell.y + cell.x; }
+
+    std::vector<Common::CellPos> heldCell(const Common::EntityPos& pos, const Common::EntitySize& size) const;
 
   private:
     size_t m_width;

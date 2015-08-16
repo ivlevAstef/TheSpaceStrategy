@@ -119,9 +119,9 @@ void GameLayer::draw(const Common::ViewMath& viewMath) {
       viewMath.convert(entityPoints[2]),
       viewMath.convert(entityPoints[3])
     };
-    
+
     m_pAreaNode->clear();
-    m_pAreaNode->drawPoly(points,4, true, Color4F(0.6f, 0.8f, 0.9f, 1.0f));
+    m_pAreaNode->drawPoly(points, 4, true, Color4F(0.6f, 0.8f, 0.9f, 1.0f));
 
     m_pAreaNode->setPosition(viewMath.windowPos());
   }

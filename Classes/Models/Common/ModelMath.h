@@ -17,25 +17,13 @@ namespace Common
 {
   typedef SIA::Point2D<int> CellPos;
   typedef SIA::Point2D<double> EntityPos;
+  typedef SIA::Point2D<double> EntitySize;
 
   class ModelMath {
-  public:
-    enum PosIndex {
-      eTop = 0,
-      eBottom = 1,
-      eLeft = 2,
-      eRight = 3,
-      eCenter = 4,
-      ePosIndexCount = 5,
-      eUndefined = ePosIndexCount
-    };
-
   public:
     static CellPos cell(EntityPos pos);
 
     static EntityPos center(CellPos pos);
-    static EntityPos buildPos(CellPos pos, PosIndex buildIndex);
-    static PosIndex buildPos(EntityPos pos);
 
     static double distance(EntityPos p1, EntityPos p2);
   };

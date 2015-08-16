@@ -31,13 +31,11 @@ namespace Models
 
     void setPos(Common::EntityPos pos);
     inline void setPos(double x, double y) { setPos({x, y}); }
-    inline const Common::EntityPos& pos() const {
-      return m_pos;
-    }
+    inline const Common::EntityPos& pos() const { return m_pos; }
 
-    inline const Common::EntityPos& lastPos() const {
-      return m_lastPos;
-    }
+    inline const Common::EntityPos& lastPos() const { return m_lastPos; }
+
+    inline const Common::EntitySize& size() const { return m_size; }
 
     inline const Common::Features& features() { return *m_pFeatures.get(); }
 
@@ -55,6 +53,7 @@ namespace Models
 
     Common::EntityPos m_pos;
     Common::EntityPos m_lastPos;
+    Common::EntitySize m_size;
 
     Common::FeaturesPtr m_pFeatures;
 

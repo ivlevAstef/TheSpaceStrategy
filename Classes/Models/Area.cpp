@@ -4,6 +4,8 @@
 #include "Properties/TransmitterEnergy.h"
 #include "Common/ModelMath.h"
 
+#include <math.h>
+
 SIASetModuleName(Model);
 
 using namespace Models;
@@ -47,6 +49,12 @@ bool Area::setupEntity(EntityPtr pEntity) {
   }
 
   if (pEntity->prop().is<Build>()) {
+    for (auto pEntityIter : m_grid.collision(pEntity)) {
+      if (pEntityIter->prop().is<Build>()) {
+        return false;
+      }
+    }
+
     return true;
   }
 

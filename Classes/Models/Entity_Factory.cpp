@@ -15,6 +15,10 @@ SIASetModuleName(Model);
 using namespace Models;
 using namespace Actions;
 
+Common::EntitySize Entity::Factory::maxEntitySize() {
+  return Common::EntitySize(0.35, 0.32);
+}
+
 EntityPtr Entity::Factory::createBuildByName(std::string name) {
   auto entity = EntityPtr(new Models::Entity());
   SIAAssert(entity.get());
@@ -41,6 +45,8 @@ EntityPtr Entity::Factory::createBuildByName(std::string name) {
 
 bool Entity::Factory::initMainBase(Entity& entity) {
   SIADebug("Init main base.");
+  entity.m_size.set(0.32, 0.32);
+
   Common::Features& features = *entity.m_pFeatures.get();
 
   features[Common::FeatureNames::maxHP] = 100;
@@ -61,6 +67,8 @@ bool Entity::Factory::initMainBase(Entity& entity) {
 
 bool Entity::Factory::initPylon(Entity& entity) {
   SIADebug("Init pylon.");
+  entity.m_size.set(0.16, 0.16);
+
   Common::Features& features = *entity.m_pFeatures.get();
 
   features[Common::FeatureNames::maxHP] = 100;
@@ -80,6 +88,8 @@ bool Entity::Factory::initPylon(Entity& entity) {
 }
 bool Entity::Factory::initMinerMinerals(Entity& entity) {
   SIADebug("Init miner minerals.");
+  entity.m_size.set(0.3, 0.3);
+
   Common::Features& features = *entity.m_pFeatures.get();
   
   features[Common::FeatureNames::maxHP] = 50;
@@ -93,6 +103,8 @@ bool Entity::Factory::initMinerMinerals(Entity& entity) {
 }
 bool Entity::Factory::initMinerals(Entity& entity) {
   SIADebug("Init minerals.");
+  entity.m_size.set(0.35, 0.32);
+
   Common::Features& features = *entity.m_pFeatures.get();
 
   features[Common::FeatureNames::maxHP] = 1000;
