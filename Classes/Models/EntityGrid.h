@@ -20,7 +20,7 @@ namespace Models
     EntityGrid(size_t width, size_t height);
 
     bool add(EntityPtr pEntity);
-    bool remove(EntityPtr pEntity);
+    bool erase(EntityPtr pEntity);
     bool update(EntityPtr pEntity);
 
     inline size_t width() const { return m_width; }

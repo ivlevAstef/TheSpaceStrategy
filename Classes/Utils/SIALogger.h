@@ -27,69 +27,101 @@
 //enable debug,info,assert level, also error stoped program.
 #define ENABLE_DEBUG
 //enable trace level
-#define ENABLE_TRACE
+//#define ENABLE_TRACE
 
-namespace SIA {    
-  struct MessageData {
-    const char* logLevel;
-    std::string msg;
-    const char* file;
-    int line;
-    const char* module;
-        
-    MessageData(const char* file, int line, const char* module, const char* message, ...);
-        
-    std::string toString() const;
-  };
-
-  #include "Private/SIALogLevels.h"
-    
+namespace SIA {       
   class Logger {
   public:
    static void Initialization();
-        
+
+   static void logToStream(const char* logLevel, const char* file, int line, const char* module, const char* message, ...);
+
   private:
     Logger();
-        
-    friend class LogLevel;
-    void LogToStream(const MessageData& logInfo);
-    std::string formatLog(const MessageData& logInfo);
-        
+     
   private:
     static Logger* single;
         
     std::chrono::steady_clock::time_point m_startApplicationTime;
   };
-    
 };
+
+///full list:
+///SIASetModuleName
+
+///SIAFatal
+///SIAError
+///SIAWarning
+///SIADebug
+///SIAInfo
+///SIATrace
+
+///SIAAssertMsg
+///SIAAssert
+///SIAFatalAssert
+
+///SIACheck
+///SIACheckRet
+///SIACheckRetValue
 
 template<typename T> static T SIADefaultModuleName() { static T value = nullptr; return value; }
 #define SIASetModuleName(NAME) template<> static const char* SIADefaultModuleName<const char*>() { static const char* value = #NAME; return value; }
 
-#define SIAMsg(MSG, ...) (SIA::MessageData(__FILE__, __LINE__, SIADefaultModuleName<const char*>(), MSG, __VA_ARGS__))
+#define SIAMsg(MSG, ...) __FILE__, __LINE__, SIADefaultModuleName<const char*>(), MSG, __VA_ARGS__
 
-#define SIAFatal(MSG, ...) SIA::Fatal::fast(SIAMsg(MSG, __VA_ARGS__))
-#define SIAError(MSG, ...) SIA::Error::fast(SIAMsg(MSG, __VA_ARGS__))
-#define SIAWarning(MSG, ...) SIA::Warning::fast(SIAMsg(MSG, __VA_ARGS__))
-#define SIADebug(MSG, ...) SIA::Debug::fast(SIAMsg(MSG, __VA_ARGS__))
-#define SIAInfo(MSG, ...) SIA::Info::fast(SIAMsg(MSG, __VA_ARGS__))
-#define SIATrace(MSG, ...) SIA::Trace::fast(SIAMsg(MSG, __VA_ARGS__))
+#define SIAFatal(MSG, ...) { SIA::Logger::logToStream("Fatal", SIAMsg(MSG, __VA_ARGS__)); exit(EXIT_FAILURE); }
 
-#define SIAAssert(CONDITION) SIA::Assert::fast((CONDITION) ? true : false, SIAMsg(#CONDITION" failed."))
-#define SIAAssertMsg(CONDITION, MSG, ...) SIA::Assert::fast((CONDITION) ? true : false, SIAMsg(MSG, __VA_ARGS__))
+#ifdef ENABLE_DEBUG
+  #define SIAError(MSG, ...) { SIA::Logger::logToStream("Error", SIAMsg(MSG, __VA_ARGS__)); exit(EXIT_FAILURE); }
+#else
+  #define SIAError(MSG, ...) { SIA::Logger::logToStream("Error", SIAMsg(MSG, __VA_ARGS__)); }
+#endif
 
-#define SIAFatalAssert(CONDITION) \
-   if((CONDITION) ? false : true) { SIA::Fatal::fast(SIAMsg(#CONDITION" failed.")); }
 
-#define SIACheck(CONDITION) SIA::Check::fast((CONDITION) ? true : false, SIAMsg(#CONDITION" failed."))
+#define SIAWarning(MSG, ...) { SIA::Logger::logToStream("Warning", SIAMsg(MSG, __VA_ARGS__)); }
 
-#define SIACheckRet(CONDITION) \
-  if (SIA::Check::fast((CONDITION) ? true : false, SIAMsg(#CONDITION" failed."))) { \
-     return; \
+#ifdef ENABLE_DEBUG
+  #define SIADebug(MSG, ...) { SIA::Logger::logToStream("Debug", SIAMsg(MSG, __VA_ARGS__)); }
+  #define SIAInfo(MSG, ...) { SIA::Logger::logToStream("Info", SIAMsg(MSG, __VA_ARGS__)); }
+
+  #ifdef ENABLE_TRACE
+    #define SIATrace(MSG, ...) { SIA::Logger::logToStream("Trace", SIAMsg(MSG, __VA_ARGS__)); }
+  #else
+    #define SIATrace(MSG, ...) { }
+  #endif
+
+#else
+  #define SIADebug(MSG, ...) { }
+  #define SIAInfo(MSG, ...) { }
+#endif
+
+#ifdef ENABLE_DEBUG
+  #define SIAAssertMsg(CONDITION, MSG, ...) if (!(CONDITION)) { \
+      SIA::Logger::logToStream("Assert", SIAMsg(MSG, __VA_ARGS__)); exit(EXIT_FAILURE); \
+    }
+
+  #define SIAAssert(CONDITION) { SIAAssertMsg(CONDITION, #CONDITION" failed."); }
+
+#else
+  #define SIAAssertMsg(CONDITION, MSG, ...) {}
+  #define SIAAssert(CONDITION) {}
+#endif
+
+#define SIAFatalAssert(CONDITION)  if (!(CONDITION)) { \
+    SIAFatal(#CONDITION" failed."); \
   }
 
-#define SIACheckRetValue(CONDITION, RET_VALUE) \
-  if (SIA::Check::fast((CONDITION) ? true : false, SIAMsg(#CONDITION" failed."))) { \
+#define SIACheck(CONDITION) if (CONDITION) { \
+    SIA::Logger::logToStream("Check", SIAMsg(#CONDITION" failed.")); \
+  }
+
+#define SIACheckRet(CONDITION) if (CONDITION) { \
+    SIA::Logger::logToStream("Check", SIAMsg(#CONDITION" failed.")); \
+    return; \
+  }
+
+#define SIACheckRetValue(CONDITION, RET_VALUE) if (CONDITION) { \
+    SIA::Logger::logToStream("Check", SIAMsg(#CONDITION" failed.")); \
     return RET_VALUE; \
   }
 

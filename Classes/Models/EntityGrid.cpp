@@ -49,7 +49,7 @@ void EntityGrid::unsafeAdd(EntityPtr pEntity) {
   m_grid[index].push_back(pEntity);
 }
 
-bool EntityGrid::remove(EntityPtr pEntity) {
+bool EntityGrid::erase(EntityPtr pEntity) {
   SIAAssert(pEntity);
 
   if (pEntity) {
@@ -91,8 +91,11 @@ bool EntityGrid::update(EntityPtr pEntity) {
         if (0 <= index && index < m_grid.size()) {
           unsafeAdd(pEntity);
         }
+
+        return true;
       }
     }
   }
 
+  return false;
 }

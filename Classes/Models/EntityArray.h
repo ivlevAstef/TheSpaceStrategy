@@ -22,7 +22,7 @@ namespace Models
     typedef std::function<bool(EntityPtr entity)> FindResultCallback;
   public:
     bool add(EntityPtr pEntity);
-    bool remove(EntityPtr pEntity);
+    bool erase(EntityPtr pEntity);
 
     void update();
 
