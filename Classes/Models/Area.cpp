@@ -18,13 +18,15 @@ bool Area::addEntity(EntityPtr pEntity) {
   if (setupEntity(pEntity)) {
     bool success = m_entities.add(pEntity);
     success &= m_grid.add(pEntity);
+    success &= m_energyGraph.add(pEntity);
 
     if (success) {
       return true;
     } else {
-      SIAWarning("Can't add entity. already exist?");
-      m_entities.erase(pEntity);
+      SIAError("Can't add entity. already exist?");
+      m_energyGraph.erase(pEntity);
       m_grid.erase(pEntity);
+      m_entities.erase(pEntity);
 
       return false;
     }
@@ -37,8 +39,9 @@ bool Area::addEntity(EntityPtr pEntity) {
 
 bool Area::eraseEntity(EntityPtr pEntity) {
   SIAAssert(pEntity);
-  bool success = m_entities.erase(pEntity);
+  bool success = m_energyGraph.erase(pEntity);
   success |= m_grid.erase(pEntity);
+  success |= m_entities.erase(pEntity);
   return success;
 }
 
@@ -63,4 +66,5 @@ bool Area::setupEntity(EntityPtr pEntity) {
 
 void Area::update() {
   m_entities.update();
+  m_energyGraph.update();
 }

@@ -144,6 +144,9 @@
     <ClCompile Include="..\Classes\Models\EntityGrid.cpp">
       <Filter>src\Models</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Models\EntityEnergyGraph.cpp">
+      <Filter>src\Models</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -276,6 +279,9 @@
       <Filter>src\Models\Commands</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Models\EntityGrid.h">
+      <Filter>src\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Models\EntityEnergyGraph.h">
       <Filter>src\Models</Filter>
     </ClInclude>
   </ItemGroup>

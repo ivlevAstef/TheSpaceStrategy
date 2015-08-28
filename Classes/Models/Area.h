@@ -13,6 +13,7 @@
 #include "Entity.h"
 #include "EntityArray.h"
 #include "EntityGrid.h"
+#include "EntityEnergyGraph.h"
 
 #include <functional>
 #include <vector>
@@ -22,6 +23,7 @@ namespace Models
   class Area {
   public:
     Area(size_t width, size_t height) : m_grid(width, height) {
+      m_energyGraph.setGrid(&m_grid);
     }
 
     bool addEntity(EntityPtr pEntity);
@@ -39,6 +41,7 @@ namespace Models
 
     EntityArray m_entities;
     EntityGrid m_grid;
+    EntityEnergyGraph m_energyGraph;
   };
 
   typedef std::shared_ptr<Area> AreaPtr;
