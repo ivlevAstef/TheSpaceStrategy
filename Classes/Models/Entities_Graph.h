@@ -1,28 +1,28 @@
 //
-//File: EntityEnergyGraph.h
+//File: Entities_Graph.h
 //Description: 
 //Author: Ivlev Alexander. Stef
-//Created: 17:51 16/8/2015
+//Created: 21:36 31/8/2015
 //Copyright (c) SIA 2015. All Right Reserved.
 //
-//
+
 
 #pragma once
 #ifndef _SIA_THE_SPACE_STRATEGY_ENTITY_ENERGY_GRAPH_H__
 #define _SIA_THE_SPACE_STRATEGY_ENTITY_ENERGY_GRAPH_H__
 
-#include "EntityGrid.h"
+#include "Entities.h"
 #include <vector>
 #include <list>
 
 namespace Models
 {
-  class EntityEnergyGraph {
+  class Entities::Graph : SIA::NonCopyable {
   public:
-    void setGrid(EntityGrid* pEntityGrid);
+    Graph(const Entities&);
 
     bool add(EntityPtr pEntity);
-    bool update(EntityPtr pEntity);
+    void update(EntityPtr pEntity);
     bool erase(EntityPtr pEntity);
 
     void update();
@@ -67,7 +67,7 @@ namespace Models
 
     std::list<GeneratorJoinPtr> m_pGeneratorJoins;
 
-    EntityGrid* m_pEntityGrid;
+    const Entities& m_parent;
 
   private:
     void addGeneratorJoin(std::list<GeneratorPtr> pLinks);

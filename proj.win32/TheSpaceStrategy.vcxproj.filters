@@ -99,9 +99,6 @@
     <ClCompile Include="..\Classes\Common\GameTouchEvents.cpp">
       <Filter>src\Common</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Models\EntityArray.cpp">
-      <Filter>src\Models</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Properties\PropertyContainer.cpp">
       <Filter>src\Properties</Filter>
     </ClCompile>
@@ -141,10 +138,16 @@
     <ClCompile Include="..\Classes\Models\ModelController.cpp">
       <Filter>src\Models</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Models\EntityGrid.cpp">
+    <ClCompile Include="..\Classes\Models\Entities.cpp">
       <Filter>src\Models</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Models\EntityEnergyGraph.cpp">
+    <ClCompile Include="..\Classes\Models\Entities_Array.cpp">
+      <Filter>src\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Models\Entities_Grid.cpp">
+      <Filter>src\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Models\Entities_Graph.cpp">
       <Filter>src\Models</Filter>
     </ClCompile>
   </ItemGroup>
@@ -205,9 +208,6 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Common\GameTouchEvents.h">
       <Filter>src\Common</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Models\EntityArray.h">
-      <Filter>src\Models</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Properties\Build.h">
       <Filter>src\Properties</Filter>
@@ -278,11 +278,20 @@
     <ClInclude Include="..\Classes\Models\Commands\CommandController.h">
       <Filter>src\Models\Commands</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Models\EntityGrid.h">
+    <ClInclude Include="..\Classes\Models\Entities.h">
       <Filter>src\Models</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Models\EntityEnergyGraph.h">
+    <ClInclude Include="..\Classes\Models\Entities_Array.h">
       <Filter>src\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Models\Entities_Grid.h">
+      <Filter>src\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Models\Entities_Graph.h">
+      <Filter>src\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Utils\NonCopyable.h">
+      <Filter>src\Utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

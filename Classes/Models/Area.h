@@ -10,38 +10,32 @@
 #ifndef _SIA_THE_SPACE_STRATEGY_AREA_H__
 #define _SIA_THE_SPACE_STRATEGY_AREA_H__
 
-#include "Entity.h"
-#include "EntityArray.h"
-#include "EntityGrid.h"
-#include "EntityEnergyGraph.h"
-
-#include <functional>
-#include <vector>
+#include "Entities.h"
+#include "Entities_Array.h"
+#include "Entities_Grid.h"
+#include "Entities_Graph.h"
 
 namespace Models
 {
-  class Area {
+  class Area: SIA::NonCopyable {
+  private:
+    static const size_t MaxEntitiesCount = 2048;
   public:
-    Area(size_t width, size_t height) : m_grid(width, height) {
-      m_energyGraph.setGrid(&m_grid);
-    }
+    Area(size_t width, size_t height);
 
     bool addEntity(EntityPtr pEntity);
     bool eraseEntity(EntityPtr pEntity);
 
     void update();
 
-    inline size_t width() const { return m_grid.width(); }
-    inline size_t height() const { return m_grid.height(); }
+    size_t width() const;
+    size_t height() const;
 
   private:
     bool setupEntity(EntityPtr pEntity);
 
   private:
-
-    EntityArray m_entities;
-    EntityGrid m_grid;
-    EntityEnergyGraph m_energyGraph;
+    Entities m_entities;
   };
 
   typedef std::shared_ptr<Area> AreaPtr;

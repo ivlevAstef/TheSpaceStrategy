@@ -1,13 +1,25 @@
-#include "EntityArray.h"
+//
+//File: Entities_Array.cpp
+//Description: 
+//Author: Ivlev Alexander. Stef
+//Created: 20:49 30/8/2015
+//Copyright (c) SIA 2015. All Right Reserved.
+//
+
+#include "Entities_Array.h"
 #include "SIALogger.h"
 #include "Common/ModelMath.h"
 
-SIASetModuleName(Model);
+SIASetModuleName(Models);
 
 using namespace Models;
 using namespace Common;
 
-bool EntityArray::add(EntityPtr pEntity) {
+Entities::Array::Array(const Entities& parent, size_t maxCount) : m_parent(parent) {
+  m_maxCount = maxCount;
+}
+
+bool Entities::Array::add(EntityPtr pEntity) {
   SIAAssert(pEntity);
 
   for (EntityPtr pIterEntity : m_pEntities) {
@@ -20,9 +32,12 @@ bool EntityArray::add(EntityPtr pEntity) {
   m_pEntities.push_back(pEntity);
 
   return true;
-}
 
-bool EntityArray::erase(EntityPtr pEntity) {
+}
+void Entities::Array::update(EntityPtr pEntity) {
+
+}
+bool Entities::Array::erase(EntityPtr pEntity) {
   SIAAssert(pEntity);
 
   for (size_t i = 0; i < m_pEntities.size(); i++) {
@@ -36,13 +51,13 @@ bool EntityArray::erase(EntityPtr pEntity) {
   return false;
 }
 
-void EntityArray::update() {
+void Entities::Array::update() {
   for (EntityPtr pIterEntity : m_pEntities) {
     pIterEntity->update();
   }
 }
 
-void EntityArray::foreachCell(Common::CellPos pos, FindResultCallback callback) const {
+void Entities::Array::foreachCell(Common::CellPos pos, FindResultCallback callback) const {
   SIAAssert(callback);
   for (EntityPtr iter : m_pEntities) {
     if (ModelMath::cell(iter->pos()) == pos) {
@@ -53,7 +68,7 @@ void EntityArray::foreachCell(Common::CellPos pos, FindResultCallback callback) 
   }
 }
 
-void EntityArray::foreach(FindResultCallback callback) const {
+void Entities::Array::foreach(FindResultCallback callback) const {
   SIAAssert(callback);
   for (EntityPtr iter : m_pEntities) {
     if (!callback(iter)) {
