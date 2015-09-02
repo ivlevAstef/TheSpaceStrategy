@@ -59,6 +59,14 @@ namespace Common
     }
 
     ViewScale scale() const {
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
+      return ViewScale(100, 100);
+#else
+      return ViewScale(150, 150);
+#endif
+    }
+    
+    ViewScale defaultScale() const {
       return ViewScale(100, 100);
     }
 

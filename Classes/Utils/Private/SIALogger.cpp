@@ -70,7 +70,7 @@ void Logger::logToStream(const char* logLevel, const char* file, int line, const
     auto sec = std::chrono::duration_cast<std::chrono::seconds>(diff).count();
     sec -= min * 60;
 
-    logIndex += sprintf(logBuffer + logIndex, "%02d:%02d ", min, sec);
+    logIndex += sprintf(logBuffer + logIndex, "%02ld:%02lld ", min, sec);
   }
 
   ///Added module

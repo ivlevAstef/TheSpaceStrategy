@@ -37,6 +37,10 @@ void Object::draw(SceneInterfacePtr pScene) {
   SIATrace("Object draw.");
   m_pEntity->draw( [&pScene, this] (const Entity& entity, double dt) {
     ViewPos pos = pScene->viewMath().convert(entity.pos());
+    ViewScale scale = pScene->viewMath().scale();
+    ViewScale defaultscale = pScene->viewMath().defaultScale();
+    
+    m_pView->setScale(scale.x / defaultscale.x, scale.y / defaultscale.y);
     m_pView->setPosition(pos);
 
   });

@@ -50,26 +50,26 @@ static TouchPos touchPos(cocos2d::Vec2 pos, ViewPos winPos) {
 void Scene::touchBegan(cocos2d::Vec2 pos) {
   GameTouchEvents::touchBegan(touchPos(pos, m_viewMath.windowPos()));
 
-  SIAAssert(!m_pButtonLayer);
+  if (nullptr == m_pButtonLayer) {
+    m_pButtonLayer = BuildButtonLayer::create(pos + m_viewMath.windowPos());
+    SIAFatalAssert(m_pButtonLayer);
 
-  m_pButtonLayer = BuildButtonLayer::create(pos + m_viewMath.windowPos());
-  SIAFatalAssert(m_pButtonLayer);
+    m_pGameLayer->addChild(m_pButtonLayer, 100);
 
-  m_pGameLayer->addChild(m_pButtonLayer, 100);
+    m_pButtonLayer->pick += BuildButtonLayer::DPick(this, [this, pos] (std::string pickId) {
+      SIAInfo("Pick build with name:%s.", pickId.c_str());
+      auto newBuild = Object::create(pickId, m_viewMath.convert(pos));
+      SIACheckRet(!newBuild.get());
+      addObject(newBuild);
+    });
 
-  m_pButtonLayer->pick += BuildButtonLayer::DPick(this, [this, pos] (std::string pickId) {
-    SIAInfo("Pick build with name:%s.", pickId.c_str());
-    auto newBuild = Object::create(pickId, m_viewMath.convert(pos));
-    SIACheckRet(!newBuild.get());
-    addObject(newBuild);
-  });
-
-  m_pButtonLayer->close += BuildButtonLayer::DClose(this, [this] (BuildButtonLayer* layer) {
-    SIAAssert(layer);
-    SIAAssert(m_pButtonLayer == layer);
-    m_pButtonLayer = nullptr;
-    m_pGameLayer->removeChild(layer);
-  }, true);
+    m_pButtonLayer->close += BuildButtonLayer::DClose(this, [this] (BuildButtonLayer* layer) {
+      SIAAssert(layer);
+      SIAAssert(m_pButtonLayer == layer);
+      m_pButtonLayer = nullptr;
+      m_pGameLayer->removeChild(layer);
+    }, true);
+  }
 }
 
 void Scene::touchMoved(cocos2d::Vec2 pos) {

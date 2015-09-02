@@ -10,7 +10,6 @@ USING_NS_CC;
 
 static const int backgroundTag = 100;
 static const int gameViewTag = 101;
-static const int gridViewTag = 102;
 
 bool GameLayer::init(Models::AreaPtr pArea) {
   SIACheckRetValue(!Layer::init(), false);
@@ -18,6 +17,7 @@ bool GameLayer::init(Models::AreaPtr pArea) {
   m_pAreaModel = pArea;
 
   m_background = nullptr;
+  m_touchesCount = 0;
 
   m_area = Layer::create();
   SIAFatalAssert(m_area);
@@ -90,9 +90,15 @@ void GameLayer::onEnter() {
 
   mouseListener->onMouseDown = CC_CALLBACK_1(GameLayer::onMouseDown, this);
   mouseListener->onMouseMove = CC_CALLBACK_1(GameLayer::onMouseMoved, this);
-  mouseListener->onMouseUp = CC_CALLBACK_1(GameLayer::onMouseUp, this);
 
   dispatcher->addEventListenerWithSceneGraphPriority(mouseListener, this);
+#else
+  auto touchesListener = EventListenerTouchAllAtOnce::create();
+  SIACheckRet(!touchesListener);
+  
+  touchesListener->onTouchesMoved = CC_CALLBACK_2(GameLayer::onTouchesMoved, this);
+  
+  dispatcher->addEventListenerWithSceneGraphPriority(touchesListener, this);
 #endif
 }
 
@@ -140,21 +146,33 @@ void GameLayer::draw(const Common::ViewMath& viewMath) {
 
 bool GameLayer::onTouchBegan(Touch* touch, Event* unused_event) {
   SIAAssert(m_area);
-  this->touchBegan(m_area->convertTouchToNodeSpace(touch));
-  return true;
+  
+  if (0 == m_touchesCount) {
+    this->touchBegan(m_area->convertTouchToNodeSpace(touch));
+    m_touchesCount++;
+    return true;
+  }
+  
+  this->touchEnded(m_area->convertTouchToNodeSpace(touch));
+  return false;
 }
 
 void GameLayer::onTouchMoved(Touch* touch, Event* unused_event) {
+  if (1 == m_touchesCount) {
+    return;
+  }
   SIAAssert(m_area);
   this->touchMoved(m_area->convertTouchToNodeSpace(touch));
 }
 
 void GameLayer::onTouchEnded(Touch* touch, Event* unused_event) {
+  m_touchesCount--;
   SIAAssert(m_area);
   this->touchEnded(m_area->convertTouchToNodeSpace(touch));
 }
 
 void GameLayer::onTouchCancelled(Touch* touch, Event* unused_event) {
+  m_touchesCount--;
   SIAAssert(m_area);
   this->touchEnded(m_area->convertTouchToNodeSpace(touch));
 }
@@ -178,7 +196,18 @@ void GameLayer::onMouseMoved(cocos2d::Event* event) {
   }
 }
 
-void GameLayer::onMouseUp(cocos2d::Event* event) {
+#else
 
+static Vec2 getCenter(cocos2d::Vec2 p1, cocos2d::Vec2 p2) {
+  return p1 + (p2 - p1) * 0.5f;
 }
+
+void GameLayer::onTouchesMoved(const std::vector<cocos2d::Touch*>& touches, cocos2d::Event* unused_event) {
+  if (2 == touches.size()) {
+    auto prevloc = getCenter(touches[0]->getPreviousLocation(), touches[1]->getPreviousLocation());
+    auto loc = getCenter(touches[0]->getLocation(), touches[1]->getLocation());
+    move(loc - prevloc);
+  }
+}
+
 #endif

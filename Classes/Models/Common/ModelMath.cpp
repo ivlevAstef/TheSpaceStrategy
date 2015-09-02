@@ -1,5 +1,7 @@
 #include "ModelMath.h"
 #include "SIALogger.h"
+#include <cmath>
+
 SIASetModuleName(Model);
 
 using namespace Common;

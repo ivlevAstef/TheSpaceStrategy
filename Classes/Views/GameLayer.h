@@ -51,12 +51,14 @@ namespace Views
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
     void onMouseDown(cocos2d::Event* event);
     void onMouseMoved(cocos2d::Event* event);
-    void onMouseUp(cocos2d::Event* event);
-
+#else
+    void onTouchesMoved(const std::vector<cocos2d::Touch*>& touches, cocos2d::Event* unused_event);
 #endif
 
       
   private:
+    int m_touchesCount;
+    
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
     cocos2d::Vec2 m_previousCursorLocation;
 #endif

@@ -99,6 +99,7 @@ std::list<EntityPtr> Entities::Grid::get(const Common::CellPos& cell) const {
   SIAAssert(cell.x <(int)m_width && cell.y < (int)m_height);
 
   int index = getIndex(cell);
+  index = index < 0 ? 0 : index;
 
   return m_grid[index < (int)m_grid.size() ? index : (int)m_grid.size() - 1];
 }
