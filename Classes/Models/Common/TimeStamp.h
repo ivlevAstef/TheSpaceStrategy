@@ -17,13 +17,15 @@ namespace Common
   class TimeStamp {
   public:
     typedef double Seconds;
-
+    
   public:
     ///construct and set current time
     TimeStamp();
 
     static TimeStamp now();
+    static TimeStamp saveNow();
     static TimeStamp after(Seconds seconds);
+    static void updateSaveNow();
 
     static Seconds deltaTime(const TimeStamp& t1, const TimeStamp& t2);
 
@@ -39,6 +41,8 @@ namespace Common
     bool operator>=(const TimeStamp& timestamp) const;
 
   private:
+    static TimeStamp sSaveTimeStamp;
+    
     std::chrono::system_clock::time_point m_timestamp;
   };
 };

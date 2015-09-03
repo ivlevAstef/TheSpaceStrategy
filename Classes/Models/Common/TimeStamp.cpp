@@ -2,8 +2,18 @@
 
 using namespace Common;
 
+TimeStamp TimeStamp::sSaveTimeStamp;
+
 TimeStamp TimeStamp::now() {
   return TimeStamp();
+}
+
+TimeStamp TimeStamp::saveNow() {
+  return sSaveTimeStamp;
+}
+
+void TimeStamp::updateSaveNow() {
+  sSaveTimeStamp = TimeStamp();
 }
 
 TimeStamp TimeStamp::after(Seconds seconds) {

@@ -18,7 +18,7 @@ void EntityMutex::BeginUpdate() {
 void EntityMutex::EndUpdate() {
   SIAAssert(m_rwMutex.writer());
 
-  m_timestamp = TimeStamp::now();
+  m_timestamp = TimeStamp::saveNow();//or now?
 
   m_rwMutex.writeUnlock();
 }

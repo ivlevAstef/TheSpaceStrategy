@@ -65,5 +65,6 @@ bool Area::setupEntity(EntityPtr pEntity) {
 }
 
 void Area::update() {
+  TimeStamp::updateSaveNow();
   m_entities.update();
 }

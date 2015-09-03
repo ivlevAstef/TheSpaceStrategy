@@ -15,7 +15,7 @@
 
 namespace Common
 {
-  class EntityMutex {
+  class EntityMutex {    
   public:
     void BeginDraw();
     void EndDraw();
