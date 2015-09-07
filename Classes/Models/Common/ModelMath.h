@@ -26,6 +26,7 @@ namespace Common
     static EntityPos center(CellPos pos);
 
     static double distance(EntityPos p1, EntityPos p2);
+    static double distance2(EntityPos p1, EntityPos p2);
   };
 };
 

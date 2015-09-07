@@ -16,6 +16,8 @@ namespace Properties
 {
   class TransmitterEnergy: public IProperty {
   public:
+    static const double sMaxTransmissionRange;
+
     DEFINE_PROPERTY(TransmitterEnergy);
 
     static IPropertyPtr create(double transmissionRange) {

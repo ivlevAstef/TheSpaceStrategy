@@ -159,10 +159,9 @@ bool GameLayer::onTouchBegan(Touch* touch, Event* unused_event) {
 
 void GameLayer::onTouchMoved(Touch* touch, Event* unused_event) {
   if (1 == m_touchesCount) {
-    return;
+    SIAAssert(m_area);
+    this->touchMoved(m_area->convertTouchToNodeSpace(touch));
   }
-  SIAAssert(m_area);
-  this->touchMoved(m_area->convertTouchToNodeSpace(touch));
 }
 
 void GameLayer::onTouchEnded(Touch* touch, Event* unused_event) {

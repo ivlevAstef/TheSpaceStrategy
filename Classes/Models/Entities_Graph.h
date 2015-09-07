@@ -12,8 +12,8 @@
 #define _SIA_THE_SPACE_STRATEGY_ENTITY_ENERGY_GRAPH_H__
 
 #include "Entities.h"
-#include <vector>
 #include <list>
+#include <map>
 
 namespace Models
 {
@@ -28,50 +28,44 @@ namespace Models
     void update();
 
   private:
-    std::vector<EntityPtr> findAround(EntityPtr pEntity, float radius);
-
-    void connect(EntityPtr pEntity);
-    void connect(EntityPtr pEntity, EntityPtr pEntityTo);
+    bool connect(EntityPtr pEntity, float range);
     void disconnect(EntityPtr pEntity);
-    void reconnect(EntityPtr pEntity);
     void remember(EntityPtr pEntity);
 
+    void reconnectAll(const std::list<EntityPtr>& entities, int depth);
+    int findMinDepth(const std::list<EntityPtr>& entities) const;
+    void setDepth(EntityPtr pEntity, int depth);
   private:
+    static const int sUndefinedDepth = 32000;
+
     struct Generator {
-      EntityPtr pEntity;
-      std::list<EntityPtr> pEquivalents;
+      //std::list<EntityPtr> pEquivalents;
       float power;
       float storage;
+      double range;
     };
     typedef std::shared_ptr<Generator> GeneratorPtr;
 
-    struct GeneratorJoin {
-      std::list<GeneratorPtr> pLinks;
-      int retainCount;
-    };
-    typedef std::shared_ptr<GeneratorJoin> GeneratorJoinPtr;
-
     struct PointerJoin {
-      EntityPtr pEntity;
-      GeneratorJoinPtr pGenerator;
       int depth;
       int maxConnected;
-      float power;
+      double range;
     };
     typedef std::shared_ptr<PointerJoin> PointerJoinPtr;
 
-    std::list<EntityPtr> m_pUnused;
+    struct PointerLeaf {
+      int depth;
+      float power;
+      double range;
+    };
+    typedef std::shared_ptr<PointerLeaf> PointerLeafPtr;
+
+    std::map<EntityPtr, PointerLeafPtr> m_Leafs;
 
     std::map<EntityPtr, GeneratorPtr> m_Generators;
     std::map<EntityPtr, PointerJoinPtr> m_Joins;
 
-    std::list<GeneratorJoinPtr> m_pGeneratorJoins;
-
     const Entities& m_parent;
-
-  private:
-    void addGeneratorJoin(std::list<GeneratorPtr> pLinks);
-    void removeGeneratorJoin(GeneratorJoinPtr pGeneratorJoin);
   };
 
 };

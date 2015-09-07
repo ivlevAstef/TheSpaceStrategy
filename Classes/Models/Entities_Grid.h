@@ -28,7 +28,9 @@ namespace Models
     void update();
 
     std::list<EntityPtr> get(const Common::CellPos& cell) const;
+    std::list<EntityPtr> getUNSAFE(const Common::CellPos& cell) const;
     std::list<EntityPtr> collision(const EntityPtr& pEntity) const;
+    std::list<EntityPtr> getAround(const Common::EntityPos& pos, double range) const;
 
     inline size_t width() const {
       return m_width;

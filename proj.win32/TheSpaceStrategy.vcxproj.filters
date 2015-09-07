@@ -150,6 +150,9 @@
     <ClCompile Include="..\Classes\Models\Entities_Graph.cpp">
       <Filter>src\Models</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Properties\TransmitterEnergy.cpp">
+      <Filter>src\Properties</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">

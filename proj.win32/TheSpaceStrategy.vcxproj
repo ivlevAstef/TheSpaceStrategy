@@ -168,6 +168,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y</Command>
     <ClCompile Include="..\Classes\Objects\Object.cpp" />
     <ClCompile Include="..\Classes\Objects\Scene.cpp" />
     <ClCompile Include="..\Classes\Properties\PropertyContainer.cpp" />
+    <ClCompile Include="..\Classes\Properties\TransmitterEnergy.cpp" />
     <ClCompile Include="..\Classes\SceneControllers\GameScene.cpp" />
     <ClCompile Include="..\Classes\Utils\Private\SIALogger.cpp" />
     <ClCompile Include="..\Classes\Views\GameLayer.cpp" />
