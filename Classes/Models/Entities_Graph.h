@@ -28,42 +28,26 @@ namespace Models
     void update();
 
   private:
-    bool connect(EntityPtr pEntity, float range);
+    bool connect(EntityPtr pEntity);
     void disconnect(EntityPtr pEntity);
-    void remember(EntityPtr pEntity);
 
     void reconnectAll(const std::list<EntityPtr>& entities, int depth);
     int findMinDepth(const std::list<EntityPtr>& entities) const;
-    void setDepth(EntityPtr pEntity, int depth);
   private:
     static const int sUndefinedDepth = 32000;
 
-    struct Generator {
-      //std::list<EntityPtr> pEquivalents;
-      float power;
-      float storage;
-      double range;
-    };
-    typedef std::shared_ptr<Generator> GeneratorPtr;
-
     struct PointerJoin {
       int depth;
-      int maxConnected;
+      float power;
       double range;
+
+      bool isGenerator;
+      bool isJoin;
+      bool isLeaf;
     };
     typedef std::shared_ptr<PointerJoin> PointerJoinPtr;
 
-    struct PointerLeaf {
-      int depth;
-      float power;
-      double range;
-    };
-    typedef std::shared_ptr<PointerLeaf> PointerLeafPtr;
-
-    std::map<EntityPtr, PointerLeafPtr> m_Leafs;
-
-    std::map<EntityPtr, GeneratorPtr> m_Generators;
-    std::map<EntityPtr, PointerJoinPtr> m_Joins;
+    std::map<EntityPtr, PointerJoinPtr> m_data;
 
     const Entities& m_parent;
   };

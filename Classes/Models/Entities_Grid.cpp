@@ -129,6 +129,21 @@ std::list<EntityPtr> Entities::Grid::getAround(const Common::EntityPos& pos, dou
   return res;
 }
 
+std::list<EntityPtr> Entities::Grid::getAround(const EntityPtr& pEntity, double range) const {
+  SIAAssert(pEntity);
+
+  std::list<EntityPtr> res = getAround(pEntity->pos(), range);
+
+  for (auto iter = res.begin(); iter != res.end(); ++iter) {
+    if (iter->get() == pEntity.get()) {
+      res.erase(iter);
+      break;
+    }
+  }
+
+  return res;
+}
+
 std::vector<CellPos> Entities::Grid::heldCell(const EntityPos& pos, const EntitySize& size) const {
   CellPos centerCellPos = ModelMath::cell(pos);
 
