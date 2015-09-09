@@ -3,6 +3,8 @@
 #include "Models/Entity_Factory.h"
 #include "Views/GameView.h"
 
+#include "Properties/EnergyState.h"
+
 #include "SIALogger.h"
 
 SIASetModuleName(Object);
@@ -18,7 +20,7 @@ Object::Object(std::string objName, Common::EntityPos pos) {
 
   m_pEntity->setPos(pos);
 
-  m_pView = GameView::create(objName);
+  m_pView = GameView::create(objName, m_pEntity);
   m_pView->retain();
 
   SIAFatalAssert(m_pView);
@@ -42,6 +44,16 @@ void Object::draw(SceneInterfacePtr pScene) {
     
     m_pView->setScale(scale.x / defaultscale.x, scale.y / defaultscale.y);
     m_pView->setPosition(pos);
+
+    if (entity.prop().is<Properties::EnergyState>()) {
+      auto eState = entity.prop().as<Properties::EnergyState>();
+
+      m_pView->setEnergyState(eState->connected());
+      m_pView->setEnergyRange(eState->range() * scale, eState->connected());
+    } else {
+      m_pView->setEnergyState(true);
+      m_pView->setEnergyRange(cocos2d::Vec2::ZERO, false);
+    }
 
   });
 }

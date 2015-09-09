@@ -3,6 +3,7 @@
 #include "SIALogger.h"
 #include "Common/FeatureNames.h"
 
+#include "Properties/EnergyState.h"
 #include "Properties/EnergyGenerator.h"
 #include "Properties/TransmitterEnergy.h"
 #include "Properties/Build.h"
@@ -55,6 +56,8 @@ bool Entity::Factory::initMainBase(Entity& entity) {
 
   entity.prop() += Properties::Build::create();
   entity.prop() += Properties::EnergyGenerator::create(25.0);
+  entity.prop() += Properties::TransmitterEnergy::create(1.5);
+  entity.prop() += Properties::EnergyState::create();
 
   ActionDataPtr building = Building::createActionData(5.0);
   ActionDataPtr inaction = Inaction::createActionData();
@@ -77,6 +80,7 @@ bool Entity::Factory::initPylon(Entity& entity) {
 
   entity.prop() += Properties::Build::create();
   entity.prop() += Properties::TransmitterEnergy::create(1.0);
+  entity.prop() += Properties::EnergyState::create();
 
   ActionDataPtr building = Building::createActionData(10.0);
   ActionDataPtr inaction = Inaction::createActionData();
@@ -97,6 +101,7 @@ bool Entity::Factory::initMinerMinerals(Entity& entity) {
   features[Common::FeatureNames::physic] = true;
 
   entity.prop() += Properties::Build::create();
+  entity.prop() += Properties::EnergyState::create();
 
   return true;
 

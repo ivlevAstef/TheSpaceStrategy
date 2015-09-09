@@ -43,7 +43,15 @@ namespace Models
       return m_properties;
     }
 
+    const Properties::PropertyContainer& prop() const {
+      return m_properties;
+    }
+
     Actions::Process& proc() {
+      return m_process;
+    }
+
+    const Actions::Process& proc() const {
       return m_process;
     }
 

@@ -32,7 +32,8 @@ namespace Models
     void disconnect(EntityPtr pEntity);
 
     void reconnectAll(const std::list<EntityPtr>& entities, int depth);
-    int findMinDepth(const std::list<EntityPtr>& entities) const;
+    int findMinDepth(EntityPtr pEntity, const std::list<EntityPtr>& entities) const;
+
   private:
     static const int sUndefinedDepth = 32000;
 
@@ -50,6 +51,13 @@ namespace Models
     std::map<EntityPtr, PointerJoinPtr> m_data;
 
     const Entities& m_parent;
+
+    double m_maxRange;
+
+  private:
+    void setDepth(int minAroundDepth, PointerJoinPtr join, EntityPtr pEntity);
+
+    bool checkRange(EntityPtr pEntity, EntityPtr pEntity2, double range) const;
   };
 
 };

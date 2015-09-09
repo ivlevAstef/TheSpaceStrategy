@@ -296,6 +296,9 @@
     <ClInclude Include="..\Classes\Utils\NonCopyable.h">
       <Filter>src\Utils</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\Properties\EnergyState.h">
+      <Filter>src\Properties</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

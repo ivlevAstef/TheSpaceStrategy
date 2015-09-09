@@ -1,7 +1,10 @@
 #include "Entities_Graph.h"
 #include "Entities_Grid.h"
 
+#include "Common/ModelMath.h"
+
 #include "Properties/EnergyGenerator.h"
+#include "Properties/EnergyState.h"
 #include "Properties/TransmitterEnergy.h"
 #include "SIALogger.h"
 
@@ -11,6 +14,7 @@ using namespace Models;
 
 
 Entities::Graph::Graph(const Entities& parent) : m_parent(parent) {
+  m_maxRange = 0;
 }
 
 bool Entities::Graph::add(EntityPtr pEntity) {
@@ -20,6 +24,12 @@ bool Entities::Graph::add(EntityPtr pEntity) {
     SIAError("Already add entity to graph.");
     return false;
   }
+
+  if (!pEntity->prop().is<Properties::EnergyState>()) {
+    SIAInfo("It's not energyState entity.");
+    return true;
+  }
+
 
   auto pointerJoin = PointerJoinPtr(new PointerJoin());
   pointerJoin->isGenerator = false;
@@ -34,16 +44,21 @@ bool Entities::Graph::add(EntityPtr pEntity) {
       pointerJoin->depth = 0;
       pointerJoin->range = range;
       pointerJoin->isGenerator = true;
+      pEntity->prop().as<Properties::EnergyState>()->connect();
     } else {
       pointerJoin->power = 0;
       pointerJoin->depth = sUndefinedDepth;
       pointerJoin->range = range;
       pointerJoin->isJoin = true;
     }
+
+    m_maxRange = (range > m_maxRange) ? range : m_maxRange;
+
+    pEntity->prop().as<Properties::EnergyState>()->setRange(range);
   } else {
     pointerJoin->power = 0;
     pointerJoin->depth = sUndefinedDepth;
-    pointerJoin->range = Properties::TransmitterEnergy::sMaxTransmissionRange;
+    pointerJoin->range = 0;
     pointerJoin->isLeaf = true;
   }
 
@@ -78,15 +93,11 @@ void Entities::Graph::update() {
 
 bool Entities::Graph::connect(EntityPtr pEntity) {
   auto pointerJoin = m_data.at(pEntity);
-  auto entities = m_parent.getGrid().getAround(pEntity, pointerJoin->range);
+  auto entities = m_parent.getGrid().getAround(pEntity, m_maxRange);
 
   if (pointerJoin->isLeaf || pointerJoin->isJoin) {
-    int minDepth = findMinDepth(entities);
-    if (minDepth != sUndefinedDepth) {
-      pointerJoin->depth = minDepth + 1;
-    } else {
-      pointerJoin->depth = sUndefinedDepth;
-    }
+    int minDepth = findMinDepth(pEntity, entities);
+    setDepth(minDepth, pointerJoin, pEntity);
   }
 
   if (pointerJoin->isGenerator || pointerJoin->isJoin) {
@@ -101,7 +112,7 @@ void Entities::Graph::disconnect(EntityPtr pEntity) {
   int safeDepth = pointerJoin->depth;
   pointerJoin->depth = sUndefinedDepth;
 
-  auto entities = m_parent.getGrid().getAround(pEntity, pointerJoin->range);
+  auto entities = m_parent.getGrid().getAround(pEntity, m_maxRange);
 
   int minDepth = sUndefinedDepth;
 
@@ -109,6 +120,10 @@ void Entities::Graph::disconnect(EntityPtr pEntity) {
     auto pJoinIter = m_data.at(pEnt);
 
     if (sUndefinedDepth == pJoinIter->depth) {
+      continue;
+    }
+
+    if (!checkRange(pEntity, pEnt, pJoinIter->range)) {
       continue;
     }
 
@@ -121,15 +136,22 @@ void Entities::Graph::disconnect(EntityPtr pEntity) {
     }
   }
 
-  pointerJoin->depth = minDepth + 1;
+  setDepth(minDepth, pointerJoin, pEntity);
 }
 
-int Entities::Graph::findMinDepth(const std::list<EntityPtr>& entities) const {
+int Entities::Graph::findMinDepth(EntityPtr pEntity, const std::list<EntityPtr>& entities) const {
   int minDepth = sUndefinedDepth;
 
   for (auto pEnt : entities) {
     if (0 < m_data.count(pEnt)) {
-      int curDepth = m_data.at(pEnt)->depth;
+      auto pJoinIter = m_data.at(pEnt);
+
+      if (!checkRange(pEntity, pEnt, pJoinIter->range)) {
+        continue;
+      }
+
+
+      int curDepth = pJoinIter->depth;
       minDepth = (minDepth < curDepth) ? minDepth : curDepth;
     }
   }
@@ -147,4 +169,22 @@ void Entities::Graph::reconnectAll(const std::list<EntityPtr>& entities, int dep
       }
     }
   }
+}
+
+void Entities::Graph::setDepth(int minAroundDepth, PointerJoinPtr join, EntityPtr pEntity) {
+  SIAAssert(pEntity->prop().is<Properties::EnergyState>());
+
+  if (minAroundDepth != sUndefinedDepth) {
+    join->depth = minAroundDepth + 1;
+
+    pEntity->prop().as<Properties::EnergyState>()->connect();
+  } else {
+    join->depth = sUndefinedDepth;
+
+    pEntity->prop().as<Properties::EnergyState>()->disconnect();
+  }
+}
+
+bool Entities::Graph::checkRange(EntityPtr pEntity, EntityPtr pEntity2, double range) const {
+  return Common::ModelMath::distance2(pEntity->pos(), pEntity2->pos()) < (range * range);
 }

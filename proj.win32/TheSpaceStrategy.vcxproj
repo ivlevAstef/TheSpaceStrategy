@@ -209,6 +209,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y</Command>
     <ClInclude Include="..\Classes\Objects\SceneInterface.h" />
     <ClInclude Include="..\Classes\Properties\Build.h" />
     <ClInclude Include="..\Classes\Properties\EnergyGenerator.h" />
+    <ClInclude Include="..\Classes\Properties\EnergyState.h" />
     <ClInclude Include="..\Classes\Properties\IProperty.h" />
     <ClInclude Include="..\Classes\Properties\PropertyContainer.h" />
     <ClInclude Include="..\Classes\Properties\TransmitterEnergy.h" />
