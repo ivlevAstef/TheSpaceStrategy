@@ -112,27 +112,29 @@ void Entities::Graph::disconnect(EntityPtr pEntity) {
   int safeDepth = pointerJoin->depth;
   pointerJoin->depth = sUndefinedDepth;
 
-  auto entities = m_parent.getGrid().getAround(pEntity, m_maxRange);
+  auto entities = m_parent.getGrid().getAround(pEntity, pointerJoin->range);
 
   int minDepth = sUndefinedDepth;
 
+  ///заменить на обход в ширину!!!! а не в глубину
+  /// причем с обратным обходом, если нашелся таковой
   for (auto pEnt : entities) {
-    auto pJoinIter = m_data.at(pEnt);
+    if (0 < m_data.count(pEnt)) {
+      auto pJoinIter = m_data.at(pEnt);
 
-    if (sUndefinedDepth == pJoinIter->depth) {
-      continue;
-    }
+      if (sUndefinedDepth == pJoinIter->depth) {
+        continue;
+      }
 
-    if (!checkRange(pEntity, pEnt, pJoinIter->range)) {
-      continue;
-    }
 
-    if (pJoinIter->depth > safeDepth) {
-      disconnect(pEnt);
-    }
+      if (pJoinIter->depth >= safeDepth) {
+        disconnect(pEnt);
+      }
 
-    if (pJoinIter->isJoin || pJoinIter->isGenerator) {
-      minDepth = pJoinIter->depth < minDepth ? pJoinIter->depth : minDepth;
+      ///обратный ход
+      if (pJoinIter->isJoin || pJoinIter->isGenerator) {
+        minDepth = pJoinIter->depth < minDepth ? pJoinIter->depth : minDepth;
+      }
     }
   }
 

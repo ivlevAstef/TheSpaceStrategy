@@ -43,9 +43,9 @@ void Entities::update(EntityPtr pEntity) {
 }
 
 bool Entities::erase(EntityPtr pEntity) {
-  bool success = m_pArray->erase(pEntity);
+  bool success = m_pGraph->erase(pEntity); 
   success |= m_pGrid->erase(pEntity);
-  success |= m_pGraph->erase(pEntity);
+  success |= m_pArray->erase(pEntity);
 
   return success;
 }

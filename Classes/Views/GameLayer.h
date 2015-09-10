@@ -40,6 +40,9 @@ namespace Views
     typedef SIA::Delegate<cocos2d::Vec2> DMove;
     SIA::FriendEvent<GameLayer, cocos2d::Vec2> move;
 
+    typedef SIA::Delegate<cocos2d::Vec2> DErase;
+    SIA::FriendEvent<GameLayer, cocos2d::Vec2> erase;
+
   private:
     virtual void onEnter() override;
     virtual void onExit() override;

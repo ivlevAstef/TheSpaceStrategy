@@ -36,6 +36,7 @@ Scene::Scene(size_t width, size_t height) {
   m_pGameLayer->touchBegan += GameLayer::DTouchBegan(this, std::bind(&Scene::touchBegan, this, _1));
   m_pGameLayer->touchMoved += GameLayer::DTouchMoved(this, std::bind(&Scene::touchMoved, this, _1));
   m_pGameLayer->touchEnded += GameLayer::DTouchEnded(this, std::bind(&Scene::touchEnded, this, _1));
+  m_pGameLayer->erase += GameLayer::DMove(this, std::bind(&Scene::erase, this, _1));
   m_pGameLayer->move += GameLayer::DMove(this, std::bind(&Scene::move, this, _1));
 }
 
@@ -81,6 +82,28 @@ void Scene::touchEnded(cocos2d::Vec2 pos) {
 
 void Scene::move(cocos2d::Vec2 moveDt) {
   m_viewMath.moveWindow(moveDt);
+}
+
+void Scene::erase(cocos2d::Vec2 erasePos) {
+  auto foundPos = m_viewMath.convert(erasePos);
+
+  double minDistance = 99999;
+  ObjectPtr minPObject = nullptr;
+  for (ObjectPtr pObject : m_pObjects) {
+    auto entityPos = pObject->entity()->pos();
+
+    double distance = ModelMath::distance2(entityPos, foundPos);
+    if (distance < minDistance || minPObject == nullptr) {
+      minDistance = distance;
+      minPObject = pObject;
+    }
+  }
+
+  if (minDistance < 0.33f && minPObject != nullptr) {
+    eraseObject(minPObject);
+  }
+
+
 }
 
 void Scene::addObject(ObjectPtr pObject) {

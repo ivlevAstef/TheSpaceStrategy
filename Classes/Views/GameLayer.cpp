@@ -182,6 +182,14 @@ void GameLayer::onMouseDown(cocos2d::Event* event) {
   if (eMouse) {
     m_previousCursorLocation = eMouse->getLocationInView();
   }
+
+  if (MOUSE_BUTTON_MIDDLE == eMouse->getMouseButton()) {
+    auto locationInView = eMouse->getLocationInView();
+    locationInView.y = -locationInView.y;//Bug into cocos
+    auto location = Director::getInstance()->convertToGL(locationInView);
+
+    erase(m_area->convertToNodeSpace(location));
+  }
 }
 
 void GameLayer::onMouseMoved(cocos2d::Event* event) {

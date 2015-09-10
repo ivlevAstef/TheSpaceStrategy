@@ -41,6 +41,7 @@ namespace Objects
     void touchMoved(cocos2d::Vec2 touch);
     void touchEnded(cocos2d::Vec2 touch);
     void move(cocos2d::Vec2 moveDt);
+    void erase(cocos2d::Vec2 erasePos);
 
   private:
     Views::GameLayer* m_pGameLayer;
